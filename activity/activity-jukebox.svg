@@ -1,0 +1,8 @@
+<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd' [
+	<!ENTITY stroke_color "#00FF00">
+	<!ENTITY fill_color "#0000FF">
+]><svg enable-background="new 0 0 102.137 56.65" height="56.65px" version="1.1" viewBox="0 0 102.137 56.65" width="102.137px" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px"><g display="block" id="activity-jukebox">
+	<path d="M102.137,15.293" display="inline" id="path2796_1_"/>
+	<path d="M52.137,15.293" display="inline" id="path2796_2_"/>
+	<path d="M16.846,6.138v37.446   c-2.95-0.7-9.023-0.698-12.263,2.012c-6.487,5.426-0.793,11.527,6.63,8.5c4.224-1.722,5.633-4.488,5.633-8.661V26.79l35.292-4.009   v14.792c-4.801-0.7-9.024-0.699-12.266,2.013c-6.485,5.426-0.792,11.526,6.63,8.499c4.226-1.722,5.636-4.488,5.636-8.661V2.043   L16.846,6.138z M52.137,15.233l-35.292,4.592l0-5.957l35.292-4.678V15.233z" display="inline" fill="#FFFFFF" stroke="#000000" stroke-width="3.5"/>
+</g></svg>
