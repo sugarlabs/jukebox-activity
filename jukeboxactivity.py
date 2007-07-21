@@ -72,22 +72,35 @@ class JukeboxActivity(activity.Activity):
         self.update_id = -1
         self.changed_id = -1
         self.seek_timeout_id = -1
+        self.player = None
+        self.uri = None
 
         self.p_position = gst.CLOCK_TIME_NONE
         self.p_duration = gst.CLOCK_TIME_NONE
 
-        self.create_ui()
+        self.videowidget = VideoWidget()
+        self.set_canvas(self.videowidget)
+
         self.player = GstPlayer(self.videowidget)
-
-        def on_eos():
-            self.player.seek(0L)
-            self.play_toggled()
-        self.player.on_eos = lambda *x: on_eos()
-
+        self.player.connect("error", self._player_error_cb)
+        self.player.connect("eos", self._player_eos_cb)
         self.show_all()
 
         if handle.uri:
-            gobject.idle_add(self._start, handle.uri)
+            self.uri = handle.uri
+            gobject.idle_add(self._start, self.uri)
+
+    def _player_error_cb(self, widget, err, debug):
+        # Xepyhr doesn't have the Xvideo extension, so for
+        # jhbuild we switch to ximagesink on-the-fly
+        if "Resource busy or not available" in str(err):
+            logging.debug("Retrying with ximagesink...")
+            self.player.switch_to_ximagesink()
+            gobject.idle_add(self._start, self.uri)
+
+    def _player_eos_cb(self, widget):
+        self.player.seek(0L)
+        self.play_toggled()
 
     def _joined_cb(self, activity):
         logging.debug("someone joined")
@@ -98,8 +111,8 @@ class JukeboxActivity(activity.Activity):
         pass
 
     def read_file(self, file_path):
-        uri = "file://" + urllib.quote(os.path.abspath(file_path))
-        gobject.idle_add(self._start, uri)
+        self.uri = "file://" + urllib.quote(os.path.abspath(file_path))
+        gobject.idle_add(self._start, self.uri)
 
     def _start(self, uri=None):
         if not uri:
@@ -107,11 +120,8 @@ class JukeboxActivity(activity.Activity):
         # FIXME: parse m3u files and extract actual URL
         self.player.set_uri(uri)
         self.play_toggled()
+        self.show_all()
         return False
-
-    def create_ui(self):
-        self.videowidget = VideoWidget()
-        self.set_canvas(self.videowidget)
 
     def play_toggled(self):
         if self.player.is_playing():
@@ -217,17 +227,30 @@ class ControlToolbar(gtk.Toolbar):
     def set_button_pause(self):
         self.button.set_icon_widget(self.pause_image)
         
-class GstPlayer:
+class GstPlayer(gobject.GObject):
+    __gsignals__ = {
+        'error': (gobject.SIGNAL_RUN_FIRST, None, [str, str]),
+        'eos'  : (gobject.SIGNAL_RUN_FIRST, None, [])
+    }
+
     def __init__(self, videowidget):
+        gobject.GObject.__init__(self)
+
         self.playing = False
         self.player = gst.element_factory_make("playbin", "player")
-        # FIXME: hook up to the 'error' signal of the playbin
 
-        xvsink = gst.element_factory_make("ximagesink", "ximagesink")
-        self.player.set_property("video-sink", xvsink)
+        imagesink = gst.element_factory_make("xvimagesink", "xvimagesink")
+        self.player.set_property("video-sink", imagesink)
+
+        r = gst.registry_get_default()
+        l = [x for x in r.get_feature_list(gst.ElementFactory) if (gst.ElementFactory.get_klass(x) == "Visualization")]
+        logging.debug(l)
+        if len(l):
+            e = l.pop() # take latest plugin in the list
+            vis_plug = gst.element_factory_make(e.get_name())
+            self.player.set_property('vis-plugin', vis_plug)
 
         self.videowidget = videowidget
-        self.on_eos = False
 
         bus = self.player.get_bus()
         bus.enable_sync_message_emission()
@@ -250,13 +273,17 @@ class GstPlayer:
         if t == gst.MESSAGE_ERROR:
             err, debug = message.parse_error()
             logging.debug("Error: %s - %s" % (err, debug))
-            if self.on_eos:
-                self.on_eos()
+            self.emit("eos")
             self.playing = False
+            self.emit("error", str(err), str(debug))
         elif t == gst.MESSAGE_EOS:
-            if self.on_eos:
-                self.on_eos()
+            self.emit("eos")
             self.playing = False
+
+    def switch_to_ximagesink(self):
+        self.player.set_state(gst.STATE_NULL)
+        imagesink = gst.element_factory_make("ximagesink", "ximagesink")
+        self.player.set_property("video-sink", imagesink)
 
     def query_position(self):
         "Returns a (position, duration) tuple"
