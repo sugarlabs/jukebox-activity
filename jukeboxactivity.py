@@ -86,7 +86,6 @@ class JukeboxActivity(activity.Activity):
 
         self.show_all()
 
-        handle.uri = "file:///home/dcbw/Music/LivKristine_FakeASmile_320_big.mpeg"
         if handle.uri:
             gobject.idle_add(self._start, handle.uri)
 
