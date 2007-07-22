@@ -74,33 +74,59 @@ class JukeboxActivity(activity.Activity):
         self.seek_timeout_id = -1
         self.player = None
         self.uri = None
+        self.tags = {}
+        self.only_audio = False
+        self.got_stream_info = False
 
         self.p_position = gst.CLOCK_TIME_NONE
         self.p_duration = gst.CLOCK_TIME_NONE
 
+        self.player = None
         self.videowidget = VideoWidget()
         self.set_canvas(self.videowidget)
-
-        self.player = GstPlayer(self.videowidget)
-        self.player.connect("error", self._player_error_cb)
-        self.player.connect("eos", self._player_eos_cb)
         self.show_all()
 
         if handle.uri:
             self.uri = handle.uri
             gobject.idle_add(self._start, self.uri)
 
-    def _player_error_cb(self, widget, err, debug):
-        # Xepyhr doesn't have the Xvideo extension, so for
-        # jhbuild we switch to ximagesink on-the-fly
-        if "Resource busy or not available" in str(err):
-            logging.debug("Retrying with ximagesink...")
-            self.player.switch_to_ximagesink()
-            gobject.idle_add(self._start, self.uri)
-
     def _player_eos_cb(self, widget):
         self.player.seek(0L)
         self.play_toggled()
+
+    def _player_new_tag_cb(self, widget, tag, value):
+        if not tag in [gst.TAG_TITLE, gst.TAG_ARTIST, gst.TAG_ALBUM]:
+            return
+        self.tags[tag] = value
+        self._update_overlay()
+
+    def _update_overlay(self):
+        if self.only_audio == False:
+            return
+        if not self.tags.has_key(gst.TAG_TITLE) or not self.tags.has_key(gst.TAG_ARTIST):
+            return
+        album = None
+        if self.tags.has_key(gst.TAG_ALBUM):
+            album = self.tags[gst.TAG_ALBUM]
+        self.player.set_overlay(self.tags[gst.TAG_TITLE], self.tags[gst.TAG_ARTIST], album)
+
+    def _player_stream_info_cb(self, widget, stream_info):
+        if not len(stream_info) or self.got_stream_info:
+            return
+
+        GST_STREAM_TYPE_UNKNOWN = 0
+        GST_STREAM_TYPE_AUDIO   = 1
+        GST_STREAM_TYPE_VIDEO   = 2
+        GST_STREAM_TYPE_TEXT    = 3
+
+        only_audio = True
+        for item in stream_info:
+            if item.props.type == GST_STREAM_TYPE_VIDEO:
+                only_audio = False
+            print item.props.codec
+        self.only_audio = only_audio
+        self.got_stream_info = True
+        self._update_overlay()
 
     def _joined_cb(self, activity):
         logging.debug("someone joined")
@@ -118,6 +144,14 @@ class JukeboxActivity(activity.Activity):
         if not uri:
             return False
         # FIXME: parse m3u files and extract actual URL
+        if not self.player:
+            # lazy init the player so that videowidget is realized
+            # and has a valid widget allocation
+            self.player = GstPlayer(self.videowidget)
+            self.player.connect("eos", self._player_eos_cb)
+            self.player.connect("tag", self._player_new_tag_cb)
+            self.player.connect("stream-info", self._player_stream_info_cb)
+
         self.player.set_uri(uri)
         self.play_toggled()
         self.show_all()
@@ -230,7 +264,9 @@ class ControlToolbar(gtk.Toolbar):
 class GstPlayer(gobject.GObject):
     __gsignals__ = {
         'error': (gobject.SIGNAL_RUN_FIRST, None, [str, str]),
-        'eos'  : (gobject.SIGNAL_RUN_FIRST, None, [])
+        'eos'  : (gobject.SIGNAL_RUN_FIRST, None, []),
+        'tag'  : (gobject.SIGNAL_RUN_FIRST, None, [str, str]),
+        'stream-info' : (gobject.SIGNAL_RUN_FIRST, None, [object])
     }
 
     def __init__(self, videowidget):
@@ -239,18 +275,16 @@ class GstPlayer(gobject.GObject):
         self.playing = False
         self.player = gst.element_factory_make("playbin", "player")
 
-        imagesink = gst.element_factory_make("xvimagesink", "xvimagesink")
-        self.player.set_property("video-sink", imagesink)
-
         r = gst.registry_get_default()
         l = [x for x in r.get_feature_list(gst.ElementFactory) if (gst.ElementFactory.get_klass(x) == "Visualization")]
-        logging.debug(l)
         if len(l):
             e = l.pop() # take latest plugin in the list
             vis_plug = gst.element_factory_make(e.get_name())
             self.player.set_property('vis-plugin', vis_plug)
 
+        self.overlay = None
         self.videowidget = videowidget
+        self._init_video_sink()
 
         bus = self.player.get_bus()
         bus.enable_sync_message_emission()
@@ -279,11 +313,59 @@ class GstPlayer(gobject.GObject):
         elif t == gst.MESSAGE_EOS:
             self.emit("eos")
             self.playing = False
+        elif t == gst.MESSAGE_TAG:
+            tags = message.parse_tag()
+            for tag in tags.keys():
+                self.emit('tag', str(tag), str(tags[tag]))
+        elif t == gst.MESSAGE_STATE_CHANGED:
+            old, new, pen = message.parse_state_changed()
+            if old == gst.STATE_READY and new == gst.STATE_PAUSED:
+                self.emit('stream-info', self.player.props.stream_info_value_array)
 
-    def switch_to_ximagesink(self):
-        self.player.set_state(gst.STATE_NULL)
-        imagesink = gst.element_factory_make("ximagesink", "ximagesink")
-        self.player.set_property("video-sink", imagesink)
+    def _init_video_sink(self):
+        self.bin = gst.Bin()
+        videoscale = gst.element_factory_make('videoscale')
+        self.bin.add(videoscale)
+        pad = videoscale.get_pad("sink")
+        ghostpad = gst.GhostPad("sink", pad)
+        self.bin.add_pad(ghostpad)
+        videoscale.set_property("method", 0)
+
+        caps_string = "video/x-raw-yuv, "
+        r = self.videowidget.get_allocation()
+        if r.width > 500:
+            # assume dimensions are valid
+            caps_string += "width=%d, height=%d" % (r.width, r.height)
+        else:
+            caps_string += "width=720"
+        caps = gst.Caps(caps_string)
+        self.filter = gst.element_factory_make("capsfilter", "filter")
+        self.bin.add(self.filter)
+        self.filter.set_property("caps", caps)
+
+        textoverlay = gst.element_factory_make('textoverlay')
+        self.overlay = textoverlay
+        self.bin.add(textoverlay)
+        conv = gst.element_factory_make ("ffmpegcolorspace", "conv");
+        self.bin.add(conv)
+        videosink = gst.element_factory_make('autovideosink')
+        self.bin.add(videosink)
+        gst.element_link_many(videoscale, self.filter, textoverlay, conv, videosink)
+        self.player.set_property("video-sink", self.bin)
+
+    def set_overlay(self, title, artist, album):
+        text = "%s\n%s" % (title, artist)
+        if album and len(album):
+            text += "\n%s" % album
+        self.overlay.set_property("text", text)
+        self.overlay.set_property("font-desc", "sans bold 14")
+        self.overlay.set_property("halignment", "right")
+        self.overlay.set_property("valignment", "bottom")
+        try:
+            # Only in OLPC versions of gstreamer-plugins-base for now
+            self.overlay.set_property("line-align", "left")
+        except:
+            pass
 
     def query_position(self):
         "Returns a (position, duration) tuple"
