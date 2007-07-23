@@ -82,8 +82,10 @@ class JukeboxActivity(activity.Activity):
         self.p_duration = gst.CLOCK_TIME_NONE
 
         self.player = None
+        self.bin = gtk.HBox()
         self.videowidget = VideoWidget()
-        self.set_canvas(self.videowidget)
+        self.bin.add(self.videowidget)
+        self.set_canvas(self.bin)
         self.show_all()
 
         if handle.uri:
@@ -93,6 +95,15 @@ class JukeboxActivity(activity.Activity):
     def _player_eos_cb(self, widget):
         self.player.seek(0L)
         self.play_toggled()
+
+    def _player_error_cb(self, widget, message, detail):
+        self.player.stop()
+        self.player.set_uri(None)
+        self.toolbar.set_disabled()
+        self.bin.remove(self.videowidget)
+        text = gtk.Label("Error: %s - %s" % (message, detail))
+        text.show_all()
+        self.bin.add(text)
 
     def _player_new_tag_cb(self, widget, tag, value):
         if not tag in [gst.TAG_TITLE, gst.TAG_ARTIST, gst.TAG_ALBUM]:
@@ -123,7 +134,6 @@ class JukeboxActivity(activity.Activity):
         for item in stream_info:
             if item.props.type == GST_STREAM_TYPE_VIDEO:
                 only_audio = False
-            print item.props.codec
         self.only_audio = only_audio
         self.got_stream_info = True
         self._update_overlay()
@@ -149,6 +159,7 @@ class JukeboxActivity(activity.Activity):
             # and has a valid widget allocation
             self.player = GstPlayer(self.videowidget)
             self.player.connect("eos", self._player_eos_cb)
+            self.player.connect("error", self._player_error_cb)
             self.player.connect("tag", self._player_new_tag_cb)
             self.player.connect("stream-info", self._player_stream_info_cb)
 
@@ -162,11 +173,14 @@ class JukeboxActivity(activity.Activity):
             self.player.pause()
             self.toolbar.set_button_play()
         else:
-            self.player.play()
-            if self.update_id == -1:
-                self.update_id = gobject.timeout_add(self.UPDATE_INTERVAL,
-                                                     self.update_scale_cb)
-            self.toolbar.set_button_pause()
+            if self.player.error:
+                self.toolbar.set_disabled()
+            else:
+                self.player.play()
+                if self.update_id == -1:
+                    self.update_id = gobject.timeout_add(self.UPDATE_INTERVAL,
+                                                         self.update_scale_cb)
+                self.toolbar.set_button_pause()
 
     def scale_button_press_cb(self, widget, event):
         self.toolbar.button.set_sensitive(False)
@@ -260,6 +274,11 @@ class ControlToolbar(gtk.Toolbar):
         
     def set_button_pause(self):
         self.button.set_icon_widget(self.pause_image)
+
+    def set_disabled(self):
+        self.button.set_sensitive(False)
+        self.scale_item.set_sensitive(False)
+        self.hscale.set_sensitive(False)
         
 class GstPlayer(gobject.GObject):
     __gsignals__ = {
@@ -273,6 +292,8 @@ class GstPlayer(gobject.GObject):
         gobject.GObject.__init__(self)
 
         self.playing = False
+        self.error = False
+
         self.player = gst.element_factory_make("playbin", "player")
 
         r = gst.registry_get_default()
@@ -307,6 +328,7 @@ class GstPlayer(gobject.GObject):
         if t == gst.MESSAGE_ERROR:
             err, debug = message.parse_error()
             logging.debug("Error: %s - %s" % (err, debug))
+            self.error = True
             self.emit("eos")
             self.playing = False
             self.emit("error", str(err), str(debug))
@@ -333,11 +355,15 @@ class GstPlayer(gobject.GObject):
 
         caps_string = "video/x-raw-yuv, "
         r = self.videowidget.get_allocation()
-        if r.width > 500:
-            # assume dimensions are valid
-            caps_string += "width=%d, height=%d" % (r.width, r.height)
+        if r.width > 500 and r.height > 500:
+            # Sigh... xvimagesink on the XOs will scale the video to fit
+            # but ximagesink in Xephyr does not.  So we live with unscaled
+            # video in Xephyr so that the XO can work right.
+            w = 480
+            h = float(w) / float(float(r.width) / float(r.height))
+            caps_string += "width=%d, height=%d" % (w, h)
         else:
-            caps_string += "width=720"
+            caps_string += "width=480, height=360"
         caps = gst.Caps(caps_string)
         self.filter = gst.element_factory_make("capsfilter", "filter")
         self.bin.add(self.filter)
@@ -405,6 +431,7 @@ class GstPlayer(gobject.GObject):
         logging.debug("playing player")
         self.player.set_state(gst.STATE_PLAYING)
         self.playing = True
+        self.error = False
         
     def stop(self):
         self.player.set_state(gst.STATE_NULL)
