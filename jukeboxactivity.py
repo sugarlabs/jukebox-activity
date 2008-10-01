@@ -43,7 +43,6 @@ import gtk
 
 import urllib
 from ControlToolbar import ControlToolbar
-from ViewToolbar import ViewToolbar
 
 class JukeboxActivity(activity.Activity):
     UPDATE_INTERVAL = 500
@@ -59,15 +58,9 @@ class JukeboxActivity(activity.Activity):
         toolbox.add_toolbar(_('Play'), toolbar)
 
         toolbar.show()
-        self._view_toolbar = ViewToolbar(toolbox, self)
-        toolbox.add_toolbar(_('View'), self._view_toolbar)
-        self._view_toolbar.show()
-
-
-
         toolbox.show()
 
-        self._view_toolbar.connect('go-fullscreen', self.__go_fullscreen_cb)
+        self.toolbar.connect('go-fullscreen', self.__go_fullscreen_cb)
 
         self.connect("shared", self._shared_cb)
 
@@ -430,4 +423,39 @@ class VideoWidget(gtk.DrawingArea):
         assert self.window.xid
         self.imagesink = sink
         self.imagesink.set_xwindow_id(self.window.xid)
+
+
+if __name__ == '__main__':
+    window = gtk.Window()
+
+    vadj = gtk.Adjustment()
+    hadj = gtk.Adjustment()
+    sw = gtk.ScrolledWindow(hadj, vadj)
+
+    view = VideoWidget()
+
+    #view.set_file_location(sys.argv[1])
+
+
+    sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+
+
+    sw.add_with_viewport(view)
+    window.add(sw)
+    player = GstPlayer(view)
+    #player.connect("eos", self._player_eos_cb)
+    #player.connect("error", self._player_error_cb)
+    #player.connect("tag", self._player_new_tag_cb)
+    #player.connect("stream-info", self._player_stream_info_cb)
+
+    player.set_uri('file:///junk/pune.ogg')
+    player.play()
+    view.set_size_request(320,240)
+    window.set_size_request(1024,768)
+    #update(player)
+    window.show_all()
+
+    gobject.timeout_add(3000, update, player)
+
+    gtk.main()
 
