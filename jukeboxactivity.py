@@ -49,7 +49,9 @@ class JukeboxActivity(activity.Activity):
 
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
+        self._object_id = handle.object_id
         self.set_title(_('Jukebox Activity'))
+
 
         toolbox = activity.ActivityToolbox(self)
         self.set_toolbox(toolbox)
@@ -59,9 +61,9 @@ class JukeboxActivity(activity.Activity):
 
         toolbar.show()
         toolbox.show()
-
         self.toolbar.connect('go-fullscreen', self.__go_fullscreen_cb)
 
+        self.toolbar.grab_focus()
         self.connect("shared", self._shared_cb)
 
         if handle.uri:
@@ -90,6 +92,9 @@ class JukeboxActivity(activity.Activity):
         self.videowidget = VideoWidget()
         self.bin.add(self.videowidget)
         self.set_canvas(self.bin)
+        self.__proxy = gtk.Invisible()
+        self.__proxy.connect("key-press-event", self._key_press_event_cb)
+        self.__proxy.show() 
         self.show_all()
 
         if handle.uri:
@@ -162,6 +167,7 @@ class JukeboxActivity(activity.Activity):
             # lazy init the player so that videowidget is realized
             # and has a valid widget allocation
             self.player = GstPlayer(self.videowidget)
+            self.player.videowidget.connect('key-press-event', self._key_press_event_cb)
             self.player.connect("eos", self._player_eos_cb)
             self.player.connect("error", self._player_error_cb)
             self.player.connect("tag", self._player_new_tag_cb)
@@ -204,7 +210,7 @@ class JukeboxActivity(activity.Activity):
         if self.changed_id == -1:
             self.changed_id = self.toolbar.hscale.connect('value-changed',
                 self.scale_value_changed_cb)
-            
+
     def scale_value_changed_cb(self, scale):
         # see seek.c:seek_cb
         real = long(scale.get_value() * self.p_duration / 100) # in ns
@@ -241,6 +247,12 @@ class JukeboxActivity(activity.Activity):
 
     def __go_fullscreen_cb(self, toolbar):
         self.fullscreen()
+
+    def _key_press_event_cb(self, widget, event):
+        keyname = gtk.gdk.keyval_name(event.keyval)
+        logging.info("Keyname Press: %s, time: %s", keyname, event.time)
+        if keyname == "space":
+            self.play_toggled()
 
 class GstPlayer(gobject.GObject):
     __gsignals__ = {
