@@ -59,6 +59,8 @@ class JukeboxActivity(activity.Activity):
         toolbar.show()
         toolbox.show()
 
+        self.toolbar.connect('go-fullscreen', self.__go_fullscreen_cb)
+
         self.connect("shared", self._shared_cb)
 
         if handle.uri:
@@ -235,6 +237,9 @@ class JukeboxActivity(activity.Activity):
             self.toolbar.adjustment.set_value(value)
 
         return True
+
+    def __go_fullscreen_cb(self, toolbar):
+        self.fullscreen()
 
 class GstPlayer(gobject.GObject):
     __gsignals__ = {
