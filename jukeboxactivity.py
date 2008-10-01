@@ -41,6 +41,7 @@ import gst.interfaces
 import gtk
 
 import urllib
+from ControlToolbar import ControlToolbar
 
 class JukeboxActivity(activity.Activity):
     UPDATE_INTERVAL = 500
@@ -235,63 +236,6 @@ class JukeboxActivity(activity.Activity):
 
         return True
 
-class ControlToolbar(gtk.Toolbar):
-    def __init__(self, toolbox, jukebox):
-        gtk.Toolbar.__init__(self)
-        
-        self.toolbox = toolbox
-        self.jukebox = jukebox
-
-        self.pause_image = gtk.image_new_from_stock(gtk.STOCK_MEDIA_PAUSE,
-                                                    gtk.ICON_SIZE_BUTTON)
-        self.pause_image.show()
-        self.play_image = gtk.image_new_from_stock(gtk.STOCK_MEDIA_PLAY,
-                                                   gtk.ICON_SIZE_BUTTON)
-        self.play_image.show()
-
-        self.button = gtk.ToolButton()
-        self.button.set_icon_widget(self.play_image)
-        self.button.set_property('can-default', True)
-        self.button.show()
-        self.button.connect('clicked', self._button_clicked_cb)
-
-        self.insert(self.button, -1)
-
-        self.adjustment = gtk.Adjustment(0.0, 0.00, 100.0, 0.1, 1.0, 1.0)
-        self.hscale = gtk.HScale(self.adjustment)
-        self.hscale.set_draw_value(False)
-        self.hscale.set_update_policy(gtk.UPDATE_CONTINUOUS)
-        self.hscale.connect('button-press-event', jukebox.scale_button_press_cb)
-        self.hscale.connect('button-release-event', jukebox.scale_button_release_cb)
-        
-        self.scale_item = gtk.ToolItem()
-        self.scale_item.set_expand(True)
-        self.scale_item.add(self.hscale)
-        self.insert(self.scale_item, -1)
-
-        self.audioscale = gtk.VolumeButton()
-        self.audioscale.connect('value-changed', jukebox.volume_changed_cb)
-        self.audioscale.set_value(1)
-        
-        self.audio_scale_item = gtk.ToolItem()
-        self.audio_scale_item.set_expand(False)
-        self.audio_scale_item.add(self.audioscale)
-        self.insert(self.audio_scale_item, -1)
-
-    def _button_clicked_cb(self, widget):
-        self.jukebox.play_toggled()
-
-    def set_button_play(self):
-        self.button.set_icon_widget(self.play_image)
-        
-    def set_button_pause(self):
-        self.button.set_icon_widget(self.pause_image)
-
-    def set_disabled(self):
-        self.button.set_sensitive(False)
-        self.scale_item.set_sensitive(False)
-        self.hscale.set_sensitive(False)
-        
 class GstPlayer(gobject.GObject):
     __gsignals__ = {
         'error': (gobject.SIGNAL_RUN_FIRST, None, [str, str]),
