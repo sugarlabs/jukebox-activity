@@ -182,6 +182,9 @@ class JukeboxActivity(activity.Activity):
                                                          self.update_scale_cb)
                 self.toolbar.set_button_pause()
 
+    def volume_changed_cb(self, widget, value):
+        self.player.player.set_property('volume', value)
+
     def scale_button_press_cb(self, widget, event):
         self.toolbar.button.set_sensitive(False)
         self.was_playing = self.player.is_playing()
@@ -265,6 +268,15 @@ class ControlToolbar(gtk.Toolbar):
         self.scale_item.set_expand(True)
         self.scale_item.add(self.hscale)
         self.insert(self.scale_item, -1)
+
+        self.audioscale = gtk.VolumeButton()
+        self.audioscale.connect('value-changed', jukebox.volume_changed_cb)
+        self.audioscale.set_value(1)
+        
+        self.audio_scale_item = gtk.ToolItem()
+        self.audio_scale_item.set_expand(False)
+        self.audio_scale_item.add(self.audioscale)
+        self.insert(self.audio_scale_item, -1)
 
     def _button_clicked_cb(self, widget):
         self.jukebox.play_toggled()
