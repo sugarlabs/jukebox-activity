@@ -92,14 +92,23 @@ class JukeboxActivity(activity.Activity):
         self.videowidget = VideoWidget()
         self.bin.add(self.videowidget)
         self.set_canvas(self.bin)
-        self.__proxy = gtk.Invisible()
-        self.__proxy.connect("key-press-event", self._key_press_event_cb)
-        self.__proxy.show() 
         self.show_all()
 
         if handle.uri:
             self.uri = handle.uri
             gobject.idle_add(self._start, self.uri)
+            
+        self.toolbox.connect("key_press_event", self._key_press_event_cb)
+
+    
+    def _key_press_event_cb(self, widget, event):
+        keyname = gtk.gdk.keyval_name(event.keyval)
+        logging.info ("Keyname Press: %s, time: %s", keyname, event.time)
+        if keyname == "space":
+            try:
+                self.player.play_toggled()
+            except:
+                pass
 
     def _player_eos_cb(self, widget):
         self.player.seek(0L)
@@ -167,7 +176,6 @@ class JukeboxActivity(activity.Activity):
             # lazy init the player so that videowidget is realized
             # and has a valid widget allocation
             self.player = GstPlayer(self.videowidget)
-            self.player.videowidget.connect('key-press-event', self._key_press_event_cb)
             self.player.connect("eos", self._player_eos_cb)
             self.player.connect("error", self._player_error_cb)
             self.player.connect("tag", self._player_new_tag_cb)
@@ -248,11 +256,6 @@ class JukeboxActivity(activity.Activity):
     def __go_fullscreen_cb(self, toolbar):
         self.fullscreen()
 
-    def _key_press_event_cb(self, widget, event):
-        keyname = gtk.gdk.keyval_name(event.keyval)
-        logging.info("Keyname Press: %s, time: %s", keyname, event.time)
-        if keyname == "space":
-            self.play_toggled()
 
 class GstPlayer(gobject.GObject):
     __gsignals__ = {
@@ -420,6 +423,11 @@ class GstPlayer(gobject.GObject):
 class VideoWidget(gtk.DrawingArea):
     def __init__(self):
         gtk.DrawingArea.__init__(self)
+        self.set_events(gtk.gdk.POINTER_MOTION_MASK |
+        gtk.gdk.POINTER_MOTION_HINT_MASK |
+        gtk.gdk.EXPOSURE_MASK |
+        gtk.gdk.KEY_PRESS_MASK |
+        gtk.gdk.KEY_RELEASE_MASK) 
         self.imagesink = None
         self.unset_flags(gtk.DOUBLE_BUFFERED)
         self.set_flags(gtk.APP_PAINTABLE)
@@ -437,37 +445,28 @@ class VideoWidget(gtk.DrawingArea):
         self.imagesink.set_xwindow_id(self.window.xid)
 
 
+
 if __name__ == '__main__':
     window = gtk.Window()
-
-    vadj = gtk.Adjustment()
-    hadj = gtk.Adjustment()
-    sw = gtk.ScrolledWindow(hadj, vadj)
 
     view = VideoWidget()
 
     #view.set_file_location(sys.argv[1])
 
-
-    sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-
-
-    sw.add_with_viewport(view)
-    window.add(sw)
     player = GstPlayer(view)
     #player.connect("eos", self._player_eos_cb)
     #player.connect("error", self._player_error_cb)
     #player.connect("tag", self._player_new_tag_cb)
     #player.connect("stream-info", self._player_stream_info_cb)
 
-    player.set_uri('file:///junk/pune.ogg')
-    player.play()
-    view.set_size_request(320,240)
-    window.set_size_request(1024,768)
-    #update(player)
-    window.show_all()
+    window.add(view)
 
-    gobject.timeout_add(3000, update, player)
+    player.set_uri('file:///home/sayamindu/WeAreHere.ogg')
+    player.play()
+    window.show_all()
+    
+
 
     gtk.main()
+
 
