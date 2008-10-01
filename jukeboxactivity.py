@@ -3,6 +3,7 @@
  Activity that plays media.
  Copyright (C) 2007 Andy Wingo <wingo@pobox.com>
  Copyright (C) 2007 Red Hat, Inc.
+ Copyright (C) 2008 Kushal Das <kushal@fedoraproject.org>
 """
 
 # This program is free software; you can redistribute it and/or
@@ -42,6 +43,7 @@ import gtk
 
 import urllib
 from ControlToolbar import ControlToolbar
+from ViewToolbar import ViewToolbar
 
 class JukeboxActivity(activity.Activity):
     UPDATE_INTERVAL = 500
@@ -57,9 +59,15 @@ class JukeboxActivity(activity.Activity):
         toolbox.add_toolbar(_('Play'), toolbar)
 
         toolbar.show()
+        self._view_toolbar = ViewToolbar(toolbox, self)
+        toolbox.add_toolbar(_('View'), self._view_toolbar)
+        self._view_toolbar.show()
+
+
+
         toolbox.show()
 
-        self.toolbar.connect('go-fullscreen', self.__go_fullscreen_cb)
+        self._view_toolbar.connect('go-fullscreen', self.__go_fullscreen_cb)
 
         self.connect("shared", self._shared_cb)
 

@@ -29,13 +29,7 @@ from sugar.activity import activity
 
 
 class ControlToolbar(gtk.Toolbar):
-    """Class to create the toolbar"""
-    
-    __gsignals__ = {
-        'go-fullscreen': (gobject.SIGNAL_RUN_FIRST,
-                          gobject.TYPE_NONE,
-                          ([]))
-    }
+    """Class to create the Control (play )toolbar"""
 
     def __init__(self, toolbox, jukebox):
         gtk.Toolbar.__init__(self)
@@ -74,17 +68,6 @@ class ControlToolbar(gtk.Toolbar):
         self.insert(spacer, -1)
         spacer.show()
 
-        self._fullscreen = ToolButton('view-fullscreen')
-        self._fullscreen.set_tooltip(_('Fullscreen'))
-        self._fullscreen.connect('clicked', self._fullscreen_cb)
-        self.insert(self._fullscreen, -1)
-        self._fullscreen.show()
-
-        spacer = gtk.SeparatorToolItem()
-        spacer.props.draw = False
-        self.insert(spacer, -1)
-        spacer.show()
-
         self.audioscale = gtk.VolumeButton()
         self.audioscale.connect('value-changed', jukebox.volume_changed_cb)
         self.audioscale.set_value(1)
@@ -107,6 +90,3 @@ class ControlToolbar(gtk.Toolbar):
         self.button.set_sensitive(False)
         self.scale_item.set_sensitive(False)
         self.hscale.set_sensitive(False)
-
-    def _fullscreen_cb(self, button):
-        self.emit('go-fullscreen')
