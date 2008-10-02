@@ -51,7 +51,7 @@ class JukeboxActivity(activity.Activity):
         activity.Activity.__init__(self, handle)
         self._object_id = handle.object_id
         self.set_title(_('Jukebox Activity'))
-
+        self.player = None
 
         toolbox = activity.ActivityToolbox(self)
         self.set_toolbox(toolbox)
@@ -87,7 +87,6 @@ class JukeboxActivity(activity.Activity):
         self.p_position = gst.CLOCK_TIME_NONE
         self.p_duration = gst.CLOCK_TIME_NONE
 
-        self.player = None
         self.bin = gtk.HBox()
         self.videowidget = VideoWidget()
         self.bin.add(self.videowidget)
@@ -201,7 +200,8 @@ class JukeboxActivity(activity.Activity):
                 self.toolbar.set_button_pause()
 
     def volume_changed_cb(self, widget, value):
-        self.player.player.set_property('volume', value)
+        if self.player:
+            self.player.player.set_property('volume', value)
 
     def scale_button_press_cb(self, widget, event):
         self.toolbar.button.set_sensitive(False)
