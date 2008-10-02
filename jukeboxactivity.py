@@ -167,7 +167,18 @@ class JukeboxActivity(activity.Activity):
 
     def read_file(self, file_path):
         self.uri = os.path.abspath(file_path)
+        if os.path.islink(self.uri):
+            self.uri = os.path.realpath(self.uri)
         gobject.idle_add(self._start, self.uri)
+
+    def getplaylist(self, links):
+        result = []
+        for x in links:
+            if x.startswith('http://'):
+                result.append(x)
+            else:
+                result.append('file://' + os.path.join(self.playpath,x))
+        return result
 
     def _start(self, uri=None):
         logging.info(uri)
@@ -176,7 +187,7 @@ class JukeboxActivity(activity.Activity):
             return False
         # FIXME: parse m3u files and extract actual URL
         if uri.endswith(".m3u"):
-            self.playlist = [line.strip() for line in open(uri).readlines()]
+            self.playlist = self.getplaylist([line.strip() for line in open(uri).readlines()])
         else:
             self.playlist.append('file://' + urllib.quote(uri))
         if not self.player:
