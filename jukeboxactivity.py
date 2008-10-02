@@ -82,6 +82,8 @@ class JukeboxActivity(activity.Activity):
         self.uri = None
         self.playlist = []
         self.playpath = None
+        self.currentplaying = None
+        self.playflag = False
         self.tags = {}
         self.only_audio = False
         self.got_stream_info = False
@@ -112,8 +114,26 @@ class JukeboxActivity(activity.Activity):
                 pass
 
     def _player_eos_cb(self, widget):
+        if self.playflag:
+            self.playflag = False
+            return
         self.player.seek(0L)
-        self.play_toggled()
+        if self.currentplaying  < len(self.playlist) - 1:
+            self.currentplaying += 1
+            self.player.stop()
+            self.player = GstPlayer(self.videowidget)
+            self.player.connect("error", self._player_error_cb)
+            self.player.connect("tag", self._player_new_tag_cb)
+            self.player.connect("stream-info", self._player_stream_info_cb)
+            self.player.set_uri(self.playlist[self.currentplaying])
+            logging.info("NExt: " + self.playlist[self.currentplaying])
+            self.playflag = True
+            self.play_toggled()
+            self.player.connect("eos", self._player_eos_cb)
+        else:
+            self.play_toggled()
+            self.player.stop()
+            self.player.set_uri(None)
 
     def _player_error_cb(self, widget, message, detail):
         self.player.stop()
@@ -202,6 +222,7 @@ class JukeboxActivity(activity.Activity):
         try:
             logging.info("Playing: " + self.playlist[0])
             self.player.set_uri(self.playlist[0])
+            self.currentplaying = 0
         except:
             pass
         self.play_toggled()
