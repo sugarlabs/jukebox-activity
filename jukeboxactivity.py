@@ -80,6 +80,8 @@ class JukeboxActivity(activity.Activity):
         self.seek_timeout_id = -1
         self.player = None
         self.uri = None
+        self.playlist = []
+        self.playpath = None
         self.tags = {}
         self.only_audio = False
         self.got_stream_info = False
@@ -164,13 +166,19 @@ class JukeboxActivity(activity.Activity):
         pass
 
     def read_file(self, file_path):
-        self.uri = "file://" + urllib.quote(os.path.abspath(file_path))
+        self.uri = os.path.abspath(file_path)
         gobject.idle_add(self._start, self.uri)
 
     def _start(self, uri=None):
+        logging.info(uri)
+        self.playpath = os.path.dirname(uri)
         if not uri:
             return False
         # FIXME: parse m3u files and extract actual URL
+        if uri.endswith(".m3u"):
+            self.playlist = [line.strip() for line in open(uri).readlines()]
+        else:
+            self.playlist.append('file://' + urllib.quote(uri))
         if not self.player:
             # lazy init the player so that videowidget is realized
             # and has a valid widget allocation
@@ -180,7 +188,11 @@ class JukeboxActivity(activity.Activity):
             self.player.connect("tag", self._player_new_tag_cb)
             self.player.connect("stream-info", self._player_stream_info_cb)
 
-        self.player.set_uri(uri)
+        try:
+            logging.info("Playing: " + self.playlist[0])
+            self.player.set_uri(self.playlist[0])
+        except:
+            pass
         self.play_toggled()
         self.show_all()
         return False
@@ -461,7 +473,7 @@ if __name__ == '__main__':
 
     window.add(view)
 
-    player.set_uri('file:///home/sayamindu/WeAreHere.ogg')
+    player.set_uri('http://78.46.73.237:8000/prog')
     player.play()
     window.show_all()
     
