@@ -42,15 +42,10 @@ class ControlToolbar(gtk.Toolbar):
         gtk.Toolbar.__init__(self)
         self.toolbox = toolbox
         self.jukebox = jukebox
-        self.prev_image = gtk.image_new_from_stock(gtk.STOCK_MEDIA_PREVIOUS,
-                                                   gtk.ICON_SIZE_BUTTON)
-        self.prev_image.show()
 
-        self.prev_button = gtk.ToolButton()
-        self.prev_button.set_icon_widget(self.prev_image)
+        self.prev_button = gtk.ToolButton(gtk.STOCK_MEDIA_PREVIOUS)
         self.prev_button.show()
         self.prev_button.connect('clicked', self.prev_button_clicked_cb)
-
         self.insert(self.prev_button, -1)
 
 
@@ -68,15 +63,10 @@ class ControlToolbar(gtk.Toolbar):
         self.button.connect('clicked', self._button_clicked_cb)
 
         self.insert(self.button, -1)
-        self.next_image = gtk.image_new_from_stock(gtk.STOCK_MEDIA_NEXT,
-                                                   gtk.ICON_SIZE_BUTTON)
-        self.next_image.show()
 
-        self.next_button = gtk.ToolButton()
-        self.next_button.set_icon_widget(self.next_image)
+        self.next_button = gtk.ToolButton(gtk.STOCK_MEDIA_NEXT)
         self.next_button.show()
         self.next_button.connect('clicked', self.next_button_clicked_cb)
-
         self.insert(self.next_button, -1)
 
 
