@@ -1,8 +1,9 @@
 NEWS
+AUTHORS
+COPYING
 setup.py
 ControlToolbar.py
 jukeboxactivity.py
-icons/speaker.svg
 activity/activity.info
 activity/activity-jukebox.svg
 TODO
