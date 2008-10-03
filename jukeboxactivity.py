@@ -112,6 +112,17 @@ class JukeboxActivity(activity.Activity):
                 self.player.play_toggled()
             except:
                 pass
+    
+    def check_if_next_prev(self):
+        if self.currentplaying == 0:
+            self.toolbar.prev_button.set_sensitive(False)
+        else:
+            self.toolbar.prev_button.set_sensitive(True)
+        if self.currentplaying  == len(self.playlist) - 1:
+            self.toolbar.next_button.set_sensitive(False)
+        else:
+            self.toolbar.next_button.set_sensitive(True)
+
 
     def songchange(self,direction):
         #if self.playflag:
@@ -146,6 +157,7 @@ class JukeboxActivity(activity.Activity):
             self.play_toggled()
             self.player.stop()
             self.player.set_uri(None)
+        self.check_if_next_prev()
 
 
     def _player_eos_cb(self, widget):
@@ -243,6 +255,7 @@ class JukeboxActivity(activity.Activity):
             pass
         self.play_toggled()
         self.show_all()
+        self.check_if_next_prev()
         return False
 
     def play_toggled(self):
