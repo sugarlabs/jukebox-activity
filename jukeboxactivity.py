@@ -113,12 +113,12 @@ class JukeboxActivity(activity.Activity):
             except:
                 pass
 
-    def _player_eos_cb(self, widget):
+    def songchange(self,direction):
         if self.playflag:
             self.playflag = False
             return
         self.player.seek(0L)
-        if self.currentplaying  < len(self.playlist) - 1:
+        if direction == "next" and self.currentplaying  < len(self.playlist) - 1:
             self.currentplaying += 1
             self.player.stop()
             self.player = GstPlayer(self.videowidget)
@@ -134,6 +134,10 @@ class JukeboxActivity(activity.Activity):
             self.play_toggled()
             self.player.stop()
             self.player.set_uri(None)
+
+
+    def _player_eos_cb(self, widget):
+        self.songchange('next')
 
     def _player_error_cb(self, widget, message, detail):
         self.player.stop()
