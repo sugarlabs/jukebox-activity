@@ -114,11 +114,23 @@ class JukeboxActivity(activity.Activity):
                 pass
 
     def songchange(self,direction):
-        if self.playflag:
-            self.playflag = False
-            return
+        #if self.playflag:
+        #    self.playflag = False
+        #    return
         self.player.seek(0L)
-        if direction == "next" and self.currentplaying  < len(self.playlist) - 1:
+        if direction == "prev" and self.currentplaying  > 0:
+            self.currentplaying -= 1
+            self.player.stop()
+            self.player = GstPlayer(self.videowidget)
+            self.player.connect("error", self._player_error_cb)
+            self.player.connect("tag", self._player_new_tag_cb)
+            self.player.connect("stream-info", self._player_stream_info_cb)
+            self.player.set_uri(self.playlist[self.currentplaying])
+            logging.info("prev: " + self.playlist[self.currentplaying])
+            #self.playflag = True
+            self.play_toggled()
+            self.player.connect("eos", self._player_eos_cb)
+        elif direction == "next" and self.currentplaying  < len(self.playlist) - 1:
             self.currentplaying += 1
             self.player.stop()
             self.player = GstPlayer(self.videowidget)
@@ -127,7 +139,7 @@ class JukeboxActivity(activity.Activity):
             self.player.connect("stream-info", self._player_stream_info_cb)
             self.player.set_uri(self.playlist[self.currentplaying])
             logging.info("NExt: " + self.playlist[self.currentplaying])
-            self.playflag = True
+            #self.playflag = True
             self.play_toggled()
             self.player.connect("eos", self._player_eos_cb)
         else:

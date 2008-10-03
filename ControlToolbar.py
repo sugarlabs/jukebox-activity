@@ -42,6 +42,17 @@ class ControlToolbar(gtk.Toolbar):
         gtk.Toolbar.__init__(self)
         self.toolbox = toolbox
         self.jukebox = jukebox
+        self.prev_image = gtk.image_new_from_stock(gtk.STOCK_MEDIA_PREVIOUS,
+                                                   gtk.ICON_SIZE_BUTTON)
+        self.prev_image.show()
+
+        self.prev_button = gtk.ToolButton()
+        self.prev_button.set_icon_widget(self.prev_image)
+        self.prev_button.show()
+        self.prev_button.connect('clicked', self.prev_button_clicked_cb)
+
+        self.insert(self.prev_button, -1)
+
 
         self.pause_image = gtk.image_new_from_stock(gtk.STOCK_MEDIA_PAUSE,
                                                     gtk.ICON_SIZE_BUTTON)
@@ -57,6 +68,17 @@ class ControlToolbar(gtk.Toolbar):
         self.button.connect('clicked', self._button_clicked_cb)
 
         self.insert(self.button, -1)
+        self.next_image = gtk.image_new_from_stock(gtk.STOCK_MEDIA_NEXT,
+                                                   gtk.ICON_SIZE_BUTTON)
+        self.next_image.show()
+
+        self.next_button = gtk.ToolButton()
+        self.next_button.set_icon_widget(self.next_image)
+        self.next_button.show()
+        self.next_button.connect('clicked', self.next_button_clicked_cb)
+
+        self.insert(self.next_button, -1)
+
 
         self.adjustment = gtk.Adjustment(0.0, 0.00, 100.0, 0.1, 1.0, 1.0)
         self.hscale = gtk.HScale(self.adjustment)
@@ -93,7 +115,12 @@ class ControlToolbar(gtk.Toolbar):
         self._fullscreen.connect('clicked', self._fullscreen_cb)
         self.insert(self._fullscreen, -1)
         self._fullscreen.show()
+    
+    def prev_button_clicked_cb(self,widget):
+        self.jukebox.songchange('prev')
 
+    def next_button_clicked_cb(self,widget):
+        self.jukebox.songchange('next')
 
     def _button_clicked_cb(self, widget):
         self.jukebox.play_toggled()
