@@ -43,6 +43,9 @@ import gtk
 
 import urllib
 from ControlToolbar import ControlToolbar
+from ConfigParser import ConfigParser
+cf = ConfigParser()
+
 
 class JukeboxActivity(activity.Activity):
     UPDATE_INTERVAL = 500
@@ -236,6 +239,16 @@ class JukeboxActivity(activity.Activity):
         # FIXME: parse m3u files and extract actual URL
         if uri.endswith(".m3u"):
             self.playlist = self.getplaylist([line.strip() for line in open(uri).readlines()])
+        elif uri.endswith('.pls'):
+            try:
+                cf.readfp(open(uri))
+                x = 1
+                while True:
+                    self.playlist.append(cf.get("playlist",'File'+str(x)))
+                    x += 1
+            except:
+                #read complete
+                pass
         else:
             self.playlist.append('file://' + urllib.quote(uri))
         if not self.player:
