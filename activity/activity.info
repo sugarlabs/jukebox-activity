@@ -1,9 +1,10 @@
 [Activity]
 name = Jukebox
 service_name = org.laptop.sugar.Jukebox
+license = GPLv2
 icon = activity-jukebox
 class = jukeboxactivity.JukeboxActivity
 show_launcher = yes
-activity_version = 3
+activity_version = 4
 mime_types = video/x-theora;audio/x-vorbis;audio/x-flac;audio/x-speex;application/x-ogm-video;application/x-ogm-audio;video/x-mng;audio/x-aiff;audio/x-wav;audio/x-m4a;video/mpeg4;video/mpeg-stream;video/mpeg;application/ogg;video/mpegts;video/mpeg2;video/mpeg1;audio/mpeg;audio/x-ac3;video/x-cdxa;audio/x-au;audio/mpegurl;audio/x-mpegurl;audio/x-vorbis+ogg;audio/x-scpls
 
