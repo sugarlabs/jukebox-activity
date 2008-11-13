@@ -9,3 +9,5 @@ activity/activity-jukebox.svg
 TODO
 po/Jukebox.pot
 po/bn_IN.po
+locale/bn_IN/activity.linfo
+locale/bn_IN/LC_MESSAGES/org.laptop.sugar.Jukebox.mo
