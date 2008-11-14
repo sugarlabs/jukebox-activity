@@ -1,7 +1,7 @@
 [Activity]
 name = Jukebox
 service_name = org.laptop.sugar.Jukebox
-license = GPLv2
+license = GPLv2+
 icon = activity-jukebox
 class = jukeboxactivity.JukeboxActivity
 show_launcher = yes
