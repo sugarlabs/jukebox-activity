@@ -227,8 +227,10 @@ class JukeboxActivity(activity.Activity):
         for x in links:
             if x.startswith('http://'):
                 result.append(x)
+            elif x.startswith('#'):
+                continue
             else:
-                result.append('file://' + os.path.join(self.playpath,x))
+                result.append('file://' + urllib.quote(os.path.join(self.playpath,x)))
         return result
 
     def _start(self, uri=None):
@@ -250,7 +252,7 @@ class JukeboxActivity(activity.Activity):
                 #read complete
                 pass
         else:
-            self.playlist.append('file://' + urllib.quote(uri))
+            self.playlist.append("file://" + urllib.quote(os.path.abspath(uri)))
         if not self.player:
             # lazy init the player so that videowidget is realized
             # and has a valid widget allocation
