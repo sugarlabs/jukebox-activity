@@ -27,6 +27,7 @@ from gettext import gettext as _
 import os
 
 from sugar.activity import activity
+from sugar.graphics.objectchooser import ObjectChooser
 
 import pygtk
 pygtk.require('2.0')
@@ -99,6 +100,10 @@ class JukeboxActivity(activity.Activity):
         self.bin.add(self.videowidget)
         self.set_canvas(self.bin)
         self.show_all()
+        #From ImageViewer Activity
+        self._want_document = True
+        self._show_object_picker = gobject.timeout_add(1000, \
+            self._show_picker_cb)
 
         if handle.uri:
             self.uri = handle.uri
@@ -216,6 +221,25 @@ class JukeboxActivity(activity.Activity):
         logging.debug("shared start")
         pass
 
+    def _show_picker_cb(self):
+        #From ImageViewer Activity
+        if not self._want_document:
+            return
+
+        chooser = ObjectChooser(_('Choose document'), self,
+            gtk.DIALOG_MODAL |
+            gtk.DIALOG_DESTROY_WITH_PARENT)
+
+        try:
+            result = chooser.run()
+            if result == gtk.RESPONSE_ACCEPT:
+                jobject = chooser.get_selected_object()
+                if jobject and jobject.file_path:
+                    self._start(jobject.file_path)
+        finally:
+            chooser.destroy()
+            del chooser
+
     def read_file(self, file_path):
         self.uri = os.path.abspath(file_path)
         if os.path.islink(self.uri):
@@ -234,6 +258,7 @@ class JukeboxActivity(activity.Activity):
         return result
 
     def _start(self, uri=None):
+        self._want_document = False
         logging.info(uri)
         self.playpath = os.path.dirname(uri)
         if not uri:
