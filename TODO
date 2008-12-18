@@ -1,4 +1,6 @@
- * Object Picker to pick file if not while startup
+ * Drag and drop media objects from Frame
+ * Option to open any other media file while it is running
+ * Playlist making and editing support
  * Screenshot support
  * journal support
  * Collaboration support
