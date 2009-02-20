@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-04 00:09+0530\n"
-"PO-Revision-Date: 2009-02-15 15:49-0500\n"
+"PO-Revision-Date: 2009-02-20 14:44-0500\n"
 "Last-Translator: Eduardo H. Silva <HoboPrimate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: activity/activity.info:2
 msgid "Jukebox"
-msgstr ""
+msgstr "Jukebox"
 
 #: ViewToolbar.py:45
 msgid "Fit to window"
