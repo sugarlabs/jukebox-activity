@@ -68,7 +68,12 @@ class JukeboxActivity(activity.Activity):
         self.toolbar.connect('go-fullscreen', self.__go_fullscreen_cb)
 
         self.toolbar.grab_focus()
-        self.connect("shared", self._shared_cb)
+        #self.connect("shared", self._shared_cb)
+        activity_toolbar = toolbox.get_activity_toolbar()
+        activity_toolbar.remove(activity_toolbar.share)
+        activity_toolbar.share = None
+        activity_toolbar.remove(activity_toolbar.keep)
+        activity_toolbar.keep = None
 
         if handle.uri:
             pass
