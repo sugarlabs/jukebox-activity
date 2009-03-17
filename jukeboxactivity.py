@@ -269,8 +269,8 @@ class JukeboxActivity(activity.Activity):
         if not uri:
             return False
         # FIXME: parse m3u files and extract actual URL
-        if uri.endswith(".m3u"):
-            self.playlist = self.getplaylist([line.strip() for line in open(uri).readlines()])
+        if uri.endswith(".m3u") or uri.endswith(".m3u8"):
+            self.playlist.extend(self.getplaylist([line.strip() for line in open(uri).readlines()]))
         elif uri.endswith('.pls'):
             try:
                 cf.readfp(open(uri))
