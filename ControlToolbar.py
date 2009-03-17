@@ -43,6 +43,11 @@ class ControlToolbar(gtk.Toolbar):
         self.toolbox = toolbox
         self.jukebox = jukebox
 
+        self.open_button = gtk.ToolButton(gtk.STOCK_FILE)
+        self.open_button.show()
+        self.open_button.connect('clicked', jukebox.open_button_clicked_cb)
+        self.insert(self.open_button, -1)
+
         self.prev_button = gtk.ToolButton(gtk.STOCK_MEDIA_PREVIOUS)
         self.prev_button.show()
         self.prev_button.connect('clicked', self.prev_button_clicked_cb)
