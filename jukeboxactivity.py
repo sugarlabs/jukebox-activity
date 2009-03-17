@@ -90,6 +90,7 @@ class JukeboxActivity(activity.Activity):
         self.player = None
         self.uri = None
         self.playlist = []
+        self.jobjectlist = []
         self.playpath = None
         self.currentplaying = None
         self.playflag = False
@@ -116,7 +117,18 @@ class JukeboxActivity(activity.Activity):
             
         self.toolbox.connect("key_press_event", self._key_press_event_cb)
 
-    
+    def open_button_clicked_cb(self, widget):
+        """ To open the dialog to select a new file"""
+        #self.player.seek(0L)
+        #self.player.stop()
+        #self.playlist = []
+        #self.playpath = None
+        #self.currentplaying = None
+        #self.playflag = False
+        self._want_document = True
+        self._show_object_picker = gobject.timeout_add(1, self._show_picker_cb)
+
+
     def _key_press_event_cb(self, widget, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
         logging.info ("Keyname Press: %s, time: %s", keyname, event.time)
@@ -240,16 +252,18 @@ class JukeboxActivity(activity.Activity):
             if result == gtk.RESPONSE_ACCEPT:
                 jobject = chooser.get_selected_object()
                 if jobject and jobject.file_path:
+                    self.jobjectlist.append(jobject)
                     self._start(jobject.file_path)
         finally:
-            chooser.destroy()
-            del chooser
+            #chooser.destroy()
+            #del chooser
+            pass
 
     def read_file(self, file_path):
         self.uri = os.path.abspath(file_path)
         if os.path.islink(self.uri):
             self.uri = os.path.realpath(self.uri)
-        gobject.idle_add(self._start, self.uri)
+        #gobject.idle_add(self._start, self.uri)
 
     def getplaylist(self, links):
         result = []
@@ -269,8 +283,8 @@ class JukeboxActivity(activity.Activity):
         if not uri:
             return False
         # FIXME: parse m3u files and extract actual URL
-        if uri.endswith(".m3u"):
-            self.playlist = self.getplaylist([line.strip() for line in open(uri).readlines()])
+        if uri.endswith(".m3u") or uri.endswith(".m3u8"):
+            self.playlist.extend(self.getplaylist([line.strip() for line in open(uri).readlines()]))
         elif uri.endswith('.pls'):
             try:
                 cf.readfp(open(uri))
@@ -293,13 +307,20 @@ class JukeboxActivity(activity.Activity):
             self.player.connect("stream-info", self._player_stream_info_cb)
 
         try:
-            logging.info("Playing: " + self.playlist[0])
-            self.player.set_uri(self.playlist[0])
-            self.currentplaying = 0
+            if not self.currentplaying:
+                logging.info("Playing: " + self.playlist[0])
+                self.player.set_uri(self.playlist[0])
+                self.currentplaying = 0
+                self.play_toggled()
+                self.show_all()
+            else:
+                self.player.seek(0L)
+                self.player.stop()
+                self.currentplaying += 1
+                self.player.set_uri(self.playlist[self.currentplaying])
+                self.play_toggled()
         except:
             pass
-        self.play_toggled()
-        self.show_all()
         self.check_if_next_prev()
         return False
 
