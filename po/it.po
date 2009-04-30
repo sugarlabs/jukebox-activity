@@ -6,35 +6,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-04 00:09+0530\n"
-"PO-Revision-Date: 2008-12-13 06:21-0500\n"
+"POT-Creation-Date: 2009-04-29 17:36-0400\n"
+"PO-Revision-Date: 2009-04-30 09:04-0400\n"
 "Last-Translator: Carlo Falciola <cfalciola@yahoo.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.1.0rc2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.2.1\n"
 
 #: activity/activity.info:2
 msgid "Jukebox"
 msgstr "Jukebox"
 
-#: ViewToolbar.py:45
-msgid "Fit to window"
-msgstr "Dimensiona come la finestra"
-
-#: ViewToolbar.py:51
-msgid "Original size"
-msgstr "Dimensione originale"
-
-#: ViewToolbar.py:63 ControlToolbar.py:104
+#: ControlToolbar.py:104
 msgid "Fullscreen"
 msgstr "Schermo intero"
 
-#: jukeboxactivity.py:53
+#: jukeboxactivity.py:57
 msgid "Jukebox Activity"
 msgstr "Attività Jukebox"
 
-#: jukeboxactivity.py:60
+#: jukeboxactivity.py:64
 msgid "Play"
 msgstr "Esegui"
+
+#: jukeboxactivity.py:234
+msgid "Choose document"
+msgstr "Scegli documento"
+
+#~ msgid "Fit to window"
+#~ msgstr "Dimensiona come la finestra"
+
+#~ msgid "Original size"
+#~ msgstr "Dimensione originale"
