@@ -6,35 +6,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-04 00:09+0530\n"
-"PO-Revision-Date: 2008-12-11 02:11-0500\n"
+"POT-Creation-Date: 2009-04-29 17:36-0400\n"
+"PO-Revision-Date: 2009-05-21 02:27-0400\n"
 "Last-Translator: Myckel Habets <myckel@sdf.lonestar.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.1.0rc2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.2.1\n"
 
 #: activity/activity.info:2
 msgid "Jukebox"
 msgstr "Jukebox"
 
-#: ViewToolbar.py:45
-msgid "Fit to window"
-msgstr "Passend in venster"
-
-#: ViewToolbar.py:51
-msgid "Original size"
-msgstr "Originele grootte"
-
-#: ViewToolbar.py:63 ControlToolbar.py:104
+#: ControlToolbar.py:109
 msgid "Fullscreen"
 msgstr "Schermvullend"
 
-#: jukeboxactivity.py:53
+#: jukeboxactivity.py:57
 msgid "Jukebox Activity"
 msgstr "Jukebox activiteit"
 
-#: jukeboxactivity.py:60
+#: jukeboxactivity.py:64
 msgid "Play"
 msgstr "Afspelen"
+
+#: jukeboxactivity.py:246
+msgid "Choose document"
+msgstr "Document kiezen"
+
+#~ msgid "Fit to window"
+#~ msgstr "Passend in venster"
+
+#~ msgid "Original size"
+#~ msgstr "Originele grootte"
