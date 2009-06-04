@@ -108,7 +108,8 @@ class JukeboxActivity(activity.Activity):
         self.show_all()
         #From ImageViewer Activity
         self._want_document = True
-        self._show_object_picker = gobject.timeout_add(1000, \
+        if self._object_id:
+            self._show_object_picker = gobject.timeout_add(1000, \
             self._show_picker_cb)
 
         if handle.uri:
@@ -263,7 +264,7 @@ class JukeboxActivity(activity.Activity):
         self.uri = os.path.abspath(file_path)
         if os.path.islink(self.uri):
             self.uri = os.path.realpath(self.uri)
-        #gobject.idle_add(self._start, self.uri)
+        gobject.idle_add(self._start, self.uri)
 
     def getplaylist(self, links):
         result = []
@@ -278,7 +279,6 @@ class JukeboxActivity(activity.Activity):
 
     def _start(self, uri=None):
         self._want_document = False
-        logging.info(uri)
         self.playpath = os.path.dirname(uri)
         if not uri:
             return False
@@ -314,11 +314,12 @@ class JukeboxActivity(activity.Activity):
                 self.play_toggled()
                 self.show_all()
             else:
-                self.player.seek(0L)
-                self.player.stop()
-                self.currentplaying += 1
-                self.player.set_uri(self.playlist[self.currentplaying])
-                self.play_toggled()
+                pass
+                #self.player.seek(0L)
+                #self.player.stop()
+                #self.currentplaying += 1
+                #self.player.set_uri(self.playlist[self.currentplaying])
+                #self.play_toggled()
         except:
             pass
         self.check_if_next_prev()
