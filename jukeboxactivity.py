@@ -28,6 +28,7 @@ import os
 
 from sugar.activity import activity
 from sugar.graphics.objectchooser import ObjectChooser
+from sugar import mime
 
 import pygtk
 pygtk.require('2.0')
