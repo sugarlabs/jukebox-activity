@@ -246,7 +246,8 @@ class JukeboxActivity(activity.Activity):
 
         chooser = ObjectChooser(_('Choose document'), self,
             gtk.DIALOG_MODAL |
-            gtk.DIALOG_DESTROY_WITH_PARENT)
+            gtk.DIALOG_DESTROY_WITH_PARENT,
+            what_filter=mime.GENERIC_TYPE_AUDIO)
 
         try:
             result = chooser.run()
