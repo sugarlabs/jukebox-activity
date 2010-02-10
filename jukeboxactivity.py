@@ -109,7 +109,7 @@ class JukeboxActivity(activity.Activity):
         self.show_all()
         #From ImageViewer Activity
         self._want_document = True
-        if self._object_id:
+        if self._object_id is None:
             self._show_object_picker = gobject.timeout_add(1000, \
             self._show_picker_cb)
 
