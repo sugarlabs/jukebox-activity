@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-04 00:09+0530\n"
+"POT-Creation-Date: 2009-04-29 17:36-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,24 +18,20 @@ msgstr ""
 
 #: activity/activity.info:2
 msgid "Jukebox"
-msgstr ""
+msgstr "ज्यूकबॉक्स"
 
-#: ViewToolbar.py:45
-msgid "Fit to window"
-msgstr ""
-
-#: ViewToolbar.py:51
-msgid "Original size"
-msgstr ""
-
-#: ViewToolbar.py:63 ControlToolbar.py:104
+#: ControlToolbar.py:109
 msgid "Fullscreen"
-msgstr ""
+msgstr "पूर्ण स्क्रीन"
 
-#: jukeboxactivity.py:53
+#: jukeboxactivity.py:57
 msgid "Jukebox Activity"
-msgstr ""
+msgstr "ज्यूकबॉक्स क्रिया"
 
-#: jukeboxactivity.py:60
+#: jukeboxactivity.py:64
 msgid "Play"
-msgstr ""
+msgstr "बजाएँ"
+
+#: jukeboxactivity.py:246
+msgid "Choose document"
+msgstr "दस्तावेज़ चुनें"
