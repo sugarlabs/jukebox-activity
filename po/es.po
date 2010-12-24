@@ -6,35 +6,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-04 00:09+0530\n"
-"PO-Revision-Date: 2008-12-05 10:40-0500\n"
-"Last-Translator: Angela Hernandez <alegna226@aol.com>\n"
+"POT-Creation-Date: 2009-04-29 17:36-0400\n"
+"PO-Revision-Date: 2009-06-10 10:32-0400\n"
+"Last-Translator: Gabriel Eirea <geirea@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 1.1.0rc2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.2.1\n"
 
 #: activity/activity.info:2
 msgid "Jukebox"
 msgstr "máquina de discos"
 
-#: ViewToolbar.py:45
-msgid "Fit to window"
-msgstr "concordar con ventana"
-
-#: ViewToolbar.py:51
-msgid "Original size"
-msgstr "tamaño original"
-
-#: ViewToolbar.py:63 ControlToolbar.py:104
+#: ControlToolbar.py:104
 msgid "Fullscreen"
 msgstr "pantalla completa"
 
-#: jukeboxactivity.py:53
+#: jukeboxactivity.py:57
 msgid "Jukebox Activity"
 msgstr "actividad de la máquina de discos o tocadiscos"
 
-#: jukeboxactivity.py:60
+#: jukeboxactivity.py:64
 msgid "Play"
 msgstr "Tocar (la musica)"
+
+#: jukeboxactivity.py:234
+msgid "Choose document"
+msgstr "Elegir documento"
+
+#~ msgid "Fit to window"
+#~ msgstr "concordar con ventana"
+
+#~ msgid "Original size"
+#~ msgstr "tamaño original"
