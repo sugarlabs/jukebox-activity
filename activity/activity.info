@@ -1,6 +1,6 @@
 [Activity]
 name = Jukebox
-service_name = org.laptop.sugar.Jukebox
+bundle_id = org.laptop.sugar.Jukebox
 license = GPLv2+
 icon = activity-jukebox
 class = jukeboxactivity.JukeboxActivity
