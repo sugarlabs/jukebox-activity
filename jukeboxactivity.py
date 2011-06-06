@@ -423,7 +423,9 @@ class GstPlayer(gobject.GObject):
             self.player.set_property('vis-plugin', vis_plug)
 
         self.overlay = None
+        videowidget.realize()
         self.videowidget = videowidget
+        self.videowidget_xid = videowidget.window.xid
         self._init_video_sink()
 
         bus = self.player.get_bus()
@@ -439,7 +441,7 @@ class GstPlayer(gobject.GObject):
         if message.structure is None:
             return
         if message.structure.get_name() == 'prepare-xwindow-id':
-            self.videowidget.set_sink(message.src)
+            self.videowidget.set_sink(message.src, self.videowidget_xid)
             message.src.set_property('force-aspect-ratio', True)
             
     def on_message(self, bus, message):
@@ -581,10 +583,9 @@ class VideoWidget(gtk.DrawingArea):
         else:
             return True
 
-    def set_sink(self, sink):
-        assert self.window.xid
+    def set_sink(self, sink, xid):
         self.imagesink = sink
-        self.imagesink.set_xwindow_id(self.window.xid)
+        self.imagesink.set_xwindow_id(xid)
 
 
 
