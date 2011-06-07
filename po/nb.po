@@ -1,3 +1,11 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # translation of jukebox-activity.po to Norsk bokmål
 # Kent Dahl <kentda@pvv.org>, 2008.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
@@ -6,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jukebox-activity\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-04 00:09+0530\n"
+"POT-Creation-Date: 2009-04-29 17:36-0400\n"
 "PO-Revision-Date: 2008-12-09 20:33+0100\n"
 "Last-Translator: Kent Dahl <kentda@pvv.org>\n"
 "Language-Team: Norsk bokmål <i18n-no@lister.ping.uio.no>\n"
@@ -20,22 +28,24 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Jukeboks"
 
-#: ViewToolbar.py:45
-msgid "Fit to window"
-msgstr "Tilpass vindu"
-
-#: ViewToolbar.py:51
-msgid "Original size"
-msgstr "Opprinnelig størrelse"
-
-#: ViewToolbar.py:63 ControlToolbar.py:104
+#: ControlToolbar.py:109
 msgid "Fullscreen"
 msgstr "Fullskjerm"
 
-#: jukeboxactivity.py:53
+#: jukeboxactivity.py:57
 msgid "Jukebox Activity"
 msgstr "Jukeboks aktivitet"
 
-#: jukeboxactivity.py:60
+#: jukeboxactivity.py:64
 msgid "Play"
 msgstr "Spill av"
+
+#: jukeboxactivity.py:246
+msgid "Choose document"
+msgstr ""
+
+#~ msgid "Fit to window"
+#~ msgstr "Tilpass vindu"
+
+#~ msgid "Original size"
+#~ msgstr "Opprinnelig størrelse"

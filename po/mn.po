@@ -2,6 +2,26 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -21,14 +41,6 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Жукбокс"
 
-#: ViewToolbar.py:45
-msgid "Fit to window"
-msgstr "Дэлгэцийн хэмжээ"
-
-#: ViewToolbar.py:51
-msgid "Original size"
-msgstr "Угийн хэмжээ"
-
 #: ControlToolbar.py:109
 msgid "Fullscreen"
 msgstr "Бүтэн дэлгэц"
@@ -44,3 +56,9 @@ msgstr "Тоглуулах"
 #: jukeboxactivity.py:246
 msgid "Choose document"
 msgstr "Баримт сонгох"
+
+#~ msgid "Fit to window"
+#~ msgstr "Дэлгэцийн хэмжээ"
+
+#~ msgid "Original size"
+#~ msgstr "Угийн хэмжээ"
