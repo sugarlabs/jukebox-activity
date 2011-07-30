@@ -2,40 +2,37 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-04 00:09+0530\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2009-04-29 17:36-0400\n"
+"PO-Revision-Date: 2011-04-05 11:30+0200\n"
+"Last-Translator:  <jimmy@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: rw\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.1.1rc4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.0.1\n"
 
 #: activity/activity.info:2
 msgid "Jukebox"
-msgstr ""
+msgstr "Jukebox"
 
-#: ViewToolbar.py:45
-msgid "Fit to window"
-msgstr ""
-
-#: ViewToolbar.py:51
-msgid "Original size"
-msgstr ""
-
-#: ViewToolbar.py:63 ControlToolbar.py:104
+#: ControlToolbar.py:104
 msgid "Fullscreen"
-msgstr ""
+msgstr "Ekara nini"
 
-#: jukeboxactivity.py:53
+#: jukeboxactivity.py:57
 msgid "Jukebox Activity"
-msgstr ""
+msgstr "Igikorwa Cya Jukebox"
 
-#: jukeboxactivity.py:60
+#: jukeboxactivity.py:64
 msgid "Play"
-msgstr ""
+msgstr "Kina"
+
+#: jukeboxactivity.py:234
+msgid "Choose document"
+msgstr "Hitamo inyandiko"

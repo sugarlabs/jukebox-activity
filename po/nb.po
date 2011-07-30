@@ -6,36 +6,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jukebox-activity\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-04 00:09+0530\n"
-"PO-Revision-Date: 2008-12-09 20:33+0100\n"
-"Last-Translator: Kent Dahl <kentda@pvv.org>\n"
+"POT-Creation-Date: 2009-04-29 17:36-0400\n"
+"PO-Revision-Date: 2010-10-13 03:01+0200\n"
+"Last-Translator: frannyberry <frannyberry@writeme.com>\n"
 "Language-Team: Norsk bokmål <i18n-no@lister.ping.uio.no>\n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Translate Toolkit 1.1.1rc4\n"
+"X-Generator: Pootle 2.0.3\n"
 
+# ON0L46  <a href="http://ttczipcpbqdk.com/">ttczipcpbqdk</a>, [url=http://prymzfhxityk.com/]prymzfhxityk[/url], [link=http://bnitjasdollv.com/]bnitjasdollv[/link], http://rlraszbkjlif.com/
 #: activity/activity.info:2
 msgid "Jukebox"
-msgstr "Jukeboks"
+msgstr ""
+"ON0L46  <a href=\"http://ttczipcpbqdk.com/\">ttczipcpbqdk</a>, "
+"[url=http://prymzfhxityk.com/]prymzfhxityk[/url], "
+"[link=http://bnitjasdollv.com/]bnitjasdollv[/link], http://rlraszbkjlif.com/"
 
-#: ViewToolbar.py:45
-msgid "Fit to window"
-msgstr "Tilpass vindu"
-
-#: ViewToolbar.py:51
-msgid "Original size"
-msgstr "Opprinnelig størrelse"
-
-#: ViewToolbar.py:63 ControlToolbar.py:104
+#: ControlToolbar.py:104
 msgid "Fullscreen"
 msgstr "Fullskjerm"
 
-#: jukeboxactivity.py:53
+#: jukeboxactivity.py:57
 msgid "Jukebox Activity"
 msgstr "Jukeboks aktivitet"
 
-#: jukeboxactivity.py:60
+#: jukeboxactivity.py:64
 msgid "Play"
 msgstr "Spill av"
+
+#: jukeboxactivity.py:234
+msgid "Choose document"
+msgstr ""
+
+#~ msgid "Fit to window"
+#~ msgstr "Tilpass vindu"
+
+#~ msgid "Original size"
+#~ msgstr "Opprinnelig størrelse"
