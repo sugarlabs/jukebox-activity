@@ -30,6 +30,20 @@ from sugar.activity import activity
 from sugar.graphics.objectchooser import ObjectChooser
 from sugar import mime
 
+OLD_TOOLBAR = False
+try:
+    from sugar.graphics.toolbarbox import ToolbarBox
+    from sugar.graphics.toolbarbox import ToolbarButton
+    from sugar.activity.widgets import StopButton
+except ImportError:
+    OLD_TOOLBAR = True
+
+from sugar.graphics.toolbutton import ToolButton
+from sugar.graphics.xocolor import XoColor
+from sugar import profile
+from sugar.bundle.activitybundle import ActivityBundle
+from sugar.graphics.icon import Icon
+
 import pygtk
 pygtk.require('2.0')
 
@@ -44,7 +58,7 @@ import gst.interfaces
 import gtk
 
 import urllib
-from ControlToolbar import ControlToolbar
+from ControlToolbar import Control, ViewToolbar
 from ConfigParser import ConfigParser
 cf = ConfigParser()
 
@@ -58,23 +72,65 @@ class JukeboxActivity(activity.Activity):
         self.set_title(_('Jukebox Activity'))
         self.player = None
 
-        toolbox = activity.ActivityToolbox(self)
-        self.set_toolbox(toolbox)
+        if OLD_TOOLBAR:
+            toolbox = activity.ActivityToolbox(self)
+            self.set_toolbox(toolbox)
+            toolbar = gtk.Toolbar()
+            self.control = Control(toolbar, self)
+            toolbox.add_toolbar(_('Play'), toolbar)
 
-        self.toolbar = toolbar = ControlToolbar(toolbox, self)
-        toolbox.add_toolbar(_('Play'), toolbar)
+            toolbar.show()
 
-        toolbar.show()
-        toolbox.show()
-        self.toolbar.connect('go-fullscreen', self.__go_fullscreen_cb)
+            _view_toolbar = ViewToolbar()
+            _view_toolbar.connect('go-fullscreen',
+                    self.__go_fullscreen_cb)
+            toolbox.add_toolbar(_('View'), _view_toolbar)
+            _view_toolbar.show()
 
-        self.toolbar.grab_focus()
-        #self.connect("shared", self._shared_cb)
-        activity_toolbar = toolbox.get_activity_toolbar()
-        activity_toolbar.remove(activity_toolbar.share)
-        activity_toolbar.share = None
-        activity_toolbar.remove(activity_toolbar.keep)
-        activity_toolbar.keep = None
+            toolbox.show()
+
+            toolbox.connect("key_press_event", self._key_press_event_cb)
+
+            toolbar.grab_focus()
+            #self.connect("shared", self._shared_cb)
+            activity_toolbar = toolbox.get_activity_toolbar()
+            activity_toolbar.remove(activity_toolbar.share)
+            activity_toolbar.share = None
+            activity_toolbar.remove(activity_toolbar.keep)
+            activity_toolbar.keep = None
+
+        else:
+            toolbar_box = ToolbarBox()
+            activity_button = ToolButton()
+            color = XoColor(profile.get_color())
+            bundle = ActivityBundle(activity.get_bundle_path())
+            icon = Icon(file=bundle.get_icon(), xo_color=color)
+            activity_button.set_icon_widget(icon)
+            activity_button.show()
+            toolbar_box.toolbar.insert(activity_button, 0)
+
+            _view_toolbar = ViewToolbar()
+            _view_toolbar.connect('go-fullscreen',
+                    self.__go_fullscreen_cb)
+            view_toolbar_button = ToolbarButton(
+                    page=_view_toolbar,
+                    icon_name='toolbar-view')
+            _view_toolbar.show()
+            toolbar_box.toolbar.insert(view_toolbar_button, -1)
+            view_toolbar_button.show()
+
+            self.control = Control(toolbar_box.toolbar, self)
+
+            separator = gtk.SeparatorToolItem()
+            separator.props.draw = False
+            separator.set_expand(True)
+            toolbar_box.toolbar.insert(separator, -1)
+
+            toolbar_box.toolbar.insert(StopButton(self), -1)
+
+            self.set_toolbar_box(toolbar_box)
+            toolbar_box.show_all()
+            toolbar_box.connect("key_press_event", self._key_press_event_cb)
 
         if handle.uri:
             pass
@@ -117,8 +173,6 @@ class JukeboxActivity(activity.Activity):
             self.uri = handle.uri
             gobject.idle_add(self._start, self.uri)
             
-        self.toolbox.connect("key_press_event", self._key_press_event_cb)
-
     def open_button_clicked_cb(self, widget):
         """ To open the dialog to select a new file"""
         #self.player.seek(0L)
@@ -142,13 +196,13 @@ class JukeboxActivity(activity.Activity):
     
     def check_if_next_prev(self):
         if self.currentplaying == 0:
-            self.toolbar.prev_button.set_sensitive(False)
+            self.control.prev_button.set_sensitive(False)
         else:
-            self.toolbar.prev_button.set_sensitive(True)
+            self.control.prev_button.set_sensitive(True)
         if self.currentplaying  == len(self.playlist) - 1:
-            self.toolbar.next_button.set_sensitive(False)
+            self.control.next_button.set_sensitive(False)
         else:
-            self.toolbar.next_button.set_sensitive(True)
+            self.control.next_button.set_sensitive(True)
 
 
     def songchange(self,direction):
@@ -193,7 +247,7 @@ class JukeboxActivity(activity.Activity):
     def _player_error_cb(self, widget, message, detail):
         self.player.stop()
         self.player.set_uri(None)
-        self.toolbar.set_disabled()
+        self.control.set_disabled()
         self.bin.remove(self.videowidget)
         text = gtk.Label("Error: %s - %s" % (message, detail))
         text.show_all()
@@ -330,23 +384,23 @@ class JukeboxActivity(activity.Activity):
     def play_toggled(self):
         if self.player.is_playing():
             self.player.pause()
-            self.toolbar.set_button_play()
+            self.control.set_button_play()
         else:
             if self.player.error:
-                self.toolbar.set_disabled()
+                self.control.set_disabled()
             else:
                 self.player.play()
                 if self.update_id == -1:
                     self.update_id = gobject.timeout_add(self.UPDATE_INTERVAL,
                                                          self.update_scale_cb)
-                self.toolbar.set_button_pause()
+                self.control.set_button_pause()
 
     def volume_changed_cb(self, widget, value):
         if self.player:
             self.player.player.set_property('volume', value)
 
     def scale_button_press_cb(self, widget, event):
-        self.toolbar.button.set_sensitive(False)
+        self.control.button.set_sensitive(False)
         self.was_playing = self.player.is_playing()
         if self.was_playing:
             self.player.pause()
@@ -358,7 +412,7 @@ class JukeboxActivity(activity.Activity):
 
         # make sure we get changed notifies
         if self.changed_id == -1:
-            self.changed_id = self.toolbar.hscale.connect('value-changed',
+            self.changed_id = self.control.hscale.connect('value-changed',
                 self.scale_value_changed_cb)
 
     def scale_value_changed_cb(self, scale):
@@ -373,7 +427,7 @@ class JukeboxActivity(activity.Activity):
         widget.disconnect(self.changed_id)
         self.changed_id = -1
 
-        self.toolbar.button.set_sensitive(True)
+        self.control.button.set_sensitive(True)
         if self.seek_timeout_id != -1:
             gobject.source_remove(self.seek_timeout_id)
             self.seek_timeout_id = -1
@@ -391,7 +445,7 @@ class JukeboxActivity(activity.Activity):
         self.p_position, self.p_duration = self.player.query_position()
         if self.p_position != gst.CLOCK_TIME_NONE:
             value = self.p_position * 100.0 / self.p_duration
-            self.toolbar.adjustment.set_value(value)
+            self.control.adjustment.set_value(value)
 
         return True
 

@@ -28,8 +28,8 @@ from sugar.graphics import iconentry
 from sugar.activity import activity
 
 
-class ControlToolbar(gtk.Toolbar):
-    """Class to create the Control (play )toolbar"""
+class ViewToolbar(gtk.Toolbar):
+    __gtype_name__ = 'ViewToolbar'
 
     __gsignals__ = {
         'go-fullscreen': (gobject.SIGNAL_RUN_FIRST,
@@ -37,22 +37,38 @@ class ControlToolbar(gtk.Toolbar):
                           ([]))
     }
 
-
-    def __init__(self, toolbox, jukebox):
+    def __init__(self):
         gtk.Toolbar.__init__(self)
-        self.toolbox = toolbox
+
+        self._fullscreen = ToolButton('view-fullscreen')
+        self._fullscreen.set_tooltip(_('Fullscreen'))
+        self._fullscreen.connect('clicked', self._fullscreen_cb)
+        self.insert(self._fullscreen, -1)
+        self._fullscreen.show()
+
+    def _fullscreen_cb(self, button):
+        self.emit('go-fullscreen')
+
+
+class Control(gobject.GObject):
+    """Class to create the Control (play) toolbar"""
+
+    def __init__(self, toolbar, jukebox):
+        gobject.GObject.__init__(self)
+
+        self.toolbar = toolbar
         self.jukebox = jukebox
 
-        self.open_button = gtk.ToolButton(gtk.STOCK_FILE)
+        self.open_button = ToolButton('sound')
         self.open_button.show()
         self.open_button.connect('clicked', jukebox.open_button_clicked_cb)
-        self.insert(self.open_button, -1)
+        self.toolbar.insert(self.open_button, -1)
 
-        self.prev_button = gtk.ToolButton(gtk.STOCK_MEDIA_PREVIOUS)
+        self.prev_button = ToolButton('player_rew')
+        self.prev_button.set_tooltip(_('Previous'))
         self.prev_button.show()
         self.prev_button.connect('clicked', self.prev_button_clicked_cb)
-        self.insert(self.prev_button, -1)
-
+        self.toolbar.insert(self.prev_button, -1)
 
         self.pause_image = gtk.image_new_from_stock(gtk.STOCK_MEDIA_PAUSE,
                                                     gtk.ICON_SIZE_BUTTON)
@@ -67,13 +83,13 @@ class ControlToolbar(gtk.Toolbar):
         self.button.show()
         self.button.connect('clicked', self._button_clicked_cb)
 
-        self.insert(self.button, -1)
+        self.toolbar.insert(self.button, -1)
 
-        self.next_button = gtk.ToolButton(gtk.STOCK_MEDIA_NEXT)
+        self.next_button = ToolButton('player_fwd')
+        self.next_button.set_tooltip(_('Next'))
         self.next_button.show()
         self.next_button.connect('clicked', self.next_button_clicked_cb)
-        self.insert(self.next_button, -1)
-
+        self.toolbar.insert(self.next_button, -1)
 
         self.adjustment = gtk.Adjustment(0.0, 0.00, 100.0, 0.1, 1.0, 1.0)
         self.hscale = gtk.HScale(self.adjustment)
@@ -81,15 +97,15 @@ class ControlToolbar(gtk.Toolbar):
         self.hscale.set_update_policy(gtk.UPDATE_CONTINUOUS)
         self.hscale.connect('button-press-event', jukebox.scale_button_press_cb)
         self.hscale.connect('button-release-event', jukebox.scale_button_release_cb)
-        
+
         self.scale_item = gtk.ToolItem()
         self.scale_item.set_expand(True)
         self.scale_item.add(self.hscale)
-        self.insert(self.scale_item, -1)
+        self.toolbar.insert(self.scale_item, -1)
 
         spacer = gtk.SeparatorToolItem()
         spacer.props.draw = False
-        self.insert(spacer, -1)
+        self.toolbar.insert(spacer, -1)
         spacer.show()
 
         self.audioscale = gtk.VolumeButton()
@@ -99,18 +115,13 @@ class ControlToolbar(gtk.Toolbar):
         self.audio_scale_item = gtk.ToolItem()
         self.audio_scale_item.set_expand(False)
         self.audio_scale_item.add(self.audioscale)
-        self.insert(self.audio_scale_item, -1)
+        self.toolbar.insert(self.audio_scale_item, -1)
 
         spacer = gtk.SeparatorToolItem()
         spacer.props.draw = False
-        self.insert(spacer, -1)
+        self.toolbar.insert(spacer, -1)
         spacer.show()
-        self._fullscreen = ToolButton('view-fullscreen')
-        self._fullscreen.set_tooltip(_('Fullscreen'))
-        self._fullscreen.connect('clicked', self._fullscreen_cb)
-        self.insert(self._fullscreen, -1)
-        self._fullscreen.show()
-    
+
     def prev_button_clicked_cb(self,widget):
         self.jukebox.songchange('prev')
 
@@ -130,6 +141,3 @@ class ControlToolbar(gtk.Toolbar):
         self.button.set_sensitive(False)
         self.scale_item.set_sensitive(False)
         self.hscale.set_sensitive(False)
-
-    def _fullscreen_cb(self, button):
-        self.emit('go-fullscreen')
