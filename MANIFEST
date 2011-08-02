@@ -247,3 +247,8 @@ locale/mg/activity.linfo
 locale/mg/LC_MESSAGES/org.laptop.sugar.Jukebox.mo
 po/fil.po
 po/tvl.po
+ViewToolbar.py
+locale/tvl/activity.linfo
+locale/tvl/LC_MESSAGES/org.laptop.sugar.Jukebox.mo
+locale/fil/activity.linfo
+locale/fil/LC_MESSAGES/org.laptop.sugar.Jukebox.mo
