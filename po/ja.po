@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-29 17:36-0400\n"
-"PO-Revision-Date: 2009-07-02 10:41-0400\n"
+"POT-Creation-Date: 2011-08-05 10:50-0300\n"
+"PO-Revision-Date: 2011-08-26 06:53+0200\n"
 "Last-Translator: korakurider <korakurider@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ja\n"
@@ -23,30 +23,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 1.2.1\n"
+"X-Generator: Pootle 2.0.1\n"
 
 #: activity/activity.info:2
 msgid "Jukebox"
 msgstr "ジュークボックス"
 
-#: ControlToolbar.py:109
+#: ControlToolbar.py:44 ViewToolbar.py:63
 msgid "Fullscreen"
 msgstr "全画面"
 
-#: jukeboxactivity.py:57
+#: ControlToolbar.py:68
+msgid "Previous"
+msgstr "前へ"
+
+#: ControlToolbar.py:89
+msgid "Next"
+msgstr "次へ"
+
+#: ViewToolbar.py:45
+msgid "Fit to window"
+msgstr "ウィンドウにあわせる"
+
+#: ViewToolbar.py:51
+msgid "Original size"
+msgstr "元のサイズ"
+
+#: jukeboxactivity.py:72
 msgid "Jukebox Activity"
 msgstr "ジュークボックス アクティビティ"
 
-#: jukeboxactivity.py:64
+#: jukeboxactivity.py:80
 msgid "Play"
 msgstr "再生"
 
-#: jukeboxactivity.py:246
+#: jukeboxactivity.py:87
+msgid "View"
+msgstr "表示"
+
+#: jukeboxactivity.py:302
 msgid "Choose document"
 msgstr "文書を選ぶ"
-
-#~ msgid "Fit to window"
-#~ msgstr "ウィンドウにあわせる"
-
-#~ msgid "Original size"
-#~ msgstr "元のサイズ"
