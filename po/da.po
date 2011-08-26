@@ -14,11 +14,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-29 17:36-0400\n"
-"PO-Revision-Date: 2011-04-04 15:53+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2011-08-05 10:50-0300\n"
+"PO-Revision-Date: 2011-08-16 01:55+0200\n"
+"Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: da\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,18 +29,38 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Jukeboks"
 
-#: ControlToolbar.py:109
+#: ControlToolbar.py:44 ViewToolbar.py:63
 msgid "Fullscreen"
 msgstr "Fuldskærm"
 
-#: jukeboxactivity.py:57
+#: ControlToolbar.py:68
+msgid "Previous"
+msgstr "Forrige"
+
+#: ControlToolbar.py:89
+msgid "Next"
+msgstr "Næste"
+
+#: ViewToolbar.py:45
+msgid "Fit to window"
+msgstr "Tilpas til vindue"
+
+#: ViewToolbar.py:51
+msgid "Original size"
+msgstr "Oprindelig størrelse"
+
+#: jukeboxactivity.py:72
 msgid "Jukebox Activity"
 msgstr "Jukeboks-aktivitet"
 
-#: jukeboxactivity.py:64
+#: jukeboxactivity.py:80
 msgid "Play"
 msgstr "Afspil"
 
-#: jukeboxactivity.py:246
+#: jukeboxactivity.py:87
+msgid "View"
+msgstr "Vis"
+
+#: jukeboxactivity.py:302
 msgid "Choose document"
 msgstr "Vælg dokument"
