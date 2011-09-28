@@ -14,11 +14,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-29 17:36-0400\n"
+"POT-Creation-Date: 2011-08-05 10:50-0300\n"
 "PO-Revision-Date: 2009-09-18 11:25-0400\n"
 "Last-Translator: Eduardo H. Silva <HoboPrimate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: pt\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,24 +29,38 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Jukebox"
 
-#: ControlToolbar.py:109
+#: ControlToolbar.py:44 ViewToolbar.py:63
 msgid "Fullscreen"
 msgstr "Ecrã completo"
 
-#: jukeboxactivity.py:57
+#: ControlToolbar.py:68
+msgid "Previous"
+msgstr ""
+
+#: ControlToolbar.py:89
+msgid "Next"
+msgstr ""
+
+#: ViewToolbar.py:45
+msgid "Fit to window"
+msgstr "Zoom até à janela"
+
+#: ViewToolbar.py:51
+msgid "Original size"
+msgstr "Tamanho original"
+
+#: jukeboxactivity.py:72
 msgid "Jukebox Activity"
 msgstr "Actividade Jukebox"
 
-#: jukeboxactivity.py:64
+#: jukeboxactivity.py:80
 msgid "Play"
 msgstr "Tocar"
 
-#: jukeboxactivity.py:246
+#: jukeboxactivity.py:87
+msgid "View"
+msgstr ""
+
+#: jukeboxactivity.py:302
 msgid "Choose document"
 msgstr "Escolhe o documento"
-
-#~ msgid "Fit to window"
-#~ msgstr "Zoom até à janela"
-
-#~ msgid "Original size"
-#~ msgstr "Tamanho original"
