@@ -26,9 +26,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-29 17:36-0400\n"
-"PO-Revision-Date: 2011-09-27 12:52+0200\n"
-"Last-Translator: Cris Anderson <anderson861@gmail.com>\n"
+"POT-Creation-Date: 2011-08-05 10:50-0300\n"
+"PO-Revision-Date: 2011-10-12 08:29+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: mn\n"
 "MIME-Version: 1.0\n"
@@ -41,24 +41,38 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Жукбокс"
 
-#: ControlToolbar.py:109
+#: ControlToolbar.py:44 ViewToolbar.py:63
 msgid "Fullscreen"
 msgstr "Бүтэн дэлгэц"
 
-#: jukeboxactivity.py:57
+#: ControlToolbar.py:68
+msgid "Previous"
+msgstr "Өмнөх"
+
+#: ControlToolbar.py:89
+msgid "Next"
+msgstr "Дараах"
+
+#: ViewToolbar.py:45
+msgid "Fit to window"
+msgstr "Дэлгэцийн хэмжээ"
+
+#: ViewToolbar.py:51
+msgid "Original size"
+msgstr "Угийн хэмжээ"
+
+#: jukeboxactivity.py:72
 msgid "Jukebox Activity"
 msgstr "Жукбокс Үйл ажиллагаа"
 
-#: jukeboxactivity.py:64
+#: jukeboxactivity.py:80
 msgid "Play"
 msgstr "Тоглуулах"
 
-#: jukeboxactivity.py:246
+#: jukeboxactivity.py:87
+msgid "View"
+msgstr "Харах"
+
+#: jukeboxactivity.py:302
 msgid "Choose document"
 msgstr "Баримт сонгох"
-
-#~ msgid "Fit to window"
-#~ msgstr "Дэлгэцийн хэмжээ"
-
-#~ msgid "Original size"
-#~ msgstr "Угийн хэмжээ"
