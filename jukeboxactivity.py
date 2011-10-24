@@ -159,8 +159,10 @@ class JukeboxActivity(activity.Activity):
         self.p_duration = gst.CLOCK_TIME_NONE
 
         self.bin = gtk.HBox()
+        self._empty_widget = gtk.Label("")
+        self._empty_widget.show()
         self.videowidget = VideoWidget()
-        self.bin.add(self.videowidget)
+        self._switch_canvas(show_video=False)
         self.set_canvas(self.bin)
         self.show_all()
         #From ImageViewer Activity
@@ -173,6 +175,22 @@ class JukeboxActivity(activity.Activity):
             self.uri = handle.uri
             gobject.idle_add(self._start, self.uri)
             
+    def _switch_canvas(self, show_video):
+        """Show or hide the video visualization in the canvas.
+
+        When hidden, the canvas is filled with an empty widget to
+        ensure redrawing.
+
+        """
+        if show_video:
+            self.bin.remove(self._empty_widget)
+            self.bin.add(self.videowidget)
+        else:
+            self.bin.add(self._empty_widget)
+            self.bin.remove(self.videowidget)
+        self.bin.queue_draw()
+
+
     def open_button_clicked_cb(self, widget):
         """ To open the dialog to select a new file"""
         #self.player.seek(0L)
@@ -213,6 +231,7 @@ class JukeboxActivity(activity.Activity):
         if direction == "prev" and self.currentplaying  > 0:
             self.currentplaying -= 1
             self.player.stop()
+            self._switch_canvas(show_video=True)
             self.player = GstPlayer(self.videowidget)
             self.player.connect("error", self._player_error_cb)
             self.player.connect("tag", self._player_new_tag_cb)
@@ -225,6 +244,7 @@ class JukeboxActivity(activity.Activity):
         elif direction == "next" and self.currentplaying  < len(self.playlist) - 1:
             self.currentplaying += 1
             self.player.stop()
+            self._switch_canvas(show_video=True)
             self.player = GstPlayer(self.videowidget)
             self.player.connect("error", self._player_error_cb)
             self.player.connect("tag", self._player_new_tag_cb)
@@ -237,6 +257,7 @@ class JukeboxActivity(activity.Activity):
         else:
             self.play_toggled()
             self.player.stop()
+            self._switch_canvas(show_video=False)
             self.player.set_uri(None)
         self.check_if_next_prev()
 
@@ -356,6 +377,7 @@ class JukeboxActivity(activity.Activity):
         if not self.player:
             # lazy init the player so that videowidget is realized
             # and has a valid widget allocation
+            self._switch_canvas(show_video=True)
             self.player = GstPlayer(self.videowidget)
             self.player.connect("eos", self._player_eos_cb)
             self.player.connect("error", self._player_error_cb)
