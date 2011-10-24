@@ -87,8 +87,6 @@ class JukeboxActivity(activity.Activity):
 
             toolbox.show()
 
-            toolbox.connect("key_press_event", self._key_press_event_cb)
-
             toolbar.grab_focus()
             #self.connect("shared", self._shared_cb)
             activity_toolbar = toolbox.get_activity_toolbar()
@@ -128,7 +126,7 @@ class JukeboxActivity(activity.Activity):
 
             self.set_toolbar_box(toolbar_box)
             toolbar_box.show_all()
-            toolbar_box.connect("key_press_event", self._key_press_event_cb)
+        self.connect("key_press_event", self._key_press_event_cb)
 
         if handle.uri:
             pass
@@ -203,10 +201,7 @@ class JukeboxActivity(activity.Activity):
         keyname = gtk.gdk.keyval_name(event.keyval)
         logging.info("Keyname Press: %s, time: %s", keyname, event.time)
         if keyname == "space":
-            try:
-                self.player.play_toggled()
-            except:
-                pass
+            self.play_toggled()
 
     def check_if_next_prev(self):
         if self.currentplaying == 0:
