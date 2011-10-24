@@ -15,17 +15,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import logging
 from gettext import gettext as _
-import re
 
 import gobject
 import gtk
 
 from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics.menuitem import MenuItem
-from sugar.graphics import iconentry
-from sugar.activity import activity
 
 
 class ViewToolbar(gtk.Toolbar):
@@ -95,8 +90,10 @@ class Control(gobject.GObject):
         self.hscale = gtk.HScale(self.adjustment)
         self.hscale.set_draw_value(False)
         self.hscale.set_update_policy(gtk.UPDATE_CONTINUOUS)
-        self.hscale.connect('button-press-event', jukebox.scale_button_press_cb)
-        self.hscale.connect('button-release-event', jukebox.scale_button_release_cb)
+        self.hscale.connect('button-press-event',
+                jukebox.scale_button_press_cb)
+        self.hscale.connect('button-release-event',
+                jukebox.scale_button_release_cb)
 
         self.scale_item = gtk.ToolItem()
         self.scale_item.set_expand(True)
@@ -122,10 +119,10 @@ class Control(gobject.GObject):
         self.toolbar.insert(spacer, -1)
         spacer.show()
 
-    def prev_button_clicked_cb(self,widget):
+    def prev_button_clicked_cb(self, widget):
         self.jukebox.songchange('prev')
 
-    def next_button_clicked_cb(self,widget):
+    def next_button_clicked_cb(self, widget):
         self.jukebox.songchange('next')
 
     def _button_clicked_cb(self, widget):

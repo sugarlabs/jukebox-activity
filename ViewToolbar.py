@@ -14,22 +14,17 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import logging
 from gettext import gettext as _
-import re
 
 import gobject
 import gtk
 
 from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics.menuitem import MenuItem
-from sugar.graphics import iconentry
-from sugar.activity import activity
 
 
 class ViewToolbar(gtk.Toolbar):
     """Class to create the view toolbar"""
-    
+
     __gsignals__ = {
         'go-fullscreen': (gobject.SIGNAL_RUN_FIRST,
                           gobject.TYPE_NONE,
@@ -58,7 +53,6 @@ class ViewToolbar(gtk.Toolbar):
         self.insert(spacer, -1)
         spacer.show()
 
-
         self._fullscreen = ToolButton('view-fullscreen')
         self._fullscreen.set_tooltip(_('Fullscreen'))
         self._fullscreen.connect('clicked', self._fullscreen_cb)
@@ -68,7 +62,7 @@ class ViewToolbar(gtk.Toolbar):
     def _zoom_tofit_cb(self, button):
         pass
         #self.jukebox.player.set_fit_to_screen_cb()
-        
+
     def _zoom_original_cb(self, button):
         pass
         #self.jukebox.player.set_original_to_size_cb()

@@ -47,8 +47,6 @@ from sugar.graphics.icon import Icon
 import pygtk
 pygtk.require('2.0')
 
-import sys
-
 import gobject
 
 import pygst
@@ -174,7 +172,7 @@ class JukeboxActivity(activity.Activity):
         if handle.uri:
             self.uri = handle.uri
             gobject.idle_add(self._start, self.uri)
-            
+
     def _switch_canvas(self, show_video):
         """Show or hide the video visualization in the canvas.
 
@@ -190,7 +188,6 @@ class JukeboxActivity(activity.Activity):
             self.bin.remove(self.videowidget)
         self.bin.queue_draw()
 
-
     def open_button_clicked_cb(self, widget):
         """ To open the dialog to select a new file"""
         #self.player.seek(0L)
@@ -202,33 +199,31 @@ class JukeboxActivity(activity.Activity):
         self._want_document = True
         self._show_object_picker = gobject.timeout_add(1, self._show_picker_cb)
 
-
     def _key_press_event_cb(self, widget, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
-        logging.info ("Keyname Press: %s, time: %s", keyname, event.time)
+        logging.info("Keyname Press: %s, time: %s", keyname, event.time)
         if keyname == "space":
             try:
                 self.player.play_toggled()
             except:
                 pass
-    
+
     def check_if_next_prev(self):
         if self.currentplaying == 0:
             self.control.prev_button.set_sensitive(False)
         else:
             self.control.prev_button.set_sensitive(True)
-        if self.currentplaying  == len(self.playlist) - 1:
+        if self.currentplaying == len(self.playlist) - 1:
             self.control.next_button.set_sensitive(False)
         else:
             self.control.next_button.set_sensitive(True)
 
-
-    def songchange(self,direction):
+    def songchange(self, direction):
         #if self.playflag:
         #    self.playflag = False
         #    return
         self.player.seek(0L)
-        if direction == "prev" and self.currentplaying  > 0:
+        if direction == "prev" and self.currentplaying > 0:
             self.currentplaying -= 1
             self.player.stop()
             self._switch_canvas(show_video=True)
@@ -241,7 +236,8 @@ class JukeboxActivity(activity.Activity):
             #self.playflag = True
             self.play_toggled()
             self.player.connect("eos", self._player_eos_cb)
-        elif direction == "next" and self.currentplaying  < len(self.playlist) - 1:
+        elif direction == "next" and \
+                self.currentplaying < len(self.playlist) - 1:
             self.currentplaying += 1
             self.player.stop()
             self._switch_canvas(show_video=True)
@@ -260,7 +256,6 @@ class JukeboxActivity(activity.Activity):
             self._switch_canvas(show_video=False)
             self.player.set_uri(None)
         self.check_if_next_prev()
-
 
     def _player_eos_cb(self, widget):
         self.songchange('next')
@@ -283,21 +278,23 @@ class JukeboxActivity(activity.Activity):
     def _update_overlay(self):
         if self.only_audio == False:
             return
-        if not self.tags.has_key(gst.TAG_TITLE) or not self.tags.has_key(gst.TAG_ARTIST):
+        if not gst.TAG_TITLE in self.tags or \
+                not gst.TAG_ARTIST in self.tags:
             return
         album = None
-        if self.tags.has_key(gst.TAG_ALBUM):
+        if gst.TAG_ALBUM in self.tags:
             album = self.tags[gst.TAG_ALBUM]
-        self.player.set_overlay(self.tags[gst.TAG_TITLE], self.tags[gst.TAG_ARTIST], album)
+        self.player.set_overlay(self.tags[gst.TAG_TITLE],
+                self.tags[gst.TAG_ARTIST], album)
 
     def _player_stream_info_cb(self, widget, stream_info):
         if not len(stream_info) or self.got_stream_info:
             return
 
         GST_STREAM_TYPE_UNKNOWN = 0
-        GST_STREAM_TYPE_AUDIO   = 1
-        GST_STREAM_TYPE_VIDEO   = 2
-        GST_STREAM_TYPE_TEXT    = 3
+        GST_STREAM_TYPE_AUDIO = 1
+        GST_STREAM_TYPE_VIDEO = 2
+        GST_STREAM_TYPE_TEXT = 3
 
         only_audio = True
         for item in stream_info:
@@ -351,7 +348,8 @@ class JukeboxActivity(activity.Activity):
             elif x.startswith('#'):
                 continue
             else:
-                result.append('file://' + urllib.quote(os.path.join(self.playpath,x)))
+                result.append('file://' +
+                        urllib.quote(os.path.join(self.playpath, x)))
         return result
 
     def _start(self, uri=None):
@@ -361,19 +359,21 @@ class JukeboxActivity(activity.Activity):
             return False
         # FIXME: parse m3u files and extract actual URL
         if uri.endswith(".m3u") or uri.endswith(".m3u8"):
-            self.playlist.extend(self.getplaylist([line.strip() for line in open(uri).readlines()]))
+            self.playlist.extend(self.getplaylist([line.strip()
+                    for line in open(uri).readlines()]))
         elif uri.endswith('.pls'):
             try:
                 cf.readfp(open(uri))
                 x = 1
                 while True:
-                    self.playlist.append(cf.get("playlist",'File'+str(x)))
+                    self.playlist.append(cf.get("playlist", 'File' + str(x)))
                     x += 1
             except:
                 #read complete
                 pass
         else:
-            self.playlist.append("file://" + urllib.quote(os.path.abspath(uri)))
+            self.playlist.append("file://" +
+                    urllib.quote(os.path.abspath(uri)))
         if not self.player:
             # lazy init the player so that videowidget is realized
             # and has a valid widget allocation
@@ -439,10 +439,10 @@ class JukeboxActivity(activity.Activity):
 
     def scale_value_changed_cb(self, scale):
         # see seek.c:seek_cb
-        real = long(scale.get_value() * self.p_duration / 100) # in ns
+        real = long(scale.get_value() * self.p_duration / 100)  # in ns
         self.player.seek(real)
         # allow for a preroll
-        self.player.get_state(timeout=50*gst.MSECOND) # 50 ms
+        self.player.get_state(timeout=50 * gst.MSECOND)  # 50 ms
 
     def scale_button_release_cb(self, widget, event):
         # see seek.cstop_seek
@@ -478,9 +478,9 @@ class JukeboxActivity(activity.Activity):
 class GstPlayer(gobject.GObject):
     __gsignals__ = {
         'error': (gobject.SIGNAL_RUN_FIRST, None, [str, str]),
-        'eos'  : (gobject.SIGNAL_RUN_FIRST, None, []),
-        'tag'  : (gobject.SIGNAL_RUN_FIRST, None, [str, str]),
-        'stream-info' : (gobject.SIGNAL_RUN_FIRST, None, [object])
+        'eos': (gobject.SIGNAL_RUN_FIRST, None, []),
+        'tag': (gobject.SIGNAL_RUN_FIRST, None, [str, str]),
+        'stream-info': (gobject.SIGNAL_RUN_FIRST, None, [object])
     }
 
     def __init__(self, videowidget):
@@ -492,9 +492,10 @@ class GstPlayer(gobject.GObject):
         self.player = gst.element_factory_make("playbin", "player")
 
         r = gst.registry_get_default()
-        l = [x for x in r.get_feature_list(gst.ElementFactory) if (gst.ElementFactory.get_klass(x) == "Visualization")]
+        l = [x for x in r.get_feature_list(gst.ElementFactory)
+                if (gst.ElementFactory.get_klass(x) == "Visualization")]
         if len(l):
-            e = l.pop() # take latest plugin in the list
+            e = l.pop()  # take latest plugin in the list
             vis_plug = gst.element_factory_make(e.get_name())
             self.player.set_property('vis-plugin', vis_plug)
 
@@ -519,7 +520,7 @@ class GstPlayer(gobject.GObject):
         if message.structure.get_name() == 'prepare-xwindow-id':
             self.videowidget.set_sink(message.src, self.videowidget_xid)
             message.src.set_property('force-aspect-ratio', True)
-            
+
     def on_message(self, bus, message):
         t = message.type
         if t == gst.MESSAGE_ERROR:
@@ -539,7 +540,8 @@ class GstPlayer(gobject.GObject):
         elif t == gst.MESSAGE_STATE_CHANGED:
             old, new, pen = message.parse_state_changed()
             if old == gst.STATE_READY and new == gst.STATE_PAUSED:
-                self.emit('stream-info', self.player.props.stream_info_value_array)
+                self.emit('stream-info',
+                        self.player.props.stream_info_value_array)
 
     def _init_video_sink(self):
         self.bin = gst.Bin()
@@ -569,11 +571,12 @@ class GstPlayer(gobject.GObject):
         textoverlay = gst.element_factory_make('textoverlay')
         self.overlay = textoverlay
         self.bin.add(textoverlay)
-        conv = gst.element_factory_make ("ffmpegcolorspace", "conv");
+        conv = gst.element_factory_make("ffmpegcolorspace", "conv")
         self.bin.add(conv)
         videosink = gst.element_factory_make('autovideosink')
         self.bin.add(videosink)
-        gst.element_link_many(videoscale, self.filter, textoverlay, conv, videosink)
+        gst.element_link_many(videoscale, self.filter, textoverlay, conv,
+                videosink)
         self.player.set_property("video-sink", self.bin)
 
     def set_overlay(self, title, artist, album):
@@ -629,7 +632,7 @@ class GstPlayer(gobject.GObject):
         self.player.set_state(gst.STATE_PLAYING)
         self.playing = True
         self.error = False
-        
+
     def stop(self):
         self.player.set_state(gst.STATE_NULL)
         logging.debug("stopped player")
@@ -639,7 +642,8 @@ class GstPlayer(gobject.GObject):
 
     def is_playing(self):
         return self.playing
-    
+
+
 class VideoWidget(gtk.DrawingArea):
     def __init__(self):
         gtk.DrawingArea.__init__(self)
@@ -647,7 +651,7 @@ class VideoWidget(gtk.DrawingArea):
         gtk.gdk.POINTER_MOTION_HINT_MASK |
         gtk.gdk.EXPOSURE_MASK |
         gtk.gdk.KEY_PRESS_MASK |
-        gtk.gdk.KEY_RELEASE_MASK) 
+        gtk.gdk.KEY_RELEASE_MASK)
         self.imagesink = None
         self.unset_flags(gtk.DOUBLE_BUFFERED)
         self.set_flags(gtk.APP_PAINTABLE)
@@ -662,7 +666,6 @@ class VideoWidget(gtk.DrawingArea):
     def set_sink(self, sink, xid):
         self.imagesink = sink
         self.imagesink.set_xwindow_id(xid)
-
 
 
 if __name__ == '__main__':
@@ -683,9 +686,4 @@ if __name__ == '__main__':
     player.set_uri('http://78.46.73.237:8000/prog')
     player.play()
     window.show_all()
-    
-
-
     gtk.main()
-
-
