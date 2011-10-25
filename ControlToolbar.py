@@ -21,6 +21,7 @@ import gobject
 import gtk
 
 from sugar.graphics.toolbutton import ToolButton
+from sugar.graphics.toggletoolbutton import ToggleToolButton
 
 
 class ViewToolbar(gtk.Toolbar):
@@ -29,7 +30,10 @@ class ViewToolbar(gtk.Toolbar):
     __gsignals__ = {
         'go-fullscreen': (gobject.SIGNAL_RUN_FIRST,
                           gobject.TYPE_NONE,
-                          ([]))
+                         ([])),
+        'toggle-playlist': (gobject.SIGNAL_RUN_FIRST,
+                            gobject.TYPE_NONE,
+                            ([]))
     }
 
     def __init__(self):
@@ -41,8 +45,18 @@ class ViewToolbar(gtk.Toolbar):
         self.insert(self._fullscreen, -1)
         self._fullscreen.show()
 
+        self._show_playlist = ToggleToolButton('view-list')
+        self._show_playlist.set_active(True)
+        self._show_playlist.set_tooltip(_('Show Playlist'))
+        self._show_playlist.connect('toggled', self._playlist_toggled_cb)
+        self.insert(self._show_playlist, -1)
+        self._show_playlist.show()
+
     def _fullscreen_cb(self, button):
         self.emit('go-fullscreen')
+
+    def _playlist_toggled_cb(self, button):
+        self.emit('toggle-playlist')
 
 
 class Control(gobject.GObject):

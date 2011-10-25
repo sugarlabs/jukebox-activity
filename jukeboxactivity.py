@@ -60,6 +60,10 @@ from ControlToolbar import Control, ViewToolbar
 from ConfigParser import ConfigParser
 cf = ConfigParser()
 
+from widgets import PlayListWidget
+
+PLAYLIST_WIDTH_PROP = 1.0 / 3
+
 
 class JukeboxActivity(activity.Activity):
     UPDATE_INTERVAL = 500
@@ -82,6 +86,8 @@ class JukeboxActivity(activity.Activity):
             _view_toolbar = ViewToolbar()
             _view_toolbar.connect('go-fullscreen',
                     self.__go_fullscreen_cb)
+            _view_toolbar.connect('toggle-playlist',
+                    self.__toggle_playlist_cb)
             toolbox.add_toolbar(_('View'), _view_toolbar)
             _view_toolbar.show()
 
@@ -108,6 +114,8 @@ class JukeboxActivity(activity.Activity):
             _view_toolbar = ViewToolbar()
             _view_toolbar.connect('go-fullscreen',
                     self.__go_fullscreen_cb)
+            _view_toolbar.connect('toggle-playlist',
+                    self.__toggle_playlist_cb)
             view_toolbar_button = ToolbarButton(
                     page=_view_toolbar,
                     icon_name='toolbar-view')
@@ -142,7 +150,10 @@ class JukeboxActivity(activity.Activity):
         self.seek_timeout_id = -1
         self.player = None
         self.uri = None
+
+        # {'url': 'file://.../media.ogg', 'title': 'My song'}
         self.playlist = []
+
         self.jobjectlist = []
         self.playpath = None
         self.currentplaying = None
@@ -155,12 +166,19 @@ class JukeboxActivity(activity.Activity):
         self.p_duration = gst.CLOCK_TIME_NONE
 
         self.bin = gtk.HBox()
+        self.bin.show()
+        self.playlist_widget = PlayListWidget(self.play)
+        self.playlist_widget.update(self.playlist)
+        self.playlist_widget.show()
+        self.bin.pack_start(self.playlist_widget, expand=False)
         self._empty_widget = gtk.Label("")
         self._empty_widget.show()
         self.videowidget = VideoWidget()
         self._switch_canvas(show_video=False)
         self.set_canvas(self.bin)
         self.show_all()
+        self.bin.connect('size-allocate', self.__size_allocate_cb)
+
         #From ImageViewer Activity
         self._want_document = True
         if self._object_id is None:
@@ -169,7 +187,7 @@ class JukeboxActivity(activity.Activity):
 
         if handle.uri:
             self.uri = handle.uri
-            gobject.idle_add(self._start, self.uri)
+            gobject.idle_add(self._start, self.uri, handle.title)
 
     def _switch_canvas(self, show_video):
         """Show or hide the video visualization in the canvas.
@@ -180,11 +198,16 @@ class JukeboxActivity(activity.Activity):
         """
         if show_video:
             self.bin.remove(self._empty_widget)
-            self.bin.add(self.videowidget)
+            self.bin.pack_end(self.videowidget)
         else:
-            self.bin.add(self._empty_widget)
+            self.bin.pack_end(self._empty_widget)
             self.bin.remove(self.videowidget)
         self.bin.queue_draw()
+
+    def __size_allocate_cb(self, widget, allocation):
+        canvas_size = self.bin.get_allocation()
+        playlist_width = int(canvas_size.width * PLAYLIST_WIDTH_PROP)
+        self.playlist_widget.set_size_request(playlist_width, 0)
 
     def open_button_clicked_cb(self, widget):
         """ To open the dialog to select a new file"""
@@ -219,38 +242,35 @@ class JukeboxActivity(activity.Activity):
         #    return
         self.player.seek(0L)
         if direction == "prev" and self.currentplaying > 0:
-            self.currentplaying -= 1
-            self.player.stop()
-            self._switch_canvas(show_video=True)
-            self.player = GstPlayer(self.videowidget)
-            self.player.connect("error", self._player_error_cb)
-            self.player.connect("tag", self._player_new_tag_cb)
-            self.player.connect("stream-info", self._player_stream_info_cb)
-            self.player.set_uri(self.playlist[self.currentplaying])
-            logging.info("prev: " + self.playlist[self.currentplaying])
+            self.play(self.currentplaying - 1)
+            logging.info("prev: " + self.playlist[self.currentplaying]['url'])
             #self.playflag = True
-            self.play_toggled()
-            self.player.connect("eos", self._player_eos_cb)
         elif direction == "next" and \
                 self.currentplaying < len(self.playlist) - 1:
-            self.currentplaying += 1
-            self.player.stop()
-            self._switch_canvas(show_video=True)
-            self.player = GstPlayer(self.videowidget)
-            self.player.connect("error", self._player_error_cb)
-            self.player.connect("tag", self._player_new_tag_cb)
-            self.player.connect("stream-info", self._player_stream_info_cb)
-            self.player.set_uri(self.playlist[self.currentplaying])
-            logging.info("NExt: " + self.playlist[self.currentplaying])
+            self.play(self.currentplaying + 1)
+            logging.info("next: " + self.playlist[self.currentplaying]['url'])
             #self.playflag = True
-            self.play_toggled()
-            self.player.connect("eos", self._player_eos_cb)
         else:
             self.play_toggled()
             self.player.stop()
             self._switch_canvas(show_video=False)
             self.player.set_uri(None)
+            self.check_if_next_prev()
+
+    def play(self, media_index):
+        self._switch_canvas(show_video=True)
+        self.currentplaying = media_index
+        self.player.stop()
+        self.player = GstPlayer(self.videowidget)
+        self.player.connect("eos", self._player_eos_cb)
+        self.player.connect("error", self._player_error_cb)
+        self.player.connect("tag", self._player_new_tag_cb)
+        self.player.connect("stream-info", self._player_stream_info_cb)
+        self.player.set_uri(self.playlist[self.currentplaying]['url'])
+
+        self.play_toggled()
         self.check_if_next_prev()
+        self.playlist_widget.set_cursor(self.currentplaying)
 
     def _player_eos_cb(self, widget):
         self.songchange('next')
@@ -323,7 +343,8 @@ class JukeboxActivity(activity.Activity):
                 jobject = chooser.get_selected_object()
                 if jobject and jobject.file_path:
                     self.jobjectlist.append(jobject)
-                    self._start(jobject.file_path)
+                    title = jobject.metadata.get('title', None)
+                    self._start(jobject.file_path, title)
         finally:
             #chooser.destroy()
             #del chooser
@@ -333,7 +354,8 @@ class JukeboxActivity(activity.Activity):
         self.uri = os.path.abspath(file_path)
         if os.path.islink(self.uri):
             self.uri = os.path.realpath(self.uri)
-        gobject.idle_add(self._start, self.uri)
+        title = self.metadata.get('title', None)
+        gobject.idle_add(self._start, self.uri, title)
 
     def getplaylist(self, links):
         result = []
@@ -347,28 +369,34 @@ class JukeboxActivity(activity.Activity):
                         urllib.quote(os.path.join(self.playpath, x)))
         return result
 
-    def _start(self, uri=None):
+    def _start(self, uri=None, title=None):
         self._want_document = False
         self.playpath = os.path.dirname(uri)
         if not uri:
             return False
         # FIXME: parse m3u files and extract actual URL
         if uri.endswith(".m3u") or uri.endswith(".m3u8"):
-            self.playlist.extend(self.getplaylist([line.strip()
-                    for line in open(uri).readlines()]))
+            for line in open(uri).readlines():
+                url = line.strip()
+                self.playlist.extend({'url': url, 'title': title})
         elif uri.endswith('.pls'):
             try:
                 cf.readfp(open(uri))
                 x = 1
                 while True:
-                    self.playlist.append(cf.get("playlist", 'File' + str(x)))
+                    url = cf.get("playlist", 'File' + str(x))
+                    self.playlist.append({'url': url, 'title': title})
                     x += 1
             except:
                 #read complete
                 pass
+
+        elif uri.startswith("file://"):
+            self.playlist.append({'url': uri, 'title': title})
+
         else:
-            self.playlist.append("file://" +
-                    urllib.quote(os.path.abspath(uri)))
+            url = "file://" + urllib.quote(os.path.abspath(uri))
+            self.playlist.append({'url': url, 'title': title})
         if not self.player:
             # lazy init the player so that videowidget is realized
             # and has a valid widget allocation
@@ -379,10 +407,12 @@ class JukeboxActivity(activity.Activity):
             self.player.connect("tag", self._player_new_tag_cb)
             self.player.connect("stream-info", self._player_stream_info_cb)
 
+        self.playlist_widget.update(self.playlist)
+
         try:
             if not self.currentplaying:
-                logging.info("Playing: " + self.playlist[0])
-                self.player.set_uri(self.playlist[0])
+                logging.info("Playing: " + self.playlist[0]['url'])
+                self.player.set_uri(self.playlist[0]['url'])
                 self.currentplaying = 0
                 self.play_toggled()
                 self.show_all()
@@ -468,6 +498,13 @@ class JukeboxActivity(activity.Activity):
 
     def __go_fullscreen_cb(self, toolbar):
         self.fullscreen()
+
+    def __toggle_playlist_cb(self, toolbar):
+        if self.playlist_widget.get_visible():
+            self.playlist_widget.hide()
+        else:
+            self.playlist_widget.show_all()
+        self.bin.queue_draw()
 
 
 class GstPlayer(gobject.GObject):
