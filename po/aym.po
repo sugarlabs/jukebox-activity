@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-05 10:50-0300\n"
+"PO-Revision-Date: 2011-11-18 19:35+0200\n"
+"Last-Translator: accopacati <accopacatty@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: aym\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.5\n"
+
+#  "Máquina de discos"
+#: activity/activity.info:2
+msgid "Jukebox"
+msgstr "Warurt'a qhantayiri"
+
+#  "Pantalla completa"
+#: ControlToolbar.py:44 ViewToolbar.py:63
+msgid "Fullscreen"
+msgstr "Maypacha uñtawi"
+
+#  "Anterior"
+#: ControlToolbar.py:68
+msgid "Previous"
+msgstr "Nayrankiri"
+
+#  "Siguiente"
+#: ControlToolbar.py:89
+msgid "Next"
+msgstr "Jutiri"
+
+#  "Concordar con ventana"
+#: ViewToolbar.py:45
+msgid "Fit to window"
+msgstr "Wakichata wakichaña"
+
+#  "Tamaño original"
+#: ViewToolbar.py:51
+msgid "Original size"
+msgstr "Tunuchani"
+
+#  "Actividad máquina de discos"
+#: jukeboxactivity.py:72
+msgid "Jukebox Activity"
+msgstr "Warurt'a Wakichäwi"
+
+#  "Reproducir"
+#: jukeboxactivity.py:80
+msgid "Play"
+msgstr "Qhantayaña"
+
+#  "Ver"
+#: jukeboxactivity.py:87
+msgid "View"
+msgstr "Unjaña"
+
+#  "Elegir documento"
+#: jukeboxactivity.py:302
+msgid "Choose document"
+msgstr "Wakichata ajlliña"
