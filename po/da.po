@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-27 00:32-0400\n"
-"PO-Revision-Date: 2011-11-27 04:18+0200\n"
+"POT-Creation-Date: 2012-03-06 02:18-0500\n"
+"PO-Revision-Date: 2012-03-16 21:51+0200\n"
 "Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: da\n"
@@ -60,6 +60,14 @@ msgstr "Vis"
 #: jukeboxactivity.py:335
 msgid "Choose document"
 msgstr "Vælg dokument"
+
+#: widgets.py:46
+msgid "No."
+msgstr "Nr."
+
+#: widgets.py:53
+msgid "Play List"
+msgstr "Afspilningsliste"
 
 #~ msgid "Fit to window"
 #~ msgstr "Tilpas til vindue"
