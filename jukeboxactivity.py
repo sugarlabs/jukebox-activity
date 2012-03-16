@@ -35,14 +35,10 @@ try:
     from sugar.graphics.toolbarbox import ToolbarBox
     from sugar.graphics.toolbarbox import ToolbarButton
     from sugar.activity.widgets import StopButton
+    from sugar.activity.widgets import ActivityToolbarButton
+
 except ImportError:
     OLD_TOOLBAR = True
-
-from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics.xocolor import XoColor
-from sugar import profile
-from sugar.bundle.activitybundle import ActivityBundle
-from sugar.graphics.icon import Icon
 
 import pygtk
 pygtk.require('2.0')
@@ -73,6 +69,7 @@ class JukeboxActivity(activity.Activity):
         self._object_id = handle.object_id
         self.set_title(_('Jukebox Activity'))
         self.player = None
+        self.max_participants = 1
 
         if OLD_TOOLBAR:
             toolbox = activity.ActivityToolbox(self)
@@ -103,13 +100,10 @@ class JukeboxActivity(activity.Activity):
 
         else:
             toolbar_box = ToolbarBox()
-            activity_button = ToolButton()
-            color = XoColor(profile.get_color())
-            bundle = ActivityBundle(activity.get_bundle_path())
-            icon = Icon(file=bundle.get_icon(), xo_color=color)
-            activity_button.set_icon_widget(icon)
-            activity_button.show()
+            activity_button = ActivityToolbarButton(self)
+            activity_toolbar = activity_button.page
             toolbar_box.toolbar.insert(activity_button, 0)
+            activity_toolbar.stop.hide()
 
             _view_toolbar = ViewToolbar()
             _view_toolbar.connect('go-fullscreen',
