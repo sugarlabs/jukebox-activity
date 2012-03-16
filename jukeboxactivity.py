@@ -225,6 +225,7 @@ class JukeboxActivity(activity.Activity):
         logging.info("Keyname Press: %s, time: %s", keyname, event.time)
         if keyname == "space":
             self.play_toggled()
+            return True
 
     def check_if_next_prev(self):
         if self.currentplaying == 0:
