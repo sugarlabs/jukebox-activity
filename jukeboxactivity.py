@@ -29,6 +29,7 @@ import os
 from sugar.activity import activity
 from sugar.graphics.objectchooser import ObjectChooser
 from sugar import mime
+from sugar.datastore import datastore
 
 OLD_TOOLBAR = False
 try:
@@ -145,7 +146,7 @@ class JukeboxActivity(activity.Activity):
         self.player = None
         self.uri = None
 
-        # {'url': 'file://.../media.ogg', 'title': 'My song'}
+        # {'url': 'file://.../media.ogg', 'title': 'My song', object_id: '..'}
         self.playlist = []
 
         self.jobjectlist = []
@@ -261,7 +262,11 @@ class JukeboxActivity(activity.Activity):
         self.player.connect("error", self._player_error_cb)
         self.player.connect("tag", self._player_new_tag_cb)
         self.player.connect("stream-info", self._player_stream_info_cb)
-        self.player.set_uri(self.playlist[self.currentplaying]['url'])
+        url = self.playlist[self.currentplaying]['url']
+        if url.startswith('journal://'):
+            jobject = datastore.get(url[len("journal://"):])
+            url = 'file://' + jobject.file_path
+        self.player.set_uri(url)
 
         self.play_toggled()
         self.check_if_next_prev()
@@ -337,61 +342,83 @@ class JukeboxActivity(activity.Activity):
             if result == gtk.RESPONSE_ACCEPT:
                 jobject = chooser.get_selected_object()
                 if jobject and jobject.file_path:
-                    self.jobjectlist.append(jobject)
+                    logging.error('Adding %s', jobject.file_path)
                     title = jobject.metadata.get('title', None)
-                    self._start(jobject.file_path, title)
+                    self._load_file(jobject.file_path, title,
+                            jobject.object_id)
         finally:
             #chooser.destroy()
             #del chooser
             pass
 
     def read_file(self, file_path):
+        """Load a file from the datastore on activity start."""
+        logging.debug('JukeBoxAtivity.read_file: %s', file_path)
+        title = self.metadata.get('title', None)
+        self._load_file(file_path, title, None)
+
+    def _load_file(self, file_path, title, object_id):
         self.uri = os.path.abspath(file_path)
         if os.path.islink(self.uri):
             self.uri = os.path.realpath(self.uri)
-        title = self.metadata.get('title', None)
-        gobject.idle_add(self._start, self.uri, title)
+        mimetype = mime.get_for_file('file://' + file_path)
+        logging.error('read_file mime %s', mimetype)
+        if mimetype == 'audio/x-mpegurl':
+            # is a M3U playlist:
+            for uri in self._read_m3u_playlist(file_path):
+                gobject.idle_add(self._start, uri['url'], uri['title'],
+                        uri['object_id'])
+        else:
+            # is another media file:
+            gobject.idle_add(self._start, self.uri, title, object_id)
 
-    def getplaylist(self, links):
-        result = []
-        for x in links:
-            if x.startswith('http://'):
-                result.append(x)
-            elif x.startswith('#'):
-                continue
-            else:
-                result.append('file://' +
-                        urllib.quote(os.path.join(self.playpath, x)))
-        return result
+    def write_file(self, file_path):
+        if len(self.playlist) > 1:
+            # need create a new file with the file list
+            logging.error('need new file')
+            self.metadata['mime_type'] = 'audio/x-mpegurl'
+            list_file = open(file_path, 'w')
+            for uri in self.playlist:
+                list_file.write('#EXTINF: %s\n' % uri['title'])
+                list_file.write('%s\n' % uri['url'])
+            list_file.close()
 
-    def _start(self, uri=None, title=None):
+    def _read_m3u_playlist(self, file_path):
+        urls = []
+        title = ''
+        for line in open(file_path).readlines():
+            line = line.strip()
+            if line != '':
+                if line.startswith('#EXTINF:'):
+                    # line with data
+                    #EXTINF: title
+                    title = line[len('#EXTINF:'):]
+                else:
+                    uri = {}
+                    uri['url'] = line.strip()
+                    uri['title'] = title
+                    if uri['url'].startswith('journal://'):
+                        uri['object_id'] = uri['url'][len('journal://'):]
+                    else:
+                        uri['object_id'] = None
+                    urls.append(uri)
+                    title = ''
+        return urls
+
+    def _start(self, uri=None, title=None, object_id=None):
         self._want_document = False
         self.playpath = os.path.dirname(uri)
         if not uri:
             return False
-        # FIXME: parse m3u files and extract actual URL
-        if uri.endswith(".m3u") or uri.endswith(".m3u8"):
-            for line in open(uri).readlines():
-                url = line.strip()
-                self.playlist.extend({'url': url, 'title': title})
-        elif uri.endswith('.pls'):
-            try:
-                cf.readfp(open(uri))
-                x = 1
-                while True:
-                    url = cf.get("playlist", 'File' + str(x))
-                    self.playlist.append({'url': url, 'title': title})
-                    x += 1
-            except:
-                #read complete
-                pass
-
-        elif uri.startswith("file://"):
-            self.playlist.append({'url': uri, 'title': title})
-
+        if object_id is not None:
+            self.playlist.append({'url': 'journal://' + object_id,
+                    'title': title})
         else:
-            url = "file://" + urllib.quote(os.path.abspath(uri))
-            self.playlist.append({'url': url, 'title': title})
+            if uri.startswith("file://"):
+                self.playlist.append({'url': uri, 'title': title})
+            else:
+                url = "file://" + urllib.quote(os.path.abspath(uri))
+                self.playlist.append({'url': url, 'title': title})
         if not self.player:
             # lazy init the player so that videowidget is realized
             # and has a valid widget allocation
@@ -407,7 +434,12 @@ class JukeboxActivity(activity.Activity):
         try:
             if not self.currentplaying:
                 logging.info("Playing: " + self.playlist[0]['url'])
-                self.player.set_uri(self.playlist[0]['url'])
+                url = self.playlist[0]['url']
+                if url.startswith('journal://'):
+                    jobject = datastore.get(url[len("journal://"):])
+                    url = 'file://' + jobject.file_path
+
+                self.player.set_uri(url)
                 self.currentplaying = 0
                 self.play_toggled()
                 self.show_all()
