@@ -98,12 +98,14 @@ class JukeboxActivity(activity.Activity):
             activity_toolbar.share = None
             activity_toolbar.remove(activity_toolbar.keep)
             activity_toolbar.keep = None
+            self.title_entry = activity_toolbar.title
 
         else:
             toolbar_box = ToolbarBox()
             activity_button = ActivityToolbarButton(self)
             activity_toolbar = activity_button.page
             toolbar_box.toolbar.insert(activity_button, 0)
+            self.title_entry = activity_toolbar.title
             activity_toolbar.stop.hide()
 
             _view_toolbar = ViewToolbar()
@@ -218,6 +220,9 @@ class JukeboxActivity(activity.Activity):
     def _key_press_event_cb(self, widget, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
         logging.info("Keyname Press: %s, time: %s", keyname, event.time)
+        if self.title_entry.has_focus():
+            return False
+
         if keyname == "space":
             self.play_toggled()
             return True
