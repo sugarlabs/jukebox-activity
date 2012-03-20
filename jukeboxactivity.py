@@ -574,7 +574,9 @@ class TagReader(gobject.GObject):
     def __init__(self):
         gobject.GObject.__init__(self)
         #make a playbin to parse the audio file
-        self.pbin = gst.element_factory_make('playbin')
+        self.pbin = gst.element_factory_make('playbin', 'player')
+        fakesink = gst.element_factory_make('fakesink', 'fakesink')
+        self.pbin.set_property('video-sink', fakesink)
         #we need to receive signals from the playbin's bus
         self.bus = self.pbin.get_bus()
         #make sure we are watching the signals on the bus
