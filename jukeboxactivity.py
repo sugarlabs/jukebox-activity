@@ -385,11 +385,30 @@ class JukeboxActivity(activity.Activity):
             # is another media file:
             gobject.idle_add(self._start, self.uri, title, object_id)
 
+    def can_close(self):
+        """Activities should override this function if they want to perform
+        extra checks before actually closing."""
+        if len(self.playlist) > 1 and \
+                self.metadata['mime_type'] != 'audio/x-mpegurl':
+            # if the activity started with a media file and added more later
+            # need create a new file with the file list to no destroy
+            # the first opened file
+            logging.error('need new file')
+            self._jobject = datastore.create()
+            self.title_entry.set_text(_('Jukebox playlist'))
+            self._jobject.metadata['title'] = _('Jukebox playlist')
+            self._jobject.metadata['title_set_by_user'] = '1'
+            description = ''
+            for uri in self.playlist:
+                description += '%s\n' % uri['title']
+            self._jobject.metadata['description'] = description
+            self._jobject.metadata['mime_type'] = 'audio/x-mpegurl'
+            datastore.write(self._jobject)
+
+        return True
+
     def write_file(self, file_path):
         if len(self.playlist) > 1:
-            # need create a new file with the file list
-            logging.error('need new file')
-            self.metadata['mime_type'] = 'audio/x-mpegurl'
             list_file = open(file_path, 'w')
             for uri in self.playlist:
                 list_file.write('#EXTINF: %s\n' % uri['title'])
