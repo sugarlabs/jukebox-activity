@@ -152,3 +152,8 @@ class Control(gobject.GObject):
         self.button.set_sensitive(False)
         self.scale_item.set_sensitive(False)
         self.hscale.set_sensitive(False)
+
+    def set_enabled(self):
+        self.button.set_sensitive(True)
+        self.scale_item.set_sensitive(True)
+        self.hscale.set_sensitive(True)

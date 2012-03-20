@@ -281,6 +281,7 @@ class JukeboxActivity(activity.Activity):
         self.player.set_uri(url)
 
         self.play_toggled()
+
         self.check_if_next_prev()
         self.playlist_widget.set_cursor(self.currentplaying)
 
@@ -484,6 +485,8 @@ class JukeboxActivity(activity.Activity):
         return False
 
     def play_toggled(self):
+        self.control.set_enabled()
+
         if self.player.is_playing():
             self.player.pause()
             self.control.set_button_play()
