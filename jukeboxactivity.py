@@ -159,6 +159,9 @@ class JukeboxActivity(activity.Activity):
         self.only_audio = False
         self.got_stream_info = False
 
+        self.tag_reader = TagReader()
+        self.tag_reader.connect('get-tags', self.__get_tags_cb)
+
         self.p_position = gst.CLOCK_TIME_NONE
         self.p_duration = gst.CLOCK_TIME_NONE
 
@@ -200,6 +203,10 @@ class JukeboxActivity(activity.Activity):
             self.bin.pack_end(self._empty_widget)
             self.bin.remove(self.videowidget)
         self.bin.queue_draw()
+
+    def __get_tags_cb(self, tags_reader, order, tags):
+        self.playlist[order]['title'] = tags['title']
+        self.playlist_widget.update(self.playlist)
 
     def __size_allocate_cb(self, widget, allocation):
         canvas_size = self.bin.get_allocation()
@@ -358,9 +365,9 @@ class JukeboxActivity(activity.Activity):
 
     def read_file(self, file_path):
         """Load a file from the datastore on activity start."""
-        logging.debug('JukeBoxAtivity.read_file: %s', file_path)
+        logging.debug('JukeBoxAtivity.read_file: %s %s', file_path)
         title = self.metadata.get('title', None)
-        self._load_file(file_path, title, None)
+        self._load_file(file_path, title, self._object_id)
 
     def _load_file(self, file_path, title, object_id):
         self.uri = os.path.abspath(file_path)
@@ -415,6 +422,8 @@ class JukeboxActivity(activity.Activity):
         self.playpath = os.path.dirname(uri)
         if not uri:
             return False
+        if title is not None:
+            title = title.strip()
         if object_id is not None:
             self.playlist.append({'url': 'journal://' + object_id,
                     'title': title})
@@ -422,8 +431,22 @@ class JukeboxActivity(activity.Activity):
             if uri.startswith("file://"):
                 self.playlist.append({'url': uri, 'title': title})
             else:
-                url = "file://" + urllib.quote(os.path.abspath(uri))
-                self.playlist.append({'url': url, 'title': title})
+                uri = "file://" + urllib.quote(os.path.abspath(uri))
+                self.playlist.append({'url': uri, 'title': title})
+        if uri.endswith(title) or title is None or title == '' or \
+                object_id is not None:
+            logging.error('Try get a better title reading tags')
+            # TODO: unify this code....
+            url = self.playlist[len(self.playlist) - 1]['url']
+            if url.find('home') > 0:
+                url = url[len("journal://"):]
+                url = 'file://' + url
+            elif url.startswith('journal://'):
+                jobject = datastore.get(url[len("journal://"):])
+                url = 'file://' + jobject.file_path
+                # jobject.destroy() ??
+            self.tag_reader.set_file(url, len(self.playlist) - 1)
+
         if not self.player:
             # lazy init the player so that videowidget is realized
             # and has a valid widget allocation
@@ -539,7 +562,46 @@ class JukeboxActivity(activity.Activity):
         self.bin.queue_draw()
 
 
+class TagReader(gobject.GObject):
+
+    __gsignals__ = {
+        'get-tags': (gobject.SIGNAL_RUN_FIRST, None, [int, object]),
+    }
+
+    def __init__(self):
+        gobject.GObject.__init__(self)
+        #make a playbin to parse the audio file
+        self.pbin = gst.element_factory_make('playbin')
+        #we need to receive signals from the playbin's bus
+        self.bus = self.pbin.get_bus()
+        #make sure we are watching the signals on the bus
+        self.bus.add_signal_watch()
+        #what do we do when a tag is part of the bus signal?
+        self.bus.connect("message::tag", self.bus_message_tag)
+
+    def bus_message_tag(self, bus, message):
+        #we received a tag message
+        taglist = message.parse_tag()
+        #put the keys in the dictionary
+        tags = {}
+        for key in taglist.keys():
+            tags[key] = taglist[key]
+        logging.error('bus_message_tag %s', tags)
+        if 'title' in tags:
+            self.emit('get-tags', self._order, tags)
+
+    def set_file(self, url, order):
+        logging.error('tag_reader url = %s order = %d', url, order)
+        self._order = order
+        self.pbin.set_state(gst.STATE_NULL)
+        #set the uri of the playbin to our audio file
+        self.pbin.set_property('uri', url)
+        #pause the playbin, we don't really need to play
+        self.pbin.set_state(gst.STATE_PAUSED)
+
+
 class GstPlayer(gobject.GObject):
+
     __gsignals__ = {
         'error': (gobject.SIGNAL_RUN_FIRST, None, [str, str]),
         'eos': (gobject.SIGNAL_RUN_FIRST, None, []),
