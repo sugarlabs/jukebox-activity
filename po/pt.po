@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-27 00:32-0400\n"
-"PO-Revision-Date: 2012-01-25 23:00+0200\n"
+"POT-Creation-Date: 2012-03-21 00:32-0400\n"
+"PO-Revision-Date: 2012-03-23 20:42+0200\n"
 "Last-Translator: Eduardo H. <hoboprimate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt\n"
@@ -25,17 +25,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
+# Também toca vídeo, para além de áudio, pelo que 'Caixa de Música' não serve muito bem.
+# E que tal se fosse "Tocar"?
 #: activity/activity.info:2
 msgid "Jukebox"
-msgstr "Caixa de Música"
+msgstr "Jukebox"
 
 #: ControlToolbar.py:43
 msgid "Fullscreen"
-msgstr "Ecrã inteiro"
+msgstr "Ecrã Inteiro"
 
 #: ControlToolbar.py:50
 msgid "Show Playlist"
-msgstr "Mostrar lista de reprodução"
+msgstr "Mostrar Lista de Reprodução"
 
 #: ControlToolbar.py:77
 msgid "Previous"
@@ -45,21 +47,33 @@ msgstr "Anterior"
 msgid "Next"
 msgstr "Seguinte"
 
-#: jukeboxactivity.py:74
+#: jukeboxactivity.py:71
 msgid "Jukebox Activity"
-msgstr "Actividade Caixa de Música"
+msgstr "Atividade Jukebox"
 
-#: jukeboxactivity.py:82
+#: jukeboxactivity.py:80
 msgid "Play"
 msgstr "Tocar"
 
-#: jukeboxactivity.py:91
+#: jukeboxactivity.py:89
 msgid "View"
 msgstr "Ver"
 
-#: jukeboxactivity.py:335
+#: jukeboxactivity.py:348
 msgid "Choose document"
-msgstr "Escolhe o documento"
+msgstr "Escolhe um documento"
+
+#: jukeboxactivity.py:398 jukeboxactivity.py:399
+msgid "Jukebox playlist"
+msgstr "Lista de reprodução Jukebox"
+
+#: widgets.py:46
+msgid "No."
+msgstr "Nº."
+
+#: widgets.py:53
+msgid "Play List"
+msgstr "Lista de Reprodução"
 
 #~ msgid "Fit to window"
 #~ msgstr "Zoom até à janela"
