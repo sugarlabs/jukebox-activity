@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-21 00:32-0400\n"
-"PO-Revision-Date: 2012-03-23 20:42+0200\n"
+"PO-Revision-Date: 2012-04-13 19:42+0200\n"
 "Last-Translator: Eduardo H. <hoboprimate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt\n"
@@ -29,7 +29,7 @@ msgstr ""
 # E que tal se fosse "Tocar"?
 #: activity/activity.info:2
 msgid "Jukebox"
-msgstr "Jukebox"
+msgstr "Tocar"
 
 #: ControlToolbar.py:43
 msgid "Fullscreen"
