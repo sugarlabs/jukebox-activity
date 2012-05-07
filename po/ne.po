@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-27 00:32-0400\n"
-"PO-Revision-Date: 2011-11-28 08:05+0200\n"
-"Last-Translator: aman0115 <aman.maharjan@olenepal.org>\n"
+"POT-Creation-Date: 2012-03-21 00:32-0400\n"
+"PO-Revision-Date: 2012-05-07 08:39+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ne\n"
 "MIME-Version: 1.0\n"
@@ -45,21 +45,33 @@ msgstr "पहिलाको"
 msgid "Next"
 msgstr "यसपछिको"
 
-#: jukeboxactivity.py:74
+#: jukeboxactivity.py:71
 msgid "Jukebox Activity"
 msgstr "ज्युकबक्स क्रियाकलाप"
 
-#: jukeboxactivity.py:82
+#: jukeboxactivity.py:80
 msgid "Play"
 msgstr "सुरु गर"
 
-#: jukeboxactivity.py:91
+#: jukeboxactivity.py:89
 msgid "View"
 msgstr "हेर"
 
-#: jukeboxactivity.py:335
+#: jukeboxactivity.py:348
 msgid "Choose document"
 msgstr "कागजात छान"
+
+#: jukeboxactivity.py:398 jukeboxactivity.py:399
+msgid "Jukebox playlist"
+msgstr "ज्युकबक्स प्लेलिस्ट"
+
+#: widgets.py:46
+msgid "No."
+msgstr "नम्बर"
+
+#: widgets.py:53
+msgid "Play List"
+msgstr "प्लेलिस्ट"
 
 #~ msgid "Fit to window"
 #~ msgstr "यो सञ्झ्यालमा अटाऊ"
