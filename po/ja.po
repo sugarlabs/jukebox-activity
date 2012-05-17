@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 10:50-0300\n"
+"POT-Creation-Date: 2012-03-21 00:32-0400\n"
 "PO-Revision-Date: 2011-08-26 06:53+0200\n"
 "Last-Translator: korakurider <korakurider@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,27 +29,23 @@ msgstr ""
 msgid "Jukebox"
 msgstr "ジュークボックス"
 
-#: ControlToolbar.py:44 ViewToolbar.py:63
+#: ControlToolbar.py:43
 msgid "Fullscreen"
 msgstr "全画面"
 
-#: ControlToolbar.py:68
+#: ControlToolbar.py:50
+msgid "Show Playlist"
+msgstr ""
+
+#: ControlToolbar.py:77
 msgid "Previous"
 msgstr "前へ"
 
-#: ControlToolbar.py:89
+#: ControlToolbar.py:98
 msgid "Next"
 msgstr "次へ"
 
-#: ViewToolbar.py:45
-msgid "Fit to window"
-msgstr "ウィンドウにあわせる"
-
-#: ViewToolbar.py:51
-msgid "Original size"
-msgstr "元のサイズ"
-
-#: jukeboxactivity.py:72
+#: jukeboxactivity.py:71
 msgid "Jukebox Activity"
 msgstr "ジュークボックス アクティビティ"
 
@@ -57,10 +53,28 @@ msgstr "ジュークボックス アクティビティ"
 msgid "Play"
 msgstr "再生"
 
-#: jukeboxactivity.py:87
+#: jukeboxactivity.py:89
 msgid "View"
 msgstr "表示"
 
-#: jukeboxactivity.py:302
+#: jukeboxactivity.py:348
 msgid "Choose document"
 msgstr "文書を選ぶ"
+
+#: jukeboxactivity.py:398 jukeboxactivity.py:399
+msgid "Jukebox playlist"
+msgstr ""
+
+#: widgets.py:46
+msgid "No."
+msgstr ""
+
+#: widgets.py:53
+msgid "Play List"
+msgstr ""
+
+#~ msgid "Fit to window"
+#~ msgstr "ウィンドウにあわせる"
+
+#~ msgid "Original size"
+#~ msgstr "元のサイズ"

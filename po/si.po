@@ -14,42 +14,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 10:50-0300\n"
-"PO-Revision-Date: 2011-08-30 16:48+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2012-03-21 00:32-0400\n"
+"PO-Revision-Date: 2012-02-03 09:41+0200\n"
+"Last-Translator: Danishka Navin <danishka@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: si\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Jukebox"
 msgstr "සංගීතය ශ්‍රවණ පෙට්ටිය"
 
-#: ControlToolbar.py:44 ViewToolbar.py:63
+#: ControlToolbar.py:43
 msgid "Fullscreen"
 msgstr "මුළු තිරයම"
 
-#: ControlToolbar.py:68
+#: ControlToolbar.py:50
+msgid "Show Playlist"
+msgstr "වාදන ලැයිස්තුව පෙන්වන්න"
+
+#: ControlToolbar.py:77
 msgid "Previous"
 msgstr "පෙර"
 
-#: ControlToolbar.py:89
+#: ControlToolbar.py:98
 msgid "Next"
 msgstr "ඊළඟ"
 
-#: ViewToolbar.py:45
-msgid "Fit to window"
-msgstr "කවුළුවට ගැළපෙන"
-
-#: ViewToolbar.py:51
-msgid "Original size"
-msgstr "මුල් ප්‍රමාණය"
-
-#: jukeboxactivity.py:72
+#: jukeboxactivity.py:71
 msgid "Jukebox Activity"
 msgstr "සංගීතය ශ්‍රවණ පෙට්ටියේ ක්‍රියාකාරකම"
 
@@ -57,10 +53,28 @@ msgstr "සංගීතය ශ්‍රවණ පෙට්ටියේ ක්‍
 msgid "Play"
 msgstr "වාදනය"
 
-#: jukeboxactivity.py:87
+#: jukeboxactivity.py:89
 msgid "View"
 msgstr "දර්ශනය කරන්න"
 
-#: jukeboxactivity.py:302
+#: jukeboxactivity.py:348
 msgid "Choose document"
 msgstr "ලේඛනය තෝරන්න"
+
+#: jukeboxactivity.py:398 jukeboxactivity.py:399
+msgid "Jukebox playlist"
+msgstr ""
+
+#: widgets.py:46
+msgid "No."
+msgstr ""
+
+#: widgets.py:53
+msgid "Play List"
+msgstr ""
+
+#~ msgid "Fit to window"
+#~ msgstr "කවුළුවට ගැළපෙන"
+
+#~ msgid "Original size"
+#~ msgstr "මුල් ප්‍රමාණය"

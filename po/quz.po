@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#  SOME DESCRIPTIVE TITLE.
+#  Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+#  This file is distributed under the same license as the PACKAGE package.
+#  FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-27 00:32-0400\n"
-"PO-Revision-Date: 2011-10-14 07:09+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2012-03-21 00:32-0400\n"
+"PO-Revision-Date: 2012-05-15 23:23+0200\n"
+"Last-Translator: Irma  <sankaypillo@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: quz\n"
 "MIME-Version: 1.0\n"
@@ -18,53 +18,57 @@ msgstr ""
 "X-Generator: Pootle 2.0.5\n"
 
 #  "Máquina de discos"
-#  [es] "Máquina de discos"
 #: activity/activity.info:2
 msgid "Jukebox"
 msgstr "Takichina"
 
 #  "Pantalla completa"
-#  [es] "Pantalla completa"
 #: ControlToolbar.py:43
 msgid "Fullscreen"
 msgstr "Hunt'asqa pantalla"
 
 #: ControlToolbar.py:50
 msgid "Show Playlist"
-msgstr ""
+msgstr "Takiykunata rikuchiy"
 
+#  "Anterior"
 #: ControlToolbar.py:77
 msgid "Previous"
 msgstr "Qhipa"
 
+#  "Siguiente"
 #: ControlToolbar.py:98
 msgid "Next"
 msgstr "Hamuq"
 
 #  "Actividad máquina de discos"
-#  [es] "Actividad de la máquina de discos o tocadiscos"
-#: jukeboxactivity.py:74
+#: jukeboxactivity.py:71
 msgid "Jukebox Activity"
-msgstr "Takichinaq ruranankuna"
+msgstr "Takichinap ruwanankuna"
 
 #  "Reproducir"
-#  [es] "Tocar (la musica)"
-#: jukeboxactivity.py:82
+#: jukeboxactivity.py:80
 msgid "Play"
 msgstr "Takichiy"
 
-#: jukeboxactivity.py:91
+#  "Ver"
+#: jukeboxactivity.py:89
 msgid "View"
 msgstr "Qhaway"
 
 #  "Elegir documento"
-#  [es] "Elegir documento"
-#: jukeboxactivity.py:335
+#: jukeboxactivity.py:348
 msgid "Choose document"
-msgstr "Qilqa-khiputa akllay"
+msgstr "Qillqa-khiputa akllay"
 
-#~ msgid "Fit to window"
-#~ msgstr "Qhawanaman t'akyachiy"
+#: jukeboxactivity.py:398 jukeboxactivity.py:399
+msgid "Jukebox playlist"
+msgstr "Takiykuna"
 
-#~ msgid "Original size"
-#~ msgstr "Kikin sayaynin"
+#: widgets.py:46
+msgid "No."
+msgstr "Mana"
+
+#: widgets.py:53
+msgid "Play List"
+msgstr "Takiykunata takichiy"

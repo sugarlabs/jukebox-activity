@@ -14,33 +14,61 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-29 17:36-0400\n"
-"PO-Revision-Date: 2010-01-31 17:53+0200\n"
-"Last-Translator: Veeven <veeven@gmail.com>\n"
+"POT-Creation-Date: 2012-03-21 00:32-0400\n"
+"PO-Revision-Date: 2011-11-27 01:12+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: te\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Jukebox"
-msgstr "జ్యూక్ బాక్సు "
+msgstr "జ్యూక్ బాక్సు"
 
-#: ControlToolbar.py:109
+#: ControlToolbar.py:43
 msgid "Fullscreen"
 msgstr "నిండుతెర"
 
-#: jukeboxactivity.py:57
+#: ControlToolbar.py:50
+msgid "Show Playlist"
+msgstr ""
+
+#: ControlToolbar.py:77
+msgid "Previous"
+msgstr ""
+
+#: ControlToolbar.py:98
+msgid "Next"
+msgstr ""
+
+#: jukeboxactivity.py:71
 msgid "Jukebox Activity"
-msgstr "జ్యూక్ బాక్స్ కార్యక్రమాలు "
+msgstr "జ్యూక్ బాక్స్ కార్యక్రమాలు"
 
-#: jukeboxactivity.py:64
+#: jukeboxactivity.py:80
 msgid "Play"
-msgstr "క్రియాశీలం "
+msgstr "క్రియాశీలం"
 
-#: jukeboxactivity.py:246
+#: jukeboxactivity.py:89
+msgid "View"
+msgstr ""
+
+#: jukeboxactivity.py:348
 msgid "Choose document"
-msgstr "దస్తావేజును ఎంచుకొను "
+msgstr "దస్తావేజును ఎంచుకొను"
+
+#: jukeboxactivity.py:398 jukeboxactivity.py:399
+msgid "Jukebox playlist"
+msgstr ""
+
+#: widgets.py:46
+msgid "No."
+msgstr ""
+
+#: widgets.py:53
+msgid "Play List"
+msgstr ""

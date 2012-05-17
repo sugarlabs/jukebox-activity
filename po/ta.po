@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 10:50-0300\n"
+"POT-Creation-Date: 2012-03-21 00:32-0400\n"
 "PO-Revision-Date: 2011-08-31 18:04+0200\n"
 "Last-Translator: Thangamani <thangam.arunx@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,27 +29,23 @@ msgstr ""
 msgid "Jukebox"
 msgstr "ஜுகி பெட்டி"
 
-#: ControlToolbar.py:44 ViewToolbar.py:63
+#: ControlToolbar.py:43
 msgid "Fullscreen"
 msgstr "முழுத்திரை"
 
-#: ControlToolbar.py:68
+#: ControlToolbar.py:50
+msgid "Show Playlist"
+msgstr ""
+
+#: ControlToolbar.py:77
 msgid "Previous"
 msgstr "முன்னைய"
 
-#: ControlToolbar.py:89
+#: ControlToolbar.py:98
 msgid "Next"
 msgstr "அடுத்தது"
 
-#: ViewToolbar.py:45
-msgid "Fit to window"
-msgstr "சாளரத்துக்கு பொருத்து"
-
-#: ViewToolbar.py:51
-msgid "Original size"
-msgstr "உண்மையான அளவு"
-
-#: jukeboxactivity.py:72
+#: jukeboxactivity.py:71
 msgid "Jukebox Activity"
 msgstr "செயற்பாடு"
 
@@ -57,10 +53,28 @@ msgstr "செயற்பாடு"
 msgid "Play"
 msgstr "இயக்கு"
 
-#: jukeboxactivity.py:87
+#: jukeboxactivity.py:89
 msgid "View"
 msgstr "பார்"
 
-#: jukeboxactivity.py:302
+#: jukeboxactivity.py:348
 msgid "Choose document"
 msgstr "தெரிவுசெய்"
+
+#: jukeboxactivity.py:398 jukeboxactivity.py:399
+msgid "Jukebox playlist"
+msgstr ""
+
+#: widgets.py:46
+msgid "No."
+msgstr ""
+
+#: widgets.py:53
+msgid "Play List"
+msgstr ""
+
+#~ msgid "Fit to window"
+#~ msgstr "சாளரத்துக்கு பொருத்து"
+
+#~ msgid "Original size"
+#~ msgstr "உண்மையான அளவு"

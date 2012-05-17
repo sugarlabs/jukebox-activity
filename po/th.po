@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-27 00:32-0400\n"
+"POT-Creation-Date: 2012-03-21 00:32-0400\n"
 "PO-Revision-Date: 2012-02-09 03:38+0200\n"
 "Last-Translator: Meechai <malaku38@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,21 +45,33 @@ msgstr "ก่อนหน้า"
 msgid "Next"
 msgstr "ถัดไป"
 
-#: jukeboxactivity.py:74
+#: jukeboxactivity.py:71
 msgid "Jukebox Activity"
 msgstr "กิจกรรมของ Jukebox"
 
-#: jukeboxactivity.py:82
+#: jukeboxactivity.py:80
 msgid "Play"
 msgstr "เล่น"
 
-#: jukeboxactivity.py:91
+#: jukeboxactivity.py:89
 msgid "View"
 msgstr "มุมมอง"
 
-#: jukeboxactivity.py:335
+#: jukeboxactivity.py:348
 msgid "Choose document"
 msgstr "เลือกเอกสาร"
+
+#: jukeboxactivity.py:398 jukeboxactivity.py:399
+msgid "Jukebox playlist"
+msgstr ""
+
+#: widgets.py:46
+msgid "No."
+msgstr ""
+
+#: widgets.py:53
+msgid "Play List"
+msgstr ""
 
 #~ msgid "Fit to window"
 #~ msgstr "พอดีหน้าต่างนี้"
