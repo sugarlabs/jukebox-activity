@@ -596,6 +596,7 @@ class TagReader(gobject.GObject):
         self.pbin = gst.element_factory_make('playbin', 'player')
         fakesink = gst.element_factory_make('fakesink', 'fakesink')
         self.pbin.set_property('video-sink', fakesink)
+        self.pbin.set_property('audio-sink', fakesink)
         #we need to receive signals from the playbin's bus
         self.bus = self.pbin.get_bus()
         #make sure we are watching the signals on the bus
