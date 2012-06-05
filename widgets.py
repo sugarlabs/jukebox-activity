@@ -85,3 +85,11 @@ class PlayListWidget(gtk.ScrolledWindow):
 
     def set_cursor(self, index):
         self.listview.set_cursor((index,))
+
+    def delete_selected_items(self):
+        selection = self.listview.get_selection()
+        sel_model, sel_rows = self.listview.get_selection().get_selected_rows()
+        for row in sel_rows:
+            self._playlist.pop(row[0])
+            self.treemodel.remove(self.treemodel.get_iter(row))
+        self.update(self._playlist)

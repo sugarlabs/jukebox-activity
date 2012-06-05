@@ -73,6 +73,13 @@ class Control(gobject.GObject):
         self.open_button.connect('clicked', jukebox.open_button_clicked_cb)
         self.toolbar.insert(self.open_button, -1)
 
+        erase_playlist_entry_btn = ToolButton(icon_name='edit-delete')
+        erase_playlist_entry_btn.set_tooltip(_('Remove selected track' \
+                                               ' from the playlist'))
+        erase_playlist_entry_btn.connect('clicked',
+                 jukebox._erase_playlist_entry_clicked_cb)
+        self.toolbar.insert(erase_playlist_entry_btn, -1)
+
         self.prev_button = ToolButton('player_rew')
         self.prev_button.set_tooltip(_('Previous'))
         self.prev_button.show()

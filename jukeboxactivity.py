@@ -599,6 +599,9 @@ class JukeboxActivity(activity.Activity):
 
         return True
 
+    def _erase_playlist_entry_clicked_cb(self, widget):
+        self.playlist_widget.delete_selected_items()
+
     def __go_fullscreen_cb(self, toolbar):
         self.fullscreen()
 
