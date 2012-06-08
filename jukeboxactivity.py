@@ -23,6 +23,7 @@
 
 
 import logging
+import tempfile
 from gettext import gettext as _
 import os
 
@@ -71,6 +72,7 @@ class JukeboxActivity(activity.Activity):
         self.set_title(_('Jukebox Activity'))
         self.player = None
         self.max_participants = 1
+        self._playlist_jobject = None
 
         if OLD_TOOLBAR:
             toolbox = activity.ActivityToolbox(self)
@@ -366,7 +368,7 @@ class JukeboxActivity(activity.Activity):
 
     def read_file(self, file_path):
         """Load a file from the datastore on activity start."""
-        logging.debug('JukeBoxAtivity.read_file: %s %s', file_path)
+        logging.debug('JukeBoxAtivity.read_file: %s', file_path)
         title = self.metadata.get('title', None)
         self._load_file(file_path, title, self._object_id)
 
@@ -385,35 +387,59 @@ class JukeboxActivity(activity.Activity):
             # is another media file:
             gobject.idle_add(self._start, self.uri, title, object_id)
 
-    def can_close(self):
-        """Activities should override this function if they want to perform
-        extra checks before actually closing."""
-        if len(self.playlist) > 1 and \
-                self.metadata['mime_type'] != 'audio/x-mpegurl':
-            # if the activity started with a media file and added more later
-            # need create a new file with the file list to no destroy
-            # the first opened file
-            logging.error('need new file')
-            self._jobject = datastore.create()
-            self.title_entry.set_text(_('Jukebox playlist'))
-            self._jobject.metadata['title'] = _('Jukebox playlist')
-            self._jobject.metadata['title_set_by_user'] = '1'
-            description = ''
-            for uri in self.playlist:
-                description += '%s\n' % uri['title']
-            self._jobject.metadata['description'] = description
-            self._jobject.metadata['mime_type'] = 'audio/x-mpegurl'
-            datastore.write(self._jobject)
+    def _create_playlist_jobject(self):
+        """Create an object in the Journal to store the playlist.
 
-        return True
+        This is needed if the activity was not started from a playlist
+        or from scratch.
+
+        """
+        jobject = datastore.create()
+        jobject.metadata['mime_type'] = "audio/x-mpegurl"
+        jobject.metadata['title'] =  _('Jukebox playlist')
+
+        temp_path = os.path.join(activity.get_activity_root(),
+                                 'instance')
+        if not os.path.exists(temp_path):
+            os.makedirs(temp_path)
+
+        jobject.file_path = tempfile.mkstemp(dir=temp_path)[1]
+        self._playlist_jobject = jobject
 
     def write_file(self, file_path):
-        if len(self.playlist) > 1:
+
+        def write_playlist_to_file(file_path):
+            """Open the file at file_path and write the playlist.
+
+            It is saved in audio/x-mpegurl format.
+
+            """
             list_file = open(file_path, 'w')
             for uri in self.playlist:
                 list_file.write('#EXTINF: %s\n' % uri['title'])
                 list_file.write('%s\n' % uri['url'])
             list_file.close()
+
+        if not self.metadata['mime_type']:
+            self.metadata['mime_type'] = 'audio/x-mpegurl'
+
+        if self.metadata['mime_type'] == 'audio/x-mpegurl':
+            write_playlist_to_file(file_path)
+
+        else:
+            if self._playlist_jobject is None:
+                self._create_playlist_jobject()
+
+            # Add the playlist to the playlist jobject description.
+            # This is only done if the activity was not started from a
+            # playlist or from scratch:
+            description = ''
+            for uri in self.playlist:
+                description += '%s\n' % uri['title']
+            self._playlist_jobject.metadata['description'] = description
+
+            write_playlist_to_file(self._playlist_jobject.file_path)
+            datastore.write(self._playlist_jobject)
 
     def _read_m3u_playlist(self, file_path):
         urls = []
