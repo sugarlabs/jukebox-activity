@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 00:32-0400\n"
-"PO-Revision-Date: 2012-03-24 00:40+0200\n"
+"POT-Creation-Date: 2012-06-15 00:32-0400\n"
+"PO-Revision-Date: 2012-06-15 09:01+0200\n"
 "Last-Translator: AlanJAS <alanjas@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
@@ -50,30 +50,34 @@ msgid "Show Playlist"
 msgstr "Mostrar Lista de Reproducción"
 
 #: ControlToolbar.py:77
+msgid "Remove selected track from the playlist"
+msgstr "Eliminar la pista seleccionada de la lista de reproducción"
+
+#: ControlToolbar.py:84
 msgid "Previous"
 msgstr "Anterior"
 
-#: ControlToolbar.py:98
+#: ControlToolbar.py:105
 msgid "Next"
 msgstr "Siguiente"
 
-#: jukeboxactivity.py:71
+#: jukeboxactivity.py:72
 msgid "Jukebox Activity"
 msgstr "Actividad máquina de discos"
 
-#: jukeboxactivity.py:80
+#: jukeboxactivity.py:82
 msgid "Play"
 msgstr "Reproducir"
 
-#: jukeboxactivity.py:89
+#: jukeboxactivity.py:91
 msgid "View"
 msgstr "Ver"
 
-#: jukeboxactivity.py:348
+#: jukeboxactivity.py:350
 msgid "Choose document"
 msgstr "Elegir documento"
 
-#: jukeboxactivity.py:398 jukeboxactivity.py:399
+#: jukeboxactivity.py:399
 msgid "Jukebox playlist"
 msgstr "Lista de reproducción de Jukebox"
 
