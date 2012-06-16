@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 00:32-0400\n"
-"PO-Revision-Date: 2012-05-07 08:39+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2012-06-15 00:32-0400\n"
+"PO-Revision-Date: 2012-06-15 08:20+0200\n"
+"Last-Translator: nirajpaudel <niraj.paudel@olenepal.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ne\n"
 "MIME-Version: 1.0\n"
@@ -38,30 +38,34 @@ msgid "Show Playlist"
 msgstr "प्लेलिस्ट देखाउ"
 
 #: ControlToolbar.py:77
+msgid "Remove selected track from the playlist"
+msgstr "चुनिंदा ट्रयाक सुचिबाट प्लेलिस्ट हटाऊ"
+
+#: ControlToolbar.py:84
 msgid "Previous"
 msgstr "पहिलाको"
 
-#: ControlToolbar.py:98
+#: ControlToolbar.py:105
 msgid "Next"
 msgstr "यसपछिको"
 
-#: jukeboxactivity.py:71
+#: jukeboxactivity.py:72
 msgid "Jukebox Activity"
 msgstr "ज्युकबक्स क्रियाकलाप"
 
-#: jukeboxactivity.py:80
+#: jukeboxactivity.py:82
 msgid "Play"
 msgstr "सुरु गर"
 
-#: jukeboxactivity.py:89
+#: jukeboxactivity.py:91
 msgid "View"
 msgstr "हेर"
 
-#: jukeboxactivity.py:348
+#: jukeboxactivity.py:350
 msgid "Choose document"
 msgstr "कागजात छान"
 
-#: jukeboxactivity.py:398 jukeboxactivity.py:399
+#: jukeboxactivity.py:399
 msgid "Jukebox playlist"
 msgstr "ज्युकबक्स प्लेलिस्ट"
 
