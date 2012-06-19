@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 00:32-0400\n"
+"POT-Creation-Date: 2012-06-15 00:32-0400\n"
 "PO-Revision-Date: 2012-05-15 23:23+0200\n"
 "Last-Translator: Irma  <sankaypillo@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,48 +27,57 @@ msgstr "Takichina"
 msgid "Fullscreen"
 msgstr "Hunt'asqa pantalla"
 
+#  "Mostrar Lista de Reproducción"
 #: ControlToolbar.py:50
 msgid "Show Playlist"
 msgstr "Takiykunata rikuchiy"
 
-#  "Anterior"
+#  "Eliminar la pista seleccionada de la lista de reproducción"
 #: ControlToolbar.py:77
+msgid "Remove selected track from the playlist"
+msgstr ""
+
+#  "Anterior"
+#: ControlToolbar.py:84
 msgid "Previous"
 msgstr "Qhipa"
 
 #  "Siguiente"
-#: ControlToolbar.py:98
+#: ControlToolbar.py:105
 msgid "Next"
 msgstr "Hamuq"
 
 #  "Actividad máquina de discos"
-#: jukeboxactivity.py:71
+#: jukeboxactivity.py:72
 msgid "Jukebox Activity"
 msgstr "Takichinap ruwanankuna"
 
 #  "Reproducir"
-#: jukeboxactivity.py:80
+#: jukeboxactivity.py:82
 msgid "Play"
 msgstr "Takichiy"
 
 #  "Ver"
-#: jukeboxactivity.py:89
+#: jukeboxactivity.py:91
 msgid "View"
 msgstr "Qhaway"
 
 #  "Elegir documento"
-#: jukeboxactivity.py:348
+#: jukeboxactivity.py:350
 msgid "Choose document"
 msgstr "Qillqa-khiputa akllay"
 
-#: jukeboxactivity.py:398 jukeboxactivity.py:399
+#  "Lista de reproducción de Jukebox"
+#: jukeboxactivity.py:399
 msgid "Jukebox playlist"
 msgstr "Takiykuna"
 
+# abreviación de número
 #: widgets.py:46
 msgid "No."
-msgstr "Mana"
+msgstr ""
 
+# "Lista de reproducción"
 #: widgets.py:53
 msgid "Play List"
 msgstr "Takiykunata takichiy"
