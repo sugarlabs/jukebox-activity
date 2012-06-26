@@ -39,18 +39,18 @@ class ViewToolbar(gtk.Toolbar):
     def __init__(self):
         gtk.Toolbar.__init__(self)
 
-        self._fullscreen = ToolButton('view-fullscreen')
-        self._fullscreen.set_tooltip(_('Fullscreen'))
-        self._fullscreen.connect('clicked', self._fullscreen_cb)
-        self.insert(self._fullscreen, -1)
-        self._fullscreen.show()
-
         self._show_playlist = ToggleToolButton('view-list')
         self._show_playlist.set_active(True)
         self._show_playlist.set_tooltip(_('Show Playlist'))
         self._show_playlist.connect('toggled', self._playlist_toggled_cb)
         self.insert(self._show_playlist, -1)
         self._show_playlist.show()
+
+        self._fullscreen = ToolButton('view-fullscreen')
+        self._fullscreen.set_tooltip(_('Fullscreen'))
+        self._fullscreen.connect('clicked', self._fullscreen_cb)
+        self.insert(self._fullscreen, -1)
+        self._fullscreen.show()
 
     def _fullscreen_cb(self, button):
         self.emit('go-fullscreen')
@@ -68,17 +68,21 @@ class Control(gobject.GObject):
         self.toolbar = toolbar
         self.jukebox = jukebox
 
-        self.open_button = ToolButton('sound')
+        self.open_button = ToolButton('list-add')
+        self.open_button.set_tooltip(_('Add track'))
         self.open_button.show()
         self.open_button.connect('clicked', jukebox.open_button_clicked_cb)
         self.toolbar.insert(self.open_button, -1)
 
-        erase_playlist_entry_btn = ToolButton(icon_name='edit-delete')
-        erase_playlist_entry_btn.set_tooltip(_('Remove selected track' \
-                                               ' from the playlist'))
+        erase_playlist_entry_btn = ToolButton(icon_name='list-remove')
+        erase_playlist_entry_btn.set_tooltip(_('Remove track'))
         erase_playlist_entry_btn.connect('clicked',
                  jukebox._erase_playlist_entry_clicked_cb)
         self.toolbar.insert(erase_playlist_entry_btn, -1)
+
+        spacer = gtk.SeparatorToolItem()
+        self.toolbar.insert(spacer, -1)
+        spacer.show()
 
         self.prev_button = ToolButton('player_rew')
         self.prev_button.set_tooltip(_('Previous'))
@@ -125,15 +129,6 @@ class Control(gobject.GObject):
         spacer.props.draw = False
         self.toolbar.insert(spacer, -1)
         spacer.show()
-
-        self.audioscale = gtk.VolumeButton()
-        self.audioscale.connect('value-changed', jukebox.volume_changed_cb)
-        self.audioscale.set_value(1)
-
-        self.audio_scale_item = gtk.ToolItem()
-        self.audio_scale_item.set_expand(False)
-        self.audio_scale_item.add(self.audioscale)
-        self.toolbar.insert(self.audio_scale_item, -1)
 
         spacer = gtk.SeparatorToolItem()
         spacer.props.draw = False
