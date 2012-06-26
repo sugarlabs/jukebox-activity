@@ -124,11 +124,6 @@ class JukeboxActivity(activity.Activity):
 
             self.control = Control(toolbar_box.toolbar, self)
 
-            separator = gtk.SeparatorToolItem()
-            separator.props.draw = False
-            separator.set_expand(True)
-            toolbar_box.toolbar.insert(separator, -1)
-
             toolbar_box.toolbar.insert(StopButton(self), -1)
 
             self.set_toolbar_box(toolbar_box)
@@ -596,6 +591,18 @@ class JukeboxActivity(activity.Activity):
         if self.p_position != gst.CLOCK_TIME_NONE:
             value = self.p_position * 100.0 / self.p_duration
             self.control.adjustment.set_value(value)
+
+            # Update the current time
+            seconds = self.p_position * 10 ** -9
+            time = '%2d:%02d' % (int(seconds / 60), int(seconds % 60))
+            self.control.current_time_label.set_text(time)
+
+        # FIXME: this should be updated just once when the file starts
+        # the first time
+        if self.p_duration != gst.CLOCK_TIME_NONE:
+            seconds = self.p_duration * 10 ** -9
+            time = '%2d:%02d' % (int(seconds / 60), int(seconds % 60))
+            self.control.total_time_label.set_text(time)
 
         return True
 

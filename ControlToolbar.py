@@ -111,6 +111,12 @@ class Control(gobject.GObject):
         self.next_button.connect('clicked', self.next_button_clicked_cb)
         self.toolbar.insert(self.next_button, -1)
 
+        current_time = gtk.ToolItem()
+        self.current_time_label = gtk.Label('')
+        current_time.add(self.current_time_label)
+        current_time.show()
+        toolbar.insert(current_time, -1)
+
         self.adjustment = gtk.Adjustment(0.0, 0.00, 100.0, 0.1, 1.0, 1.0)
         self.hscale = gtk.HScale(self.adjustment)
         self.hscale.set_draw_value(False)
@@ -125,15 +131,11 @@ class Control(gobject.GObject):
         self.scale_item.add(self.hscale)
         self.toolbar.insert(self.scale_item, -1)
 
-        spacer = gtk.SeparatorToolItem()
-        spacer.props.draw = False
-        self.toolbar.insert(spacer, -1)
-        spacer.show()
-
-        spacer = gtk.SeparatorToolItem()
-        spacer.props.draw = False
-        self.toolbar.insert(spacer, -1)
-        spacer.show()
+        total_time = gtk.ToolItem()
+        self.total_time_label = gtk.Label('')
+        total_time.add(self.total_time_label)
+        total_time.show()
+        toolbar.insert(total_time, -1)
 
     def prev_button_clicked_cb(self, widget):
         self.jukebox.songchange('prev')
