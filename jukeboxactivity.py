@@ -391,7 +391,7 @@ class JukeboxActivity(activity.Activity):
         """
         jobject = datastore.create()
         jobject.metadata['mime_type'] = "audio/x-mpegurl"
-        jobject.metadata['title'] =  _('Jukebox playlist')
+        jobject.metadata['title'] = _('Jukebox playlist')
 
         temp_path = os.path.join(activity.get_activity_root(),
                                  'instance')
