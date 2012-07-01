@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-15 00:32-0400\n"
-"PO-Revision-Date: 2012-06-15 07:19+0200\n"
+"POT-Creation-Date: 2012-06-28 00:31-0400\n"
+"PO-Revision-Date: 2012-07-01 21:59+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -29,23 +29,27 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Jukebox"
 
-#: ControlToolbar.py:43
-msgid "Fullscreen"
-msgstr "Fullscreen"
-
-#: ControlToolbar.py:50
+#: ControlToolbar.py:44
 msgid "Show Playlist"
 msgstr "Show Playlist"
 
-#: ControlToolbar.py:77
-msgid "Remove selected track from the playlist"
-msgstr "Remove selected track from the playlist"
+#: ControlToolbar.py:50
+msgid "Fullscreen"
+msgstr "Fullscreen"
 
-#: ControlToolbar.py:84
+#: ControlToolbar.py:72
+msgid "Add track"
+msgstr "Add track"
+
+#: ControlToolbar.py:78
+msgid "Remove track"
+msgstr "Remove track"
+
+#: ControlToolbar.py:88
 msgid "Previous"
 msgstr "Previous"
 
-#: ControlToolbar.py:105
+#: ControlToolbar.py:109
 msgid "Next"
 msgstr "Next"
 
@@ -61,11 +65,11 @@ msgstr "Play"
 msgid "View"
 msgstr "View"
 
-#: jukeboxactivity.py:350
+#: jukeboxactivity.py:345
 msgid "Choose document"
 msgstr "Choose document"
 
-#: jukeboxactivity.py:399
+#: jukeboxactivity.py:394
 msgid "Jukebox playlist"
 msgstr "Jukebox playlist"
 
@@ -76,6 +80,9 @@ msgstr "No."
 #: widgets.py:53
 msgid "Play List"
 msgstr "Play List"
+
+#~ msgid "Remove selected track from the playlist"
+#~ msgstr "Remove selected track from the playlist"
 
 #~ msgid "Fit to window"
 #~ msgstr "Fit to window"
