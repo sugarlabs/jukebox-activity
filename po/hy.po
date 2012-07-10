@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-15 00:32-0400\n"
-"PO-Revision-Date: 2012-06-23 06:01+0200\n"
+"POT-Creation-Date: 2012-06-28 00:31-0400\n"
+"PO-Revision-Date: 2012-07-10 00:13+0200\n"
 "Last-Translator: Jasmine <udea_jasmine@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: hy\n"
@@ -21,23 +21,27 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Նվագարկիչ"
 
-#: ControlToolbar.py:43
-msgid "Fullscreen"
-msgstr "Էկրանի չափով"
-
-#: ControlToolbar.py:50
+#: ControlToolbar.py:44
 msgid "Show Playlist"
 msgstr "Ցուցադրել վերարտադրման ցանկը"
 
-#: ControlToolbar.py:77
-msgid "Remove selected track from the playlist"
-msgstr "Ընտրած երիզը հեռացնել Վերարտադրման ցանկից:"
+#: ControlToolbar.py:50
+msgid "Fullscreen"
+msgstr "Էկրանի չափով"
 
-#: ControlToolbar.py:84
+#: ControlToolbar.py:72
+msgid "Add track"
+msgstr "Շավիղ ավելացնել"
+
+#: ControlToolbar.py:78
+msgid "Remove track"
+msgstr "Հեռացնել շավիղը"
+
+#: ControlToolbar.py:88
 msgid "Previous"
 msgstr "Նախորդ"
 
-#: ControlToolbar.py:105
+#: ControlToolbar.py:109
 msgid "Next"
 msgstr "Հաջորդ"
 
@@ -53,11 +57,11 @@ msgstr "Նվագարկել"
 msgid "View"
 msgstr "Տեսք"
 
-#: jukeboxactivity.py:350
+#: jukeboxactivity.py:345
 msgid "Choose document"
 msgstr "Ընտրել փաստաթուղթը"
 
-#: jukeboxactivity.py:399
+#: jukeboxactivity.py:394
 msgid "Jukebox playlist"
 msgstr "Նվագարկչի ցանկը"
 
@@ -68,3 +72,6 @@ msgstr "N"
 #: widgets.py:53
 msgid "Play List"
 msgstr "Ցանկ"
+
+#~ msgid "Remove selected track from the playlist"
+#~ msgstr "Ընտրած երիզը հեռացնել Վերարտադրման ցանկից:"
