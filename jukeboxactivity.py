@@ -27,31 +27,27 @@ import tempfile
 from gettext import gettext as _
 import os
 
-from sugar.activity import activity
-from sugar.graphics.objectchooser import ObjectChooser
-from sugar import mime
-from sugar.datastore import datastore
+from sugar3.activity import activity
+from sugar3.graphics.objectchooser import ObjectChooser
+from sugar3 import mime
+from sugar3.datastore import datastore
 
-OLD_TOOLBAR = False
-try:
-    from sugar.graphics.toolbarbox import ToolbarBox
-    from sugar.graphics.toolbarbox import ToolbarButton
-    from sugar.activity.widgets import StopButton
-    from sugar.activity.widgets import ActivityToolbarButton
+from sugar3.graphics.toolbarbox import ToolbarBox
+from sugar3.graphics.toolbarbox import ToolbarButton
+from sugar3.activity.widgets import StopButton
+from sugar3.activity.widgets import ActivityToolbarButton
 
-except ImportError:
-    OLD_TOOLBAR = True
+import gi
+gi.require_version('Gtk', '3.0')
 
-import pygtk
-pygtk.require('2.0')
-
-import gobject
+from gi.repository import GObject
+from gi.repository import Gdk
 
 import pygst
 pygst.require('0.10')
 import gst
 import gst.interfaces
-import gtk
+from gi.repository import Gtk
 
 import urllib
 from ControlToolbar import Control, ViewToolbar
@@ -74,70 +70,45 @@ class JukeboxActivity(activity.Activity):
         self.max_participants = 1
         self._playlist_jobject = None
 
-        if OLD_TOOLBAR:
-            toolbox = activity.ActivityToolbox(self)
-            self.set_toolbox(toolbox)
-            toolbar = gtk.Toolbar()
-            self.control = Control(toolbar, self)
-            toolbox.add_toolbar(_('Play'), toolbar)
+        toolbar_box = ToolbarBox()
+        activity_button = ActivityToolbarButton(self)
+        activity_toolbar = activity_button.page
+        toolbar_box.toolbar.insert(activity_button, 0)
+        self.title_entry = activity_toolbar.title
 
-            toolbar.show()
+        # FIXME: I don't know what is the mission of this line
+        # activity_toolbar.stop.hide()
 
-            _view_toolbar = ViewToolbar()
-            _view_toolbar.connect('go-fullscreen',
-                    self.__go_fullscreen_cb)
-            _view_toolbar.connect('toggle-playlist',
-                    self.__toggle_playlist_cb)
-            toolbox.add_toolbar(_('View'), _view_toolbar)
-            _view_toolbar.show()
+        _view_toolbar = ViewToolbar()
+        _view_toolbar.connect('go-fullscreen',
+                              self.__go_fullscreen_cb)
+        _view_toolbar.connect('toggle-playlist',
+                              self.__toggle_playlist_cb)
+        view_toolbar_button = ToolbarButton(
+            page=_view_toolbar,
+            icon_name='toolbar-view')
+        _view_toolbar.show()
+        toolbar_box.toolbar.insert(view_toolbar_button, -1)
+        view_toolbar_button.show()
 
-            toolbox.show()
+        self.control = Control(toolbar_box.toolbar, self)
 
-            toolbar.grab_focus()
-            #self.connect("shared", self._shared_cb)
-            activity_toolbar = toolbox.get_activity_toolbar()
-            activity_toolbar.remove(activity_toolbar.share)
-            activity_toolbar.share = None
-            activity_toolbar.remove(activity_toolbar.keep)
-            activity_toolbar.keep = None
-            self.title_entry = activity_toolbar.title
+        toolbar_box.toolbar.insert(StopButton(self), -1)
 
-        else:
-            toolbar_box = ToolbarBox()
-            activity_button = ActivityToolbarButton(self)
-            activity_toolbar = activity_button.page
-            toolbar_box.toolbar.insert(activity_button, 0)
-            self.title_entry = activity_toolbar.title
-            activity_toolbar.stop.hide()
+        self.set_toolbar_box(toolbar_box)
+        toolbar_box.show_all()
 
-            _view_toolbar = ViewToolbar()
-            _view_toolbar.connect('go-fullscreen',
-                    self.__go_fullscreen_cb)
-            _view_toolbar.connect('toggle-playlist',
-                    self.__toggle_playlist_cb)
-            view_toolbar_button = ToolbarButton(
-                    page=_view_toolbar,
-                    icon_name='toolbar-view')
-            _view_toolbar.show()
-            toolbar_box.toolbar.insert(view_toolbar_button, -1)
-            view_toolbar_button.show()
-
-            self.control = Control(toolbar_box.toolbar, self)
-
-            toolbar_box.toolbar.insert(StopButton(self), -1)
-
-            self.set_toolbar_box(toolbar_box)
-            toolbar_box.show_all()
         self.connect("key_press_event", self._key_press_event_cb)
 
-        if handle.uri:
-            pass
-        elif self._shared_activity:
-            if self.get_shared():
-                pass
-            else:
-                # Wait for a successful join before trying to get the document
-                self.connect("joined", self._joined_cb)
+        # FIXME: this is related with shared activity and it doesn't work
+        # if handle.uri:
+        #     pass
+        # elif self._shared_activity:
+        #     if self.get_shared():
+        #         pass
+        #     else:
+        #         # Wait for a successful join before trying to get the document
+        #         self.connect("joined", self._joined_cb)
 
         self.update_id = -1
         self.changed_id = -1
@@ -162,29 +133,36 @@ class JukeboxActivity(activity.Activity):
         self.p_position = gst.CLOCK_TIME_NONE
         self.p_duration = gst.CLOCK_TIME_NONE
 
-        self.bin = gtk.HBox()
-        self.bin.show()
+        # README: I changed this because I was getting an error when I
+        # tried to modify self.bin with something different than
+        # Gtk.Bin
+
+        # self.bin = Gtk.HBox()
+        # self.bin.show()
+
+        self.canvas = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+
         self.playlist_widget = PlayListWidget(self.play)
         self.playlist_widget.update(self.playlist)
         self.playlist_widget.show()
-        self.bin.pack_start(self.playlist_widget, expand=False)
-        self._empty_widget = gtk.Label("")
+        self.canvas.pack_start(self.playlist_widget, False, True, 0)
+        self._empty_widget = Gtk.Label(label="")
         self._empty_widget.show()
         self.videowidget = VideoWidget()
         self._switch_canvas(show_video=False)
-        self.set_canvas(self.bin)
+        self.set_canvas(self.canvas)
         self.show_all()
-        self.bin.connect('size-allocate', self.__size_allocate_cb)
+        self.canvas.connect('size-allocate', self.__size_allocate_cb)
 
         #From ImageViewer Activity
         self._want_document = True
         if self._object_id is None:
-            self._show_object_picker = gobject.timeout_add(1000, \
+            self._show_object_picker = GObject.timeout_add(1000, \
             self._show_picker_cb)
 
         if handle.uri:
             self.uri = handle.uri
-            gobject.idle_add(self._start, self.uri, handle.title)
+            GObject.idle_add(self._start, self.uri, handle.title)
 
     def _switch_canvas(self, show_video):
         """Show or hide the video visualization in the canvas.
@@ -194,19 +172,19 @@ class JukeboxActivity(activity.Activity):
 
         """
         if show_video:
-            self.bin.remove(self._empty_widget)
-            self.bin.pack_end(self.videowidget)
+            self.canvas.remove(self._empty_widget)
+            self.canvas.pack_end(self.videowidget, True, True, 0)
         else:
-            self.bin.pack_end(self._empty_widget)
-            self.bin.remove(self.videowidget)
-        self.bin.queue_draw()
+            self.canvas.pack_end(self._empty_widget, True, True, 0)
+            self.canvas.remove(self.videowidget)
+        self.canvas.queue_draw()
 
     def __get_tags_cb(self, tags_reader, order, tags):
         self.playlist[order]['title'] = tags['title']
         self.playlist_widget.update(self.playlist)
 
     def __size_allocate_cb(self, widget, allocation):
-        canvas_size = self.bin.get_allocation()
+        canvas_size = self.canvas.get_allocation()
         playlist_width = int(canvas_size.width * PLAYLIST_WIDTH_PROP)
         self.playlist_widget.set_size_request(playlist_width, 0)
 
@@ -219,10 +197,10 @@ class JukeboxActivity(activity.Activity):
         #self.currentplaying = None
         #self.playflag = False
         self._want_document = True
-        self._show_object_picker = gobject.timeout_add(1, self._show_picker_cb)
+        self._show_object_picker = GObject.timeout_add(1, self._show_picker_cb)
 
     def _key_press_event_cb(self, widget, event):
-        keyname = gtk.gdk.keyval_name(event.keyval)
+        keyname = Gdk.keyval_name(event.keyval)
         logging.info("Keyname Press: %s, time: %s", keyname, event.time)
         if self.title_entry.has_focus():
             return False
@@ -289,10 +267,10 @@ class JukeboxActivity(activity.Activity):
         self.player.stop()
         self.player.set_uri(None)
         self.control.set_disabled()
-        self.bin.remove(self.videowidget)
-        text = gtk.Label("Error: %s - %s" % (message, detail))
+        self.canvas.remove(self.videowidget)
+        text = Gtk.Label("Error: %s - %s" % (message, detail))
         text.show_all()
-        self.bin.add(text)
+        self.canvas.add(text)
 
     def _player_new_tag_cb(self, widget, tag, value):
         if not tag in [gst.TAG_TITLE, gst.TAG_ARTIST, gst.TAG_ALBUM]:
@@ -342,14 +320,18 @@ class JukeboxActivity(activity.Activity):
         if not self._want_document:
             return
 
-        chooser = ObjectChooser(_('Choose document'), self,
-            gtk.DIALOG_MODAL |
-            gtk.DIALOG_DESTROY_WITH_PARENT,
-            what_filter=mime.GENERIC_TYPE_AUDIO)
+        # README: some arguments are deprecated so I avoid them
+
+        # chooser = ObjectChooser(_('Choose document'), self,
+        #     Gtk.DialogFlags.MODAL |
+        #     Gtk.DialogFlags.DESTROY_WITH_PARENT,
+        #     what_filter=mime.GENERIC_TYPE_AUDIO)
+
+        chooser = ObjectChooser(self, what_filter=mime.GENERIC_TYPE_AUDIO)
 
         try:
             result = chooser.run()
-            if result == gtk.RESPONSE_ACCEPT:
+            if result == Gtk.ResponseType.ACCEPT:
                 jobject = chooser.get_selected_object()
                 if jobject and jobject.file_path:
                     logging.error('Adding %s', jobject.file_path)
@@ -376,11 +358,11 @@ class JukeboxActivity(activity.Activity):
         if mimetype == 'audio/x-mpegurl':
             # is a M3U playlist:
             for uri in self._read_m3u_playlist(file_path):
-                gobject.idle_add(self._start, uri['url'], uri['title'],
+                GObject.idle_add(self._start, uri['url'], uri['title'],
                         uri['object_id'])
         else:
             # is another media file:
-            gobject.idle_add(self._start, self.uri, title, object_id)
+            GObject.idle_add(self._start, self.uri, title, object_id)
 
     def _create_playlist_jobject(self):
         """Create an object in the Journal to store the playlist.
@@ -536,7 +518,7 @@ class JukeboxActivity(activity.Activity):
             else:
                 self.player.play()
                 if self.update_id == -1:
-                    self.update_id = gobject.timeout_add(self.UPDATE_INTERVAL,
+                    self.update_id = GObject.timeout_add(self.UPDATE_INTERVAL,
                                                          self.update_scale_cb)
                 self.control.set_button_pause()
 
@@ -552,7 +534,7 @@ class JukeboxActivity(activity.Activity):
 
         # don't timeout-update position during seek
         if self.update_id != -1:
-            gobject.source_remove(self.update_id)
+            GObject.source_remove(self.update_id)
             self.update_id = -1
 
         # make sure we get changed notifies
@@ -574,7 +556,7 @@ class JukeboxActivity(activity.Activity):
 
         self.control.button.set_sensitive(True)
         if self.seek_timeout_id != -1:
-            gobject.source_remove(self.seek_timeout_id)
+            GObject.source_remove(self.seek_timeout_id)
             self.seek_timeout_id = -1
         else:
             if self.was_playing:
@@ -583,7 +565,7 @@ class JukeboxActivity(activity.Activity):
         if self.update_id != -1:
             self.error('Had a previous update timeout id')
         else:
-            self.update_id = gobject.timeout_add(self.UPDATE_INTERVAL,
+            self.update_id = GObject.timeout_add(self.UPDATE_INTERVAL,
                 self.update_scale_cb)
 
     def update_scale_cb(self):
@@ -617,17 +599,17 @@ class JukeboxActivity(activity.Activity):
             self.playlist_widget.hide()
         else:
             self.playlist_widget.show_all()
-        self.bin.queue_draw()
+        self.canvas.queue_draw()
 
 
-class TagReader(gobject.GObject):
+class TagReader(GObject.GObject):
 
     __gsignals__ = {
-        'get-tags': (gobject.SIGNAL_RUN_FIRST, None, [int, object]),
+        'get-tags': (GObject.SignalFlags.RUN_FIRST, None, [int, object]),
     }
 
     def __init__(self):
-        gobject.GObject.__init__(self)
+        GObject.GObject.__init__(self)
         #make a playbin to parse the audio file
         self.pbin = gst.element_factory_make('playbin', 'player')
         fakesink = gst.element_factory_make('fakesink', 'fakesink')
@@ -661,17 +643,17 @@ class TagReader(gobject.GObject):
         self.pbin.set_state(gst.STATE_PAUSED)
 
 
-class GstPlayer(gobject.GObject):
+class GstPlayer(GObject.GObject):
 
     __gsignals__ = {
-        'error': (gobject.SIGNAL_RUN_FIRST, None, [str, str]),
-        'eos': (gobject.SIGNAL_RUN_FIRST, None, []),
-        'tag': (gobject.SIGNAL_RUN_FIRST, None, [str, str]),
-        'stream-info': (gobject.SIGNAL_RUN_FIRST, None, [object])
+        'error': (GObject.SignalFlags.RUN_FIRST, None, [str, str]),
+        'eos': (GObject.SignalFlags.RUN_FIRST, None, []),
+        'tag': (GObject.SignalFlags.RUN_FIRST, None, [str, str]),
+        'stream-info': (GObject.SignalFlags.RUN_FIRST, None, [object])
     }
 
     def __init__(self, videowidget):
-        gobject.GObject.__init__(self)
+        GObject.GObject.__init__(self)
 
         self.playing = False
         self.error = False
@@ -689,7 +671,7 @@ class GstPlayer(gobject.GObject):
         self.overlay = None
         videowidget.realize()
         self.videowidget = videowidget
-        self.videowidget_xid = videowidget.window.xid
+        self.videowidget_xid = videowidget.get_window().get_xid()
         self._init_video_sink()
 
         bus = self.player.get_bus()
@@ -831,17 +813,18 @@ class GstPlayer(gobject.GObject):
         return self.playing
 
 
-class VideoWidget(gtk.DrawingArea):
+class VideoWidget(Gtk.DrawingArea):
     def __init__(self):
-        gtk.DrawingArea.__init__(self)
-        self.set_events(gtk.gdk.POINTER_MOTION_MASK |
-        gtk.gdk.POINTER_MOTION_HINT_MASK |
-        gtk.gdk.EXPOSURE_MASK |
-        gtk.gdk.KEY_PRESS_MASK |
-        gtk.gdk.KEY_RELEASE_MASK)
+        GObject.GObject.__init__(self)
+        self.set_events(Gdk.EventMask.POINTER_MOTION_MASK |
+        Gdk.EventMask.POINTER_MOTION_HINT_MASK |
+        Gdk.EventMask.EXPOSURE_MASK |
+        Gdk.EventMask.KEY_PRESS_MASK |
+        Gdk.EventMask.KEY_RELEASE_MASK)
         self.imagesink = None
-        self.unset_flags(gtk.DOUBLE_BUFFERED)
-        self.set_flags(gtk.APP_PAINTABLE)
+
+        self.set_app_paintable(True)
+        self.set_double_buffered(False)
 
     def do_expose_event(self, event):
         if self.imagesink:
@@ -856,7 +839,7 @@ class VideoWidget(gtk.DrawingArea):
 
 
 if __name__ == '__main__':
-    window = gtk.Window()
+    window = Gtk.Window()
 
     view = VideoWidget()
 
@@ -873,4 +856,4 @@ if __name__ == '__main__':
     player.set_uri('http://78.46.73.237:8000/prog')
     player.play()
     window.show_all()
-    gtk.main()
+    Gtk.main()

@@ -16,41 +16,41 @@
 import logging
 from gettext import gettext as _
 
-import pygtk
-pygtk.require('2.0')
+import gi
+gi.require_version('Gtk', '3.0')
 
-import gobject
-import gtk
-import pango
+from gi.repository import GObject
+from gi.repository import Gtk
+from gi.repository import Pango
 
 
 COLUMNS_NAME = ('index', 'media')
 COLUMNS = dict((name, i) for i, name in enumerate(COLUMNS_NAME))
 
 
-class PlayListWidget(gtk.ScrolledWindow):
+class PlayListWidget(Gtk.ScrolledWindow):
     def __init__(self, play_callback):
         self._playlist = None
         self._play_callback = play_callback
 
-        gtk.ScrolledWindow.__init__(self, hadjustment=None,
+        GObject.GObject.__init__(self, hadjustment=None,
                                     vadjustment=None)
-        self.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
-        self.listview = gtk.TreeView()
-        self.treemodel = gtk.ListStore(int, object)
+        self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        self.listview = Gtk.TreeView()
+        self.treemodel = Gtk.ListStore(int, object)
         self.listview.set_model(self.treemodel)
         selection = self.listview.get_selection()
-        selection.set_mode(gtk.SELECTION_SINGLE)
+        selection.set_mode(Gtk.SelectionMode.SINGLE)
 
-        renderer_idx = gtk.CellRendererText()
-        treecol_idx = gtk.TreeViewColumn(_('No.'))
+        renderer_idx = Gtk.CellRendererText()
+        treecol_idx = Gtk.TreeViewColumn(_('No.'))
         treecol_idx.pack_start(renderer_idx, True)
         treecol_idx.set_cell_data_func(renderer_idx, self._set_number)
         self.listview.append_column(treecol_idx)
 
-        renderer_title = gtk.CellRendererText()
-        renderer_title.set_property('ellipsize', pango.ELLIPSIZE_END)
-        treecol_title = gtk.TreeViewColumn(_('Play List'))
+        renderer_title = Gtk.CellRendererText()
+        renderer_title.set_property('ellipsize', Pango.EllipsizeMode.END)
+        treecol_title = Gtk.TreeViewColumn(_('Play List'))
         treecol_title.pack_start(renderer_title, True)
         treecol_title.set_cell_data_func(renderer_title, self._set_title)
         self.listview.append_column(treecol_title)
@@ -64,14 +64,16 @@ class PlayListWidget(gtk.ScrolledWindow):
 
     def __on_row_activated(self, treeview, path, col):
         model = treeview.get_model()
-        media_idx = path[COLUMNS['index']]
+
+        treeiter = model.get_iter(path)
+        media_idx = model.get_value(treeiter, COLUMNS['index'])
         self._play_callback(media_idx)
 
-    def _set_number(self, column, cell, model, it):
+    def _set_number(self, column, cell, model, it, data):
         idx = model.get_value(it, COLUMNS['index'])
         cell.set_property('text', idx + 1)
 
-    def _set_title(self, column, cell, model, it):
+    def _set_title(self, column, cell, model, it, data):
         playlist_item = model.get_value(it, COLUMNS['media'])
         cell.set_property('text', playlist_item['title'])
 
@@ -90,6 +92,7 @@ class PlayListWidget(gtk.ScrolledWindow):
         selection = self.listview.get_selection()
         sel_model, sel_rows = self.listview.get_selection().get_selected_rows()
         for row in sel_rows:
-            self._playlist.pop(row[0])
+            index = sel_model.get_value(sel_model.get_iter(row), 0)
+            self._playlist.pop(index)
             self.treemodel.remove(self.treemodel.get_iter(row))
         self.update(self._playlist)

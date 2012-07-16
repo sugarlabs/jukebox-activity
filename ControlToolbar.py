@@ -15,29 +15,31 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import logging
+
 from gettext import gettext as _
 
-import gobject
-import gtk
+from gi.repository import GObject
+from gi.repository import Gtk
 
-from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics.toggletoolbutton import ToggleToolButton
+from sugar3.graphics.toolbutton import ToolButton
+from sugar3.graphics.toggletoolbutton import ToggleToolButton
 
 
-class ViewToolbar(gtk.Toolbar):
+class ViewToolbar(Gtk.Toolbar):
     __gtype_name__ = 'ViewToolbar'
 
     __gsignals__ = {
-        'go-fullscreen': (gobject.SIGNAL_RUN_FIRST,
-                          gobject.TYPE_NONE,
+        'go-fullscreen': (GObject.SignalFlags.RUN_FIRST,
+                          None,
                          ([])),
-        'toggle-playlist': (gobject.SIGNAL_RUN_FIRST,
-                            gobject.TYPE_NONE,
+        'toggle-playlist': (GObject.SignalFlags.RUN_FIRST,
+                            None,
                             ([]))
     }
 
     def __init__(self):
-        gtk.Toolbar.__init__(self)
+        GObject.GObject.__init__(self)
 
         self._show_playlist = ToggleToolButton('view-list')
         self._show_playlist.set_active(True)
@@ -59,11 +61,11 @@ class ViewToolbar(gtk.Toolbar):
         self.emit('toggle-playlist')
 
 
-class Control(gobject.GObject):
+class Control(GObject.GObject):
     """Class to create the Control (play) toolbar"""
 
     def __init__(self, toolbar, jukebox):
-        gobject.GObject.__init__(self)
+        GObject.GObject.__init__(self)
 
         self.toolbar = toolbar
         self.jukebox = jukebox
@@ -80,7 +82,7 @@ class Control(gobject.GObject):
                  jukebox._erase_playlist_entry_clicked_cb)
         self.toolbar.insert(erase_playlist_entry_btn, -1)
 
-        spacer = gtk.SeparatorToolItem()
+        spacer = Gtk.SeparatorToolItem()
         self.toolbar.insert(spacer, -1)
         spacer.show()
 
@@ -90,14 +92,14 @@ class Control(gobject.GObject):
         self.prev_button.connect('clicked', self.prev_button_clicked_cb)
         self.toolbar.insert(self.prev_button, -1)
 
-        self.pause_image = gtk.image_new_from_stock(gtk.STOCK_MEDIA_PAUSE,
-                                                    gtk.ICON_SIZE_BUTTON)
+        self.pause_image = Gtk.Image.new_from_stock(Gtk.STOCK_MEDIA_PAUSE,
+                                                    Gtk.IconSize.BUTTON)
         self.pause_image.show()
-        self.play_image = gtk.image_new_from_stock(gtk.STOCK_MEDIA_PLAY,
-                                                   gtk.ICON_SIZE_BUTTON)
+        self.play_image = Gtk.Image.new_from_stock(Gtk.STOCK_MEDIA_PLAY,
+                                                   Gtk.IconSize.BUTTON)
         self.play_image.show()
 
-        self.button = gtk.ToolButton()
+        self.button = Gtk.ToolButton()
         self.button.set_icon_widget(self.play_image)
         self.button.set_property('can-default', True)
         self.button.show()
@@ -111,28 +113,32 @@ class Control(gobject.GObject):
         self.next_button.connect('clicked', self.next_button_clicked_cb)
         self.toolbar.insert(self.next_button, -1)
 
-        current_time = gtk.ToolItem()
-        self.current_time_label = gtk.Label('')
+        current_time = Gtk.ToolItem()
+        self.current_time_label = Gtk.Label(label='')
         current_time.add(self.current_time_label)
         current_time.show()
         toolbar.insert(current_time, -1)
 
-        self.adjustment = gtk.Adjustment(0.0, 0.00, 100.0, 0.1, 1.0, 1.0)
-        self.hscale = gtk.HScale(self.adjustment)
+        self.adjustment = Gtk.Adjustment(0.0, 0.00, 100.0, 0.1, 1.0, 1.0)
+        self.hscale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL,
+                                adjustment=self.adjustment)
         self.hscale.set_draw_value(False)
-        self.hscale.set_update_policy(gtk.UPDATE_CONTINUOUS)
+        # FIXME: this seems to be deprecated
+        # self.hscale.set_update_policy(Gtk.UPDATE_CONTINUOUS)
+        logging.debug("FIXME: AttributeError: 'Scale' object has no "
+                      "attribute 'set_update_policy'")
         self.hscale.connect('button-press-event',
                 jukebox.scale_button_press_cb)
         self.hscale.connect('button-release-event',
                 jukebox.scale_button_release_cb)
 
-        self.scale_item = gtk.ToolItem()
+        self.scale_item = Gtk.ToolItem()
         self.scale_item.set_expand(True)
         self.scale_item.add(self.hscale)
         self.toolbar.insert(self.scale_item, -1)
 
-        total_time = gtk.ToolItem()
-        self.total_time_label = gtk.Label('')
+        total_time = Gtk.ToolItem()
+        self.total_time_label = Gtk.Label(label='')
         total_time.add(self.total_time_label)
         total_time.show()
         toolbar.insert(total_time, -1)
