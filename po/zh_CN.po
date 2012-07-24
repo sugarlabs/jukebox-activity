@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 00:32-0400\n"
-"PO-Revision-Date: 2012-03-24 05:07+0200\n"
+"POT-Creation-Date: 2012-07-17 00:33-0400\n"
+"PO-Revision-Date: 2012-07-02 03:32+0200\n"
 "Last-Translator: lite <litekok@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -29,39 +29,35 @@ msgstr ""
 msgid "Jukebox"
 msgstr "点唱机"
 
-#: ControlToolbar.py:43
-msgid "Fullscreen"
-msgstr "全屏显示"
-
-#: ControlToolbar.py:50
+#: ControlToolbar.py:46
 msgid "Show Playlist"
 msgstr "显示播放列表"
 
-#: ControlToolbar.py:77
+#: ControlToolbar.py:52
+msgid "Fullscreen"
+msgstr "全屏显示"
+
+#: ControlToolbar.py:74
+msgid "Add track"
+msgstr "添加曲目"
+
+#: ControlToolbar.py:80
+msgid "Remove track"
+msgstr "移除曲目"
+
+#: ControlToolbar.py:90
 msgid "Previous"
 msgstr "上一个"
 
-#: ControlToolbar.py:98
+#: ControlToolbar.py:111
 msgid "Next"
 msgstr "下一个"
 
-#: jukeboxactivity.py:71
+#: jukeboxactivity.py:68
 msgid "Jukebox Activity"
 msgstr "点唱机活动"
 
-#: jukeboxactivity.py:80
-msgid "Play"
-msgstr "播放"
-
-#: jukeboxactivity.py:89
-msgid "View"
-msgstr "查看"
-
-#: jukeboxactivity.py:348
-msgid "Choose document"
-msgstr "选择文档"
-
-#: jukeboxactivity.py:398 jukeboxactivity.py:399
+#: jukeboxactivity.py:376
 msgid "Jukebox playlist"
 msgstr "点唱机播放列表"
 
@@ -72,6 +68,18 @@ msgstr "否"
 #: widgets.py:53
 msgid "Play List"
 msgstr "播放列表"
+
+#~ msgid "Play"
+#~ msgstr "播放"
+
+#~ msgid "View"
+#~ msgstr "查看"
+
+#~ msgid "Choose document"
+#~ msgstr "选择文档"
+
+#~ msgid "Remove selected track from the playlist"
+#~ msgstr "从播放列表中移除选中的音轨"
 
 #~ msgid "Fit to window"
 #~ msgstr "适合窗口大小"
