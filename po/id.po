@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-28 00:31-0400\n"
-"PO-Revision-Date: 2012-06-20 08:01+0200\n"
+"POT-Creation-Date: 2012-07-17 00:33-0400\n"
+"PO-Revision-Date: 2012-07-01 04:22+0200\n"
 "Last-Translator: andika <andika@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: id\n"
@@ -29,47 +29,35 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Jukebox"
 
-#: ControlToolbar.py:44
+#: ControlToolbar.py:46
 msgid "Show Playlist"
 msgstr "Tampilkan Daftar Putar"
 
-#: ControlToolbar.py:50
+#: ControlToolbar.py:52
 msgid "Fullscreen"
 msgstr "Tampilan penuh"
 
-#: ControlToolbar.py:72
+#: ControlToolbar.py:74
 msgid "Add track"
-msgstr ""
+msgstr "Tambah trek"
 
-#: ControlToolbar.py:78
+#: ControlToolbar.py:80
 msgid "Remove track"
-msgstr ""
+msgstr "Hapus trek"
 
-#: ControlToolbar.py:88
+#: ControlToolbar.py:90
 msgid "Previous"
 msgstr "Sebelumnya"
 
-#: ControlToolbar.py:109
+#: ControlToolbar.py:111
 msgid "Next"
 msgstr "Selanjutnya"
 
-#: jukeboxactivity.py:72
+#: jukeboxactivity.py:68
 msgid "Jukebox Activity"
 msgstr "Aktifitas Jukebox"
 
-#: jukeboxactivity.py:82
-msgid "Play"
-msgstr "Putar"
-
-#: jukeboxactivity.py:91
-msgid "View"
-msgstr "Tampilan"
-
-#: jukeboxactivity.py:345
-msgid "Choose document"
-msgstr "Pilih dokumen"
-
-#: jukeboxactivity.py:394
+#: jukeboxactivity.py:376
 msgid "Jukebox playlist"
 msgstr "Daftar putar Jukebox"
 
@@ -80,6 +68,15 @@ msgstr "Tidak."
 #: widgets.py:53
 msgid "Play List"
 msgstr "Daftar Putar"
+
+#~ msgid "Play"
+#~ msgstr "Putar"
+
+#~ msgid "View"
+#~ msgstr "Tampilan"
+
+#~ msgid "Choose document"
+#~ msgstr "Pilih dokumen"
 
 #~ msgid "Remove selected track from the playlist"
 #~ msgstr "Hapus trek yang dipilih dari daftar putar"
