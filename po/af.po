@@ -14,54 +14,50 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 00:32-0400\n"
-"PO-Revision-Date: 2011-05-24 01:36+0200\n"
+"POT-Creation-Date: 2012-07-17 00:33-0400\n"
+"PO-Revision-Date: 2012-07-29 21:47+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: af\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.0.5\n"
 
 #: activity/activity.info:2
 msgid "Jukebox"
 msgstr ""
 
-#: ControlToolbar.py:43
-msgid "Fullscreen"
-msgstr ""
-
-#: ControlToolbar.py:50
+#: ControlToolbar.py:46
 msgid "Show Playlist"
 msgstr ""
 
-#: ControlToolbar.py:77
+#: ControlToolbar.py:52
+msgid "Fullscreen"
+msgstr "Volskerm"
+
+#: ControlToolbar.py:74
+msgid "Add track"
+msgstr ""
+
+#: ControlToolbar.py:80
+msgid "Remove track"
+msgstr ""
+
+#: ControlToolbar.py:90
 msgid "Previous"
-msgstr ""
+msgstr "Vorige"
 
-#: ControlToolbar.py:98
+#: ControlToolbar.py:111
 msgid "Next"
-msgstr ""
+msgstr "Volgende"
 
-#: jukeboxactivity.py:71
+#: jukeboxactivity.py:68
 msgid "Jukebox Activity"
 msgstr ""
 
-#: jukeboxactivity.py:80
-msgid "Play"
-msgstr ""
-
-#: jukeboxactivity.py:89
-msgid "View"
-msgstr ""
-
-#: jukeboxactivity.py:348
-msgid "Choose document"
-msgstr "Kies dokument"
-
-#: jukeboxactivity.py:398 jukeboxactivity.py:399
+#: jukeboxactivity.py:376
 msgid "Jukebox playlist"
 msgstr ""
 
@@ -72,3 +68,6 @@ msgstr ""
 #: widgets.py:53
 msgid "Play List"
 msgstr ""
+
+#~ msgid "Choose document"
+#~ msgstr "Kies dokument"
