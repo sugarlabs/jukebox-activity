@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 00:32-0400\n"
-"PO-Revision-Date: 2012-04-13 19:42+0200\n"
+"POT-Creation-Date: 2012-07-17 00:33-0400\n"
+"PO-Revision-Date: 2012-07-31 20:59+0200\n"
 "Last-Translator: Eduardo H. <hoboprimate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt\n"
@@ -31,39 +31,35 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Tocar"
 
-#: ControlToolbar.py:43
-msgid "Fullscreen"
-msgstr "Ecrã Inteiro"
-
-#: ControlToolbar.py:50
+#: ControlToolbar.py:46
 msgid "Show Playlist"
 msgstr "Mostrar Lista de Reprodução"
 
-#: ControlToolbar.py:77
+#: ControlToolbar.py:52
+msgid "Fullscreen"
+msgstr "Ecrã Inteiro"
+
+#: ControlToolbar.py:74
+msgid "Add track"
+msgstr "Adicionar média"
+
+#: ControlToolbar.py:80
+msgid "Remove track"
+msgstr "Remover média"
+
+#: ControlToolbar.py:90
 msgid "Previous"
 msgstr "Anterior"
 
-#: ControlToolbar.py:98
+#: ControlToolbar.py:111
 msgid "Next"
 msgstr "Seguinte"
 
-#: jukeboxactivity.py:71
+#: jukeboxactivity.py:68
 msgid "Jukebox Activity"
 msgstr "Atividade Jukebox"
 
-#: jukeboxactivity.py:80
-msgid "Play"
-msgstr "Tocar"
-
-#: jukeboxactivity.py:89
-msgid "View"
-msgstr "Ver"
-
-#: jukeboxactivity.py:348
-msgid "Choose document"
-msgstr "Escolhe um documento"
-
-#: jukeboxactivity.py:398 jukeboxactivity.py:399
+#: jukeboxactivity.py:376
 msgid "Jukebox playlist"
 msgstr "Lista de reprodução Jukebox"
 
@@ -74,6 +70,18 @@ msgstr "Nº."
 #: widgets.py:53
 msgid "Play List"
 msgstr "Lista de Reprodução"
+
+#~ msgid "Play"
+#~ msgstr "Tocar"
+
+#~ msgid "View"
+#~ msgstr "Ver"
+
+#~ msgid "Choose document"
+#~ msgstr "Escolhe um documento"
+
+#~ msgid "Remove selected track from the playlist"
+#~ msgstr "Remover da lista de reprodução a faixa selecionada"
 
 #~ msgid "Fit to window"
 #~ msgstr "Zoom até à janela"
