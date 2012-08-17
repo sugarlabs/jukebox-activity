@@ -36,6 +36,7 @@ from sugar3.graphics.toolbarbox import ToolbarBox
 from sugar3.graphics.toolbarbox import ToolbarButton
 from sugar3.activity.widgets import StopButton
 from sugar3.activity.widgets import ActivityToolbarButton
+from sugar3.graphics.alert import ErrorAlert
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -250,18 +251,38 @@ class JukeboxActivity(activity.Activity):
         self.player.connect("tag", self._player_new_tag_cb)
         self.player.connect("stream-info", self._player_stream_info_cb)
         url = self.playlist[self.currentplaying]['url']
+        error = None
         if url.startswith('journal://'):
-            jobject = datastore.get(url[len("journal://"):])
-            url = 'file://' + jobject.file_path
-        self.player.set_uri(url)
-
-        self.play_toggled()
+            try:
+                jobject = datastore.get(url[len("journal://"):])
+                url = 'file://' + jobject.file_path
+            except:
+                path = url[len("journal://"):]
+                error = _('The file %s was not found') % path
 
         self.check_if_next_prev()
+
+        if error is None:
+            self.player.set_uri(url)
+            self.play_toggled()
+        else:
+            self.control.set_disabled()
+            self._show_error_alert(error)
+
         self.playlist_widget.set_cursor(self.currentplaying)
 
     def _player_eos_cb(self, widget):
         self.songchange('next')
+
+    def _show_error_alert(self, title):
+        alert = ErrorAlert()
+        alert.props.title = title
+        self.add_alert(alert)
+        alert.connect('response', self._alert_cancel_cb)
+        alert.show()
+
+    def _alert_cancel_cb(self, alert, response_id):
+        self.remove_alert(alert)
 
     def _player_error_cb(self, widget, message, detail):
         self.player.stop()
@@ -458,6 +479,7 @@ class JukeboxActivity(activity.Activity):
                 self.playlist.append({'url': uri, 'title': title})
         if uri.endswith(title) or title is None or title == '' or \
                 object_id is not None:
+            error = False
             logging.error('Try get a better title reading tags')
             # TODO: unify this code....
             url = self.playlist[len(self.playlist) - 1]['url']
@@ -465,10 +487,14 @@ class JukeboxActivity(activity.Activity):
                 url = url[len("journal://"):]
                 url = 'file://' + url
             elif url.startswith('journal://'):
-                jobject = datastore.get(url[len("journal://"):])
-                url = 'file://' + jobject.file_path
+                try:
+                    jobject = datastore.get(url[len("journal://"):])
+                    url = 'file://' + jobject.file_path
+                except:
+                    error = True
                 # jobject.destroy() ??
-            self.tag_reader.set_file(url, len(self.playlist) - 1)
+            if not error:
+                self.tag_reader.set_file(url, len(self.playlist) - 1)
 
         if not self.player:
             # lazy init the player so that videowidget is realized
