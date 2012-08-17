@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-28 00:31-0400\n"
+"POT-Creation-Date: 2012-07-17 00:33-0400\n"
 "PO-Revision-Date: 2012-07-06 06:22+0200\n"
 "Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,47 +29,35 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Jukeboks"
 
-#: ControlToolbar.py:44
+#: ControlToolbar.py:46
 msgid "Show Playlist"
 msgstr "Vis afspilningsliste"
 
-#: ControlToolbar.py:50
+#: ControlToolbar.py:52
 msgid "Fullscreen"
 msgstr "Fuldskærm"
 
-#: ControlToolbar.py:72
+#: ControlToolbar.py:74
 msgid "Add track"
 msgstr "Tilføj nummer"
 
-#: ControlToolbar.py:78
+#: ControlToolbar.py:80
 msgid "Remove track"
 msgstr "Fjern nummer"
 
-#: ControlToolbar.py:88
+#: ControlToolbar.py:90
 msgid "Previous"
 msgstr "Forrige"
 
-#: ControlToolbar.py:109
+#: ControlToolbar.py:111
 msgid "Next"
 msgstr "Næste"
 
-#: jukeboxactivity.py:72
+#: jukeboxactivity.py:68
 msgid "Jukebox Activity"
 msgstr "Jukeboks-aktivitet"
 
-#: jukeboxactivity.py:82
-msgid "Play"
-msgstr "Afspil"
-
-#: jukeboxactivity.py:91
-msgid "View"
-msgstr "Vis"
-
-#: jukeboxactivity.py:345
-msgid "Choose document"
-msgstr "Vælg dokument"
-
-#: jukeboxactivity.py:394
+#: jukeboxactivity.py:376
 msgid "Jukebox playlist"
 msgstr "Afspilningsliste for Jukeboks"
 
@@ -80,6 +68,15 @@ msgstr "Nr."
 #: widgets.py:53
 msgid "Play List"
 msgstr "Afspilningsliste"
+
+#~ msgid "Play"
+#~ msgstr "Afspil"
+
+#~ msgid "View"
+#~ msgstr "Vis"
+
+#~ msgid "Choose document"
+#~ msgstr "Vælg dokument"
 
 #~ msgid "Remove selected track from the playlist"
 #~ msgstr "Fjern valgt nummer fra afspilningslisten"
