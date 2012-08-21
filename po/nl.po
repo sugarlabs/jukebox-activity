@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 00:32-0400\n"
-"PO-Revision-Date: 2012-04-30 09:03+0200\n"
+"POT-Creation-Date: 2012-07-17 00:33-0400\n"
+"PO-Revision-Date: 2012-08-20 13:14+0200\n"
 "Last-Translator: whe <heppew@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nl\n"
@@ -33,39 +33,35 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Jukebox"
 
-#: ControlToolbar.py:43
-msgid "Fullscreen"
-msgstr "Schermvullend"
-
-#: ControlToolbar.py:50
+#: ControlToolbar.py:46
 msgid "Show Playlist"
 msgstr "Toon afspeellijst"
 
-#: ControlToolbar.py:77
+#: ControlToolbar.py:52
+msgid "Fullscreen"
+msgstr "Schermvullend"
+
+#: ControlToolbar.py:74
+msgid "Add track"
+msgstr "Voeg spoor toe"
+
+#: ControlToolbar.py:80
+msgid "Remove track"
+msgstr "Verwijder spoor"
+
+#: ControlToolbar.py:90
 msgid "Previous"
 msgstr "Vorig"
 
-#: ControlToolbar.py:98
+#: ControlToolbar.py:111
 msgid "Next"
 msgstr "Volgend"
 
-#: jukeboxactivity.py:71
+#: jukeboxactivity.py:68
 msgid "Jukebox Activity"
 msgstr "Jukebox activiteit"
 
-#: jukeboxactivity.py:80
-msgid "Play"
-msgstr "Afspelen"
-
-#: jukeboxactivity.py:89
-msgid "View"
-msgstr "Bekijk"
-
-#: jukeboxactivity.py:348
-msgid "Choose document"
-msgstr "Document kiezen"
-
-#: jukeboxactivity.py:398 jukeboxactivity.py:399
+#: jukeboxactivity.py:376
 msgid "Jukebox playlist"
 msgstr "Jukebox afspeellist"
 
@@ -76,6 +72,15 @@ msgstr "Nee."
 #: widgets.py:53
 msgid "Play List"
 msgstr "Afspeellijst"
+
+#~ msgid "Play"
+#~ msgstr "Afspelen"
+
+#~ msgid "View"
+#~ msgstr "Bekijk"
+
+#~ msgid "Choose document"
+#~ msgstr "Document kiezen"
 
 #~ msgid "Fit to window"
 #~ msgstr "Passend in venster"
