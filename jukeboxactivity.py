@@ -558,11 +558,6 @@ class JukeboxActivity(activity.Activity):
         if self.was_playing:
             self.player.pause()
 
-        # don't timeout-update position during seek
-        if self.update_id != -1:
-            GObject.source_remove(self.update_id)
-            self.update_id = -1
-
         # make sure we get changed notifies
         if self.changed_id == -1:
             self.changed_id = self.control.hscale.connect('value-changed',
@@ -573,7 +568,7 @@ class JukeboxActivity(activity.Activity):
         real = long(scale.get_value() * self.p_duration / 100)  # in ns
         self.player.seek(real)
         # allow for a preroll
-        self.player.get_state(timeout=50 * gst.MSECOND)  # 50 ms
+        self.player.get_state()  # timeout = 1 ns
 
     def scale_button_release_cb(self, widget, event):
         # see seek.cstop_seek
@@ -589,7 +584,8 @@ class JukeboxActivity(activity.Activity):
                 self.player.play()
 
         if self.update_id != -1:
-            self.error('Had a previous update timeout id')
+            GObject.source_remove(self.seek_timeout_id)
+            self.update_id = -1
         else:
             self.update_id = GObject.timeout_add(self.UPDATE_INTERVAL,
                 self.update_scale_cb)
