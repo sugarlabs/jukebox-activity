@@ -150,7 +150,7 @@ class JukeboxActivity(activity.Activity):
         self._empty_widget = Gtk.Label(label="")
         self._empty_widget.show()
         self.videowidget = VideoWidget()
-        self._switch_canvas(show_video=False)
+        self._init_view_area()
         self.set_canvas(self.canvas)
         self.show_all()
         self.canvas.connect('size-allocate', self.__size_allocate_cb)
@@ -165,6 +165,17 @@ class JukeboxActivity(activity.Activity):
             self.uri = handle.uri
             GObject.idle_add(self._start, self.uri, handle.title)
 
+    def _init_view_area(self):
+        """
+        Use a notebook with two pages, one empty an another
+        with the videowidget
+        """
+        self.view_area = Gtk.Notebook()
+        self.view_area.set_show_tabs(False)
+        self.view_area.append_page(self._empty_widget, None)
+        self.view_area.append_page(self.videowidget, None)
+        self.canvas.pack_end(self.view_area, True, True, 0)
+
     def _switch_canvas(self, show_video):
         """Show or hide the video visualization in the canvas.
 
@@ -173,12 +184,9 @@ class JukeboxActivity(activity.Activity):
 
         """
         if show_video:
-            self.canvas.remove(self._empty_widget)
-            self.canvas.pack_end(self.videowidget, True, True, 0)
+            self.view_area.set_current_page(1)
         else:
-            self.canvas.pack_end(self._empty_widget, True, True, 0)
-            self.canvas.remove(self.videowidget)
-        self.canvas.queue_draw()
+            self.view_area.set_current_page(0)
 
     def __get_tags_cb(self, tags_reader, order, tags):
         self.playlist[order]['title'] = tags['title']
@@ -288,10 +296,7 @@ class JukeboxActivity(activity.Activity):
         self.player.stop()
         self.player.set_uri(None)
         self.control.set_disabled()
-        self.canvas.remove(self.videowidget)
-        text = Gtk.Label("Error: %s - %s" % (message, detail))
-        text.show_all()
-        self.canvas.add(text)
+        self._show_error_alert("Error: %s - %s" % (message, detail))
 
     def _player_new_tag_cb(self, widget, tag, value):
         if not tag in [gst.TAG_TITLE, gst.TAG_ARTIST, gst.TAG_ALBUM]:
