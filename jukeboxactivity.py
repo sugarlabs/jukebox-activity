@@ -498,8 +498,8 @@ class JukeboxActivity(activity.Activity):
                 except:
                     error = True
                 # jobject.destroy() ??
-            if not error:
-                self.tag_reader.set_file(url, len(self.playlist) - 1)
+            #if not error:
+            #    self.tag_reader.set_file(url, len(self.playlist) - 1)
 
         if not self.player:
             # lazy init the player so that videowidget is realized
