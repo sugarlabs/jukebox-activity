@@ -21,7 +21,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
-
+import sys
 import logging
 import tempfile
 from gettext import gettext as _
@@ -885,9 +885,6 @@ if __name__ == '__main__':
 
     view = VideoWidget()
 
-    #view.set_file_location(sys.argv[1])
-
-    player = GstPlayer(view)
     #player.connect("eos", self._player_eos_cb)
     #player.connect("error", self._player_error_cb)
     #player.connect("tag", self._player_new_tag_cb)
@@ -895,7 +892,14 @@ if __name__ == '__main__':
 
     window.add(view)
 
-    player.set_uri('http://78.46.73.237:8000/prog')
-    player.play()
+    view.show()
+    def map_cb(widget):
+        player = GstPlayer(view)
+        player.set_uri(sys.argv[1])
+        player.play()
+
+    window.connect('map', map_cb)
+    window.maximize()
     window.show_all()
+    window.connect("destroy", gtk.main_quit)
     gtk.main()
