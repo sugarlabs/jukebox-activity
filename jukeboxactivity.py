@@ -172,8 +172,8 @@ class JukeboxActivity(activity.Activity):
         self._empty_widget = gtk.Label("")
         self._empty_widget.show()
         self.videowidget = VideoWidget()
-        self._switch_canvas(show_video=False)
         self.set_canvas(self.bin)
+        self._init_view_area()
         self.show_all()
         self.bin.connect('size-allocate', self.__size_allocate_cb)
 
@@ -187,6 +187,17 @@ class JukeboxActivity(activity.Activity):
             self.uri = handle.uri
             gobject.idle_add(self._start, self.uri, handle.title)
 
+    def _init_view_area(self):
+        """
+        Use a notebook with two pages, one empty an another
+        with the videowidget
+        """
+        self.view_area = gtk.Notebook()
+        self.view_area.set_show_tabs(False)
+        self.view_area.append_page(self._empty_widget, None)
+        self.view_area.append_page(self.videowidget, None)
+        self.canvas.pack_end(self.view_area, True, True, 0)
+
     def _switch_canvas(self, show_video):
         """Show or hide the video visualization in the canvas.
 
@@ -195,11 +206,9 @@ class JukeboxActivity(activity.Activity):
 
         """
         if show_video:
-            self.bin.remove(self._empty_widget)
-            self.bin.pack_end(self.videowidget)
+            self.view_area.set_current_page(1)
         else:
-            self.bin.pack_end(self._empty_widget)
-            self.bin.remove(self.videowidget)
+            self.view_area.set_current_page(0)
         self.bin.queue_draw()
 
     def __get_tags_cb(self, tags_reader, order, tags):
@@ -298,10 +307,7 @@ class JukeboxActivity(activity.Activity):
         self.player.stop()
         self.player.set_uri(None)
         self.control.set_disabled()
-        self.bin.remove(self.videowidget)
-        text = gtk.Label("Error: %s - %s" % (message, detail))
-        text.show_all()
-        self.bin.add(text)
+        self._show_error_alert("Error: %s - %s" % (message, detail))
 
     def _show_error_alert(self, title, text=None):
         alert = ErrorAlert()
