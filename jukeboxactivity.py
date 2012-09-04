@@ -477,7 +477,7 @@ class JukeboxActivity(activity.Activity):
         self.playlist_widget.update(self.playlist)
 
         try:
-            if not self.currentplaying:
+            if self.currentplaying is None:
                 logging.info("Playing: " + self.playlist[0]['url'])
                 url = self.playlist[0]['url']
                 if url.startswith('journal://'):
