@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-28 00:31-0400\n"
-"PO-Revision-Date: 2011-11-18 19:35+0200\n"
-"Last-Translator: accopacati <accopacatty@gmail.com>\n"
+"POT-Creation-Date: 2012-07-17 00:33-0400\n"
+"PO-Revision-Date: 2012-08-22 23:11+0200\n"
+"Last-Translator: EdgarQuispeChambi <quispedgar@yahoo.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: aym\n"
 "MIME-Version: 1.0\n"
@@ -20,66 +20,63 @@ msgstr ""
 #  "Máquina de discos"
 #: activity/activity.info:2
 msgid "Jukebox"
-msgstr "Warurt'a qhantayiri"
+msgstr "Warurt'anaka qhantayiri"
 
-#: ControlToolbar.py:44
+#: ControlToolbar.py:46
 msgid "Show Playlist"
-msgstr ""
+msgstr "Warurt'anaka qhantayaña wakichata"
 
 #  "Pantalla completa"
-#: ControlToolbar.py:50
+#: ControlToolbar.py:52
 msgid "Fullscreen"
-msgstr "Maypacha uñtawi"
+msgstr "Maypacha uñtañataki"
 
-#: ControlToolbar.py:72
+#: ControlToolbar.py:74
 msgid "Add track"
-msgstr ""
+msgstr "Warurt'ayañataki wakichma"
 
-#: ControlToolbar.py:78
+#: ControlToolbar.py:80
 msgid "Remove track"
-msgstr ""
+msgstr "Warurt'añataki wakichata apaqma"
 
 #  "Anterior"
-#: ControlToolbar.py:88
+#: ControlToolbar.py:90
 msgid "Previous"
-msgstr "Nayrankiri"
+msgstr "Nayrchapi"
 
 #  "Siguiente"
-#: ControlToolbar.py:109
+#: ControlToolbar.py:111
 msgid "Next"
-msgstr "Jutiri"
+msgstr "Qhipankiri"
 
 #  "Actividad máquina de discos"
-#: jukeboxactivity.py:72
+#: jukeboxactivity.py:68
 msgid "Jukebox Activity"
-msgstr "Warurt'a Wakichäwi"
+msgstr "Warurt'anaka qhantayaña wakichäwi"
 
-#  "Reproducir"
-#: jukeboxactivity.py:82
-msgid "Play"
-msgstr "Qhantayaña"
-
-#  "Ver"
-#: jukeboxactivity.py:91
-msgid "View"
-msgstr "Unjaña"
-
-#  "Elegir documento"
-#: jukeboxactivity.py:345
-msgid "Choose document"
-msgstr "Wakichata ajlliña"
-
-#: jukeboxactivity.py:394
+#: jukeboxactivity.py:376
 msgid "Jukebox playlist"
-msgstr ""
+msgstr "Jukebox warurt'anaka qhantayaña wakichaña"
 
 #: widgets.py:46
 msgid "No."
-msgstr ""
+msgstr "N.° jakhu chimpu"
 
 #: widgets.py:53
 msgid "Play List"
-msgstr ""
+msgstr "Warurt'anaka qhantayaña wakichata"
+
+#  "Reproducir"
+#~ msgid "Play"
+#~ msgstr "Qhantayaña"
+
+#  "Ver"
+#~ msgid "View"
+#~ msgstr "Unjaña"
+
+#  "Elegir documento"
+#~ msgid "Choose document"
+#~ msgstr "Wakichata ajlliña"
 
 #  "Concordar con ventana"
 #~ msgid "Fit to window"
