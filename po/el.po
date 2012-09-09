@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 00:32-0400\n"
-"PO-Revision-Date: 2011-12-19 15:58+0200\n"
+"POT-Creation-Date: 2012-07-17 00:33-0400\n"
+"PO-Revision-Date: 2012-09-08 10:26+0200\n"
 "Last-Translator: Yannis <kiolalis@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
@@ -29,49 +29,54 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Jukebox"
 
-#: ControlToolbar.py:43
-msgid "Fullscreen"
-msgstr "Πλήρης οθόνη"
-
-#: ControlToolbar.py:50
+#: ControlToolbar.py:46
 msgid "Show Playlist"
 msgstr "Εμφάνιση λίστας αναπαραγωγής"
 
-#: ControlToolbar.py:77
+#: ControlToolbar.py:52
+msgid "Fullscreen"
+msgstr "Πλήρης οθόνη"
+
+#: ControlToolbar.py:74
+msgid "Add track"
+msgstr "Προσθήκη κομματιού"
+
+#: ControlToolbar.py:80
+msgid "Remove track"
+msgstr "Αφαίρεση κομματιού"
+
+#: ControlToolbar.py:90
 msgid "Previous"
 msgstr "Προηγούμενο"
 
-#: ControlToolbar.py:98
+#: ControlToolbar.py:111
 msgid "Next"
 msgstr "Επόμενο"
 
-#: jukeboxactivity.py:71
+#: jukeboxactivity.py:68
 msgid "Jukebox Activity"
 msgstr "Δραστηριότητα Jukebox"
 
-#: jukeboxactivity.py:80
-msgid "Play"
-msgstr "Αναπαραγωγή"
-
-#: jukeboxactivity.py:89
-msgid "View"
-msgstr "Προβολή"
-
-#: jukeboxactivity.py:348
-msgid "Choose document"
-msgstr "Επιλογή εγγράφου"
-
-#: jukeboxactivity.py:398 jukeboxactivity.py:399
+#: jukeboxactivity.py:376
 msgid "Jukebox playlist"
-msgstr ""
+msgstr "Λίστα αναπαραγωγής του Jukebox"
 
 #: widgets.py:46
 msgid "No."
-msgstr ""
+msgstr "Όχι"
 
 #: widgets.py:53
 msgid "Play List"
-msgstr ""
+msgstr "Λίστα αναπαραγωγής"
+
+#~ msgid "Play"
+#~ msgstr "Αναπαραγωγή"
+
+#~ msgid "View"
+#~ msgstr "Προβολή"
+
+#~ msgid "Choose document"
+#~ msgstr "Επιλογή εγγράφου"
 
 #~ msgid "Fit to window"
 #~ msgstr "Ταίριασμα στο παράθυρο"
