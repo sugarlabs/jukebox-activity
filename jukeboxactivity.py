@@ -159,11 +159,6 @@ class JukeboxActivity(activity.Activity):
         self.playpath = None
         self.currentplaying = None
         self.playflag = False
-        self.tags = {}
-        self.only_audio = False
-
-        self.tag_reader = TagReader()
-        self.tag_reader.connect('get-tags', self.__get_tags_cb)
 
         self.p_position = gst.CLOCK_TIME_NONE
         self.p_duration = gst.CLOCK_TIME_NONE
@@ -197,8 +192,6 @@ class JukeboxActivity(activity.Activity):
         self.player = GstPlayer(self.videowidget)
         self.player.connect("eos", self._player_eos_cb)
         self.player.connect("error", self._player_error_cb)
-        self.player.connect("tag", self._player_new_tag_cb)
-        self.player.connect("stream-info", self._player_stream_info_cb)
 
     def _notify_active_cb(self, widget, event):
         """Sugar notify us that the activity is becoming active or inactive.
@@ -206,7 +199,7 @@ class JukeboxActivity(activity.Activity):
         a video.
         """
 
-        if self.player.player.props.uri is not None and not self.only_audio:
+        if self.player.player.props.uri is not None:
             if not self.player.is_playing() and self.props.active:
                 self.player.play()
             if self.player.is_playing() and not self.props.active:
@@ -235,10 +228,6 @@ class JukeboxActivity(activity.Activity):
         else:
             self.view_area.set_current_page(0)
         self.bin.queue_draw()
-
-    def __get_tags_cb(self, tags_reader, order, tags):
-        self.playlist[order]['title'] = tags['title']
-        self.playlist_widget.update(self.playlist)
 
     def __size_allocate_cb(self, widget, allocation):
         canvas_size = self.bin.get_allocation()
@@ -338,40 +327,6 @@ class JukeboxActivity(activity.Activity):
 
     def _alert_cancel_cb(self, alert, response_id):
         self.remove_alert(alert)
-
-    def _player_new_tag_cb(self, widget, tag, value):
-        if not tag in [gst.TAG_TITLE, gst.TAG_ARTIST, gst.TAG_ALBUM]:
-            return
-        self.tags[tag] = value
-        self._update_overlay()
-
-    def _update_overlay(self):
-        if self.only_audio == False:
-            return
-        if not gst.TAG_TITLE in self.tags or \
-                not gst.TAG_ARTIST in self.tags:
-            return
-        album = None
-        if gst.TAG_ALBUM in self.tags:
-            album = self.tags[gst.TAG_ALBUM]
-        self.player.set_overlay(self.tags[gst.TAG_TITLE],
-                self.tags[gst.TAG_ARTIST], album)
-
-    def _player_stream_info_cb(self, widget, stream_info):
-        if not len(stream_info):
-            return
-
-        GST_STREAM_TYPE_UNKNOWN = 0
-        GST_STREAM_TYPE_AUDIO = 1
-        GST_STREAM_TYPE_VIDEO = 2
-        GST_STREAM_TYPE_TEXT = 3
-
-        only_audio = True
-        for item in stream_info:
-            if item.props.type == GST_STREAM_TYPE_VIDEO:
-                only_audio = False
-        self.only_audio = only_audio
-        self._update_overlay()
 
     def _joined_cb(self, activity):
         logging.debug("someone joined")
@@ -518,24 +473,6 @@ class JukeboxActivity(activity.Activity):
             else:
                 uri = "file://" + urllib.quote(os.path.abspath(uri))
                 self.playlist.append({'url': uri, 'title': title})
-        if uri.endswith(title) or title is None or title == '' or \
-                object_id is not None:
-            error = False
-            logging.error('Try get a better title reading tags')
-            # TODO: unify this code....
-            url = self.playlist[len(self.playlist) - 1]['url']
-            if url.find('home') > 0:
-                url = url[len("journal://"):]
-                url = 'file://' + url
-            elif url.startswith('journal://'):
-                try:
-                    jobject = datastore.get(url[len("journal://"):])
-                    url = 'file://' + jobject.file_path
-                except:
-                    error = True
-                # jobject.destroy() ??
-            if not error:
-                self.tag_reader.set_file(url, len(self.playlist) - 1)
 
         self.playlist_widget.update(self.playlist)
 
@@ -660,54 +597,11 @@ class JukeboxActivity(activity.Activity):
         self.bin.queue_draw()
 
 
-class TagReader(gobject.GObject):
-
-    __gsignals__ = {
-        'get-tags': (gobject.SIGNAL_RUN_FIRST, None, [int, object]),
-    }
-
-    def __init__(self):
-        gobject.GObject.__init__(self)
-        #make a playbin to parse the audio file
-        self.pbin = gst.element_factory_make('playbin', 'player')
-        fakesink = gst.element_factory_make('fakesink', 'fakesink')
-        self.pbin.set_property('video-sink', fakesink)
-        self.pbin.set_property('audio-sink', fakesink)
-        #we need to receive signals from the playbin's bus
-        self.bus = self.pbin.get_bus()
-        #make sure we are watching the signals on the bus
-        self.bus.add_signal_watch()
-        #what do we do when a tag is part of the bus signal?
-        self.bus.connect("message::tag", self.bus_message_tag)
-
-    def bus_message_tag(self, bus, message):
-        #we received a tag message
-        taglist = message.parse_tag()
-        #put the keys in the dictionary
-        tags = {}
-        for key in taglist.keys():
-            tags[key] = taglist[key]
-        logging.error('bus_message_tag %s', tags)
-        if 'title' in tags:
-            self.emit('get-tags', self._order, tags)
-
-    def set_file(self, url, order):
-        logging.error('tag_reader url = %s order = %d', url, order)
-        self._order = order
-        self.pbin.set_state(gst.STATE_NULL)
-        #set the uri of the playbin to our audio file
-        self.pbin.set_property('uri', url)
-        #pause the playbin, we don't really need to play
-        self.pbin.set_state(gst.STATE_PAUSED)
-
-
 class GstPlayer(gobject.GObject):
 
     __gsignals__ = {
         'error': (gobject.SIGNAL_RUN_FIRST, None, [str, str]),
         'eos': (gobject.SIGNAL_RUN_FIRST, None, []),
-        'tag': (gobject.SIGNAL_RUN_FIRST, None, [str, str]),
-        'stream-info': (gobject.SIGNAL_RUN_FIRST, None, [object])
     }
 
     def __init__(self, videowidget):
@@ -768,15 +662,6 @@ class GstPlayer(gobject.GObject):
         elif t == gst.MESSAGE_EOS:
             self.emit("eos")
             self.playing = False
-        elif t == gst.MESSAGE_TAG:
-            tags = message.parse_tag()
-            for tag in tags.keys():
-                self.emit('tag', str(tag), str(tags[tag]))
-        elif t == gst.MESSAGE_STATE_CHANGED:
-            old, new, pen = message.parse_state_changed()
-            if old == gst.STATE_READY and new == gst.STATE_PAUSED:
-                self.emit('stream-info',
-                        self.player.props.stream_info_value_array)
 
     def _init_video_sink(self):
         self.bin = gst.Bin()
@@ -894,8 +779,6 @@ if __name__ == '__main__':
 
     #player.connect("eos", self._player_eos_cb)
     #player.connect("error", self._player_error_cb)
-    #player.connect("tag", self._player_new_tag_cb)
-    #player.connect("stream-info", self._player_stream_info_cb)
 
     window.add(view)
 
