@@ -698,7 +698,13 @@ class GstPlayer(GObject.GObject):
         self.playing = False
         self.error = False
 
-        self.player = gst.element_factory_make("playbin", "player")
+        self.player = gst.element_factory_make("playbin2", "player")
+
+        # Set the proper flags to render the vis-plugin
+        GST_PLAY_FLAG_VIS = 1 << 3
+        GST_PLAY_FLAG_TEXT = 1 << 2
+        self.player.props.flags |= GST_PLAY_FLAG_VIS
+        self.player.props.flags |= GST_PLAY_FLAG_TEXT
 
         r = gst.registry_get_default()
         l = [x for x in r.get_feature_list(gst.ElementFactory)
