@@ -169,12 +169,20 @@ class JukeboxActivity(activity.Activity):
             self.uri = handle.uri
             GObject.idle_add(self._start, self.uri, handle.title)
 
+        # Create the player just once
+        logging.debug('Instantiating GstPlayer')
+        self.player = GstPlayer(self.videowidget)
+        self.player.connect("eos", self._player_eos_cb)
+        self.player.connect("error", self._player_error_cb)
+        self.player.connect("tag", self._player_new_tag_cb)
+        self.player.connect("stream-info", self._player_stream_info_cb)
+
     def _notify_active_cb(self, widget, event):
         """Sugar notify us that the activity is becoming active or inactive.
         When we are inactive, we stop the player if it is reproducing
         a video.
         """
-        if self.player is not None and not self.only_audio:
+        if self.player.player.props.uri is not None and not self.only_audio:
             if not self.player.is_playing() and self.props.active:
                 self.player.play()
             if self.player.is_playing() and not self.props.active:
@@ -269,12 +277,6 @@ class JukeboxActivity(activity.Activity):
     def play(self, media_index):
         self._switch_canvas(show_video=True)
         self.currentplaying = media_index
-        self.player.stop()
-        self.player = GstPlayer(self.videowidget)
-        self.player.connect("eos", self._player_eos_cb)
-        self.player.connect("error", self._player_error_cb)
-        self.player.connect("tag", self._player_new_tag_cb)
-        self.player.connect("stream-info", self._player_stream_info_cb)
         url = self.playlist[self.currentplaying]['url']
         error = None
         if url.startswith('journal://'):
@@ -289,7 +291,7 @@ class JukeboxActivity(activity.Activity):
 
         if error is None:
             self.player.set_uri(url)
-            self.play_toggled()
+            self.player.play()
         else:
             self.control.set_disabled()
             self._show_error_alert(error)
@@ -517,16 +519,6 @@ class JukeboxActivity(activity.Activity):
             if not error:
                 self.tag_reader.set_file(url, len(self.playlist) - 1)
 
-        if not self.player:
-            # lazy init the player so that videowidget is realized
-            # and has a valid widget allocation
-            self._switch_canvas(show_video=True)
-            self.player = GstPlayer(self.videowidget)
-            self.player.connect("eos", self._player_eos_cb)
-            self.player.connect("error", self._player_error_cb)
-            self.player.connect("tag", self._player_new_tag_cb)
-            self.player.connect("stream-info", self._player_stream_info_cb)
-
         self.playlist_widget.update(self.playlist)
 
         try:
@@ -538,6 +530,7 @@ class JukeboxActivity(activity.Activity):
                     url = 'file://' + jobject.file_path
 
                 self.player.set_uri(url)
+                self.player.play()
                 self.currentplaying = 0
                 self.play_toggled()
                 self.show_all()
@@ -728,6 +721,8 @@ class GstPlayer(GObject.GObject):
         bus.connect('message', self.on_message)
 
     def set_uri(self, uri):
+        self.player.set_state(gst.STATE_PAUSED)
+        self.player.set_state(gst.STATE_NULL)
         self.player.set_property('uri', uri)
 
     def on_sync_message(self, bus, message):
