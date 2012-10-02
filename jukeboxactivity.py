@@ -754,22 +754,6 @@ class GstPlayer(GObject.GObject):
         self.bin.add_pad(ghostpad)
         videoscale.set_property("method", 0)
 
-        caps_string = "video/x-raw-yuv, "
-        r = self.videowidget.get_allocation()
-        if r.width > 500 and r.height > 500:
-            # Sigh... xvimagesink on the XOs will scale the video to fit
-            # but ximagesink in Xephyr does not.  So we live with unscaled
-            # video in Xephyr so that the XO can work right.
-            w = 480
-            h = float(w) / float(float(r.width) / float(r.height))
-            caps_string += "width=%d, height=%d" % (w, h)
-        else:
-            caps_string += "width=480, height=360"
-        caps = gst.Caps(caps_string)
-        self.filter = gst.element_factory_make("capsfilter", "filter")
-        self.bin.add(self.filter)
-        self.filter.set_property("caps", caps)
-
         textoverlay = gst.element_factory_make('textoverlay')
         self.overlay = textoverlay
         self.bin.add(textoverlay)
@@ -777,8 +761,7 @@ class GstPlayer(GObject.GObject):
         self.bin.add(conv)
         videosink = gst.element_factory_make('autovideosink')
         self.bin.add(videosink)
-        gst.element_link_many(videoscale, self.filter, textoverlay, conv,
-                videosink)
+        gst.element_link_many(videoscale, textoverlay, conv, videosink)
         self.player.set_property("video-sink", self.bin)
 
     def set_overlay(self, title, artist, album):
