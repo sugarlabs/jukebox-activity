@@ -101,6 +101,11 @@ class JukeboxActivity(activity.Activity):
 
         self.connect("key_press_event", self._key_press_event_cb)
 
+        # We want to be notified when the activity gets the focus or
+        # loses it.  When it is not active, we don't need to keep
+        # reproducing the video
+        self.connect("notify::active", self._notify_active_cb)
+
         # FIXME: this is related with shared activity and it doesn't work
         # if handle.uri:
         #     pass
@@ -126,7 +131,6 @@ class JukeboxActivity(activity.Activity):
         self.playflag = False
         self.tags = {}
         self.only_audio = False
-        self.got_stream_info = False
 
         self.tag_reader = TagReader()
         self.tag_reader.connect('get-tags', self.__get_tags_cb)
@@ -164,6 +168,17 @@ class JukeboxActivity(activity.Activity):
         if handle.uri:
             self.uri = handle.uri
             GObject.idle_add(self._start, self.uri, handle.title)
+
+    def _notify_active_cb(self, widget, event):
+        """Sugar notify us that the activity is becoming active or inactive.
+        When we are inactive, we stop the player if it is reproducing
+        a video.
+        """
+        if self.player is not None and not self.only_audio:
+            if not self.player.is_playing() and self.props.active:
+                self.player.play()
+            if self.player.is_playing() and not self.props.active:
+                self.player.pause()
 
     def _init_view_area(self):
         """
@@ -319,7 +334,7 @@ class JukeboxActivity(activity.Activity):
                 self.tags[gst.TAG_ARTIST], album)
 
     def _player_stream_info_cb(self, widget, stream_info):
-        if not len(stream_info) or self.got_stream_info:
+        if not len(stream_info):
             return
 
         GST_STREAM_TYPE_UNKNOWN = 0
@@ -332,7 +347,6 @@ class JukeboxActivity(activity.Activity):
             if item.props.type == GST_STREAM_TYPE_VIDEO:
                 only_audio = False
         self.only_audio = only_audio
-        self.got_stream_info = True
         self._update_overlay()
 
     def _joined_cb(self, activity):
