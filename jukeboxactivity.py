@@ -40,15 +40,23 @@ from sugar3.graphics.alert import ErrorAlert
 
 import gi
 gi.require_version('Gtk', '3.0')
+gi.require_version('Gst', '1.0')
 
 from gi.repository import GObject
 from gi.repository import Gdk
-
-import pygst
-pygst.require('0.10')
-import gst
-import gst.interfaces
 from gi.repository import Gtk
+from gi.repository import Gst
+
+# Needed for window.get_xid(), xvimagesink.set_window_handle(),
+# respectively:
+from gi.repository import GdkX11, GstVideo
+
+# Avoid "Fatal Python error: GC object already tracked"
+# http://stackoverflow.com/questions/7496629/gstreamer-appsrc-causes-random-crashes
+GObject.threads_init()
+
+# Initialize GStreamer
+Gst.init(None)
 
 import urllib
 from ControlToolbar import Control, ViewToolbar
@@ -130,9 +138,6 @@ class JukeboxActivity(activity.Activity):
         self.currentplaying = None
         self.playflag = False
 
-        self.p_position = gst.CLOCK_TIME_NONE
-        self.p_duration = gst.CLOCK_TIME_NONE
-
         # README: I changed this because I was getting an error when I
         # tried to modify self.bin with something different than
         # Gtk.Bin
@@ -169,6 +174,8 @@ class JukeboxActivity(activity.Activity):
         self.player = GstPlayer(self.videowidget)
         self.player.connect("eos", self._player_eos_cb)
         self.player.connect("error", self._player_error_cb)
+        self.p_position = Gst.CLOCK_TIME_NONE
+        self.p_duration = Gst.CLOCK_TIME_NONE
 
     def _notify_active_cb(self, widget, event):
         """Sugar notify us that the activity is becoming active or inactive.
@@ -524,7 +531,7 @@ class JukeboxActivity(activity.Activity):
         real = long(scale.get_value() * self.p_duration / 100)  # in ns
         self.player.seek(real)
         # allow for a preroll
-        self.player.get_state(timeout=50 * gst.MSECOND)  # 50 ms
+        self.player.get_state(timeout=50 * Gst.MSECOND)  # 50 ms
 
     def scale_button_release_cb(self, widget, event):
         # see seek.cstop_seek
@@ -546,8 +553,13 @@ class JukeboxActivity(activity.Activity):
                 self.update_scale_cb)
 
     def update_scale_cb(self):
-        self.p_position, self.p_duration = self.player.query_position()
-        if self.p_position != gst.CLOCK_TIME_NONE:
+        success, self.p_position, self.p_duration = \
+            self.player.query_position()
+
+        if not success:
+            return True
+
+        if self.p_position != Gst.CLOCK_TIME_NONE:
             value = self.p_position * 100.0 / self.p_duration
             self.control.adjustment.set_value(value)
 
@@ -558,7 +570,7 @@ class JukeboxActivity(activity.Activity):
 
         # FIXME: this should be updated just once when the file starts
         # the first time
-        if self.p_duration != gst.CLOCK_TIME_NONE:
+        if self.p_duration != Gst.CLOCK_TIME_NONE:
             seconds = self.p_duration * 10 ** -9
             time = '%2d:%02d' % (int(seconds / 60), int(seconds % 60))
             self.control.total_time_label.set_text(time)
@@ -592,7 +604,22 @@ class GstPlayer(GObject.GObject):
         self.playing = False
         self.error = False
 
-        self.player = gst.element_factory_make("playbin2", "player")
+        # Create GStreamer pipeline
+        self.pipeline = Gst.Pipeline()
+        # Create bus to get events from GStreamer pipeline
+        self.bus = self.pipeline.get_bus()
+        self.bus.add_signal_watch()
+
+        self.bus.connect('message::eos', self.__on_eos_message)
+        self.bus.connect('message::error', self.__on_error_message)
+
+        # This is needed to make the video output in our DrawingArea
+        self.bus.enable_sync_message_emission()
+        self.bus.connect('sync-message::element', self.__on_sync_message)
+
+        # Create GStreamer elements
+        self.player = Gst.ElementFactory.make('playbin', None)
+        self.pipeline.add(self.player)
 
         # Set the proper flags to render the vis-plugin
         GST_PLAY_FLAG_VIS = 1 << 3
@@ -600,12 +627,12 @@ class GstPlayer(GObject.GObject):
         self.player.props.flags |= GST_PLAY_FLAG_VIS
         self.player.props.flags |= GST_PLAY_FLAG_TEXT
 
-        r = gst.registry_get_default()
-        l = [x for x in r.get_feature_list(gst.ElementFactory)
-                if (gst.ElementFactory.get_klass(x) == "Visualization")]
+        r = Gst.Registry.get()
+        l = [x for x in r.get_feature_list(Gst.ElementFactory)
+             if (x.get_metadata('klass') == "Visualization")]
         if len(l):
             e = l.pop()  # take latest plugin in the list
-            vis_plug = gst.element_factory_make(e.get_name())
+            vis_plug = Gst.ElementFactory.make(e.get_name(), e.get_name())
             self.player.set_property('vis-plugin', vis_plug)
 
         self.overlay = None
@@ -614,54 +641,48 @@ class GstPlayer(GObject.GObject):
         self.videowidget_xid = videowidget.get_window().get_xid()
         self._init_video_sink()
 
-        bus = self.player.get_bus()
-        bus.enable_sync_message_emission()
-        bus.add_signal_watch()
-        bus.connect('sync-message::element', self.on_sync_message)
-        bus.connect('message', self.on_message)
+    def __on_error_message(self, bus, msg):
+        self.stop()
+        self.playing = False
+        self.error = True
+        err, debug = msg.parse_error()
+        self.emit('error', err, debug)
+
+    def __on_eos_message(self, bus, msg):
+        logging.debug('SIGNAL: eos')
+        self.playing = False
+        self.emit('eos')
+
+    def __on_sync_message(self, bus, msg):
+        if msg.get_structure().get_name() == 'prepare-window-handle':
+            msg.src.set_window_handle(self.videowidget_xid)
 
     def set_uri(self, uri):
-        self.player.set_state(gst.STATE_PAUSED)
-        self.player.set_state(gst.STATE_NULL)
+        self.pipeline.set_state(Gst.State.READY)
+        logging.debug('### Setting URI: %s', uri)
         self.player.set_property('uri', uri)
 
-    def on_sync_message(self, bus, message):
-        if message.structure is None:
-            return
-        if message.structure.get_name() == 'prepare-xwindow-id':
-            self.videowidget.set_sink(message.src, self.videowidget_xid)
-            message.src.set_property('force-aspect-ratio', True)
-
-    def on_message(self, bus, message):
-        t = message.type
-        if t == gst.MESSAGE_ERROR:
-            err, debug = message.parse_error()
-            logging.debug("Error: %s - %s" % (err, debug))
-            self.error = True
-            self.emit("eos")
-            self.playing = False
-            self.emit("error", str(err), str(debug))
-        elif t == gst.MESSAGE_EOS:
-            self.emit("eos")
-            self.playing = False
-
     def _init_video_sink(self):
-        self.bin = gst.Bin()
-        videoscale = gst.element_factory_make('videoscale')
+        self.bin = Gst.Bin()
+        videoscale = Gst.ElementFactory.make('videoscale', 'videoscale')
         self.bin.add(videoscale)
-        pad = videoscale.get_pad("sink")
-        ghostpad = gst.GhostPad("sink", pad)
+        pad = videoscale.get_static_pad("sink")
+        ghostpad = Gst.GhostPad.new("sink", pad)
         self.bin.add_pad(ghostpad)
         videoscale.set_property("method", 0)
 
-        textoverlay = gst.element_factory_make('textoverlay')
+        textoverlay = Gst.ElementFactory.make('textoverlay', 'textoverlay')
         self.overlay = textoverlay
         self.bin.add(textoverlay)
-        conv = gst.element_factory_make("ffmpegcolorspace", "conv")
+        conv = Gst.ElementFactory.make("videoconvert", "conv")
         self.bin.add(conv)
-        videosink = gst.element_factory_make('autovideosink')
+        videosink = Gst.ElementFactory.make('autovideosink', 'autovideosink')
         self.bin.add(videosink)
-        gst.element_link_many(videoscale, textoverlay, conv, videosink)
+
+        videoscale.link(textoverlay)
+        textoverlay.link(conv)
+        conv.link(videosink)
+
         self.player.set_property("video-sink", self.bin)
 
     def set_overlay(self, title, artist, album):
@@ -680,46 +701,37 @@ class GstPlayer(GObject.GObject):
 
     def query_position(self):
         "Returns a (position, duration) tuple"
-        try:
-            position, format = self.player.query_position(gst.FORMAT_TIME)
-        except:
-            position = gst.CLOCK_TIME_NONE
 
-        try:
-            duration, format = self.player.query_duration(gst.FORMAT_TIME)
-        except:
-            duration = gst.CLOCK_TIME_NONE
+        p_success, position = self.player.query_position(Gst.Format.TIME)
+        d_success, duration = self.player.query_duration(Gst.Format.TIME)
 
-        return (position, duration)
+        return (p_success and d_success, position, duration)
 
     def seek(self, location):
         """
         @param location: time to seek to, in nanoseconds
         """
-        event = gst.event_new_seek(1.0, gst.FORMAT_TIME,
-            gst.SEEK_FLAG_FLUSH | gst.SEEK_FLAG_ACCURATE,
-            gst.SEEK_TYPE_SET, location,
-            gst.SEEK_TYPE_NONE, 0)
 
-        res = self.player.send_event(event)
-        if res:
-            self.player.set_new_stream_time(0L)
-        else:
-            logging.debug("seek to %r failed" % location)
+        logging.debug('Seek: %s ns', location)
+
+        self.pipeline.seek_simple(Gst.Format.TIME,
+                                  Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT,
+                                  location)
 
     def pause(self):
         logging.debug("pausing player")
-        self.player.set_state(gst.STATE_PAUSED)
+        self.pipeline.set_state(Gst.State.PAUSED)
         self.playing = False
 
     def play(self):
         logging.debug("playing player")
-        self.player.set_state(gst.STATE_PLAYING)
+        self.pipeline.set_state(Gst.State.PLAYING)
         self.playing = True
         self.error = False
 
     def stop(self):
-        self.player.set_state(gst.STATE_NULL)
+        self.playing = False
+        self.pipeline.set_state(Gst.State.NULL)
         logging.debug("stopped player")
 
     def get_state(self, timeout=1):
@@ -733,25 +745,13 @@ class VideoWidget(Gtk.DrawingArea):
     def __init__(self):
         GObject.GObject.__init__(self)
         self.set_events(Gdk.EventMask.POINTER_MOTION_MASK |
-        Gdk.EventMask.POINTER_MOTION_HINT_MASK |
-        Gdk.EventMask.EXPOSURE_MASK |
-        Gdk.EventMask.KEY_PRESS_MASK |
-        Gdk.EventMask.KEY_RELEASE_MASK)
-        self.imagesink = None
+                        Gdk.EventMask.POINTER_MOTION_HINT_MASK |
+                        Gdk.EventMask.EXPOSURE_MASK |
+                        Gdk.EventMask.KEY_PRESS_MASK |
+                        Gdk.EventMask.KEY_RELEASE_MASK)
 
         self.set_app_paintable(True)
         self.set_double_buffered(False)
-
-    def do_expose_event(self, event):
-        if self.imagesink:
-            self.imagesink.expose()
-            return False
-        else:
-            return True
-
-    def set_sink(self, sink, xid):
-        self.imagesink = sink
-        self.imagesink.set_xwindow_id(xid)
 
 
 if __name__ == '__main__':
