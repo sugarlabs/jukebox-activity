@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 00:32-0400\n"
+"POT-Creation-Date: 2012-07-17 00:33-0400\n"
 "PO-Revision-Date: 2011-12-18 06:55+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,39 +30,35 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Glasbeni avtomat"
 
-#: ControlToolbar.py:43
-msgid "Fullscreen"
-msgstr "Celozaslonski način"
-
-#: ControlToolbar.py:50
+#: ControlToolbar.py:46
 msgid "Show Playlist"
 msgstr "Pokaži seznam predvajanja"
 
-#: ControlToolbar.py:77
+#: ControlToolbar.py:52
+msgid "Fullscreen"
+msgstr "Celozaslonski način"
+
+#: ControlToolbar.py:74
+msgid "Add track"
+msgstr ""
+
+#: ControlToolbar.py:80
+msgid "Remove track"
+msgstr ""
+
+#: ControlToolbar.py:90
 msgid "Previous"
 msgstr "Predhodna"
 
-#: ControlToolbar.py:98
+#: ControlToolbar.py:111
 msgid "Next"
 msgstr "Naslednja"
 
-#: jukeboxactivity.py:71
+#: jukeboxactivity.py:68
 msgid "Jukebox Activity"
 msgstr "Dejavnost glasbenega avtomata"
 
-#: jukeboxactivity.py:80
-msgid "Play"
-msgstr "Predvajaj"
-
-#: jukeboxactivity.py:89
-msgid "View"
-msgstr "Poglej"
-
-#: jukeboxactivity.py:348
-msgid "Choose document"
-msgstr "Izbor dokumenta"
-
-#: jukeboxactivity.py:398 jukeboxactivity.py:399
+#: jukeboxactivity.py:376
 msgid "Jukebox playlist"
 msgstr ""
 
@@ -73,6 +69,15 @@ msgstr ""
 #: widgets.py:53
 msgid "Play List"
 msgstr ""
+
+#~ msgid "Play"
+#~ msgstr "Predvajaj"
+
+#~ msgid "View"
+#~ msgstr "Poglej"
+
+#~ msgid "Choose document"
+#~ msgstr "Izbor dokumenta"
 
 #~ msgid "Fit to window"
 #~ msgstr "Prilagodi velikosti okna"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 00:32-0400\n"
+"POT-Creation-Date: 2012-07-17 00:33-0400\n"
 "PO-Revision-Date: 2011-08-24 08:37+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -25,39 +25,35 @@ msgstr ""
 msgid "Jukebox"
 msgstr "صندوق الموسيقى"
 
-#: ControlToolbar.py:43
-msgid "Fullscreen"
-msgstr "ملء الشاشة"
-
-#: ControlToolbar.py:50
+#: ControlToolbar.py:46
 msgid "Show Playlist"
 msgstr ""
 
-#: ControlToolbar.py:77
+#: ControlToolbar.py:52
+msgid "Fullscreen"
+msgstr "ملء الشاشة"
+
+#: ControlToolbar.py:74
+msgid "Add track"
+msgstr ""
+
+#: ControlToolbar.py:80
+msgid "Remove track"
+msgstr ""
+
+#: ControlToolbar.py:90
 msgid "Previous"
 msgstr "السّابق"
 
-#: ControlToolbar.py:98
+#: ControlToolbar.py:111
 msgid "Next"
 msgstr "التّالي"
 
-#: jukeboxactivity.py:71
+#: jukeboxactivity.py:68
 msgid "Jukebox Activity"
 msgstr "نشاط صندوق الموسيقى"
 
-#: jukeboxactivity.py:80
-msgid "Play"
-msgstr "شغّل"
-
-#: jukeboxactivity.py:89
-msgid "View"
-msgstr "عرض"
-
-#: jukeboxactivity.py:348
-msgid "Choose document"
-msgstr "اختر مستندا"
-
-#: jukeboxactivity.py:398 jukeboxactivity.py:399
+#: jukeboxactivity.py:376
 msgid "Jukebox playlist"
 msgstr ""
 
@@ -68,6 +64,15 @@ msgstr ""
 #: widgets.py:53
 msgid "Play List"
 msgstr ""
+
+#~ msgid "Play"
+#~ msgstr "شغّل"
+
+#~ msgid "View"
+#~ msgstr "عرض"
+
+#~ msgid "Choose document"
+#~ msgstr "اختر مستندا"
 
 #~ msgid "Fit to window"
 #~ msgstr "لائم النافذة"

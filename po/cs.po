@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 00:32-0400\n"
-"PO-Revision-Date: 2012-02-20 00:39+0200\n"
-"Last-Translator: garretraziel <boloomka@gmail.com>\n"
+"POT-Creation-Date: 2012-07-17 00:33-0400\n"
+"PO-Revision-Date: 2012-07-02 11:42+0200\n"
+"Last-Translator: jui <appukonrad@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -29,46 +29,51 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Jukebox"
 
-#: ControlToolbar.py:43
-msgid "Fullscreen"
-msgstr "Celá obrazovka"
-
-#: ControlToolbar.py:50
+#: ControlToolbar.py:46
 msgid "Show Playlist"
 msgstr "Zobrazit seznam skladeb"
 
-#: ControlToolbar.py:77
+#: ControlToolbar.py:52
+msgid "Fullscreen"
+msgstr "Celá obrazovka"
+
+#: ControlToolbar.py:74
+msgid "Add track"
+msgstr "Přidat stopu"
+
+#: ControlToolbar.py:80
+msgid "Remove track"
+msgstr "Odebrat stopu"
+
+#: ControlToolbar.py:90
 msgid "Previous"
 msgstr "Předchozí"
 
-#: ControlToolbar.py:98
+#: ControlToolbar.py:111
 msgid "Next"
 msgstr "Následující"
 
-#: jukeboxactivity.py:71
+#: jukeboxactivity.py:68
 msgid "Jukebox Activity"
-msgstr "Jukebox činnost"
+msgstr "Jukebox činnosti"
 
-#: jukeboxactivity.py:80
-msgid "Play"
-msgstr "Přehrát"
-
-#: jukeboxactivity.py:89
-msgid "View"
-msgstr "Zobrazit"
-
-#: jukeboxactivity.py:348
-msgid "Choose document"
-msgstr "Vybrat dokument"
-
-#: jukeboxactivity.py:398 jukeboxactivity.py:399
+#: jukeboxactivity.py:376
 msgid "Jukebox playlist"
-msgstr ""
+msgstr "Seznam skladeb"
 
 #: widgets.py:46
 msgid "No."
-msgstr ""
+msgstr "Číslo"
 
 #: widgets.py:53
 msgid "Play List"
-msgstr ""
+msgstr "Přehrát seznam"
+
+#~ msgid "Play"
+#~ msgstr "Přehrát"
+
+#~ msgid "View"
+#~ msgstr "Zobrazit"
+
+#~ msgid "Choose document"
+#~ msgstr "Vybrat dokument"

@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-21 00:32-0400\n"
-"PO-Revision-Date: 2012-03-06 22:41+0200\n"
-"Last-Translator: usuariotenek002 <usuariotenek02@gmail.com>\n"
+"POT-Creation-Date: 2012-07-17 00:33-0400\n"
+"PO-Revision-Date: 2012-06-24 02:08+0200\n"
+"Last-Translator: ing.arturo.lara <ing.arturo.lara@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: hus\n"
 "MIME-Version: 1.0\n"
@@ -21,39 +21,35 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Ajum kweche'dhaykol"
 
-#: ControlToolbar.py:43
+#: ControlToolbar.py:46
+msgid "Show Playlist"
+msgstr "Ka tejwa'medha' an k'elab ts'ataxtalab"
+
+#: ControlToolbar.py:52
 msgid "Fullscreen"
 msgstr "Putat walek"
 
-#: ControlToolbar.py:50
-msgid "Show Playlist"
-msgstr "ka tejwa'medha' an k'elab ts'ataxtalab"
+#: ControlToolbar.py:74
+msgid "Add track"
+msgstr ""
 
-#: ControlToolbar.py:77
+#: ControlToolbar.py:80
+msgid "Remove track"
+msgstr ""
+
+#: ControlToolbar.py:90
 msgid "Previous"
 msgstr "Xi ok'xidh"
 
-#: ControlToolbar.py:98
+#: ControlToolbar.py:111
 msgid "Next"
 msgstr "Júnakej"
 
-#: jukeboxactivity.py:71
+#: jukeboxactivity.py:68
 msgid "Jukebox Activity"
 msgstr "T'ojlabil an Ajum kweche'dhaykol"
 
-#: jukeboxactivity.py:80
-msgid "Play"
-msgstr "T'ujuw"
-
-#: jukeboxactivity.py:89
-msgid "View"
-msgstr "Tsu'uw"
-
-#: jukeboxactivity.py:348
-msgid "Choose document"
-msgstr "Takuy dhuchlab"
-
-#: jukeboxactivity.py:398 jukeboxactivity.py:399
+#: jukeboxactivity.py:376
 msgid "Jukebox playlist"
 msgstr ""
 
@@ -65,8 +61,3 @@ msgstr ""
 msgid "Play List"
 msgstr ""
 
-#~ msgid "Fit to window"
-#~ msgstr "Junkuw k'al an met'nib"
-
-#~ msgid "Original size"
-#~ msgstr "In lejtal puwél"
