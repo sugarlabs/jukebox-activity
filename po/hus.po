@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-17 00:33-0400\n"
-"PO-Revision-Date: 2012-06-24 02:08+0200\n"
-"Last-Translator: ing.arturo.lara <ing.arturo.lara@gmail.com>\n"
+"PO-Revision-Date: 2012-10-09 22:30+0200\n"
+"Last-Translator: ichich <akire_409@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: hus\n"
 "MIME-Version: 1.0\n"
@@ -17,10 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
+# patàl ti  ajum dhayk'ol
 #: activity/activity.info:2
 msgid "Jukebox"
 msgstr "Ajum kweche'dhaykol"
 
+# ka tsuw jun duche watbadh talab
 #: ControlToolbar.py:46
 msgid "Show Playlist"
 msgstr "Ka tejwa'medha' an k'elab ts'ataxtalab"
