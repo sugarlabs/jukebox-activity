@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-10-11 00:32-0400\n"
+"PO-Revision-Date: 2012-08-22 23:11+0200\n"
+"Last-Translator: EdgarQuispeChambi <quispedgar@yahoo.es>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: aym\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.5\n"
+
+#  "Máquina de discos"
+#. TRANS: "name" option from activity.info file
+msgid "Jukebox"
+msgstr "Warurt'anaka qhantayiri"
+
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
+"friends the songs you love, watch movies and educational videos together, "
+"and much more!"
+msgstr ""
+
+#: ControlToolbar.py:46
+msgid "Show Playlist"
+msgstr "Warurt'anaka qhantayaña wakichata"
+
+#  "Pantalla completa"
+#: ControlToolbar.py:52
+msgid "Fullscreen"
+msgstr "Maypacha uñtañataki"
+
+#: ControlToolbar.py:74
+msgid "Add track"
+msgstr "Warurt'ayañataki wakichma"
+
+#: ControlToolbar.py:80
+msgid "Remove track"
+msgstr "Warurt'añataki wakichata apaqma"
+
+#  "Anterior"
+#: ControlToolbar.py:90
+msgid "Previous"
+msgstr "Nayrchapi"
+
+#  "Siguiente"
+#: ControlToolbar.py:111
+msgid "Next"
+msgstr "Qhipankiri"
+
+#  "Actividad máquina de discos"
+#: jukeboxactivity.py:77
+msgid "Jukebox Activity"
+msgstr "Warurt'anaka qhantayaña wakichäwi"
+
+#: jukeboxactivity.py:284
+#, python-format
+msgid "The file %s was not found"
+msgstr ""
+
+#: jukeboxactivity.py:382
+msgid "Jukebox playlist"
+msgstr "Jukebox warurt'anaka qhantayaña wakichaña"
+
+#: widgets.py:46
+msgid "No."
+msgstr "N.° jakhu chimpu"
+
+#: widgets.py:53
+msgid "Play List"
+msgstr "Warurt'anaka qhantayaña wakichata"
+
+#  "Reproducir"
+#~ msgid "Play"
+#~ msgstr "Qhantayaña"
+
+#  "Ver"
+#~ msgid "View"
+#~ msgstr "Unjaña"
+
+#  "Elegir documento"
+#~ msgid "Choose document"
+#~ msgstr "Wakichata ajlliña"
+
+#  "Concordar con ventana"
+#~ msgid "Fit to window"
+#~ msgstr "Wakichata wakichaña"
+
+#  "Tamaño original"
+#~ msgid "Original size"
+#~ msgstr "Tunuchani"
