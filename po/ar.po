@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-17 00:33-0400\n"
+"POT-Creation-Date: 2012-10-11 00:32-0400\n"
 "PO-Revision-Date: 2011-08-24 08:37+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -21,9 +21,17 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Virtaal 0.7.0\n"
 
-#: activity/activity.info:2
+#. TRANS: "name" option from activity.info file
 msgid "Jukebox"
 msgstr "صندوق الموسيقى"
+
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
+"friends the songs you love, watch movies and educational videos together, "
+"and much more!"
+msgstr ""
 
 #: ControlToolbar.py:46
 msgid "Show Playlist"
@@ -49,11 +57,16 @@ msgstr "السّابق"
 msgid "Next"
 msgstr "التّالي"
 
-#: jukeboxactivity.py:68
+#: jukeboxactivity.py:77
 msgid "Jukebox Activity"
 msgstr "نشاط صندوق الموسيقى"
 
-#: jukeboxactivity.py:376
+#: jukeboxactivity.py:284
+#, python-format
+msgid "The file %s was not found"
+msgstr ""
+
+#: jukeboxactivity.py:382
 msgid "Jukebox playlist"
 msgstr ""
 

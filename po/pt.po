@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-17 00:33-0400\n"
+"POT-Creation-Date: 2012-10-11 00:32-0400\n"
 "PO-Revision-Date: 2012-07-31 20:59+0200\n"
 "Last-Translator: Eduardo H. <hoboprimate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,9 +27,17 @@ msgstr ""
 
 # Também toca vídeo, para além de áudio, pelo que 'Caixa de Música' não serve muito bem.
 # E que tal se fosse "Tocar"?
-#: activity/activity.info:2
+#. TRANS: "name" option from activity.info file
 msgid "Jukebox"
 msgstr "Tocar"
+
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
+"friends the songs you love, watch movies and educational videos together, "
+"and much more!"
+msgstr ""
 
 #: ControlToolbar.py:46
 msgid "Show Playlist"
@@ -55,11 +63,16 @@ msgstr "Anterior"
 msgid "Next"
 msgstr "Seguinte"
 
-#: jukeboxactivity.py:68
+#: jukeboxactivity.py:77
 msgid "Jukebox Activity"
 msgstr "Atividade Jukebox"
 
-#: jukeboxactivity.py:376
+#: jukeboxactivity.py:284
+#, python-format
+msgid "The file %s was not found"
+msgstr ""
+
+#: jukeboxactivity.py:382
 msgid "Jukebox playlist"
 msgstr "Lista de reprodução Jukebox"
 

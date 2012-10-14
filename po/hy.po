@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-17 00:33-0400\n"
+"POT-Creation-Date: 2012-10-11 00:32-0400\n"
 "PO-Revision-Date: 2012-07-10 00:13+0200\n"
 "Last-Translator: Jasmine <udea_jasmine@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,9 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#: activity/activity.info:2
+#. TRANS: "name" option from activity.info file
 msgid "Jukebox"
 msgstr "Նվագարկիչ"
+
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
+"friends the songs you love, watch movies and educational videos together, "
+"and much more!"
+msgstr ""
 
 #: ControlToolbar.py:46
 msgid "Show Playlist"
@@ -45,11 +53,16 @@ msgstr "Նախորդ"
 msgid "Next"
 msgstr "Հաջորդ"
 
-#: jukeboxactivity.py:68
+#: jukeboxactivity.py:77
 msgid "Jukebox Activity"
 msgstr "Նվագարկչի գործունեություն"
 
-#: jukeboxactivity.py:376
+#: jukeboxactivity.py:284
+#, python-format
+msgid "The file %s was not found"
+msgstr ""
+
+#: jukeboxactivity.py:382
 msgid "Jukebox playlist"
 msgstr "Նվագարկչի ցանկը"
 

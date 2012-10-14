@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-17 00:33-0400\n"
-"PO-Revision-Date: 2012-10-01 13:14+0200\n"
-"Last-Translator: KatSitko <xanthe1808@gmail.com>\n"
+"POT-Creation-Date: 2012-10-11 00:32-0400\n"
+"PO-Revision-Date: 2012-10-13 19:17+0200\n"
+"Last-Translator: Karolina <karo.zaklika@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -26,9 +26,20 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#: activity/activity.info:2
+#. TRANS: "name" option from activity.info file
 msgid "Jukebox"
 msgstr "Szafa grająca"
+
+#. TRANS: "summary" option from activity.info file
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
+"friends the songs you love, watch movies and educational videos together, "
+"and much more!"
+msgstr ""
+"Zostań DJ-em lub VJ-em. Odtwarzaj swoje ulubione teledyski i piosenki. Dziel "
+"się ze znajomymi piosenkami, które kochasz, oglądajcie razem edukacyjne "
+"teledyski i wiele więcej!"
 
 #: ControlToolbar.py:46
 msgid "Show Playlist"
@@ -54,11 +65,16 @@ msgstr "Poprzedni"
 msgid "Next"
 msgstr "Następny"
 
-#: jukeboxactivity.py:68
+#: jukeboxactivity.py:77
 msgid "Jukebox Activity"
 msgstr "Czynność - Szafa grająca"
 
-#: jukeboxactivity.py:376
+#: jukeboxactivity.py:284
+#, python-format
+msgid "The file %s was not found"
+msgstr "Plik %s nie został znaleziony"
+
+#: jukeboxactivity.py:382
 msgid "Jukebox playlist"
 msgstr "Lista odtwarzania szafy grającej"
 
