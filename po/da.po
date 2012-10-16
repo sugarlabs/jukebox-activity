@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-11 00:32-0400\n"
-"PO-Revision-Date: 2012-07-06 06:22+0200\n"
+"PO-Revision-Date: 2012-10-16 14:14+0200\n"
 "Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: da\n"
@@ -36,6 +36,8 @@ msgid ""
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 msgstr ""
+"Bliv DJ, bliv en VJ. Afspil dine yndlingsvideoer og sange. Del de sange du "
+"elsker med dine venner, se film og uddannelsesvideoer sammen, og meget mere!"
 
 #: ControlToolbar.py:46
 msgid "Show Playlist"
@@ -68,7 +70,7 @@ msgstr "Jukeboks-aktivitet"
 #: jukeboxactivity.py:284
 #, python-format
 msgid "The file %s was not found"
-msgstr ""
+msgstr "Filen %s blev ikke fundet"
 
 #: jukeboxactivity.py:382
 msgid "Jukebox playlist"
