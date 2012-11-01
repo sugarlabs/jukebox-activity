@@ -304,9 +304,11 @@ class JukeboxActivity(activity.Activity):
     def _player_eos_cb(self, widget):
         self.songchange('next')
 
-    def _show_error_alert(self, title):
+    def _show_error_alert(self, title, msg=None):
         alert = ErrorAlert()
         alert.props.title = title
+        if msg is not None:
+            alert.props.msg = msg
         self.add_alert(alert)
         alert.connect('response', self._alert_cancel_cb)
         alert.show()
@@ -354,7 +356,15 @@ class JukeboxActivity(activity.Activity):
         self.player.stop()
         self.player.set_uri(None)
         self.control.set_disabled()
-        self._show_error_alert("Error: %s - %s" % (message, detail))
+
+        file_path = self.playlist[self.currentplaying]['url']\
+            .replace('journal://', 'file://')
+        mimetype = mime.get_for_file(file_path)
+
+        title = _('Error')
+        msg = _('This "%s" file can\'t be played') % mimetype
+        self._switch_canvas(False)
+        self._show_error_alert(title, msg)
 
     def _joined_cb(self, activity):
         logging.debug("someone joined")
