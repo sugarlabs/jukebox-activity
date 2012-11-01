@@ -37,6 +37,7 @@ from sugar3.graphics.toolbarbox import ToolbarButton
 from sugar3.activity.widgets import StopButton
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.graphics.alert import ErrorAlert
+from sugar3.graphics.alert import Alert
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -46,6 +47,7 @@ from gi.repository import GObject
 from gi.repository import Gdk
 from gi.repository import Gtk
 from gi.repository import Gst
+from gi.repository import Gio
 
 # Needed for window.get_xid(), xvimagesink.set_window_handle(),
 # respectively:
@@ -87,6 +89,10 @@ class JukeboxActivity(activity.Activity):
 
         # FIXME: I don't know what is the mission of this line
         # activity_toolbar.stop.hide()
+
+        self.volume_monitor = Gio.VolumeMonitor.get()
+        self.volume_monitor.connect('mount-added', self._mount_added_cb)
+        self.volume_monitor.connect('mount-removed', self._mount_removed_cb)
 
         _view_toolbar = ViewToolbar()
         _view_toolbar.connect('go-fullscreen',
@@ -137,6 +143,7 @@ class JukeboxActivity(activity.Activity):
         self.playpath = None
         self.currentplaying = None
         self.playflag = False
+        self._not_found_files = 0
 
         # README: I changed this because I was getting an error when I
         # tried to modify self.bin with something different than
@@ -304,6 +311,42 @@ class JukeboxActivity(activity.Activity):
         alert.connect('response', self._alert_cancel_cb)
         alert.show()
 
+    def _mount_added_cb(self, volume_monitor, device):
+        self.playlist_widget.update(self.playlist)
+
+    def _mount_removed_cb(self, volume_monitor, device):
+        self.playlist_widget.update(self.playlist)
+
+    def _show_missing_tracks_alert(self, nro):
+        alert = Alert()
+        title = _('%s tracks not found.') % nro
+        alert.props.title = title
+        alert.add_button(Gtk.ResponseType.APPLY, _('Details'))
+        self.add_alert(alert)
+        alert.connect('response', self.__missing_tracks_alert_response_cb)
+
+    def __missing_tracks_alert_response_cb(self, alert, response_id):
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        vbox.props.valign = Gtk.Align.CENTER
+        label = Gtk.Label(label='')
+        label.set_markup(_('<b>Missing tracks</b>'))
+        vbox.pack_start(label, False, False, 15)
+
+        for track in self.playlist_widget.get_missing_tracks():
+            path = track['url'].replace('journal://', '')\
+                .replace('file://', '')
+            label = Gtk.Label(label=path)
+            vbox.add(label)
+
+        _missing_tracks = Gtk.ScrolledWindow()
+        _missing_tracks.add_with_viewport(vbox)
+        _missing_tracks.show_all()
+
+        self.view_area.append_page(_missing_tracks, None)
+
+        self.view_area.set_current_page(2)
+        self.remove_alert(alert)
+
     def _alert_cancel_cb(self, alert, response_id):
         self.remove_alert(alert)
 
@@ -364,11 +407,17 @@ class JukeboxActivity(activity.Activity):
         if mimetype == 'audio/x-mpegurl':
             # is a M3U playlist:
             for uri in self._read_m3u_playlist(file_path):
+                if not self.playlist_widget.check_available_media(uri['url']):
+                    self._not_found_files += 1
+
                 GObject.idle_add(self._start, uri['url'], uri['title'],
                         uri['object_id'])
         else:
             # is another media file:
             GObject.idle_add(self._start, self.uri, title, object_id)
+
+        if self._not_found_files > 0:
+            self._show_missing_tracks_alert(self._not_found_files)
 
     def _create_playlist_jobject(self):
         """Create an object in the Journal to store the playlist.
@@ -451,6 +500,7 @@ class JukeboxActivity(activity.Activity):
         self.playpath = os.path.dirname(uri)
         if not uri:
             return False
+
         if title is not None:
             title = title.strip()
         if object_id is not None:
