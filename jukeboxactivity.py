@@ -153,6 +153,7 @@ class JukeboxActivity(activity.Activity):
         # self.bin.show()
 
         self.canvas = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self._alert = None
 
         self.playlist_widget = PlayListWidget(self.play)
         self.playlist_widget.update(self.playlist)
@@ -305,27 +306,32 @@ class JukeboxActivity(activity.Activity):
         self.songchange('next')
 
     def _show_error_alert(self, title, msg=None):
-        alert = ErrorAlert()
-        alert.props.title = title
+        self._alert = ErrorAlert()
+        self._alert.props.title = title
         if msg is not None:
-            alert.props.msg = msg
-        self.add_alert(alert)
-        alert.connect('response', self._alert_cancel_cb)
-        alert.show()
+            self._alert.props.msg = msg
+        self.add_alert(self._alert)
+        self._alert.connect('response', self._alert_cancel_cb)
+        self._alert.show()
 
     def _mount_added_cb(self, volume_monitor, device):
+        self.view_area.set_current_page(0)
+        self.remove_alert(self._alert)
         self.playlist_widget.update(self.playlist)
 
     def _mount_removed_cb(self, volume_monitor, device):
+        self.view_area.set_current_page(0)
+        self.remove_alert(self._alert)
         self.playlist_widget.update(self.playlist)
 
     def _show_missing_tracks_alert(self, nro):
-        alert = Alert()
+        self._alert = Alert()
         title = _('%s tracks not found.') % nro
-        alert.props.title = title
-        alert.add_button(Gtk.ResponseType.APPLY, _('Details'))
-        self.add_alert(alert)
-        alert.connect('response', self.__missing_tracks_alert_response_cb)
+        self._alert.props.title = title
+        self._alert.add_button(Gtk.ResponseType.APPLY, _('Details'))
+        self.add_alert(self._alert)
+        self._alert.connect('response',
+                self.__missing_tracks_alert_response_cb)
 
     def __missing_tracks_alert_response_cb(self, alert, response_id):
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
