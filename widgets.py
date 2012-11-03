@@ -14,6 +14,7 @@
 # USA
 
 import logging
+import os
 from gettext import gettext as _
 
 import gi
@@ -23,8 +24,10 @@ from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Pango
 
+from sugar3.graphics.icon import CellRendererIcon
 
-COLUMNS_NAME = ('index', 'media')
+
+COLUMNS_NAME = ('index', 'media', 'available')
 COLUMNS = dict((name, i) for i, name in enumerate(COLUMNS_NAME))
 
 
@@ -37,10 +40,20 @@ class PlayListWidget(Gtk.ScrolledWindow):
                                     vadjustment=None)
         self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         self.listview = Gtk.TreeView()
-        self.treemodel = Gtk.ListStore(int, object)
+        self.treemodel = Gtk.ListStore(int, object, bool)
         self.listview.set_model(self.treemodel)
         selection = self.listview.get_selection()
         selection.set_mode(Gtk.SelectionMode.SINGLE)
+
+        renderer_icon = CellRendererIcon(self.listview)
+        renderer_icon.props.icon_name = 'emblem-notification'
+        renderer_icon.props.width = 20
+        renderer_icon.props.height = 20
+        renderer_icon.props.size = 20
+        treecol_icon = Gtk.TreeViewColumn()
+        treecol_icon.pack_start(renderer_icon, False)
+        treecol_icon.set_cell_data_func(renderer_icon, self._set_icon)
+        self.listview.append_column(treecol_icon)
 
         renderer_idx = Gtk.CellRendererText()
         treecol_idx = Gtk.TreeViewColumn(_('No.'))
@@ -75,15 +88,27 @@ class PlayListWidget(Gtk.ScrolledWindow):
 
     def _set_title(self, column, cell, model, it, data):
         playlist_item = model.get_value(it, COLUMNS['media'])
+        available = model.get_value(it, COLUMNS['available'])
+
         cell.set_property('text', playlist_item['title'])
+        sensitive = True
+        if not available:
+            sensitive = False
+        cell.set_property('sensitive', sensitive)
+
+    def _set_icon(self, column, cell, model, it, data):
+        available = model.get_value(it, COLUMNS['available'])
+        cell.set_property('visible', not available)
 
     def update(self, playlist):
         self.treemodel.clear()
         self._playlist = playlist
         pl = list(enumerate(playlist))
         for i, media in pl:
-            self.treemodel.append((i, media))
-        self.set_cursor(0)
+            available = self.check_available_media(media['url'])
+            media['available'] = available
+            self.treemodel.append((i, media, available))
+        #self.set_cursor(0)
 
     def set_cursor(self, index):
         self.listview.set_cursor((index,))
@@ -96,3 +121,17 @@ class PlayListWidget(Gtk.ScrolledWindow):
             self._playlist.pop(index)
             self.treemodel.remove(self.treemodel.get_iter(row))
         self.update(self._playlist)
+
+    def check_available_media(self, uri):
+        path = uri.replace('journal://', '').replace('file://', '')
+        if os.path.exists(path):
+            return True
+        else:
+            return False
+
+    def get_missing_tracks(self):
+        missing_tracks = []
+        for track in self._playlist:
+            if not track['available']:
+                missing_tracks.append(track)
+        return missing_tracks
