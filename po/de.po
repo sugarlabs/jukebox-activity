@@ -58,8 +58,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Jukebox-activity\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-11 00:32-0400\n"
-"PO-Revision-Date: 2012-11-03 00:18+0200\n"
+"POT-Creation-Date: 2012-11-03 00:31-0400\n"
+"PO-Revision-Date: 2012-11-12 11:56+0200\n"
 "Last-Translator: Markus <m.slg@gmx.de>\n"
 "Language-Team: OLPC-Deutsch <LL@li.org>\n"
 "Language: de\n"
@@ -110,24 +110,46 @@ msgstr "Zurück"
 msgid "Next"
 msgstr "Weiter"
 
-#: jukeboxactivity.py:77
+#: jukeboxactivity.py:79
 msgid "Jukebox Activity"
 msgstr "Jukebox-Aktivität"
 
-#: jukeboxactivity.py:284
+#: jukeboxactivity.py:292
 #, python-format
 msgid "The file %s was not found"
 msgstr "Die Datei %s wurde nicht gefunden."
 
-#: jukeboxactivity.py:382
+#: jukeboxactivity.py:329
+#, python-format
+msgid "%s tracks not found."
+msgstr "%s Titel wurden nicht gefunden."
+
+#: jukeboxactivity.py:331
+msgid "Details"
+msgstr "Details"
+
+#: jukeboxactivity.py:340
+msgid "<b>Missing tracks</b>"
+msgstr "<b>Fehlende Titel</b>"
+
+#: jukeboxactivity.py:370
+msgid "Error"
+msgstr "Fehler"
+
+#: jukeboxactivity.py:371
+#, python-format
+msgid "This \"%s\" file can't be played"
+msgstr "Diese \"s\"-Datei kann nicht abgespielt werden."
+
+#: jukeboxactivity.py:447
 msgid "Jukebox playlist"
 msgstr "Jukebox-Wiedergabeliste"
 
-#: widgets.py:46
+#: widgets.py:59
 msgid "No."
 msgstr "Nein."
 
-#: widgets.py:53
+#: widgets.py:66
 msgid "Play List"
 msgstr "Wiedergabeliste"
 
