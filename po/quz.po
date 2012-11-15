@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-11 00:32-0400\n"
-"PO-Revision-Date: 2012-05-15 23:23+0200\n"
-"Last-Translator: Irma  <sankaypillo@gmail.com>\n"
+"POT-Creation-Date: 2012-11-03 00:31-0400\n"
+"PO-Revision-Date: 2012-11-15 06:47+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: quz\n"
 "MIME-Version: 1.0\n"
@@ -22,6 +22,10 @@ msgstr ""
 msgid "Jukebox"
 msgstr "Takichina"
 
+#  [ES] ""
+#  [ES] "Se un DJ, se un VJ. Reproduce tus videos y canciones favoritas. Comparte con "
+#  [ES] "tus amigos las canciones que amas, mira películas y videos educacionales "
+#  [ES] "juntos, y mucho mas."
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
 msgid ""
@@ -29,6 +33,9 @@ msgid ""
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 msgstr ""
+"Munaspaqa, DJ utaq VJ nisqa kawaq. Videyuykikunata takiyniykikunata ima "
+"qhawachiwaq takichiwaq. Masiykikunawanqa yachanamanta munasqa videyukunata "
+"takiykunata ima qunakuy"
 
 #  "Mostrar Lista de Reproducción"
 #: ControlToolbar.py:46
@@ -40,13 +47,15 @@ msgstr "Takiykunata rikuchiy"
 msgid "Fullscreen"
 msgstr "Hunt'asqa pantalla"
 
+#  [ES] "Agregar pista"
 #: ControlToolbar.py:74
 msgid "Add track"
-msgstr ""
+msgstr "Takiyta churay"
 
+#  [ES] "Eliminar pista"
 #: ControlToolbar.py:80
 msgid "Remove track"
-msgstr ""
+msgstr "Takiyta qhichuy"
 
 #  "Anterior"
 #: ControlToolbar.py:90
@@ -59,26 +68,55 @@ msgid "Next"
 msgstr "Hamuq"
 
 #  "Actividad máquina de discos"
-#: jukeboxactivity.py:77
+#: jukeboxactivity.py:79
 msgid "Jukebox Activity"
 msgstr "Takichinap ruwanankuna"
 
-#: jukeboxactivity.py:284
+#  [ES] "El archivo %s no fue encontrado"
+#: jukeboxactivity.py:292
 #, python-format
 msgid "The file %s was not found"
-msgstr ""
+msgstr "Kay %s khipuqa manam tarikunchu"
+
+#  [ES] "%s pistas no encontradas."
+#: jukeboxactivity.py:329
+#, python-format
+msgid "%s tracks not found."
+msgstr "%s takiykuna mana tarisqa."
+
+#  [ES] "Detalles"
+#: jukeboxactivity.py:331
+msgid "Details"
+msgstr "Aswa qharinakuna"
+
+#  [ES] "<b>Pistas perdidas</b>"
+#: jukeboxactivity.py:340
+msgid "<b>Missing tracks</b>"
+msgstr "<b>Chinkasqa takiykuna</b>"
+
+#  [ES] "Error"
+#: jukeboxactivity.py:370
+msgid "Error"
+msgstr "Pantay"
+
+#  [ES] "Este \"%s\" archivo no puede reproducirse"
+#: jukeboxactivity.py:371
+#, python-format
+msgid "This \"%s\" file can't be played"
+msgstr "Kay khipuqa \"%s\" manam puririnchu"
 
 #  "Lista de reproducción de Jukebox"
-#: jukeboxactivity.py:382
+#: jukeboxactivity.py:447
 msgid "Jukebox playlist"
 msgstr "Takiykuna"
 
-#: widgets.py:46
+#  [ES] "Nº."
+#: widgets.py:59
 msgid "No."
-msgstr ""
+msgstr "No."
 
 # "Lista de reproducción"
-#: widgets.py:53
+#: widgets.py:66
 msgid "Play List"
 msgstr "Takiykunata takichiy"
 
