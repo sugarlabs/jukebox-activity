@@ -31,7 +31,7 @@ COLUMNS_NAME = ('index', 'media', 'available')
 COLUMNS = dict((name, i) for i, name in enumerate(COLUMNS_NAME))
 
 
-class PlayListWidget(Gtk.ScrolledWindow):
+class PlayList(Gtk.ScrolledWindow):
     def __init__(self, play_callback):
         self._playlist = None
         self._play_callback = play_callback
