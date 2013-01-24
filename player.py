@@ -80,7 +80,6 @@ class GstPlayer(GObject.GObject):
         videowidget.realize()
         self.videowidget = videowidget
         self.videowidget_xid = videowidget.get_window().get_xid()
-        self._init_video_sink()
 
     def __on_error_message(self, bus, msg):
         self.stop()
@@ -102,29 +101,6 @@ class GstPlayer(GObject.GObject):
         self.pipeline.set_state(Gst.State.READY)
         logging.debug('### Setting URI: %s', uri)
         self.player.set_property('uri', uri)
-
-    def _init_video_sink(self):
-        self.bin = Gst.Bin()
-        videoscale = Gst.ElementFactory.make('videoscale', 'videoscale')
-        self.bin.add(videoscale)
-        pad = videoscale.get_static_pad("sink")
-        ghostpad = Gst.GhostPad.new("sink", pad)
-        self.bin.add_pad(ghostpad)
-        videoscale.set_property("method", 0)
-
-        textoverlay = Gst.ElementFactory.make('textoverlay', 'textoverlay')
-        self.overlay = textoverlay
-        self.bin.add(textoverlay)
-        conv = Gst.ElementFactory.make("videoconvert", "conv")
-        self.bin.add(conv)
-        videosink = Gst.ElementFactory.make('autovideosink', 'autovideosink')
-        self.bin.add(videosink)
-
-        videoscale.link(textoverlay)
-        textoverlay.link(conv)
-        conv.link(videosink)
-
-        self.player.set_property("video-sink", self.bin)
 
     def set_overlay(self, title, artist, album):
         text = "%s\n%s" % (title, artist)
