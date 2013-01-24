@@ -37,6 +37,7 @@ class GstPlayer(GObject.GObject):
     __gsignals__ = {
         'error': (GObject.SignalFlags.RUN_FIRST, None, [str, str]),
         'eos': (GObject.SignalFlags.RUN_FIRST, None, []),
+        'play': (GObject.SignalFlags.RUN_FIRST, None, []),
     }
 
     def __init__(self, videowidget):
@@ -62,21 +63,6 @@ class GstPlayer(GObject.GObject):
         self.player = Gst.ElementFactory.make('playbin', None)
         self.pipeline.add(self.player)
 
-        # Set the proper flags to render the vis-plugin
-        GST_PLAY_FLAG_VIS = 1 << 3
-        GST_PLAY_FLAG_TEXT = 1 << 2
-        self.player.props.flags |= GST_PLAY_FLAG_VIS
-        self.player.props.flags |= GST_PLAY_FLAG_TEXT
-
-        r = Gst.Registry.get()
-        l = [x for x in r.get_feature_list(Gst.ElementFactory)
-             if (x.get_metadata('klass') == "Visualization")]
-        if len(l):
-            e = l.pop()  # take latest plugin in the list
-            vis_plug = Gst.ElementFactory.make(e.get_name(), e.get_name())
-            self.player.set_property('vis-plugin', vis_plug)
-
-        self.overlay = None
         videowidget.realize()
         self.videowidget = videowidget
         self.videowidget_xid = videowidget.get_window().get_xid()
@@ -101,20 +87,6 @@ class GstPlayer(GObject.GObject):
         self.pipeline.set_state(Gst.State.READY)
         logging.debug('### Setting URI: %s', uri)
         self.player.set_property('uri', uri)
-
-    def set_overlay(self, title, artist, album):
-        text = "%s\n%s" % (title, artist)
-        if album and len(album):
-            text += "\n%s" % album
-        self.overlay.set_property("text", text)
-        self.overlay.set_property("font-desc", "sans bold 14")
-        self.overlay.set_property("halignment", "right")
-        self.overlay.set_property("valignment", "bottom")
-        try:
-            # Only in OLPC versions of gstreamer-plugins-base for now
-            self.overlay.set_property("line-align", "left")
-        except:
-            pass
 
     def query_position(self):
         "Returns a (position, duration) tuple"
@@ -145,6 +117,7 @@ class GstPlayer(GObject.GObject):
         self.pipeline.set_state(Gst.State.PLAYING)
         self.playing = True
         self.error = False
+        self.emit('play')
 
     def stop(self):
         self.playing = False

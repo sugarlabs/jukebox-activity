@@ -169,6 +169,8 @@ class JukeboxActivity(activity.Activity):
         self.player = GstPlayer(self.videowidget)
         self.player.connect("eos", self._player_eos_cb)
         self.player.connect("error", self._player_error_cb)
+        self.player.connect('play', self.__player_play_cb)
+
         self.p_position = Gst.CLOCK_TIME_NONE
         self.p_duration = Gst.CLOCK_TIME_NONE
 
@@ -348,6 +350,21 @@ class JukeboxActivity(activity.Activity):
 
     def _alert_cancel_cb(self, alert, response_id):
         self.remove_alert(alert)
+
+    def __player_play_cb(self, widget):
+        # Do not show the visualization widget if we are playing just
+        # an audio stream
+
+        def callback():
+            if self.player.playing_video():
+                self._switch_canvas(True)
+            else:
+                self._switch_canvas(False)
+            return False
+
+        # HACK: we need a timeout here because gstreamer returns
+        # n-video = 0 if we call it immediately
+        GObject.timeout_add(1000, callback)
 
     def _player_error_cb(self, widget, message, detail):
         self.player.stop()
