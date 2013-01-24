@@ -399,6 +399,12 @@ class JukeboxActivity(activity.Activity):
             #del chooser
             pass
 
+    def can_close(self):
+        # We need to put the Gst.State in NULL so gstreamer can
+        # cleanup the pipeline
+        self.player.stop()
+        return True
+
     def read_file(self, file_path):
         """Load a file from the datastore on activity start."""
         logging.debug('JukeBoxAtivity.read_file: %s', file_path)
