@@ -55,7 +55,7 @@ PLAYLIST_WIDTH_PROP = 1.0 / 3
 class JukeboxActivity(activity.Activity):
 
     __gsignals__ = {
-        'no-stream': (GObject.SignalFlags.RUN_FIRST, None, []),
+        'playlist-finished': (GObject.SignalFlags.RUN_FIRST, None, []),
         }
 
     def __init__(self, handle):
@@ -91,7 +91,7 @@ class JukeboxActivity(activity.Activity):
         toolbar_box.show_all()
 
         self.connect('key_press_event', self.__key_press_event_cb)
-        self.connect('no-stream', self.__no_stream_cb)
+        self.connect('playlist-finished', self.__playlist_finished_cb)
 
         # We want to be notified when the activity gets the focus or
         # loses it. When it is not active, we don't need to keep
@@ -138,6 +138,8 @@ class JukeboxActivity(activity.Activity):
             emptypanel.show(self, 'activity-jukebox',
                             _('No media'), _('Choose media files'),
                             self.control.show_picker_cb)
+
+        self.control.check_if_next_prev()
 
     def __notify_active_cb(self, widget, event):
         """Sugar notify us that the activity is becoming active or inactive.
@@ -189,10 +191,15 @@ class JukeboxActivity(activity.Activity):
             self.control._button_clicked_cb(None)
             return True
 
-    def __no_stream_cb(self, widget):
+    def __playlist_finished_cb(self, widget):
         self._switch_canvas(show_video=False)
         self._view_toolbar._show_playlist.set_active(True)
         self.unfullscreen()
+
+        # Select the first stream to be played when Play button will
+        # be pressed
+        self.playlist_widget._current_playing = 0
+        self.control.check_if_next_prev()
 
     def songchange(self, direction):
         current_playing = self.playlist_widget._current_playing
@@ -203,7 +210,7 @@ class JukeboxActivity(activity.Activity):
             self.play_index(current_playing + 1)
 
         else:
-            self.emit('no-stream')
+            self.emit('playlist-finished')
 
     def play_index(self, index):
         # README: this line is no more necessary because of the

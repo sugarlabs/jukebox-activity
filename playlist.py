@@ -40,7 +40,7 @@ class PlayList(Gtk.ScrolledWindow):
 
     def __init__(self):
         self._not_found_files = 0
-        self._current_playing = None
+        self._current_playing = 0
         self._items = []
 
         GObject.GObject.__init__(self, hadjustment=None,

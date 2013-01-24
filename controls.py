@@ -117,7 +117,7 @@ class Controls(GObject.GObject):
         total_time.show()
         self.toolbar.insert(total_time, -1)
 
-        self.activity.connect('no-stream', self.__no_stream_cb)
+        self.activity.connect('playlist-finished', self.__playlist_finished_cb)
         self.activity.player.connect('play', self.__player_play)
 
     def __player_play(self, widget):
@@ -132,6 +132,7 @@ class Controls(GObject.GObject):
 
     def __erase_playlist_entry_clicked_cb(self, widget):
         self.activity.playlist_widget.delete_selected_items()
+        self.check_if_next_prev()
 
     def show_picker_cb(self, button=None):
         jobject = None
@@ -163,14 +164,25 @@ class Controls(GObject.GObject):
 
     def check_if_next_prev(self):
         current_playing = self.activity.playlist_widget._current_playing
-        if current_playing == 0:
+        if len(self.activity.playlist_widget._items) == 0:
+            # There is no media in the playlist
             self.prev_button.set_sensitive(False)
-        else:
-            self.prev_button.set_sensitive(True)
-        if current_playing == len(self.activity.playlist_widget._items) - 1:
+            self.button.set_sensitive(False)
             self.next_button.set_sensitive(False)
         else:
-            self.next_button.set_sensitive(True)
+            self.button.set_sensitive(True)
+
+            current_playing = self.activity.playlist_widget._current_playing
+            if current_playing == 0:
+                self.prev_button.set_sensitive(False)
+            else:
+                self.prev_button.set_sensitive(True)
+
+            items = len(self.activity.playlist_widget._items)
+            if current_playing == items - 1:
+                self.next_button.set_sensitive(False)
+            else:
+                self.next_button.set_sensitive(True)
 
     def _button_clicked_cb(self, widget):
         self.set_enabled()
@@ -183,6 +195,13 @@ class Controls(GObject.GObject):
             if self.activity.player.error:
                 self.set_disabled()
             else:
+                if self.activity.player.player.props.current_uri is None:
+                    # There is no stream selected to be played
+                    # yet. Select the first one
+                    path = self.activity.playlist_widget._items[0]['path']
+                    self.activity.playlist_widget._current_playing = 0
+                    self.activity.player.set_uri(path)
+
                 self.activity.player.play()
                 self.activity._switch_canvas(True)
                 self._scale_update_id = GObject.timeout_add(
@@ -272,7 +291,7 @@ class Controls(GObject.GObject):
 
         return True
 
-    def __no_stream_cb(self, widget):
+    def __playlist_finished_cb(self, widget):
         self.activity.player.stop()
         self.set_button_play()
         self.check_if_next_prev()
