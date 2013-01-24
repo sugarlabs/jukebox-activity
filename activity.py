@@ -281,11 +281,12 @@ class JukeboxActivity(activity.Activity):
 
     def __player_error_cb(self, widget, message, detail):
         self.player.stop()
-        self.player.set_uri(None)
         self.control.set_disabled()
 
-        file_path = self.playlist[self.currentplaying]['url']\
-            .replace('journal://', 'file://')
+        logging.error('ERROR MESSAGE: %s', message)
+        logging.error('ERROR DETAIL: %s', detail)
+
+        file_path = self.playlist_widget._items[self.playlist_widget._current_playing]['path']
         mimetype = mime.get_for_file(file_path)
 
         title = _('Error')
