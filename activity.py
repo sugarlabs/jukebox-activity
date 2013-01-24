@@ -40,7 +40,6 @@ gi.require_version('Gst', '1.0')
 from gi.repository import GObject
 from gi.repository import Gdk
 from gi.repository import Gtk
-from gi.repository import Gst
 from gi.repository import Gio
 
 from viewtoolbar import ViewToolbar
@@ -53,7 +52,6 @@ PLAYLIST_WIDTH_PROP = 1.0 / 3
 
 
 class JukeboxActivity(activity.Activity):
-    UPDATE_INTERVAL = 500
 
     __gsignals__ = {
         'no-stream': (GObject.SignalFlags.RUN_FIRST, None, []),
@@ -88,10 +86,6 @@ class JukeboxActivity(activity.Activity):
         toolbar_box.toolbar.insert(view_toolbar_button, -1)
         view_toolbar_button.show()
 
-        self.control = Controls(toolbar_box.toolbar, self)
-
-        toolbar_box.toolbar.insert(StopButton(self), -1)
-
         self.set_toolbar_box(toolbar_box)
         toolbar_box.show_all()
 
@@ -102,17 +96,23 @@ class JukeboxActivity(activity.Activity):
         # reproducing the video
         self.connect('notify::active', self.__notify_active_cb)
 
-        self.update_id = -1
-        self.changed_id = -1
-        self.seek_timeout_id = -1
-        self.player = None
-
         self.canvas = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
 
         self.playlist_widget = PlayList()
         self.playlist_widget.connect('play-index', self.__play_index_cb)
         self.playlist_widget.show()
         self.canvas.pack_start(self.playlist_widget, False, True, 0)
+
+        # Create the player just once
+        logging.debug('Instantiating GstPlayer')
+        self.player = GstPlayer()
+        self.player.connect('eos', self.__player_eos_cb)
+        self.player.connect('error', self.__player_error_cb)
+        self.player.connect('play', self.__player_play_cb)
+
+        self.control = Controls(self, toolbar_box.toolbar)
+
+        toolbar_box.toolbar.insert(StopButton(self), -1)
 
         self._empty_widget = Gtk.Label(label="")
         self._empty_widget.show()
@@ -122,15 +122,7 @@ class JukeboxActivity(activity.Activity):
         self.show_all()
         self.canvas.connect('size-allocate', self.__size_allocate_cb)
 
-        # Create the player just once
-        logging.debug('Instantiating GstPlayer')
-        self.player = GstPlayer(self.videowidget)
-        self.player.connect('eos', self.__player_eos_cb)
-        self.player.connect('error', self.__player_error_cb)
-        self.player.connect('play', self.__player_play_cb)
-
-        self.p_position = Gst.CLOCK_TIME_NONE
-        self.p_duration = Gst.CLOCK_TIME_NONE
+        self.player.init_view_area(self.videowidget)
 
         volume_monitor = Gio.VolumeMonitor.get()
         volume_monitor.connect('mount-added', self.__mount_added_cb)
@@ -188,19 +180,8 @@ class JukeboxActivity(activity.Activity):
             return False
 
         if keyname == "space":
-            self.play_toggled()
+            self.control._button_clicked_cb(None)
             return True
-
-    def check_if_next_prev(self):
-        current_playing = self.playlist_widget._current_playing
-        if current_playing == 0:
-            self.control.prev_button.set_sensitive(False)
-        else:
-            self.control.prev_button.set_sensitive(True)
-        if current_playing == len(self.playlist_widget._items) - 1:
-            self.control.next_button.set_sensitive(False)
-        else:
-            self.control.next_button.set_sensitive(True)
 
     def songchange(self, direction):
         current_playing = self.playlist_widget._current_playing
@@ -221,7 +202,7 @@ class JukeboxActivity(activity.Activity):
         self.playlist_widget._current_playing = index
 
         path = self.playlist_widget._items[index]['path']
-        self.check_if_next_prev()
+        self.control.check_if_next_prev()
 
         self.player.set_uri(path)
         self.player.play()
@@ -232,7 +213,7 @@ class JukeboxActivity(activity.Activity):
         # self._switch_canvas(show_video=True)
         self.playlist_widget._current_playing = index
 
-        self.check_if_next_prev()
+        self.control.check_if_next_prev()
 
         self.player.set_uri(path)
         self.player.play()
@@ -342,89 +323,6 @@ class JukeboxActivity(activity.Activity):
 
             write_playlist_to_file(self._playlist_jobject.file_path)
             datastore.write(self._playlist_jobject)
-
-    def play_toggled(self):
-        self.control.set_enabled()
-
-        if self.player.is_playing():
-            self.player.pause()
-            self.control.set_button_play()
-        else:
-            if self.player.error:
-                self.control.set_disabled()
-            else:
-                self.player.play()
-                if self.update_id == -1:
-                    self.update_id = GObject.timeout_add(self.UPDATE_INTERVAL,
-                                                         self.update_scale_cb)
-                self.control.set_button_pause()
-
-    def scale_button_press_cb(self, widget, event):
-        self.control.button.set_sensitive(False)
-        self.was_playing = self.player.is_playing()
-        if self.was_playing:
-            self.player.pause()
-
-        # don't timeout-update position during seek
-        if self.update_id != -1:
-            GObject.source_remove(self.update_id)
-            self.update_id = -1
-
-        # make sure we get changed notifies
-        if self.changed_id == -1:
-            self.changed_id = self.control.hscale.connect('value-changed',
-                self.scale_value_changed_cb)
-
-    def scale_value_changed_cb(self, scale):
-        # see seek.c:seek_cb
-        real = long(scale.get_value() * self.p_duration / 100)  # in ns
-        self.player.seek(real)
-        # allow for a preroll
-        self.player.get_state(timeout=50 * Gst.MSECOND)  # 50 ms
-
-    def scale_button_release_cb(self, widget, event):
-        # see seek.cstop_seek
-        widget.disconnect(self.changed_id)
-        self.changed_id = -1
-
-        self.control.button.set_sensitive(True)
-        if self.seek_timeout_id != -1:
-            GObject.source_remove(self.seek_timeout_id)
-            self.seek_timeout_id = -1
-        else:
-            if self.was_playing:
-                self.player.play()
-
-        if self.update_id != -1:
-            self.error('Had a previous update timeout id')
-        else:
-            self.update_id = GObject.timeout_add(self.UPDATE_INTERVAL,
-                self.update_scale_cb)
-
-    def update_scale_cb(self):
-        success, self.p_position, self.p_duration = \
-            self.player.query_position()
-
-        if not success:
-            return True
-
-        if self.p_position != Gst.CLOCK_TIME_NONE:
-            value = self.p_position * 100.0 / self.p_duration
-            self.control.adjustment.set_value(value)
-
-            # Update the current time
-            seconds = self.p_position * 10 ** -9
-            time = '%2d:%02d' % (int(seconds / 60), int(seconds % 60))
-            self.control.current_time_label.set_text(time)
-
-        # FIXME: this should be updated just once when the file starts
-        # the first time
-        if self.p_duration != Gst.CLOCK_TIME_NONE:
-            seconds = self.p_duration * 10 ** -9
-            time = '%2d:%02d' % (int(seconds / 60), int(seconds % 60))
-            self.control.total_time_label.set_text(time)
-
-        return True
 
     def __go_fullscreen_cb(self, toolbar):
         self.fullscreen()

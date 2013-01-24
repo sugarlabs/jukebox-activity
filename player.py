@@ -40,7 +40,7 @@ class GstPlayer(GObject.GObject):
         'play': (GObject.SignalFlags.RUN_FIRST, None, []),
     }
 
-    def __init__(self, videowidget):
+    def __init__(self):
         GObject.GObject.__init__(self)
 
         self.playing = False
@@ -63,6 +63,7 @@ class GstPlayer(GObject.GObject):
         self.player = Gst.ElementFactory.make('playbin', None)
         self.pipeline.add(self.player)
 
+    def init_view_area(self, videowidget):
         videowidget.realize()
         self.videowidget = videowidget
         self.videowidget_xid = videowidget.get_window().get_xid()
