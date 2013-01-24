@@ -33,6 +33,7 @@ class Controls(GObject.GObject):
     add, remove, etc) toolbar"""
 
     SCALE_UPDATE_INTERVAL = 1000
+    RESEEK_TIMEOUT = 250  # ms
 
     def __init__(self, activity, toolbar):
         GObject.GObject.__init__(self)
@@ -41,8 +42,8 @@ class Controls(GObject.GObject):
         self.toolbar = toolbar
 
         self._scale_update_id = -1
-        self._scale_changed_id = -1
-        self._seek_timeout_id = -1
+        self._scale_value_changed_id = -1
+        self._scale_reseek_timeout_id = -1
 
         self.open_button = ToolButton('list-add')
         self.open_button.set_tooltip(_('Add track'))
@@ -225,8 +226,8 @@ class Controls(GObject.GObject):
 
     def __scale_button_press_cb(self, widget, event):
         self.button.set_sensitive(False)
-        self.was_playing = self.activity.player.is_playing()
-        if self.was_playing:
+        self._was_playing = self.activity.player.is_playing()
+        if self._was_playing:
             self.activity.player.pause()
 
         # don't timeout-update position during seek
@@ -235,34 +236,41 @@ class Controls(GObject.GObject):
             self._scale_update_id = -1
 
         # make sure we get changed notifies
-        if self._scale_changed_id == -1:
-            self._scale_changed_id = self.hscale.connect('value-changed',
+        if self._scale_value_changed_id == -1:
+            self._scale_value_changed_id = self.hscale.connect('value-changed',
                 self.__scale_value_changed_cb)
 
     def __scale_value_changed_cb(self, scale):
-        # see seek.c:seek_cb
-        real = long(scale.get_value() * self.p_duration / 100)  # in ns
-        self.activity.player.seek(real)
-        # allow for a preroll
+        if self._scale_reseek_timeout_id != -1:
+            GObject.source_remove(self._scale_reseek_timeout_id)
+
+        self._scale_reseek_timeout_id = GObject.timeout_add(
+            self.RESEEK_TIMEOUT, self._reseek)
+
+    def _reseek(self):
+        self._scale_reseek_timeout_id = -1
+        location = long(self.activity.control.hscale.get_value() * \
+                            self.p_duration / 100)  # in ns
+        self.activity.player.seek(location)
+        # Allow for a preroll
         self.activity.player.get_state(timeout=50 * Gst.MSECOND)  # 50 ms
+        return False
 
     def __scale_button_release_cb(self, widget, event):
-        # see seek.cstop_seek
-        widget.disconnect(self._scale_changed_id)
-        self._scale_changed_id = -1
+        if self._scale_reseek_timeout_id != -1:
+            GObject.source_remove(self._scale_reseek_timeout_id)
+            self._scale_reseek_timeout_id = -1
+        self._reseek()
+
+        widget.disconnect(self._scale_value_changed_id)
+        self._scale_value_changed_id = -1
 
         self.button.set_sensitive(True)
-        if self._seek_timeout_id != -1:
-            GObject.source_remove(self._seek_timeout_id)
-            self._seek_timeout_id = -1
-        else:
-            if self.was_playing:
-                self.activity.player.play()
 
-        if self._scale_update_id != -1:
-            # self.error('Had a previous update timeout id')
-            pass
-        else:
+        if self._was_playing:
+            self.activity.player.play()
+
+        if self._scale_update_id == -1:
             self._scale_update_id = GObject.timeout_add(
                 self.SCALE_UPDATE_INTERVAL, self.__update_scale_cb)
 
