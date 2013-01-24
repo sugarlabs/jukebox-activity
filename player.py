@@ -180,3 +180,6 @@ class GstPlayer(GObject.GObject):
 
     def is_playing(self):
         return self.playing
+
+    def playing_video(self):
+        return self.player.props.n_video > 0

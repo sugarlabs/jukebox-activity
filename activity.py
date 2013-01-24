@@ -103,9 +103,9 @@ class JukeboxActivity(activity.Activity):
         self.connect("key_press_event", self._key_press_event_cb)
 
         # We want to be notified when the activity gets the focus or
-        # loses it.  When it is not active, we don't need to keep
+        # loses it. When it is not active, we don't need to keep
         # reproducing the video
-        self.connect("notify::active", self._notify_active_cb)
+        self.connect('notify::active', self.__notify_active_cb)
 
         # FIXME: this is related with shared activity and it doesn't work
         # if handle.uri:
@@ -172,12 +172,16 @@ class JukeboxActivity(activity.Activity):
         self.p_position = Gst.CLOCK_TIME_NONE
         self.p_duration = Gst.CLOCK_TIME_NONE
 
-    def _notify_active_cb(self, widget, event):
+    def __notify_active_cb(self, widget, event):
         """Sugar notify us that the activity is becoming active or inactive.
         When we are inactive, we stop the player if it is reproducing
         a video.
         """
-        if self.player.player.props.uri is not None:
+
+        logging.debug('JukeboxActivity notify::active signal received')
+
+        if self.player.player.props.current_uri is not None and \
+                self.player.playing_video():
             if not self.player.is_playing() and self.props.active:
                 self.player.play()
             if self.player.is_playing() and not self.props.active:
