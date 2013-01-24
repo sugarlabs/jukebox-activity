@@ -100,6 +100,8 @@ class JukeboxActivity(activity.Activity):
 
         self.playlist_widget = PlayList()
         self.playlist_widget.connect('play-index', self.__play_index_cb)
+        self.playlist_widget.set_size_request(
+            Gdk.Screen.width() * PLAYLIST_WIDTH_PROP, 0)
         self.playlist_widget.show()
         self.canvas.pack_start(self.playlist_widget, False, True, 0)
 
@@ -120,7 +122,6 @@ class JukeboxActivity(activity.Activity):
         self.set_canvas(self.canvas)
         self._init_view_area()
         self.show_all()
-        self.canvas.connect('size-allocate', self.__size_allocate_cb)
 
         self.player.init_view_area(self.videowidget)
 
@@ -167,11 +168,6 @@ class JukeboxActivity(activity.Activity):
         else:
             self.view_area.set_current_page(0)
         self.canvas.queue_draw()
-
-    def __size_allocate_cb(self, widget, allocation):
-        canvas_size = self.canvas.get_allocation()
-        playlist_width = int(canvas_size.width * PLAYLIST_WIDTH_PROP)
-        self.playlist_widget.set_size_request(playlist_width, 0)
 
     def __key_press_event_cb(self, widget, event):
         keyname = Gdk.keyval_name(event.keyval)
