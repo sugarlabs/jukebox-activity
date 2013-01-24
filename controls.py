@@ -22,7 +22,9 @@ from gi.repository import GObject
 
 from gettext import gettext as _
 
+from sugar3 import mime
 from sugar3.graphics.toolbutton import ToolButton
+from sugar3.graphics.objectchooser import ObjectChooser
 
 
 class Controls(GObject.GObject):
@@ -38,13 +40,13 @@ class Controls(GObject.GObject):
         self.open_button = ToolButton('list-add')
         self.open_button.set_tooltip(_('Add track'))
         self.open_button.show()
-        self.open_button.connect('clicked', jukebox.open_button_clicked_cb)
+        self.open_button.connect('clicked', self.__open_button_clicked_cb)
         self.toolbar.insert(self.open_button, -1)
 
         erase_playlist_entry_btn = ToolButton(icon_name='list-remove')
         erase_playlist_entry_btn.set_tooltip(_('Remove track'))
         erase_playlist_entry_btn.connect('clicked',
-                 jukebox._erase_playlist_entry_clicked_cb)
+                 self.__erase_playlist_entry_clicked_cb)
         self.toolbar.insert(erase_playlist_entry_btn, -1)
 
         spacer = Gtk.SeparatorToolItem()
@@ -107,6 +109,29 @@ class Controls(GObject.GObject):
         total_time.add(self.total_time_label)
         total_time.show()
         toolbar.insert(total_time, -1)
+
+    def __open_button_clicked_cb(self, widget):
+        self.__show_picker_cb()
+
+    def __erase_playlist_entry_clicked_cb(self, widget):
+        self.jukebox.playlist_widget.delete_selected_items()
+
+    def __show_picker_cb(self):
+        jobject = None
+        chooser = ObjectChooser(self.jukebox,
+                                what_filter=mime.GENERIC_TYPE_AUDIO)
+
+        try:
+            result = chooser.run()
+            if result == Gtk.ResponseType.ACCEPT:
+                jobject = chooser.get_selected_object()
+                if jobject and jobject.file_path:
+                    logging.info('Adding %s', jobject.file_path)
+                    self.jukebox.playlist_widget.load_file(jobject)
+                    self.jukebox.check_if_next_prev()
+        finally:
+            if jobject is not None:
+                jobject.destroy()
 
     def prev_button_clicked_cb(self, widget):
         self.jukebox.songchange('prev')

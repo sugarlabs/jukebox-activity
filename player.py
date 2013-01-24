@@ -85,7 +85,9 @@ class GstPlayer(GObject.GObject):
 
     def set_uri(self, uri):
         self.pipeline.set_state(Gst.State.READY)
-        logging.debug('### Setting URI: %s', uri)
+        # gstreamer needs the 'file://' prefix
+        uri = 'file://' + uri
+        logging.debug('URI: %s', uri)
         self.player.set_property('uri', uri)
 
     def query_position(self):
