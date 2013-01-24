@@ -91,6 +91,7 @@ class JukeboxActivity(activity.Activity):
         toolbar_box.show_all()
 
         self.connect('key_press_event', self.__key_press_event_cb)
+        self.connect('no-stream', self.__no_stream_cb)
 
         # We want to be notified when the activity gets the focus or
         # loses it. When it is not active, we don't need to keep
@@ -188,6 +189,11 @@ class JukeboxActivity(activity.Activity):
             self.control._button_clicked_cb(None)
             return True
 
+    def __no_stream_cb(self, widget):
+        self._switch_canvas(show_video=False)
+        self._view_toolbar._show_playlist.set_active(True)
+        self.unfullscreen()
+
     def songchange(self, direction):
         current_playing = self.playlist_widget._current_playing
         if direction == 'prev' and current_playing > 0:
@@ -197,7 +203,6 @@ class JukeboxActivity(activity.Activity):
             self.play_index(current_playing + 1)
 
         else:
-            self._switch_canvas(show_video=False)
             self.emit('no-stream')
 
     def play_index(self, index):
