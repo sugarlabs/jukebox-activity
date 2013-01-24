@@ -21,6 +21,7 @@
 
 import sys
 import logging
+import emptypanel
 from gettext import gettext as _
 
 from sugar3.activity import activity
@@ -74,15 +75,15 @@ class JukeboxActivity(activity.Activity):
         toolbar_box.toolbar.insert(activity_button, 0)
         self.title_entry = activity_toolbar.title
 
-        view_toolbar = ViewToolbar()
-        view_toolbar.connect('go-fullscreen',
+        self._view_toolbar = ViewToolbar()
+        self._view_toolbar.connect('go-fullscreen',
                              self.__go_fullscreen_cb)
-        view_toolbar.connect('toggle-playlist',
+        self._view_toolbar.connect('toggle-playlist',
                              self.__toggle_playlist_cb)
         view_toolbar_button = ToolbarButton(
-            page=view_toolbar,
+            page=self._view_toolbar,
             icon_name='toolbar-view')
-        view_toolbar.show()
+        self._view_toolbar.show()
         toolbar_box.toolbar.insert(view_toolbar_button, -1)
         view_toolbar_button.show()
 
@@ -96,14 +97,14 @@ class JukeboxActivity(activity.Activity):
         # reproducing the video
         self.connect('notify::active', self.__notify_active_cb)
 
-        self.canvas = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        self._video_canvas = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
 
         self.playlist_widget = PlayList()
         self.playlist_widget.connect('play-index', self.__play_index_cb)
         self.playlist_widget.set_size_request(
             Gdk.Screen.width() * PLAYLIST_WIDTH_PROP, 0)
         self.playlist_widget.show()
-        self.canvas.pack_start(self.playlist_widget, False, True, 0)
+        self._video_canvas.pack_start(self.playlist_widget, False, True, 0)
 
         # Create the player just once
         logging.debug('Instantiating GstPlayer')
@@ -119,7 +120,7 @@ class JukeboxActivity(activity.Activity):
         self._empty_widget = Gtk.Label(label="")
         self._empty_widget.show()
         self.videowidget = VideoWidget()
-        self.set_canvas(self.canvas)
+        self.set_canvas(self._video_canvas)
         self._init_view_area()
         self.show_all()
 
@@ -128,6 +129,14 @@ class JukeboxActivity(activity.Activity):
         volume_monitor = Gio.VolumeMonitor.get()
         volume_monitor.connect('mount-added', self.__mount_added_cb)
         volume_monitor.connect('mount-removed', self.__mount_removed_cb)
+
+        if handle.object_id is None:
+            # The activity was launched from scratch. We need to show
+            # the Empty Widget
+            self.playlist_widget.hide()
+            emptypanel.show(self, 'activity-jukebox',
+                            _('No media'), _('Choose media files'),
+                            self.control.show_picker_cb)
 
     def __notify_active_cb(self, widget, event):
         """Sugar notify us that the activity is becoming active or inactive.
@@ -153,7 +162,7 @@ class JukeboxActivity(activity.Activity):
         self.view_area.set_show_tabs(False)
         self.view_area.append_page(self._empty_widget, None)
         self.view_area.append_page(self.videowidget, None)
-        self.canvas.pack_end(self.view_area, expand=True,
+        self._video_canvas.pack_end(self.view_area, expand=True,
                              fill=True, padding=0)
 
     def _switch_canvas(self, show_video):
@@ -167,7 +176,7 @@ class JukeboxActivity(activity.Activity):
             self.view_area.set_current_page(1)
         else:
             self.view_area.set_current_page(0)
-        self.canvas.queue_draw()
+        self._video_canvas.queue_draw()
 
     def __key_press_event_cb(self, widget, event):
         keyname = Gdk.keyval_name(event.keyval)
@@ -324,11 +333,11 @@ class JukeboxActivity(activity.Activity):
         self.fullscreen()
 
     def __toggle_playlist_cb(self, toolbar):
-        if self.playlist_widget.get_visible():
-            self.playlist_widget.hide()
-        else:
+        if self._view_toolbar._show_playlist.get_active():
             self.playlist_widget.show_all()
-        self.canvas.queue_draw()
+        else:
+            self.playlist_widget.hide()
+        self._video_canvas.queue_draw()
 
 
 class VideoWidget(Gtk.DrawingArea):

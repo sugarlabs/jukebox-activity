@@ -44,7 +44,7 @@ class ViewToolbar(Gtk.Toolbar):
         GObject.GObject.__init__(self)
 
         self._show_playlist = ToggleToolButton('view-list')
-        self._show_playlist.set_active(True)
+        self._show_playlist.set_active(False)
         self._show_playlist.set_tooltip(_('Show Playlist'))
         self._show_playlist.connect('toggled', self._playlist_toggled_cb)
         self.insert(self._show_playlist, -1)
