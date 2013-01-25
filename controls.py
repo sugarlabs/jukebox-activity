@@ -33,6 +33,7 @@ class Controls(GObject.GObject):
     add, remove, etc) toolbar"""
 
     SCALE_UPDATE_INTERVAL = 1000
+    SCALE_DURATION_TEXT = 100
     RESEEK_TIMEOUT = 250  # ms
 
     def __init__(self, activity, toolbar):
@@ -125,8 +126,29 @@ class Controls(GObject.GObject):
         if self._scale_update_id == -1:
             self._scale_update_id = GObject.timeout_add(
                 self.SCALE_UPDATE_INTERVAL, self.__update_scale_cb)
+
+        # We need to wait for GstPlayer to load the stream's duration
+        GObject.timeout_add(self.SCALE_DURATION_TEXT,
+                            self.__set_scale_duration)
+
         self.set_enabled()
         self.set_button_pause()
+
+    def __set_scale_duration(self):
+        success, self.p_position, self.p_duration = \
+            self.activity.player.query_position()
+
+        if success and self.p_duration != Gst.CLOCK_TIME_NONE:
+            seconds = self.p_duration * 10 ** -9
+            time = '%2d:%02d' % (int(seconds / 60), int(seconds % 60))
+            self.total_time_label.set_text(time)
+            # Once we set the total_time we don't need to change it
+            # until a new stream is played
+            return False
+        else:
+            # We don't have the stream's duration yet, we need to call
+            # this method again
+            return True
 
     def __open_button_clicked_cb(self, widget):
         self.show_picker_cb()
@@ -278,10 +300,7 @@ class Controls(GObject.GObject):
         success, self.p_position, self.p_duration = \
             self.activity.player.query_position()
 
-        if not success:
-            return True
-
-        if self.p_position != Gst.CLOCK_TIME_NONE:
+        if success and self.p_position != Gst.CLOCK_TIME_NONE:
             value = self.p_position * 100.0 / self.p_duration
             self.adjustment.set_value(value)
 
@@ -289,13 +308,6 @@ class Controls(GObject.GObject):
             seconds = self.p_position * 10 ** -9
             time = '%2d:%02d' % (int(seconds / 60), int(seconds % 60))
             self.current_time_label.set_text(time)
-
-        # FIXME: this should be updated just once when the file starts
-        # the first time
-        if self.p_duration != Gst.CLOCK_TIME_NONE:
-            seconds = self.p_duration * 10 ** -9
-            time = '%2d:%02d' % (int(seconds / 60), int(seconds % 60))
-            self.total_time_label.set_text(time)
 
         return True
 
