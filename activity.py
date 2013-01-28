@@ -33,6 +33,8 @@ from sugar3.graphics.toolbarbox import ToolbarButton
 from sugar3.activity.widgets import StopButton
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.graphics.alert import ErrorAlert
+from sugar3.graphics.alert import Alert
+from sugar3.graphics.icon import Icon
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -102,6 +104,8 @@ class JukeboxActivity(activity.Activity):
 
         self.playlist_widget = PlayList()
         self.playlist_widget.connect('play-index', self.__play_index_cb)
+        self.playlist_widget.connect('missing-tracks',
+                                     self.__missing_tracks_cb)
         self.playlist_widget.set_size_request(
             Gdk.Screen.width() * PLAYLIST_WIDTH_PROP, 0)
         self.playlist_widget.show()
@@ -258,6 +262,46 @@ class JukeboxActivity(activity.Activity):
         self.view_area.set_current_page(0)
         self.remove_alert(self._alert)
         self.playlist_widget.update()
+
+    def __missing_tracks_cb(self, widget, tracks):
+        self._show_missing_tracks_alert(tracks)
+
+    def _show_missing_tracks_alert(self, tracks):
+        self._alert = Alert()
+        title = _('%s tracks not found.') % len(tracks)
+        self._alert.props.title = title
+        icon = Icon(icon_name='dialog-cancel')
+        self._alert.add_button(Gtk.ResponseType.CANCEL, _('Dismiss'), icon)
+        icon.show()
+
+        icon = Icon(icon_name='dialog-ok')
+        self._alert.add_button(Gtk.ResponseType.APPLY, _('Details'), icon)
+        icon.show()
+        self.add_alert(self._alert)
+        self._alert.connect(
+            'response', self.__missing_tracks_alert_response_cb, tracks)
+
+    def __missing_tracks_alert_response_cb(self, alert, response_id, tracks):
+        if response_id == Gtk.ResponseType.APPLY:
+            vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+            vbox.props.valign = Gtk.Align.CENTER
+            label = Gtk.Label(label='')
+            label.set_markup(_('<b>Missing tracks</b>'))
+            vbox.pack_start(label, False, False, 15)
+
+            for track in tracks:
+                label = Gtk.Label(label=track['path'])
+                vbox.add(label)
+
+            _missing_tracks = Gtk.ScrolledWindow()
+            _missing_tracks.add_with_viewport(vbox)
+            _missing_tracks.show_all()
+
+            self.view_area.append_page(_missing_tracks, None)
+
+            self.view_area.set_current_page(2)
+
+        self.remove_alert(alert)
 
     def _alert_cancel_cb(self, alert, response_id):
         self.remove_alert(alert)

@@ -36,10 +36,10 @@ class PlayList(Gtk.ScrolledWindow):
 
     __gsignals__ = {
         'play-index': (GObject.SignalFlags.RUN_FIRST, None, [int, str]),
+        'missing-tracks': (GObject.SignalFlags.RUN_FIRST, None, [object]),
         }
 
     def __init__(self):
-        self._not_found_files = 0
         self._current_playing = 0
         self._items = []
 
@@ -130,18 +130,15 @@ class PlayList(Gtk.ScrolledWindow):
         else:
             return False
 
-    def get_missing_tracks(self):
+    def _get_missing_tracks(self):
         missing_tracks = []
-        for track in self._playlist:
+        for track in self._items:
             if not track['available']:
                 missing_tracks.append(track)
         return missing_tracks
 
     def _load_m3u_playlist(self, file_path):
         for uri in self._read_m3u_playlist(file_path):
-            if not self.check_available_media(uri['path']):
-                self._not_found_files += 1
-
             self._add_track(uri['path'], uri['title'])
 
     def _load_stream(self, file_path, title=None):
@@ -167,6 +164,11 @@ class PlayList(Gtk.ScrolledWindow):
         else:
             # is not a M3U playlist
             self._load_stream(file_path, title)
+
+        missing_tracks = self._get_missing_tracks()
+        if len(missing_tracks) > 0:
+            logging.info('%s tracks not found', len(missing_tracks))
+            self.emit('missing-tracks', missing_tracks)
 
     def update(self):
         for tree_item, playlist_item in zip(self.treemodel, self._items):
