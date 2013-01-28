@@ -172,7 +172,8 @@ class PlayList(Gtk.ScrolledWindow):
 
     def update(self):
         for tree_item, playlist_item in zip(self.treemodel, self._items):
-            tree_item[2] = self.check_available_media(playlist_item['path'])
+            tree_item[2] = playlist_item['available'] = \
+                self.check_available_media(playlist_item['path'])
 
     def _add_track(self, file_path, title):
         available = self.check_available_media(file_path)

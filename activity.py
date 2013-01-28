@@ -131,9 +131,9 @@ class JukeboxActivity(activity.Activity):
 
         self.player.init_view_area(self.videowidget)
 
-        volume_monitor = Gio.VolumeMonitor.get()
-        volume_monitor.connect('mount-added', self.__mount_added_cb)
-        volume_monitor.connect('mount-removed', self.__mount_removed_cb)
+        self._volume_monitor = Gio.VolumeMonitor.get()
+        self._volume_monitor.connect('mount-added', self.__mount_added_cb)
+        self._volume_monitor.connect('mount-removed', self.__mount_removed_cb)
 
         if handle.object_id is None:
             # The activity was launched from scratch. We need to show
