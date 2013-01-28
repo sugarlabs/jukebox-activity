@@ -89,10 +89,11 @@ class PlayList(Gtk.ScrolledWindow):
         index = model.get_value(treeiter, COLUMNS['index'])
         # TODO: put the path inside the ListStore
         path = self._items[index]['path']
-        # TODO: check if the stream is available before emitting the signal
-        self._current_playing = index
-        self.set_cursor(index)
-        self.emit('play-index', index, path)
+        available = self._items[index]['available']
+        if available:
+            self._current_playing = index
+            self.set_cursor(index)
+            self.emit('play-index', index, path)
 
     def _set_number(self, column, cell, model, it, data):
         idx = model.get_value(it, COLUMNS['index'])

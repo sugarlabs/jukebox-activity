@@ -221,14 +221,18 @@ class Controls(GObject.GObject):
                 if self.activity.player.player.props.current_uri is None:
                     # There is no stream selected to be played
                     # yet. Select the first one
-                    path = self.activity.playlist_widget._items[0]['path']
-                    self.activity.playlist_widget._current_playing = 0
-                    self.activity.player.set_uri(path)
-
-                self.activity.player.play()
-                self.activity._switch_canvas(True)
-                self._scale_update_id = GObject.timeout_add(
-                    self.SCALE_UPDATE_INTERVAL, self.__update_scale_cb)
+                    available = self.activity.playlist_widget.\
+                        _items[0]['available']
+                    if available:
+                        path = self.activity.playlist_widget._items[0]['path']
+                        self.activity.playlist_widget.emit(
+                            'play-index', 0, path)
+                        self.activity.playlist_widget._current_playing = 0
+                else:
+                    self.activity.player.play()
+                    self.activity._switch_canvas(True)
+                    self._scale_update_id = GObject.timeout_add(
+                        self.SCALE_UPDATE_INTERVAL, self.__update_scale_cb)
 
     def set_button_play(self):
         self.button.set_icon_widget(self.play_image)
