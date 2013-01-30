@@ -223,6 +223,8 @@ class JukeboxActivity(activity.Activity):
         self.playlist_widget._current_playing = index
 
         path = self.playlist_widget._items[index]['path']
+        if self.playlist_widget.is_from_journal(path):
+            path = self.playlist_widget.get_path_from_journal(path)
         self.control.check_if_next_prev()
 
         self.player.set_uri(path)
@@ -233,6 +235,9 @@ class JukeboxActivity(activity.Activity):
         # .playing_video() method
         # self._switch_canvas(show_video=True)
         self.playlist_widget._current_playing = index
+
+        if self.playlist_widget.is_from_journal(path):
+            path = self.playlist_widget.get_path_from_journal(path)
 
         self.control.check_if_next_prev()
 

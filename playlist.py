@@ -125,6 +125,9 @@ class PlayList(Gtk.ScrolledWindow):
             self.treemodel.remove(self.treemodel.get_iter(row))
 
     def check_available_media(self, path):
+        if self.is_from_journal(path):
+            path = self.get_path_from_journal(path)
+
         if os.path.exists(path):
             return True
         else:
@@ -148,15 +151,21 @@ class PlayList(Gtk.ScrolledWindow):
         self._add_track(file_path, title)
 
     def load_file(self, jobject, title=None):
-        logging.debug('#### jobject: %s', type(jobject))
-        if isinstance(jobject, datastore.RawObject) or \
-           isinstance(jobject, datastore.DSObject):
-            file_path = jobject.file_path
+        if isinstance(jobject, datastore.RawObject):
+            logging.debug('Loading a datastore.RawObject')
+            file_path = mime_path = jobject.file_path
+            title = jobject.metadata['title']
+        elif isinstance(jobject, datastore.DSObject):
+            # This file is stored in the Journal (datastore)
+            logging.debug('Loading a datastore.DSObject')
+            file_path = 'journal://' + jobject.object_id
+            mime_path = datastore.get(jobject.object_id).file_path
             title = jobject.metadata['title']
         else:
-            file_path = jobject
+            logging.debug('Loading a %s', type(jobject))
+            file_path = mime_path = jobject
 
-        mimetype = mime.get_for_file('file://' + file_path)
+        mimetype = mime.get_for_file('file://' + mime_path)
         logging.info('read_file mime %s', mimetype)
         if mimetype == 'audio/x-mpegurl':
             # is a M3U playlist:
@@ -187,12 +196,16 @@ class PlayList(Gtk.ScrolledWindow):
     def _read_m3u_playlist(self, file_path):
         urls = []
         title = ''
+
+        if self.is_from_journal(file_path):
+            file_path = self.get_path_from_journal(file_path)
+
         for line in open(file_path).readlines():
             line = line.strip()
             if line != '':
                 if line.startswith('#EXTINF:'):
                     # line with data
-                    # EXTINF: title
+                    # EXTINF:title
                     title = line[len('#EXTINF:'):]
                 else:
                     uri = {}
@@ -220,3 +233,13 @@ class PlayList(Gtk.ScrolledWindow):
 
         jobject.file_path = tempfile.mkstemp(dir=temp_path)[1]
         return jobject
+
+    def is_from_journal(self, path):
+        if path.startswith('journal://'):
+            return True
+        else:
+            return False
+
+    def get_path_from_journal(self, path):
+        object_id = path[len('journal://'):]
+        return datastore.get(object_id).file_path
