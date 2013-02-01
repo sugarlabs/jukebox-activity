@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 00:31-0400\n"
-"PO-Revision-Date: 2012-11-07 16:49+0200\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
+"PO-Revision-Date: 2013-02-01 16:30+0200\n"
 "Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: da\n"
@@ -39,72 +39,86 @@ msgstr ""
 "Bliv DJ, bliv en VJ. Afspil dine yndlingsvideoer og sange. Del de sange du "
 "elsker med dine venner, se film og uddannelsesvideoer sammen, og meget mere!"
 
-#: ControlToolbar.py:46
-msgid "Show Playlist"
-msgstr "Vis afspilningsliste"
-
-#: ControlToolbar.py:52
-msgid "Fullscreen"
-msgstr "Fuldskærm"
-
-#: ControlToolbar.py:74
-msgid "Add track"
-msgstr "Tilføj nummer"
-
-#: ControlToolbar.py:80
-msgid "Remove track"
-msgstr "Fjern nummer"
-
-#: ControlToolbar.py:90
-msgid "Previous"
-msgstr "Forrige"
-
-#: ControlToolbar.py:111
-msgid "Next"
-msgstr "Næste"
-
-#: jukeboxactivity.py:79
+#: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Jukeboks-aktivitet"
 
-#: jukeboxactivity.py:292
-#, python-format
-msgid "The file %s was not found"
-msgstr "Filen %s blev ikke fundet"
+#: activity.py:143
+msgid "No media"
+msgstr "Intet medie"
 
-#: jukeboxactivity.py:329
+#: activity.py:143
+msgid "Choose media files"
+msgstr "Vælg mediefiler"
+
+#: activity.py:271
 #, python-format
 msgid "%s tracks not found."
 msgstr "Der var %s numre som ikke blev fundet."
 
-#: jukeboxactivity.py:331
+#: activity.py:274
+msgid "Dismiss"
+msgstr "Afvis"
+
+#: activity.py:278
 msgid "Details"
 msgstr "Detaljer"
 
-#: jukeboxactivity.py:340
+#: activity.py:289
 msgid "<b>Missing tracks</b>"
 msgstr "<b>Manglende numre</b>"
 
-#: jukeboxactivity.py:370
+#: activity.py:334
 msgid "Error"
 msgstr "Fejl"
 
-#: jukeboxactivity.py:371
+#: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "Filen \"%s\" kan ikke afspilles"
 
-#: jukeboxactivity.py:447
-msgid "Jukebox playlist"
-msgstr "Afspilningsliste for Jukeboks"
+#: controls.py:50
+msgid "Add track"
+msgstr "Tilføj nummer"
 
-#: widgets.py:59
+#: controls.py:56
+msgid "Remove track"
+msgstr "Fjern nummer"
+
+#: controls.py:66
+msgid "Previous"
+msgstr "Forrige"
+
+#: controls.py:87
+msgid "Next"
+msgstr "Næste"
+
+#: playlist.py:66
 msgid "No."
 msgstr "Nr."
 
-#: widgets.py:66
-msgid "Play List"
-msgstr "Afspilningsliste"
+#: playlist.py:73
+msgid "Track"
+msgstr "Nummer"
+
+#: playlist.py:214
+msgid "Jukebox playlist"
+msgstr "Afspilningsliste for Jukeboks"
+
+#: viewtoolbar.py:48
+msgid "Show Playlist"
+msgstr "Vis afspilningsliste"
+
+#: viewtoolbar.py:54
+msgid "Fullscreen"
+msgstr "Fuldskærm"
+
+#, python-format
+#~ msgid "The file %s was not found"
+#~ msgstr "Filen %s blev ikke fundet"
+
+#~ msgid "Play List"
+#~ msgstr "Afspilningsliste"
 
 #~ msgid "Play"
 #~ msgstr "Afspil"
