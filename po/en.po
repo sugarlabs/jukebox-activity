@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-26 00:32-0500\n"
-"PO-Revision-Date: 2013-01-27 02:03+0200\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
+"PO-Revision-Date: 2013-02-01 08:42+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -40,40 +40,57 @@ msgstr ""
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 
-#: activity.py:69
+#: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Jukebox Activity"
 
-#: activity.py:139
+#: activity.py:143
 msgid "No media"
 msgstr "No media"
 
-#: activity.py:139
+#: activity.py:143
 msgid "Choose media files"
 msgstr "Choose media files"
 
-#: activity.py:290
+#: activity.py:271
+#, python-format
+msgid "%s tracks not found."
+msgstr "%s tracks not found."
+
+#: activity.py:274
+msgid "Dismiss"
+msgstr "Dismiss"
+
+#: activity.py:278
+msgid "Details"
+msgstr "Details"
+
+#: activity.py:289
+msgid "<b>Missing tracks</b>"
+msgstr "<b>Missing tracks</b>"
+
+#: activity.py:334
 msgid "Error"
 msgstr "Error"
 
-#: activity.py:291
+#: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "This \"%s\" file can't be played"
 
-#: controls.py:49
+#: controls.py:50
 msgid "Add track"
 msgstr "Add track"
 
-#: controls.py:55
+#: controls.py:56
 msgid "Remove track"
 msgstr "Remove track"
 
-#: controls.py:65
+#: controls.py:66
 msgid "Previous"
 msgstr "Previous"
 
-#: controls.py:86
+#: controls.py:87
 msgid "Next"
 msgstr "Next"
 
@@ -85,7 +102,7 @@ msgstr "No."
 msgid "Track"
 msgstr "Track"
 
-#: playlist.py:210
+#: playlist.py:214
 msgid "Jukebox playlist"
 msgstr "Jukebox playlist"
 
@@ -100,16 +117,6 @@ msgstr "Fullscreen"
 #, python-format
 #~ msgid "The file %s was not found"
 #~ msgstr "The file %s was not found"
-
-#, python-format
-#~ msgid "%s tracks not found."
-#~ msgstr "%s tracks not found."
-
-#~ msgid "Details"
-#~ msgstr "Details"
-
-#~ msgid "<b>Missing tracks</b>"
-#~ msgstr "<b>Missing tracks</b>"
 
 #~ msgid "Play List"
 #~ msgstr "Play List"
