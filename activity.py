@@ -253,13 +253,11 @@ class JukeboxActivity(activity.Activity):
 
     def __mount_added_cb(self, volume_monitor, device):
         logging.debug('Mountpoint added. Checking...')
-        self.view_area.set_current_page(0)
         self.remove_alert(self._alert)
         self.playlist_widget.update()
 
     def __mount_removed_cb(self, volume_monitor, device):
         logging.debug('Mountpoint removed. Checking...')
-        self.view_area.set_current_page(0)
         self.remove_alert(self._alert)
         self.playlist_widget.update()
 
