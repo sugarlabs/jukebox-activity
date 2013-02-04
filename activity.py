@@ -348,6 +348,7 @@ class JukeboxActivity(activity.Activity):
 
         title = self.metadata['title']
         self.playlist_widget.load_file(file_path, title)
+        self._view_toolbar._show_playlist.set_active(True)
 
     def write_file(self, file_path):
 
