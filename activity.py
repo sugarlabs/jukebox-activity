@@ -223,12 +223,15 @@ class JukeboxActivity(activity.Activity):
         self.playlist_widget._current_playing = index
 
         path = self.playlist_widget._items[index]['path']
-        if self.playlist_widget.is_from_journal(path):
-            path = self.playlist_widget.get_path_from_journal(path)
-        self.control.check_if_next_prev()
+        if self.playlist_widget.check_available_media(path):
+            if self.playlist_widget.is_from_journal(path):
+                path = self.playlist_widget.get_path_from_journal(path)
+            self.control.check_if_next_prev()
 
-        self.player.set_uri(path)
-        self.player.play()
+            self.player.set_uri(path)
+            self.player.play()
+        else:
+            self.songchange('next')
 
     def __play_index_cb(self, widget, index, path):
         # README: this line is no more necessary because of the
