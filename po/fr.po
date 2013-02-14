@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 00:31-0400\n"
-"PO-Revision-Date: 2012-07-14 00:46+0200\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
+"PO-Revision-Date: 2013-02-14 15:56+0200\n"
 "Last-Translator: samy boutayeb <s.boutayeb@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -36,73 +36,90 @@ msgid ""
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 msgstr ""
+"Deviens DJ, ou VJ!  Joue tes sons et vidéos préférés.  Partage avec tes amis\n"
+"les chansons que tu aimes, regarde des films et des vidéos pédagogiques, et\n"
+"bien plus !"
 
-#: ControlToolbar.py:46
-msgid "Show Playlist"
-msgstr "Afficher la liste de lecture"
-
-#: ControlToolbar.py:52
-msgid "Fullscreen"
-msgstr "Plein écran"
-
-#: ControlToolbar.py:74
-msgid "Add track"
-msgstr "Ajouter une piste"
-
-#: ControlToolbar.py:80
-msgid "Remove track"
-msgstr "Supprimer la piste"
-
-#: ControlToolbar.py:90
-msgid "Previous"
-msgstr "Précédent"
-
-#: ControlToolbar.py:111
-msgid "Next"
-msgstr "Suivant"
-
-#: jukeboxactivity.py:79
+#: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Activité Jukebox"
 
-#: jukeboxactivity.py:292
-#, python-format
-msgid "The file %s was not found"
-msgstr ""
+#: activity.py:143
+msgid "No media"
+msgstr "Aucun média"
 
-#: jukeboxactivity.py:329
+#: activity.py:143
+msgid "Choose media files"
+msgstr "Choisis des fichiers médias"
+
+#: activity.py:271
 #, python-format
 msgid "%s tracks not found."
-msgstr ""
+msgstr "%s pistes non trouvées."
 
-#: jukeboxactivity.py:331
+#: activity.py:274
+msgid "Dismiss"
+msgstr "Ignorer"
+
+#: activity.py:278
 msgid "Details"
-msgstr ""
+msgstr "Détails"
 
-#: jukeboxactivity.py:340
+#: activity.py:289
 msgid "<b>Missing tracks</b>"
-msgstr ""
+msgstr "Pistes manquantes"
 
-#: jukeboxactivity.py:370
+#: activity.py:334
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
-#: jukeboxactivity.py:371
+#: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
-msgstr ""
+msgstr "Le fichier \"%s\" ne peut pas être joué"
 
-#: jukeboxactivity.py:447
-msgid "Jukebox playlist"
-msgstr "Liste de lecture Jukebox"
+#: controls.py:50
+msgid "Add track"
+msgstr "Ajouter une piste"
 
-#: widgets.py:59
+#: controls.py:56
+msgid "Remove track"
+msgstr "Supprimer la piste"
+
+#: controls.py:66
+msgid "Previous"
+msgstr "Précédent"
+
+#: controls.py:87
+msgid "Next"
+msgstr "Suivant"
+
+#: playlist.py:66
 msgid "No."
 msgstr "N°"
 
-#: widgets.py:66
-msgid "Play List"
-msgstr "Jouer la liste"
+#: playlist.py:73
+msgid "Track"
+msgstr "Piste"
+
+#: playlist.py:214
+msgid "Jukebox playlist"
+msgstr "Liste de lecture Jukebox"
+
+#: viewtoolbar.py:48
+msgid "Show Playlist"
+msgstr "Afficher la liste de lecture"
+
+#: viewtoolbar.py:54
+msgid "Fullscreen"
+msgstr "Plein écran"
+
+#, python-format
+#~ msgid "The file %s was not found"
+#~ msgstr "Le fichier %s n'a pas été trouvé"
+
+#~ msgid "Play List"
+#~ msgstr "Jouer la liste"
 
 #~ msgid "Play"
 #~ msgstr "Lire"
