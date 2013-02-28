@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 00:31-0400\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
 "PO-Revision-Date: 2012-11-15 06:47+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,88 +37,102 @@ msgstr ""
 "qhawachiwaq takichiwaq. Masiykikunawanqa yachanamanta munasqa videyukunata "
 "takiykunata ima qunakuy"
 
-#  "Mostrar Lista de Reproducción"
-#: ControlToolbar.py:46
-msgid "Show Playlist"
-msgstr "Takiykunata rikuchiy"
-
-#  "Pantalla completa"
-#: ControlToolbar.py:52
-msgid "Fullscreen"
-msgstr "Hunt'asqa pantalla"
-
-#  [ES] "Agregar pista"
-#: ControlToolbar.py:74
-msgid "Add track"
-msgstr "Takiyta churay"
-
-#  [ES] "Eliminar pista"
-#: ControlToolbar.py:80
-msgid "Remove track"
-msgstr "Takiyta qhichuy"
-
-#  "Anterior"
-#: ControlToolbar.py:90
-msgid "Previous"
-msgstr "Qhipa"
-
-#  "Siguiente"
-#: ControlToolbar.py:111
-msgid "Next"
-msgstr "Hamuq"
-
 #  "Actividad máquina de discos"
-#: jukeboxactivity.py:79
+#: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Takichinap ruwanankuna"
 
-#  [ES] "El archivo %s no fue encontrado"
-#: jukeboxactivity.py:292
-#, python-format
-msgid "The file %s was not found"
-msgstr "Kay %s khipuqa manam tarikunchu"
+#: activity.py:143
+msgid "No media"
+msgstr ""
+
+#: activity.py:143
+msgid "Choose media files"
+msgstr ""
 
 #  [ES] "%s pistas no encontradas."
-#: jukeboxactivity.py:329
+#: activity.py:271
 #, python-format
 msgid "%s tracks not found."
 msgstr "%s takiykuna mana tarisqa."
 
+#: activity.py:274
+msgid "Dismiss"
+msgstr ""
+
 #  [ES] "Detalles"
-#: jukeboxactivity.py:331
+#: activity.py:278
 msgid "Details"
 msgstr "Aswa qharinakuna"
 
 #  [ES] "<b>Pistas perdidas</b>"
-#: jukeboxactivity.py:340
+#: activity.py:289
 msgid "<b>Missing tracks</b>"
 msgstr "<b>Chinkasqa takiykuna</b>"
 
 #  [ES] "Error"
-#: jukeboxactivity.py:370
+#: activity.py:334
 msgid "Error"
 msgstr "Pantay"
 
 #  [ES] "Este \"%s\" archivo no puede reproducirse"
-#: jukeboxactivity.py:371
+#: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "Kay khipuqa \"%s\" manam puririnchu"
 
-#  "Lista de reproducción de Jukebox"
-#: jukeboxactivity.py:447
-msgid "Jukebox playlist"
-msgstr "Takiykuna"
+#  [ES] "Agregar pista"
+#: controls.py:50
+msgid "Add track"
+msgstr "Takiyta churay"
+
+#  [ES] "Eliminar pista"
+#: controls.py:56
+msgid "Remove track"
+msgstr "Takiyta qhichuy"
+
+#  "Anterior"
+#: controls.py:66
+msgid "Previous"
+msgstr "Qhipa"
+
+#  "Siguiente"
+#: controls.py:87
+msgid "Next"
+msgstr "Hamuq"
 
 #  [ES] "Nº."
-#: widgets.py:59
+#: playlist.py:66
 msgid "No."
 msgstr "No."
 
+#: playlist.py:73
+msgid "Track"
+msgstr ""
+
+#  "Lista de reproducción de Jukebox"
+#: playlist.py:214
+msgid "Jukebox playlist"
+msgstr "Takiykuna"
+
+#  "Mostrar Lista de Reproducción"
+#: viewtoolbar.py:48
+msgid "Show Playlist"
+msgstr "Takiykunata rikuchiy"
+
+#  "Pantalla completa"
+#: viewtoolbar.py:54
+msgid "Fullscreen"
+msgstr "Hunt'asqa pantalla"
+
+#  [ES] "El archivo %s no fue encontrado"
+#, python-format
+#~ msgid "The file %s was not found"
+#~ msgstr "Kay %s khipuqa manam tarikunchu"
+
 # "Lista de reproducción"
-#: widgets.py:66
-msgid "Play List"
-msgstr "Takiykunata takichiy"
+#~ msgid "Play List"
+#~ msgstr "Takiykunata takichiy"
 
 #  "Reproducir"
 #~ msgid "Play"

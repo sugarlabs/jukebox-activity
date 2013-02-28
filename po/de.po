@@ -58,7 +58,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Jukebox-activity\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 00:31-0400\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
 "PO-Revision-Date: 2012-11-12 11:56+0200\n"
 "Last-Translator: Markus <m.slg@gmx.de>\n"
 "Language-Team: OLPC-Deutsch <LL@li.org>\n"
@@ -86,72 +86,86 @@ msgstr ""
 "die Lieder, die du liebst, mit deinen Freunden und schau gemeinsam mit ihnen "
 "Filme an, Bildungsvideos und vieles mehr!"
 
-#: ControlToolbar.py:46
-msgid "Show Playlist"
-msgstr "Wiedergabeliste anzeigen"
-
-#: ControlToolbar.py:52
-msgid "Fullscreen"
-msgstr "Vollbild"
-
-#: ControlToolbar.py:74
-msgid "Add track"
-msgstr "Titel hinzufügen"
-
-#: ControlToolbar.py:80
-msgid "Remove track"
-msgstr "Titel entfernen"
-
-#: ControlToolbar.py:90
-msgid "Previous"
-msgstr "Zurück"
-
-#: ControlToolbar.py:111
-msgid "Next"
-msgstr "Weiter"
-
-#: jukeboxactivity.py:79
+#: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Jukebox-Aktivität"
 
-#: jukeboxactivity.py:292
-#, python-format
-msgid "The file %s was not found"
-msgstr "Die Datei %s wurde nicht gefunden."
+#: activity.py:143
+msgid "No media"
+msgstr ""
 
-#: jukeboxactivity.py:329
+#: activity.py:143
+msgid "Choose media files"
+msgstr ""
+
+#: activity.py:271
 #, python-format
 msgid "%s tracks not found."
 msgstr "%s Titel wurden nicht gefunden."
 
-#: jukeboxactivity.py:331
+#: activity.py:274
+msgid "Dismiss"
+msgstr ""
+
+#: activity.py:278
 msgid "Details"
 msgstr "Details"
 
-#: jukeboxactivity.py:340
+#: activity.py:289
 msgid "<b>Missing tracks</b>"
 msgstr "<b>Fehlende Titel</b>"
 
-#: jukeboxactivity.py:370
+#: activity.py:334
 msgid "Error"
 msgstr "Fehler"
 
-#: jukeboxactivity.py:371
+#: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "Diese \"s\"-Datei kann nicht abgespielt werden."
 
-#: jukeboxactivity.py:447
-msgid "Jukebox playlist"
-msgstr "Jukebox-Wiedergabeliste"
+#: controls.py:50
+msgid "Add track"
+msgstr "Titel hinzufügen"
 
-#: widgets.py:59
+#: controls.py:56
+msgid "Remove track"
+msgstr "Titel entfernen"
+
+#: controls.py:66
+msgid "Previous"
+msgstr "Zurück"
+
+#: controls.py:87
+msgid "Next"
+msgstr "Weiter"
+
+#: playlist.py:66
 msgid "No."
 msgstr "Nein."
 
-#: widgets.py:66
-msgid "Play List"
-msgstr "Wiedergabeliste"
+#: playlist.py:73
+msgid "Track"
+msgstr ""
+
+#: playlist.py:214
+msgid "Jukebox playlist"
+msgstr "Jukebox-Wiedergabeliste"
+
+#: viewtoolbar.py:48
+msgid "Show Playlist"
+msgstr "Wiedergabeliste anzeigen"
+
+#: viewtoolbar.py:54
+msgid "Fullscreen"
+msgstr "Vollbild"
+
+#, python-format
+#~ msgid "The file %s was not found"
+#~ msgstr "Die Datei %s wurde nicht gefunden."
+
+#~ msgid "Play List"
+#~ msgstr "Wiedergabeliste"
 
 #~ msgid "Play"
 #~ msgstr "Abspielen"

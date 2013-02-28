@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 00:31-0400\n"
-"PO-Revision-Date: 2012-07-01 04:22+0200\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
+"PO-Revision-Date: 2013-01-09 06:30+0200\n"
 "Last-Translator: andika <andika@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: id\n"
@@ -36,73 +36,90 @@ msgid ""
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 msgstr ""
+"Jadilah DJ, jadilah VJ. Putar video dan lagu favorit Anda. Berbagi dengan "
+"teman Anda lagu-lagu yang Anda suka, tonton film dan video pendidikan "
+"bersama-sama, dan banyak lagi!"
 
-#: ControlToolbar.py:46
-msgid "Show Playlist"
-msgstr "Tampilkan Daftar Putar"
-
-#: ControlToolbar.py:52
-msgid "Fullscreen"
-msgstr "Tampilan penuh"
-
-#: ControlToolbar.py:74
-msgid "Add track"
-msgstr "Tambah trek"
-
-#: ControlToolbar.py:80
-msgid "Remove track"
-msgstr "Hapus trek"
-
-#: ControlToolbar.py:90
-msgid "Previous"
-msgstr "Sebelumnya"
-
-#: ControlToolbar.py:111
-msgid "Next"
-msgstr "Selanjutnya"
-
-#: jukeboxactivity.py:79
+#: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Aktifitas Jukebox"
 
-#: jukeboxactivity.py:292
-#, python-format
-msgid "The file %s was not found"
+#: activity.py:143
+msgid "No media"
 msgstr ""
 
-#: jukeboxactivity.py:329
+#: activity.py:143
+msgid "Choose media files"
+msgstr ""
+
+#: activity.py:271
 #, python-format
 msgid "%s tracks not found."
+msgstr "%s trek tak ditemukan."
+
+#: activity.py:274
+msgid "Dismiss"
 msgstr ""
 
-#: jukeboxactivity.py:331
+#: activity.py:278
 msgid "Details"
-msgstr ""
+msgstr "Rincian"
 
-#: jukeboxactivity.py:340
+#: activity.py:289
 msgid "<b>Missing tracks</b>"
-msgstr ""
+msgstr "<b>Trek yang hilang</b>"
 
-#: jukeboxactivity.py:370
+#: activity.py:334
 msgid "Error"
-msgstr ""
+msgstr "Galat"
 
-#: jukeboxactivity.py:371
+#: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
-msgstr ""
+msgstr "Berkas \"%s\" ini tak dapat diputar"
 
-#: jukeboxactivity.py:447
-msgid "Jukebox playlist"
-msgstr "Daftar putar Jukebox"
+#: controls.py:50
+msgid "Add track"
+msgstr "Tambah trek"
 
-#: widgets.py:59
+#: controls.py:56
+msgid "Remove track"
+msgstr "Hapus trek"
+
+#: controls.py:66
+msgid "Previous"
+msgstr "Sebelumnya"
+
+#: controls.py:87
+msgid "Next"
+msgstr "Selanjutnya"
+
+#: playlist.py:66
 msgid "No."
 msgstr "Tidak."
 
-#: widgets.py:66
-msgid "Play List"
-msgstr "Daftar Putar"
+#: playlist.py:73
+msgid "Track"
+msgstr ""
+
+#: playlist.py:214
+msgid "Jukebox playlist"
+msgstr "Daftar putar Jukebox"
+
+#: viewtoolbar.py:48
+msgid "Show Playlist"
+msgstr "Tampilkan Daftar Putar"
+
+#: viewtoolbar.py:54
+msgid "Fullscreen"
+msgstr "Tampilan penuh"
+
+#, python-format
+#~ msgid "The file %s was not found"
+#~ msgstr "Berkas %s tak ditemukan"
+
+#~ msgid "Play List"
+#~ msgstr "Daftar Putar"
 
 #~ msgid "Play"
 #~ msgstr "Putar"

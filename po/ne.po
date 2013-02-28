@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 00:31-0400\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
 "PO-Revision-Date: 2012-08-22 08:27+0200\n"
 "Last-Translator: prabhat <prabhat.bhattarai@olenepal.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,72 +37,82 @@ msgid ""
 "and much more!"
 msgstr ""
 
-#: ControlToolbar.py:46
-msgid "Show Playlist"
-msgstr "प्लेलिस्ट देखाउ"
-
-#: ControlToolbar.py:52
-msgid "Fullscreen"
-msgstr "पुरै स्क्रिन"
-
-#: ControlToolbar.py:74
-msgid "Add track"
-msgstr "थप  ट्रयाक"
-
-#: ControlToolbar.py:80
-msgid "Remove track"
-msgstr "हटाऊ ट्रयाक"
-
-#: ControlToolbar.py:90
-msgid "Previous"
-msgstr "पहिलाको"
-
-#: ControlToolbar.py:111
-msgid "Next"
-msgstr "यसपछिको"
-
-#: jukeboxactivity.py:79
+#: activity.py:71
 msgid "Jukebox Activity"
 msgstr "ज्युकबक्स क्रियाकलाप"
 
-#: jukeboxactivity.py:292
-#, python-format
-msgid "The file %s was not found"
+#: activity.py:143
+msgid "No media"
 msgstr ""
 
-#: jukeboxactivity.py:329
+#: activity.py:143
+msgid "Choose media files"
+msgstr ""
+
+#: activity.py:271
 #, python-format
 msgid "%s tracks not found."
 msgstr ""
 
-#: jukeboxactivity.py:331
+#: activity.py:274
+msgid "Dismiss"
+msgstr ""
+
+#: activity.py:278
 msgid "Details"
 msgstr ""
 
-#: jukeboxactivity.py:340
+#: activity.py:289
 msgid "<b>Missing tracks</b>"
 msgstr ""
 
-#: jukeboxactivity.py:370
+#: activity.py:334
 msgid "Error"
 msgstr ""
 
-#: jukeboxactivity.py:371
+#: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr ""
 
-#: jukeboxactivity.py:447
-msgid "Jukebox playlist"
-msgstr "ज्युकबक्स प्लेलिस्ट"
+#: controls.py:50
+msgid "Add track"
+msgstr "थप  ट्रयाक"
 
-#: widgets.py:59
+#: controls.py:56
+msgid "Remove track"
+msgstr "हटाऊ ट्रयाक"
+
+#: controls.py:66
+msgid "Previous"
+msgstr "पहिलाको"
+
+#: controls.py:87
+msgid "Next"
+msgstr "यसपछिको"
+
+#: playlist.py:66
 msgid "No."
 msgstr "नम्बर"
 
-#: widgets.py:66
-msgid "Play List"
-msgstr "प्लेलिस्ट"
+#: playlist.py:73
+msgid "Track"
+msgstr ""
+
+#: playlist.py:214
+msgid "Jukebox playlist"
+msgstr "ज्युकबक्स प्लेलिस्ट"
+
+#: viewtoolbar.py:48
+msgid "Show Playlist"
+msgstr "प्लेलिस्ट देखाउ"
+
+#: viewtoolbar.py:54
+msgid "Fullscreen"
+msgstr "पुरै स्क्रिन"
+
+#~ msgid "Play List"
+#~ msgstr "प्लेलिस्ट"
 
 #~ msgid "Play"
 #~ msgstr "सुरु गर"

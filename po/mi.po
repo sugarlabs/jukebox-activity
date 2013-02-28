@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-11 00:32-0400\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
 "PO-Revision-Date: 2012-09-21 10:36+0200\n"
 "Last-Translator: hariru <hariruroa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,47 +29,79 @@ msgid ""
 "and much more!"
 msgstr ""
 
-#: ControlToolbar.py:46
-msgid "Show Playlist"
-msgstr "Whakaatu Rārangipāho"
-
-#: ControlToolbar.py:52
-msgid "Fullscreen"
-msgstr "Matakatoa"
-
-#: ControlToolbar.py:74
-msgid "Add track"
-msgstr "Tāpiri oro"
-
-#: ControlToolbar.py:80
-msgid "Remove track"
-msgstr "Tango oro"
-
-#: ControlToolbar.py:90
-msgid "Previous"
-msgstr "Tōmua"
-
-#: ControlToolbar.py:111
-msgid "Next"
-msgstr "Panuku"
-
-#: jukeboxactivity.py:77
+#: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Hohe Mihini Whakatangi Waiata"
 
-#: jukeboxactivity.py:284
-#, python-format
-msgid "The file %s was not found"
+#: activity.py:143
+msgid "No media"
 msgstr ""
 
-#: jukeboxactivity.py:382
-msgid "Jukebox playlist"
-msgstr "Rārangipāpāho Mihini Whakatangi Waiata"
+#: activity.py:143
+msgid "Choose media files"
+msgstr ""
 
-#: widgets.py:46
+#: activity.py:271
+#, python-format
+msgid "%s tracks not found."
+msgstr ""
+
+#: activity.py:274
+msgid "Dismiss"
+msgstr ""
+
+#: activity.py:278
+msgid "Details"
+msgstr ""
+
+#: activity.py:289
+msgid "<b>Missing tracks</b>"
+msgstr ""
+
+#: activity.py:334
+msgid "Error"
+msgstr ""
+
+#: activity.py:335
+#, python-format
+msgid "This \"%s\" file can't be played"
+msgstr ""
+
+#: controls.py:50
+msgid "Add track"
+msgstr "Tāpiri oro"
+
+#: controls.py:56
+msgid "Remove track"
+msgstr "Tango oro"
+
+#: controls.py:66
+msgid "Previous"
+msgstr "Tōmua"
+
+#: controls.py:87
+msgid "Next"
+msgstr "Panuku"
+
+#: playlist.py:66
 msgid "No."
 msgstr "Kao."
 
-#: widgets.py:53
-msgid "Play List"
-msgstr "Rārangi Pāpāho"
+#: playlist.py:73
+msgid "Track"
+msgstr ""
+
+#: playlist.py:214
+msgid "Jukebox playlist"
+msgstr "Rārangipāpāho Mihini Whakatangi Waiata"
+
+#: viewtoolbar.py:48
+msgid "Show Playlist"
+msgstr "Whakaatu Rārangipāho"
+
+#: viewtoolbar.py:54
+msgid "Fullscreen"
+msgstr "Matakatoa"
+
+#~ msgid "Play List"
+#~ msgstr "Rārangi Pāpāho"

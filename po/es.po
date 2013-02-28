@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 00:31-0400\n"
-"PO-Revision-Date: 2012-11-07 16:41+0200\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
+"PO-Revision-Date: 2013-02-01 18:05+0200\n"
 "Last-Translator: AlanJAS <alanjas@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
@@ -52,73 +52,87 @@ msgstr ""
 "tus amigos las canciones que amas, mira películas y videos educacionales "
 "juntos, y mucho mas."
 
-#: ControlToolbar.py:46
-msgid "Show Playlist"
-msgstr "Mostrar Lista de Reproducción"
-
-#: ControlToolbar.py:52
-msgid "Fullscreen"
-msgstr "Pantalla completa"
-
-#: ControlToolbar.py:74
-msgid "Add track"
-msgstr "Agregar pista"
-
-#: ControlToolbar.py:80
-msgid "Remove track"
-msgstr "Eliminar pista"
-
-#: ControlToolbar.py:90
-msgid "Previous"
-msgstr "Anterior"
-
-#: ControlToolbar.py:111
-msgid "Next"
-msgstr "Siguiente"
-
-#: jukeboxactivity.py:79
+#: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Actividad máquina de discos"
 
-#: jukeboxactivity.py:292
-#, python-format
-msgid "The file %s was not found"
-msgstr "El archivo %s no fue encontrado"
+#: activity.py:143
+msgid "No media"
+msgstr "No hay medios"
 
-#: jukeboxactivity.py:329
+#: activity.py:143
+msgid "Choose media files"
+msgstr "Elije archivos de medios"
+
+#: activity.py:271
 #, python-format
 msgid "%s tracks not found."
 msgstr "%s pistas no encontradas."
 
-#: jukeboxactivity.py:331
+#: activity.py:274
+msgid "Dismiss"
+msgstr "Descartar"
+
+#: activity.py:278
 msgid "Details"
 msgstr "Detalles"
 
-#: jukeboxactivity.py:340
+#: activity.py:289
 msgid "<b>Missing tracks</b>"
 msgstr "<b>Pistas perdidas</b>"
 
-#: jukeboxactivity.py:370
+#: activity.py:334
 msgid "Error"
 msgstr "Error"
 
-#: jukeboxactivity.py:371
+#: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "Este \"%s\" archivo no puede reproducirse"
 
-#: jukeboxactivity.py:447
-msgid "Jukebox playlist"
-msgstr "Lista de reproducción de Jukebox"
+#: controls.py:50
+msgid "Add track"
+msgstr "Agregar pista"
+
+#: controls.py:56
+msgid "Remove track"
+msgstr "Eliminar pista"
+
+#: controls.py:66
+msgid "Previous"
+msgstr "Anterior"
+
+#: controls.py:87
+msgid "Next"
+msgstr "Siguiente"
 
 # abreviación de número?
-#: widgets.py:59
+#: playlist.py:66
 msgid "No."
 msgstr "Nº."
 
-#: widgets.py:66
-msgid "Play List"
-msgstr "Lista de reproducción"
+#: playlist.py:73
+msgid "Track"
+msgstr "Pista"
+
+#: playlist.py:214
+msgid "Jukebox playlist"
+msgstr "Lista de reproducción de Jukebox"
+
+#: viewtoolbar.py:48
+msgid "Show Playlist"
+msgstr "Mostrar Lista de Reproducción"
+
+#: viewtoolbar.py:54
+msgid "Fullscreen"
+msgstr "Pantalla completa"
+
+#, python-format
+#~ msgid "The file %s was not found"
+#~ msgstr "El archivo %s no fue encontrado"
+
+#~ msgid "Play List"
+#~ msgstr "Lista de reproducción"
 
 #~ msgid "Play"
 #~ msgstr "Reproducir"

@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 00:31-0400\n"
-"PO-Revision-Date: 2012-11-09 22:11+0200\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
+"PO-Revision-Date: 2013-02-10 22:07+0200\n"
 "Last-Translator: whe <heppew@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nl\n"
@@ -44,72 +44,86 @@ msgstr ""
 "liedjes waar je van houdt met je vrienden, bekijk films en leerzame videos "
 "samen, en veel meer!"
 
-#: ControlToolbar.py:46
-msgid "Show Playlist"
-msgstr "Toon afspeellijst"
-
-#: ControlToolbar.py:52
-msgid "Fullscreen"
-msgstr "Schermvullend"
-
-#: ControlToolbar.py:74
-msgid "Add track"
-msgstr "Voeg spoor toe"
-
-#: ControlToolbar.py:80
-msgid "Remove track"
-msgstr "Verwijder spoor"
-
-#: ControlToolbar.py:90
-msgid "Previous"
-msgstr "Vorig"
-
-#: ControlToolbar.py:111
-msgid "Next"
-msgstr "Volgend"
-
-#: jukeboxactivity.py:79
+#: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Jukebox activiteit"
 
-#: jukeboxactivity.py:292
-#, python-format
-msgid "The file %s was not found"
-msgstr "Het bestand %s is niet gevonden"
+#: activity.py:143
+msgid "No media"
+msgstr "Geen media"
 
-#: jukeboxactivity.py:329
+#: activity.py:143
+msgid "Choose media files"
+msgstr "Kies mediabestanden"
+
+#: activity.py:271
 #, python-format
 msgid "%s tracks not found."
 msgstr "%s sporen niet gevonden."
 
-#: jukeboxactivity.py:331
+#: activity.py:274
+msgid "Dismiss"
+msgstr "Vertrek"
+
+#: activity.py:278
 msgid "Details"
 msgstr "Details"
 
-#: jukeboxactivity.py:340
+#: activity.py:289
 msgid "<b>Missing tracks</b>"
 msgstr "<b>Missende sporen</b>"
 
-#: jukeboxactivity.py:370
+#: activity.py:334
 msgid "Error"
 msgstr "Fout"
 
-#: jukeboxactivity.py:371
+#: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "Dit \"%s\" bestand kan niet afgespeeld worden"
 
-#: jukeboxactivity.py:447
-msgid "Jukebox playlist"
-msgstr "Jukebox afspeellijst"
+#: controls.py:50
+msgid "Add track"
+msgstr "Voeg spoor toe"
 
-#: widgets.py:59
+#: controls.py:56
+msgid "Remove track"
+msgstr "Verwijder spoor"
+
+#: controls.py:66
+msgid "Previous"
+msgstr "Vorig"
+
+#: controls.py:87
+msgid "Next"
+msgstr "Volgend"
+
+#: playlist.py:66
 msgid "No."
 msgstr "Nee."
 
-#: widgets.py:66
-msgid "Play List"
-msgstr "Afspeellijst"
+#: playlist.py:73
+msgid "Track"
+msgstr "Spoor"
+
+#: playlist.py:214
+msgid "Jukebox playlist"
+msgstr "Jukebox afspeellijst"
+
+#: viewtoolbar.py:48
+msgid "Show Playlist"
+msgstr "Toon afspeellijst"
+
+#: viewtoolbar.py:54
+msgid "Fullscreen"
+msgstr "Schermvullend"
+
+#, python-format
+#~ msgid "The file %s was not found"
+#~ msgstr "Het bestand %s is niet gevonden"
+
+#~ msgid "Play List"
+#~ msgstr "Afspeellijst"
 
 #~ msgid "Play"
 #~ msgstr "Afspelen"

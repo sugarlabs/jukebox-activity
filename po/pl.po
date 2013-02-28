@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 00:31-0400\n"
-"PO-Revision-Date: 2012-10-13 19:17+0200\n"
-"Last-Translator: Karolina <karo.zaklika@gmail.com>\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
+"PO-Revision-Date: 2013-01-01 20:12+0200\n"
+"Last-Translator: Kamila <kamilafilipowska@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -41,72 +41,86 @@ msgstr ""
 "się ze znajomymi piosenkami, które kochasz, oglądajcie razem edukacyjne "
 "teledyski i wiele więcej!"
 
-#: ControlToolbar.py:46
-msgid "Show Playlist"
-msgstr "Pokaż listę odtwarzania"
-
-#: ControlToolbar.py:52
-msgid "Fullscreen"
-msgstr "Pełny ekran"
-
-#: ControlToolbar.py:74
-msgid "Add track"
-msgstr "Dodaj utwór"
-
-#: ControlToolbar.py:80
-msgid "Remove track"
-msgstr "Usuń utwór"
-
-#: ControlToolbar.py:90
-msgid "Previous"
-msgstr "Poprzedni"
-
-#: ControlToolbar.py:111
-msgid "Next"
-msgstr "Następny"
-
-#: jukeboxactivity.py:79
+#: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Czynność - Szafa grająca"
 
-#: jukeboxactivity.py:292
-#, python-format
-msgid "The file %s was not found"
-msgstr "Plik %s nie został znaleziony"
+#: activity.py:143
+msgid "No media"
+msgstr ""
 
-#: jukeboxactivity.py:329
+#: activity.py:143
+msgid "Choose media files"
+msgstr ""
+
+#: activity.py:271
 #, python-format
 msgid "%s tracks not found."
+msgstr "Nie znaleziono ścieżki %."
+
+#: activity.py:274
+msgid "Dismiss"
 msgstr ""
 
-#: jukeboxactivity.py:331
+#: activity.py:278
 msgid "Details"
-msgstr ""
+msgstr "Szczegóły"
 
-#: jukeboxactivity.py:340
+#: activity.py:289
 msgid "<b>Missing tracks</b>"
-msgstr ""
+msgstr "<b> Brakujące ścieżki </b>"
 
-#: jukeboxactivity.py:370
+#: activity.py:334
 msgid "Error"
-msgstr ""
+msgstr "Błąd"
 
-#: jukeboxactivity.py:371
+#: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
-msgstr ""
+msgstr "Nie można odtworzyć pliku \"%\""
 
-#: jukeboxactivity.py:447
-msgid "Jukebox playlist"
-msgstr "Lista odtwarzania szafy grającej"
+#: controls.py:50
+msgid "Add track"
+msgstr "Dodaj utwór"
 
-#: widgets.py:59
+#: controls.py:56
+msgid "Remove track"
+msgstr "Usuń utwór"
+
+#: controls.py:66
+msgid "Previous"
+msgstr "Poprzedni"
+
+#: controls.py:87
+msgid "Next"
+msgstr "Następny"
+
+#: playlist.py:66
 msgid "No."
 msgstr "Nr."
 
-#: widgets.py:66
-msgid "Play List"
-msgstr "Lista odtwarzania"
+#: playlist.py:73
+msgid "Track"
+msgstr ""
+
+#: playlist.py:214
+msgid "Jukebox playlist"
+msgstr "Lista odtwarzania szafy grającej"
+
+#: viewtoolbar.py:48
+msgid "Show Playlist"
+msgstr "Pokaż listę odtwarzania"
+
+#: viewtoolbar.py:54
+msgid "Fullscreen"
+msgstr "Pełny ekran"
+
+#, python-format
+#~ msgid "The file %s was not found"
+#~ msgstr "Plik %s nie został znaleziony"
+
+#~ msgid "Play List"
+#~ msgstr "Lista odtwarzania"
 
 #~ msgid "Play"
 #~ msgstr "Graj"

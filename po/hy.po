@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 00:31-0400\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
 "PO-Revision-Date: 2012-07-10 00:13+0200\n"
 "Last-Translator: Jasmine <udea_jasmine@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,72 +29,82 @@ msgid ""
 "and much more!"
 msgstr ""
 
-#: ControlToolbar.py:46
-msgid "Show Playlist"
-msgstr "Ցուցադրել վերարտադրման ցանկը"
-
-#: ControlToolbar.py:52
-msgid "Fullscreen"
-msgstr "Էկրանի չափով"
-
-#: ControlToolbar.py:74
-msgid "Add track"
-msgstr "Շավիղ ավելացնել"
-
-#: ControlToolbar.py:80
-msgid "Remove track"
-msgstr "Հեռացնել շավիղը"
-
-#: ControlToolbar.py:90
-msgid "Previous"
-msgstr "Նախորդ"
-
-#: ControlToolbar.py:111
-msgid "Next"
-msgstr "Հաջորդ"
-
-#: jukeboxactivity.py:79
+#: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Նվագարկչի գործունեություն"
 
-#: jukeboxactivity.py:292
-#, python-format
-msgid "The file %s was not found"
+#: activity.py:143
+msgid "No media"
 msgstr ""
 
-#: jukeboxactivity.py:329
+#: activity.py:143
+msgid "Choose media files"
+msgstr ""
+
+#: activity.py:271
 #, python-format
 msgid "%s tracks not found."
 msgstr ""
 
-#: jukeboxactivity.py:331
+#: activity.py:274
+msgid "Dismiss"
+msgstr ""
+
+#: activity.py:278
 msgid "Details"
 msgstr ""
 
-#: jukeboxactivity.py:340
+#: activity.py:289
 msgid "<b>Missing tracks</b>"
 msgstr ""
 
-#: jukeboxactivity.py:370
+#: activity.py:334
 msgid "Error"
 msgstr ""
 
-#: jukeboxactivity.py:371
+#: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr ""
 
-#: jukeboxactivity.py:447
-msgid "Jukebox playlist"
-msgstr "Նվագարկչի ցանկը"
+#: controls.py:50
+msgid "Add track"
+msgstr "Շավիղ ավելացնել"
 
-#: widgets.py:59
+#: controls.py:56
+msgid "Remove track"
+msgstr "Հեռացնել շավիղը"
+
+#: controls.py:66
+msgid "Previous"
+msgstr "Նախորդ"
+
+#: controls.py:87
+msgid "Next"
+msgstr "Հաջորդ"
+
+#: playlist.py:66
 msgid "No."
 msgstr "N"
 
-#: widgets.py:66
-msgid "Play List"
-msgstr "Ցանկ"
+#: playlist.py:73
+msgid "Track"
+msgstr ""
+
+#: playlist.py:214
+msgid "Jukebox playlist"
+msgstr "Նվագարկչի ցանկը"
+
+#: viewtoolbar.py:48
+msgid "Show Playlist"
+msgstr "Ցուցադրել վերարտադրման ցանկը"
+
+#: viewtoolbar.py:54
+msgid "Fullscreen"
+msgstr "Էկրանի չափով"
+
+#~ msgid "Play List"
+#~ msgstr "Ցանկ"
 
 #~ msgid "Play"
 #~ msgstr "Նվագարկել"
