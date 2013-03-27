@@ -184,6 +184,9 @@ class PlayList(Gtk.ScrolledWindow):
             logging.info('%s tracks not found', len(missing_tracks))
             self.emit('missing-tracks', missing_tracks)
 
+        # set the focus in the first row
+        self._set_cursor(0)
+
     def update(self):
         for tree_item, playlist_item in zip(self.treemodel, self._items):
             tree_item[2] = playlist_item['available'] = \
