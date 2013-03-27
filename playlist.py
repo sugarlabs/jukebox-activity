@@ -79,7 +79,6 @@ class PlayList(Gtk.ScrolledWindow):
         self.listview.set_enable_search(False)
 
         self.listview.connect('row-activated', self.__on_row_activated)
-
         self.add(self.listview)
 
     def __on_row_activated(self, treeview, path, col):
@@ -91,9 +90,15 @@ class PlayList(Gtk.ScrolledWindow):
         path = self._items[index]['path']
         available = self._items[index]['available']
         if available:
-            self._current_playing = index
-            self.set_cursor(index)
+            self.set_current_playing(index)
             self.emit('play-index', index, path)
+
+    def set_current_playing(self, index):
+        self._current_playing = index
+        self._set_cursor(index)
+
+    def get_current_playing(self):
+        return self._current_playing
 
     def _set_number(self, column, cell, model, it, data):
         idx = model.get_value(it, COLUMNS['index'])
@@ -113,7 +118,7 @@ class PlayList(Gtk.ScrolledWindow):
         available = model.get_value(it, COLUMNS['available'])
         cell.set_property('visible', not available)
 
-    def set_cursor(self, index):
+    def _set_cursor(self, index):
         self.listview.set_cursor((index,))
 
     def delete_selected_items(self):

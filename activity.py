@@ -202,17 +202,16 @@ class JukeboxActivity(activity.Activity):
 
         # Select the first stream to be played when Play button will
         # be pressed
-        self.playlist_widget._current_playing = 0
+        self.playlist_widget.set_current_playing(0)
         self.control.check_if_next_prev()
 
     def songchange(self, direction):
-        current_playing = self.playlist_widget._current_playing
+        current_playing = self.playlist_widget.get_current_playing()
         if direction == 'prev' and current_playing > 0:
             self.play_index(current_playing - 1)
         elif direction == 'next' and \
                 current_playing < len(self.playlist_widget._items) - 1:
             self.play_index(current_playing + 1)
-
         else:
             self.emit('playlist-finished')
 
@@ -220,7 +219,7 @@ class JukeboxActivity(activity.Activity):
         # README: this line is no more necessary because of the
         # .playing_video() method
         # self._switch_canvas(show_video=True)
-        self.playlist_widget._current_playing = index
+        self.playlist_widget.set_current_playing(index)
 
         path = self.playlist_widget._items[index]['path']
         if self.playlist_widget.check_available_media(path):
@@ -237,7 +236,7 @@ class JukeboxActivity(activity.Activity):
         # README: this line is no more necessary because of the
         # .playing_video() method
         # self._switch_canvas(show_video=True)
-        self.playlist_widget._current_playing = index
+        self.playlist_widget.set_current_playing(index)
 
         if self.playlist_widget.is_from_journal(path):
             path = self.playlist_widget.get_path_from_journal(path)
@@ -334,7 +333,8 @@ class JukeboxActivity(activity.Activity):
         logging.error('ERROR MESSAGE: %s', message)
         logging.error('ERROR DETAIL: %s', detail)
 
-        file_path = self.playlist_widget._items[self.playlist_widget._current_playing]['path']
+        file_path = self.playlist_widget._items[
+                self.playlist_widget.get_current_playing()]['path']
         mimetype = mime.get_for_file(file_path)
 
         title = _('Error')

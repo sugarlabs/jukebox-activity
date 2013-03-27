@@ -186,7 +186,7 @@ class Controls(GObject.GObject):
         self.activity.songchange('next')
 
     def check_if_next_prev(self):
-        current_playing = self.activity.playlist_widget._current_playing
+        current_playing = self.activity.playlist_widget.get_current_playing()
         if len(self.activity.playlist_widget._items) == 0:
             # There is no media in the playlist
             self.prev_button.set_sensitive(False)
@@ -195,7 +195,6 @@ class Controls(GObject.GObject):
         else:
             self.button.set_sensitive(True)
 
-            current_playing = self.activity.playlist_widget._current_playing
             if current_playing == 0:
                 self.prev_button.set_sensitive(False)
             else:
@@ -227,7 +226,7 @@ class Controls(GObject.GObject):
                         path = self.activity.playlist_widget._items[0]['path']
                         self.activity.playlist_widget.emit(
                             'play-index', 0, path)
-                        self.activity.playlist_widget._current_playing = 0
+                        self.activity.playlist_widget.set_current_playing(0)
                 else:
                     self.activity.player.play()
                     self.activity._switch_canvas(True)
