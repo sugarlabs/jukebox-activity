@@ -157,7 +157,7 @@ class Controls(GObject.GObject):
         self.activity.playlist_widget.delete_selected_items()
         self.check_if_next_prev()
 
-    def show_picker_cb(self, button=None):
+    def show_picker_cb(self):
         jobject = None
         chooser = ObjectChooser(self.activity,
                                 what_filter=mime.GENERIC_TYPE_AUDIO)
@@ -171,9 +171,8 @@ class Controls(GObject.GObject):
                     self.activity.playlist_widget.load_file(jobject)
                     self.check_if_next_prev()
 
-                    if button is not None:
-                        self.activity._switch_canvas(False)
-                        self.activity._view_toolbar.\
+                    self.activity._switch_canvas(False)
+                    self.activity._view_toolbar.\
                             _show_playlist.set_active(True)
         finally:
             if jobject is not None:
