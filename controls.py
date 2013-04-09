@@ -212,6 +212,7 @@ class Controls(GObject.GObject):
             self.activity.player.pause()
             self.set_button_play()
             GObject.source_remove(self._scale_update_id)
+            self._scale_update_id = -1
         else:
             if self.activity.player.error:
                 self.set_disabled()

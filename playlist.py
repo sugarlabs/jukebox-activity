@@ -79,7 +79,21 @@ class PlayList(Gtk.ScrolledWindow):
         self.listview.set_enable_search(False)
 
         self.listview.connect('row-activated', self.__on_row_activated)
+        self.listview.connect('cursor-changed', self.__on_cursor_changed)
+
         self.add(self.listview)
+
+    def __on_cursor_changed(self, treeview):
+        selection = self.listview.get_selection()
+        sel_model, sel_rows = self.listview.get_selection().get_selected_rows()
+        for row in sel_rows:
+            index = sel_model.get_value(sel_model.get_iter(row), 0)
+            if index != self._current_playing:
+                path = self._items[index]['path']
+                available = self._items[index]['available']
+                if available:
+                    self.set_current_playing(index)
+                    self.emit('play-index', index, path)
 
     def __on_row_activated(self, treeview, path, col):
         model = treeview.get_model()
