@@ -129,6 +129,12 @@ class PlayList(Gtk.ScrolledWindow):
             self._items.pop(index)
             self.treemodel.remove(self.treemodel.get_iter(row))
 
+        # uptade the order numbers in the playlist
+        index = 0
+        for tree_item, playlist_item in zip(self.treemodel, self._items):
+            tree_item[0] = index
+            index = index + 1
+
     def check_available_media(self, path):
         if self.is_from_journal(path):
             path = self.get_path_from_journal(path)
