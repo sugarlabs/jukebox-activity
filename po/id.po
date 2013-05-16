@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2013-01-09 06:30+0200\n"
+"PO-Revision-Date: 2013-04-06 08:31+0200\n"
 "Last-Translator: andika <andika@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: id\n"
@@ -46,11 +46,11 @@ msgstr "Aktifitas Jukebox"
 
 #: activity.py:143
 msgid "No media"
-msgstr ""
+msgstr "Tiada media"
 
 #: activity.py:143
 msgid "Choose media files"
-msgstr ""
+msgstr "Pilih berkas media"
 
 #: activity.py:271
 #, python-format
@@ -59,7 +59,7 @@ msgstr "%s trek tak ditemukan."
 
 #: activity.py:274
 msgid "Dismiss"
-msgstr ""
+msgstr "Tutup"
 
 #: activity.py:278
 msgid "Details"
@@ -100,7 +100,7 @@ msgstr "Tidak."
 
 #: playlist.py:73
 msgid "Track"
-msgstr ""
+msgstr "Trek"
 
 #: playlist.py:214
 msgid "Jukebox playlist"
