@@ -157,7 +157,9 @@ class Controls(GObject.GObject):
         self.activity.playlist_widget.delete_selected_items()
         self.check_if_next_prev()
 
-    def show_picker_cb(self):
+    def show_picker_cb(self, button=None):
+        # optional parameter button is used when called from activity.py
+        # emptypanel big button
         jobject = None
         chooser = ObjectChooser(self.activity,
                                 what_filter=mime.GENERIC_TYPE_AUDIO)
