@@ -71,10 +71,10 @@ class JukeboxActivity(activity.Activity):
         self.set_title(_('Jukebox Activity'))
         self.max_participants = 1
 
-        toolbar_box = ToolbarBox()
+        self._toolbar_box = ToolbarBox()
         activity_button = ActivityToolbarButton(self)
         activity_toolbar = activity_button.page
-        toolbar_box.toolbar.insert(activity_button, 0)
+        self._toolbar_box.toolbar.insert(activity_button, 0)
         self.title_entry = activity_toolbar.title
 
         self._view_toolbar = ViewToolbar()
@@ -86,11 +86,19 @@ class JukeboxActivity(activity.Activity):
             page=self._view_toolbar,
             icon_name='toolbar-view')
         self._view_toolbar.show()
-        toolbar_box.toolbar.insert(view_toolbar_button, -1)
+        self._toolbar_box.toolbar.insert(view_toolbar_button, -1)
         view_toolbar_button.show()
 
-        self.set_toolbar_box(toolbar_box)
-        toolbar_box.show_all()
+        self._control_toolbar = Gtk.Toolbar()
+        self._control_toolbar_button = ToolbarButton(
+            page=self._control_toolbar,
+            icon_name='media-playback-start')
+        self._control_toolbar.show()
+        self._toolbar_box.toolbar.insert(self._control_toolbar_button, -1)
+        self._control_toolbar_button.hide()
+
+        self.set_toolbar_box(self._toolbar_box)
+        self._toolbar_box.show_all()
 
         self.connect('key_press_event', self.__key_press_event_cb)
         self.connect('playlist-finished', self.__playlist_finished_cb)
@@ -118,9 +126,17 @@ class JukeboxActivity(activity.Activity):
         self.player.connect('error', self.__player_error_cb)
         self.player.connect('play', self.__player_play_cb)
 
-        self.control = Controls(self, toolbar_box.toolbar)
+        self.control = Controls(self, self._toolbar_box.toolbar,
+                                self._control_toolbar)
 
-        toolbar_box.toolbar.insert(StopButton(self), -1)
+        self._separator = Gtk.SeparatorToolItem()
+        self._separator.props.draw = False
+        self._separator.set_expand(True)
+        self._separator.show()
+        self._toolbar_box.toolbar.insert(self._separator, -1)
+
+        self._stop = StopButton(self)
+        self._toolbar_box.toolbar.insert(self._stop, -1)
 
         self._empty_widget = Gtk.Label(label="")
         self._empty_widget.show()
@@ -128,6 +144,8 @@ class JukeboxActivity(activity.Activity):
         self.set_canvas(self._video_canvas)
         self._init_view_area()
         self.show_all()
+
+        self._configure_cb()
 
         self.player.init_view_area(self.videowidget)
 
@@ -144,6 +162,22 @@ class JukeboxActivity(activity.Activity):
                             self.control.show_picker_cb)
 
         self.control.check_if_next_prev()
+
+        Gdk.Screen.get_default().connect('size-changed', self._configure_cb)
+
+    def _configure_cb(self, event=None):
+        self._toolbar_box.toolbar.remove(self._stop)
+        self._toolbar_box.toolbar.remove(self._separator)
+        if Gdk.Screen.width() < Gdk.Screen.height():
+            self._control_toolbar_button.show()
+            self._control_toolbar_button.set_expanded(True)
+            self.control.update_layout(landscape=False)
+            self._toolbar_box.toolbar.insert(self._separator, -1)
+        else:
+            self._control_toolbar_button.set_expanded(False)
+            self._control_toolbar_button.hide()
+            self.control.update_layout(landscape=True)
+        self._toolbar_box.toolbar.insert(self._stop, -1)
 
     def __notify_active_cb(self, widget, event):
         """Sugar notify us that the activity is becoming active or inactive.

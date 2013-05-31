@@ -36,11 +36,12 @@ class Controls(GObject.GObject):
     SCALE_DURATION_TEXT = 100
     RESEEK_TIMEOUT = 250  # ms
 
-    def __init__(self, activity, toolbar):
+    def __init__(self, activity, main_toolbar, secondary_toolbar):
         GObject.GObject.__init__(self)
 
         self.activity = activity
-        self.toolbar = toolbar
+        self.toolbar = main_toolbar
+        self.secondary_toolbar = secondary_toolbar
 
         self._scale_update_id = -1
         self._scale_value_changed_id = -1
@@ -58,9 +59,11 @@ class Controls(GObject.GObject):
                  self.__erase_playlist_entry_clicked_cb)
         self.toolbar.insert(erase_playlist_entry_btn, -1)
 
-        spacer = Gtk.SeparatorToolItem()
-        self.toolbar.insert(spacer, -1)
-        spacer.show()
+        self._spacer = Gtk.SeparatorToolItem()
+        self._spacer.props.draw = True
+        self._spacer.set_expand(False)
+        self.toolbar.insert(self._spacer, -1)
+        self._spacer.show()
 
         self.prev_button = ToolButton('player_rew')
         self.prev_button.set_tooltip(_('Previous'))
@@ -89,11 +92,11 @@ class Controls(GObject.GObject):
         self.next_button.connect('clicked', self.__next_button_clicked_cb)
         self.toolbar.insert(self.next_button, -1)
 
-        current_time = Gtk.ToolItem()
+        self._current_time = Gtk.ToolItem()
         self.current_time_label = Gtk.Label(label='')
-        current_time.add(self.current_time_label)
-        current_time.show()
-        self.toolbar.insert(current_time, -1)
+        self._current_time.add(self.current_time_label)
+        self._current_time.show()
+        self.toolbar.insert(self._current_time, -1)
 
         self.adjustment = Gtk.Adjustment(0.0, 0.00, 100.0, 0.1, 1.0, 1.0)
         self.hscale = Gtk.Scale(orientation=Gtk.Orientation.HORIZONTAL,
@@ -113,14 +116,40 @@ class Controls(GObject.GObject):
         self.scale_item.add(self.hscale)
         self.toolbar.insert(self.scale_item, -1)
 
-        total_time = Gtk.ToolItem()
+        self._total_time = Gtk.ToolItem()
         self.total_time_label = Gtk.Label(label='')
-        total_time.add(self.total_time_label)
-        total_time.show()
-        self.toolbar.insert(total_time, -1)
+        self._total_time.add(self.total_time_label)
+        self._total_time.show()
+        self.toolbar.insert(self._total_time, -1)
 
         self.activity.connect('playlist-finished', self.__playlist_finished_cb)
         self.activity.player.connect('play', self.__player_play)
+
+    def update_layout(self, landscape=True):
+        if landscape:
+            self._remove_controls(self.secondary_toolbar)
+            self._add_controls(self.toolbar)
+        else:
+            self._remove_controls(self.toolbar)
+            self._add_controls(self.secondary_toolbar)
+            self._spacer.hide()
+
+    def _remove_controls(self, toolbar):
+        for control in [self._spacer, self.prev_button,
+                        self.button, self.next_button,
+                        self._current_time, self.scale_item,
+                        self._total_time]:
+            if control in toolbar:
+                toolbar.remove(control)
+
+    def _add_controls(self, toolbar):
+        for control in [self._spacer, self.prev_button,
+                        self.button, self.next_button,
+                        self._current_time, self.scale_item,
+                        self._total_time]:
+            if not control in toolbar:
+                toolbar.insert(control, -1)
+                control.show()
 
     def __player_play(self, widget):
         if self._scale_update_id == -1:
