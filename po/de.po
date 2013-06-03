@@ -59,7 +59,7 @@ msgstr ""
 "Project-Id-Version: Jukebox-activity\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2012-11-12 11:56+0200\n"
+"PO-Revision-Date: 2013-06-03 21:05+0200\n"
 "Last-Translator: Markus <m.slg@gmx.de>\n"
 "Language-Team: OLPC-Deutsch <LL@li.org>\n"
 "Language: de\n"
@@ -92,11 +92,11 @@ msgstr "Jukebox-Aktivität"
 
 #: activity.py:143
 msgid "No media"
-msgstr ""
+msgstr "Keine Medien"
 
 #: activity.py:143
 msgid "Choose media files"
-msgstr ""
+msgstr "Mediendateien wählen"
 
 #: activity.py:271
 #, python-format
@@ -105,7 +105,7 @@ msgstr "%s Titel wurden nicht gefunden."
 
 #: activity.py:274
 msgid "Dismiss"
-msgstr ""
+msgstr "Verwerfen"
 
 #: activity.py:278
 msgid "Details"
@@ -122,7 +122,7 @@ msgstr "Fehler"
 #: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
-msgstr "Diese \"s\"-Datei kann nicht abgespielt werden."
+msgstr "Die Datei \"%s\" kann nicht abgespielt werden."
 
 #: controls.py:50
 msgid "Add track"
@@ -146,7 +146,7 @@ msgstr "Nein."
 
 #: playlist.py:73
 msgid "Track"
-msgstr ""
+msgstr "Titel"
 
 #: playlist.py:214
 msgid "Jukebox playlist"
