@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2012-11-15 06:47+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2013-08-06 23:39+0200\n"
+"Last-Translator: Irma  <sankaypillo@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: quz\n"
 "MIME-Version: 1.0\n"
@@ -44,11 +44,11 @@ msgstr "Takichinap ruwanankuna"
 
 #: activity.py:143
 msgid "No media"
-msgstr ""
+msgstr "Media nisqakunaqa manam kanchu"
 
 #: activity.py:143
 msgid "Choose media files"
-msgstr ""
+msgstr "Medios nisqakunap khipunta akllay"
 
 #  [ES] "%s pistas no encontradas."
 #: activity.py:271
@@ -58,7 +58,7 @@ msgstr "%s takiykuna mana tarisqa."
 
 #: activity.py:274
 msgid "Dismiss"
-msgstr ""
+msgstr "Qhichuy"
 
 #  [ES] "Detalles"
 #: activity.py:278
@@ -108,7 +108,7 @@ msgstr "No."
 
 #: playlist.py:73
 msgid "Track"
-msgstr ""
+msgstr "Taki"
 
 #  "Lista de reproducción de Jukebox"
 #: playlist.py:214
