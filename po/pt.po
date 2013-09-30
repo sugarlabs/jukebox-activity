@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2012-07-31 20:59+0200\n"
+"PO-Revision-Date: 2013-09-24 16:06+0200\n"
 "Last-Translator: Eduardo H. <hoboprimate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt\n"
@@ -38,6 +38,9 @@ msgid ""
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 msgstr ""
+"Sê um DJ, sê um VJ. Toca os teus vídeos e músicas favoritas. Partilha com os "
+"teus amigos as canções que amas, vê filmes e vídeos educacionais em "
+"conjunto, e muito mais!"
 
 #: activity.py:71
 msgid "Jukebox Activity"
@@ -45,37 +48,37 @@ msgstr "Atividade Jukebox"
 
 #: activity.py:143
 msgid "No media"
-msgstr ""
+msgstr "Sem média"
 
 #: activity.py:143
 msgid "Choose media files"
-msgstr ""
+msgstr "Escolhe ficheiros de média"
 
 #: activity.py:271
 #, python-format
 msgid "%s tracks not found."
-msgstr ""
+msgstr "%s faixas não encontradas."
 
 #: activity.py:274
 msgid "Dismiss"
-msgstr ""
+msgstr "Descartar"
 
 #: activity.py:278
 msgid "Details"
-msgstr ""
+msgstr "Detalhes"
 
 #: activity.py:289
 msgid "<b>Missing tracks</b>"
-msgstr ""
+msgstr "<b>Faixas em falta</b>"
 
 #: activity.py:334
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 #: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
-msgstr ""
+msgstr "O ficheiro \"%s\" não pode ser tocado"
 
 #: controls.py:50
 msgid "Add track"
@@ -99,7 +102,7 @@ msgstr "Nº."
 
 #: playlist.py:73
 msgid "Track"
-msgstr ""
+msgstr "Faixa"
 
 #: playlist.py:214
 msgid "Jukebox playlist"
