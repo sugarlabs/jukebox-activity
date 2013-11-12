@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2012-01-11 14:23+0200\n"
-"Last-Translator: maux77 <dreadlock@hotmail.it>\n"
+"PO-Revision-Date: 2013-11-11 16:46+0200\n"
+"Last-Translator: arosella <arosella@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -36,6 +36,10 @@ msgid ""
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 msgstr ""
+"Divenda un DJ, diventa un VJ. Puoi mostrare i tuo video preferiti ed "
+"ascoltare le canzoni che più ti piacciono. Puoi anche condividere con i tuoi "
+"amici le tue canzoni del cuore, guardare film e documentari insieme a loro, "
+"e tanto altro!"
 
 #: activity.py:71
 msgid "Jukebox Activity"
@@ -43,45 +47,45 @@ msgstr "Attività Jukebox"
 
 #: activity.py:143
 msgid "No media"
-msgstr ""
+msgstr "Nessun file multimediale"
 
 #: activity.py:143
 msgid "Choose media files"
-msgstr ""
+msgstr "Scegli i file multimediali"
 
 #: activity.py:271
 #, python-format
 msgid "%s tracks not found."
-msgstr ""
+msgstr "non trovo la traccia %s ."
 
 #: activity.py:274
 msgid "Dismiss"
-msgstr ""
+msgstr "Abbandona"
 
 #: activity.py:278
 msgid "Details"
-msgstr ""
+msgstr "Dettagli"
 
 #: activity.py:289
 msgid "<b>Missing tracks</b>"
-msgstr ""
+msgstr "<b>Tracce Mancanti</b>"
 
 #: activity.py:334
 msgid "Error"
-msgstr ""
+msgstr "Errore"
 
 #: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
-msgstr ""
+msgstr "Questo file \"%s\" non può essere eseguito"
 
 #: controls.py:50
 msgid "Add track"
-msgstr ""
+msgstr "Aggiungi traccia"
 
 #: controls.py:56
 msgid "Remove track"
-msgstr ""
+msgstr "Rimuovi traccia"
 
 #: controls.py:66
 msgid "Previous"
@@ -93,15 +97,15 @@ msgstr "Successivo"
 
 #: playlist.py:66
 msgid "No."
-msgstr ""
+msgstr "No."
 
 #: playlist.py:73
 msgid "Track"
-msgstr ""
+msgstr "Traccia"
 
 #: playlist.py:214
 msgid "Jukebox playlist"
-msgstr ""
+msgstr "Lista di esecuzione del Jukebox"
 
 #: viewtoolbar.py:48
 msgid "Show Playlist"
