@@ -49,8 +49,8 @@ class PlayList(Gtk.ScrolledWindow):
         self.listview = Gtk.TreeView()
         self.treemodel = Gtk.ListStore(int, object, bool)
         self.listview.set_model(self.treemodel)
-        selection = self.listview.get_selection()
-        selection.set_mode(Gtk.SelectionMode.SINGLE)
+        self.selection = self.listview.get_selection()
+        self.selection.set_mode(Gtk.SelectionMode.SINGLE)
 
         renderer_icon = CellRendererIcon(self.listview)
         renderer_icon.props.icon_name = 'emblem-notification'
@@ -82,6 +82,37 @@ class PlayList(Gtk.ScrolledWindow):
         self.listview.connect('cursor-changed', self.__on_cursor_changed)
 
         self.add(self.listview)
+
+    def move_up(self):
+        selected_iter = self.selection.get_selected()[1]
+        position = self.treemodel.get_iter(
+            int(str(self.treemodel.get_path(selected_iter))) - 1)
+        self.treemodel.move_before(selected_iter, position)
+        i = self._current_playing
+        self._items[i - 1], self._items[i] = \
+            self._items[i], self._items[i - 1]
+        index = 0
+        for tree_item, playlist_item in zip(self.treemodel, self._items):
+            tree_item[0] = index
+            index = index + 1
+
+        self._current_playing -= 1
+
+    def move_down(self):
+        selected_iter = self.selection.get_selected()[1]
+        position = self.treemodel.get_iter(
+            int(str(self.treemodel.get_path(selected_iter))) + 1)
+        self.treemodel.move_after(selected_iter, position)
+        i = self._current_playing
+        self._items[i + 1], self._items[i] = \
+            self._items[i], self._items[i + 1]
+
+        index = 0
+        for tree_item, playlist_item in zip(self.treemodel, self._items):
+            tree_item[0] = index
+            index = index + 1
+
+        self._current_playing += 1
 
     def __on_cursor_changed(self, treeview):
         selection = self.listview.get_selection()
@@ -116,7 +147,7 @@ class PlayList(Gtk.ScrolledWindow):
 
     def _set_number(self, column, cell, model, it, data):
         idx = model.get_value(it, COLUMNS['index'])
-        cell.set_property('text', idx + 1)
+        cell.set_property('text', str(idx + 1))
 
     def _set_title(self, column, cell, model, it, data):
         title = model.get_value(it, COLUMNS['title'])

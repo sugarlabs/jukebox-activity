@@ -35,6 +35,7 @@ from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.graphics.alert import ErrorAlert
 from sugar3.graphics.alert import Alert
 from sugar3.graphics.icon import Icon
+from sugar3.graphics.toolbutton import ToolButton
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -110,6 +111,8 @@ class JukeboxActivity(activity.Activity):
 
         self._video_canvas = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
 
+        self._playlist_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+
         self.playlist_widget = PlayList()
         self.playlist_widget.connect('play-index', self.__play_index_cb)
         self.playlist_widget.connect('missing-tracks',
@@ -117,7 +120,24 @@ class JukeboxActivity(activity.Activity):
         self.playlist_widget.set_size_request(
             Gdk.Screen.width() * PLAYLIST_WIDTH_PROP, 0)
         self.playlist_widget.show()
-        self._video_canvas.pack_start(self.playlist_widget, False, True, 0)
+
+        self._playlist_box.pack_start(self.playlist_widget, expand=True,
+                                      fill=True, padding=0)
+
+        self._playlist_toolbar = Gtk.Toolbar()
+
+        move_up = ToolButton("go-up")
+        move_up.set_tooltip(_("Move up"))
+        move_up.connect("clicked", self._move_up_cb)
+        self._playlist_toolbar.insert(move_up, 0)
+
+        move_down = ToolButton("go-down")
+        move_down.set_tooltip(_("Move down"))
+        move_down.connect("clicked", self._move_down_cb)
+        self._playlist_toolbar.insert(move_down, 1)
+
+        self._playlist_box.pack_end(self._playlist_toolbar, False, False, 0)
+        self._video_canvas.pack_start(self._playlist_box, False, False, 0)
 
         # Create the player just once
         logging.debug('Instantiating GstPlayer')
@@ -144,6 +164,8 @@ class JukeboxActivity(activity.Activity):
         self.set_canvas(self._video_canvas)
         self._init_view_area()
         self.show_all()
+        # need hide the playlist by default
+        self._playlist_box.hide()
 
         self._configure_cb()
 
@@ -164,6 +186,12 @@ class JukeboxActivity(activity.Activity):
         self.control.check_if_next_prev()
 
         Gdk.Screen.get_default().connect('size-changed', self._configure_cb)
+
+    def _move_up_cb(self, button):
+        self.playlist_widget.move_up()
+
+    def _move_down_cb(self, button):
+        self.playlist_widget.move_down()
 
     def _configure_cb(self, event=None):
         self._toolbar_box.toolbar.remove(self._stop)
@@ -431,9 +459,9 @@ class JukeboxActivity(activity.Activity):
 
     def __toggle_playlist_cb(self, toolbar):
         if self._view_toolbar._show_playlist.get_active():
-            self.playlist_widget.show_all()
+            self._playlist_box.show_all()
         else:
-            self.playlist_widget.hide()
+            self._playlist_box.hide()
         self._video_canvas.queue_draw()
 
 
