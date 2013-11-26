@@ -58,8 +58,7 @@ PLAYLIST_WIDTH_PROP = 1.0 / 3
 class JukeboxActivity(activity.Activity):
 
     __gsignals__ = {
-        'playlist-finished': (GObject.SignalFlags.RUN_FIRST, None, []),
-        }
+        'playlist-finished': (GObject.SignalFlags.RUN_FIRST, None, []), }
 
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
@@ -80,9 +79,9 @@ class JukeboxActivity(activity.Activity):
 
         self._view_toolbar = ViewToolbar()
         self._view_toolbar.connect('go-fullscreen',
-                             self.__go_fullscreen_cb)
+                                   self.__go_fullscreen_cb)
         self._view_toolbar.connect('toggle-playlist',
-                             self.__toggle_playlist_cb)
+                                   self.__toggle_playlist_cb)
         view_toolbar_button = ToolbarButton(
             page=self._view_toolbar,
             icon_name='toolbar-view')
@@ -232,7 +231,7 @@ class JukeboxActivity(activity.Activity):
         self.view_area.append_page(self._empty_widget, None)
         self.view_area.append_page(self.videowidget, None)
         self._video_canvas.pack_end(self.view_area, expand=True,
-                             fill=True, padding=0)
+                                    fill=True, padding=0)
 
     def _switch_canvas(self, show_video):
         """Show or hide the video visualization in the canvas.
@@ -396,7 +395,7 @@ class JukeboxActivity(activity.Activity):
         logging.error('ERROR DETAIL: %s', detail)
 
         file_path = self.playlist_widget._items[
-                self.playlist_widget.get_current_playing()]['path']
+            self.playlist_widget.get_current_playing()]['path']
         mimetype = mime.get_for_file(file_path)
 
         title = _('Error')
@@ -441,7 +440,8 @@ class JukeboxActivity(activity.Activity):
 
         else:
             if self._playlist_jobject is None:
-                self._playlist_jobject = self.playlist_widget.create_playlist_jobject()
+                self._playlist_jobject = \
+                    self.playlist_widget.create_playlist_jobject()
 
             # Add the playlist to the playlist jobject description.
             # This is only done if the activity was not started from a

@@ -55,8 +55,8 @@ class Controls(GObject.GObject):
 
         erase_playlist_entry_btn = ToolButton(icon_name='list-remove')
         erase_playlist_entry_btn.set_tooltip(_('Remove track'))
-        erase_playlist_entry_btn.connect('clicked',
-                 self.__erase_playlist_entry_clicked_cb)
+        erase_playlist_entry_btn.connect(
+            'clicked', self.__erase_playlist_entry_clicked_cb)
         self.toolbar.insert(erase_playlist_entry_btn, -1)
 
         self._spacer = Gtk.SeparatorToolItem()
@@ -107,9 +107,9 @@ class Controls(GObject.GObject):
         logging.debug("FIXME: AttributeError: 'Scale' object has no "
                       "attribute 'set_update_policy'")
         self.hscale.connect('button-press-event',
-                self.__scale_button_press_cb)
+                            self.__scale_button_press_cb)
         self.hscale.connect('button-release-event',
-                self.__scale_button_release_cb)
+                            self.__scale_button_release_cb)
 
         self.scale_item = Gtk.ToolItem()
         self.scale_item.set_expand(True)
@@ -203,8 +203,8 @@ class Controls(GObject.GObject):
                     self.check_if_next_prev()
 
                     self.activity._switch_canvas(False)
-                    self.activity._view_toolbar.\
-                            _show_playlist.set_active(True)
+                    self.activity._view_toolbar._show_playlist.set_active(
+                        True)
         finally:
             if jobject is not None:
                 jobject.destroy()
@@ -293,8 +293,8 @@ class Controls(GObject.GObject):
 
         # make sure we get changed notifies
         if self._scale_value_changed_id == -1:
-            self._scale_value_changed_id = self.hscale.connect('value-changed',
-                self.__scale_value_changed_cb)
+            self._scale_value_changed_id = self.hscale.connect(
+                'value-changed', self.__scale_value_changed_cb)
 
     def __scale_value_changed_cb(self, scale):
         if self._scale_reseek_timeout_id != -1:
@@ -305,8 +305,8 @@ class Controls(GObject.GObject):
 
     def _reseek(self):
         self._scale_reseek_timeout_id = -1
-        location = long(self.activity.control.hscale.get_value() * \
-                            self.p_duration / 100)  # in ns
+        location = long(self.activity.control.hscale.get_value() *
+                        self.p_duration / 100)  # in ns
         self.activity.player.seek(location)
         # Allow for a preroll
         self.activity.player.get_state(timeout=50 * Gst.MSECOND)  # 50 ms

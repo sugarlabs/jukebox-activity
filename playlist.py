@@ -36,8 +36,7 @@ class PlayList(Gtk.ScrolledWindow):
 
     __gsignals__ = {
         'play-index': (GObject.SignalFlags.RUN_FIRST, None, [int, str]),
-        'missing-tracks': (GObject.SignalFlags.RUN_FIRST, None, [object]),
-        }
+        'missing-tracks': (GObject.SignalFlags.RUN_FIRST, None, [object]), }
 
     def __init__(self):
         self._current_playing = 0
