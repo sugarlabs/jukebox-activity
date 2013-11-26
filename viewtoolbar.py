@@ -17,8 +17,6 @@
 # Copyright (C) 2008 Kushal Das <kushal@fedoraproject.org>
 # Copyright (C) 2013 Manuel Kaufmann <humitos@gmail.com>
 
-import logging
-
 from gettext import gettext as _
 
 from gi.repository import GObject

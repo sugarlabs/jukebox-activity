@@ -114,7 +114,6 @@ class PlayList(Gtk.ScrolledWindow):
         self._current_playing += 1
 
     def __on_cursor_changed(self, treeview):
-        selection = self.listview.get_selection()
         sel_model, sel_rows = self.listview.get_selection().get_selected_rows()
         for row in sel_rows:
             index = sel_model.get_value(sel_model.get_iter(row), 0)
@@ -166,7 +165,6 @@ class PlayList(Gtk.ScrolledWindow):
         self.listview.set_cursor((index,))
 
     def delete_selected_items(self):
-        selection = self.listview.get_selection()
         sel_model, sel_rows = self.listview.get_selection().get_selected_rows()
         for row in sel_rows:
             index = sel_model.get_value(sel_model.get_iter(row), 0)
