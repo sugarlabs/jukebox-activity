@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2013-02-14 15:56+0200\n"
+"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"PO-Revision-Date: 2013-12-01 01:28+0200\n"
 "Last-Translator: samy boutayeb <s.boutayeb@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fr\n"
@@ -44,73 +44,81 @@ msgstr ""
 msgid "Jukebox Activity"
 msgstr "Activité Jukebox"
 
-#: activity.py:143
+#: activity.py:129
+msgid "Move up"
+msgstr "Monter"
+
+#: activity.py:134
+msgid "Move down"
+msgstr "Descendre"
+
+#: activity.py:182
 msgid "No media"
 msgstr "Aucun média"
 
-#: activity.py:143
+#: activity.py:182
 msgid "Choose media files"
 msgstr "Choisis des fichiers médias"
 
-#: activity.py:271
+#: activity.py:337
 #, python-format
 msgid "%s tracks not found."
 msgstr "%s pistes non trouvées."
 
-#: activity.py:274
+#: activity.py:340
 msgid "Dismiss"
 msgstr "Ignorer"
 
-#: activity.py:278
+#: activity.py:344
 msgid "Details"
 msgstr "Détails"
 
-#: activity.py:289
+#: activity.py:355
 msgid "<b>Missing tracks</b>"
 msgstr "Pistes manquantes"
 
-#: activity.py:334
+#: activity.py:401
 msgid "Error"
 msgstr "Erreur"
 
-#: activity.py:335
+#: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "Le fichier \"%s\" ne peut pas être joué"
 
-#: controls.py:50
+#: controls.py:51
 msgid "Add track"
 msgstr "Ajouter une piste"
 
-#: controls.py:56
+#: controls.py:57
 msgid "Remove track"
 msgstr "Supprimer la piste"
 
-#: controls.py:66
+#: controls.py:69
 msgid "Previous"
 msgstr "Précédent"
 
-#: controls.py:87
+#: controls.py:90
 msgid "Next"
 msgstr "Suivant"
 
-#: playlist.py:66
+#: playlist.py:65
 msgid "No."
 msgstr "N°"
 
-#: playlist.py:73
+#: playlist.py:72
 msgid "Track"
 msgstr "Piste"
 
-#: playlist.py:214
+#: playlist.py:283
 msgid "Jukebox playlist"
 msgstr "Liste de lecture Jukebox"
 
-#: viewtoolbar.py:48
+#: viewtoolbar.py:46
 msgid "Show Playlist"
 msgstr "Afficher la liste de lecture"
 
-#: viewtoolbar.py:54
+#: viewtoolbar.py:52
 msgid "Fullscreen"
 msgstr "Plein écran"
 
