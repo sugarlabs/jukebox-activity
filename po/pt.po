@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2013-09-24 16:06+0200\n"
+"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"PO-Revision-Date: 2013-12-10 19:32+0200\n"
 "Last-Translator: Eduardo H. <hoboprimate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt\n"
@@ -46,73 +46,81 @@ msgstr ""
 msgid "Jukebox Activity"
 msgstr "Atividade Jukebox"
 
-#: activity.py:143
+#: activity.py:129
+msgid "Move up"
+msgstr "Mover para cima"
+
+#: activity.py:134
+msgid "Move down"
+msgstr "Mover para baixo"
+
+#: activity.py:182
 msgid "No media"
 msgstr "Sem média"
 
-#: activity.py:143
+#: activity.py:182
 msgid "Choose media files"
 msgstr "Escolhe ficheiros de média"
 
-#: activity.py:271
+#: activity.py:337
 #, python-format
 msgid "%s tracks not found."
 msgstr "%s faixas não encontradas."
 
-#: activity.py:274
+#: activity.py:340
 msgid "Dismiss"
 msgstr "Descartar"
 
-#: activity.py:278
+#: activity.py:344
 msgid "Details"
 msgstr "Detalhes"
 
-#: activity.py:289
+#: activity.py:355
 msgid "<b>Missing tracks</b>"
 msgstr "<b>Faixas em falta</b>"
 
-#: activity.py:334
+#: activity.py:401
 msgid "Error"
 msgstr "Erro"
 
-#: activity.py:335
+#: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "O ficheiro \"%s\" não pode ser tocado"
 
-#: controls.py:50
+#: controls.py:51
 msgid "Add track"
 msgstr "Adicionar média"
 
-#: controls.py:56
+#: controls.py:57
 msgid "Remove track"
 msgstr "Remover média"
 
-#: controls.py:66
+#: controls.py:69
 msgid "Previous"
 msgstr "Anterior"
 
-#: controls.py:87
+#: controls.py:90
 msgid "Next"
 msgstr "Seguinte"
 
-#: playlist.py:66
+#: playlist.py:65
 msgid "No."
 msgstr "Nº."
 
-#: playlist.py:73
+#: playlist.py:72
 msgid "Track"
 msgstr "Faixa"
 
-#: playlist.py:214
+#: playlist.py:283
 msgid "Jukebox playlist"
 msgstr "Lista de reprodução Jukebox"
 
-#: viewtoolbar.py:48
+#: viewtoolbar.py:46
 msgid "Show Playlist"
 msgstr "Mostrar Lista de Reprodução"
 
-#: viewtoolbar.py:54
+#: viewtoolbar.py:52
 msgid "Fullscreen"
 msgstr "Ecrã Inteiro"
 
