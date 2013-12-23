@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 00:33-0500\n"
+"POT-Creation-Date: 2013-11-27 00:31-0500\n"
 "PO-Revision-Date: 2013-11-11 16:46+0200\n"
 "Last-Translator: arosella <arosella@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,73 +45,81 @@ msgstr ""
 msgid "Jukebox Activity"
 msgstr "Attività Jukebox"
 
-#: activity.py:143
+#: activity.py:129
+msgid "Move up"
+msgstr ""
+
+#: activity.py:134
+msgid "Move down"
+msgstr ""
+
+#: activity.py:182
 msgid "No media"
 msgstr "Nessun file multimediale"
 
-#: activity.py:143
+#: activity.py:182
 msgid "Choose media files"
 msgstr "Scegli i file multimediali"
 
-#: activity.py:271
+#: activity.py:337
 #, python-format
 msgid "%s tracks not found."
 msgstr "non trovo la traccia %s ."
 
-#: activity.py:274
+#: activity.py:340
 msgid "Dismiss"
 msgstr "Abbandona"
 
-#: activity.py:278
+#: activity.py:344
 msgid "Details"
 msgstr "Dettagli"
 
-#: activity.py:289
+#: activity.py:355
 msgid "<b>Missing tracks</b>"
 msgstr "<b>Tracce Mancanti</b>"
 
-#: activity.py:334
+#: activity.py:401
 msgid "Error"
 msgstr "Errore"
 
-#: activity.py:335
+#: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "Questo file \"%s\" non può essere eseguito"
 
-#: controls.py:50
+#: controls.py:51
 msgid "Add track"
 msgstr "Aggiungi traccia"
 
-#: controls.py:56
+#: controls.py:57
 msgid "Remove track"
 msgstr "Rimuovi traccia"
 
-#: controls.py:66
+#: controls.py:69
 msgid "Previous"
 msgstr "Precedente"
 
-#: controls.py:87
+#: controls.py:90
 msgid "Next"
 msgstr "Successivo"
 
-#: playlist.py:66
+#: playlist.py:65
 msgid "No."
 msgstr "No."
 
-#: playlist.py:73
+#: playlist.py:72
 msgid "Track"
 msgstr "Traccia"
 
-#: playlist.py:214
+#: playlist.py:283
 msgid "Jukebox playlist"
 msgstr "Lista di esecuzione del Jukebox"
 
-#: viewtoolbar.py:48
+#: viewtoolbar.py:46
 msgid "Show Playlist"
 msgstr "Mostra lista di esecuzione"
 
-#: viewtoolbar.py:54
+#: viewtoolbar.py:52
 msgid "Fullscreen"
 msgstr "Schermo intero"
 
