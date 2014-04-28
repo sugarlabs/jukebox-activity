@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 00:33-0500\n"
+"POT-Creation-Date: 2013-11-27 00:31-0500\n"
 "PO-Revision-Date: 2011-08-24 08:37+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -37,73 +37,81 @@ msgstr ""
 msgid "Jukebox Activity"
 msgstr "نشاط صندوق الموسيقى"
 
-#: activity.py:143
+#: activity.py:129
+msgid "Move up"
+msgstr ""
+
+#: activity.py:134
+msgid "Move down"
+msgstr ""
+
+#: activity.py:182
 msgid "No media"
 msgstr ""
 
-#: activity.py:143
+#: activity.py:182
 msgid "Choose media files"
 msgstr ""
 
-#: activity.py:271
+#: activity.py:337
 #, python-format
 msgid "%s tracks not found."
 msgstr ""
 
-#: activity.py:274
+#: activity.py:340
 msgid "Dismiss"
 msgstr ""
 
-#: activity.py:278
+#: activity.py:344
 msgid "Details"
 msgstr ""
 
-#: activity.py:289
+#: activity.py:355
 msgid "<b>Missing tracks</b>"
 msgstr ""
 
-#: activity.py:334
+#: activity.py:401
 msgid "Error"
 msgstr ""
 
-#: activity.py:335
+#: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr ""
 
-#: controls.py:50
+#: controls.py:51
 msgid "Add track"
 msgstr ""
 
-#: controls.py:56
+#: controls.py:57
 msgid "Remove track"
 msgstr ""
 
-#: controls.py:66
+#: controls.py:69
 msgid "Previous"
 msgstr "السّابق"
 
-#: controls.py:87
+#: controls.py:90
 msgid "Next"
 msgstr "التّالي"
 
-#: playlist.py:66
+#: playlist.py:65
 msgid "No."
 msgstr ""
 
-#: playlist.py:73
+#: playlist.py:72
 msgid "Track"
 msgstr ""
 
-#: playlist.py:214
+#: playlist.py:283
 msgid "Jukebox playlist"
 msgstr ""
 
-#: viewtoolbar.py:48
+#: viewtoolbar.py:46
 msgid "Show Playlist"
 msgstr ""
 
-#: viewtoolbar.py:54
+#: viewtoolbar.py:52
 msgid "Fullscreen"
 msgstr "ملء الشاشة"
 
