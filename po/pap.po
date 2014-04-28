@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2013-09-24 01:26+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"PO-Revision-Date: 2014-03-27 23:12+0200\n"
+"Last-Translator: June <juneleonora@yahoo.com>\n"
 "Language-Team: JuneLeonora\n"
 "Language: pap\n"
 "MIME-Version: 1.0\n"
@@ -43,73 +43,81 @@ msgstr ""
 msgid "Jukebox Activity"
 msgstr "Aktividat di Jukebox"
 
-#: activity.py:143
+#: activity.py:129
+msgid "Move up"
+msgstr "Move bai ariba"
+
+#: activity.py:134
+msgid "Move down"
+msgstr "Move bai abou"
+
+#: activity.py:182
 msgid "No media"
 msgstr "Sin medionan di komunikashon"
 
-#: activity.py:143
+#: activity.py:182
 msgid "Choose media files"
 msgstr "Skohe failnan di medionan di komunikashon"
 
-#: activity.py:271
+#: activity.py:337
 #, python-format
 msgid "%s tracks not found."
 msgstr "%s no a haña kansion"
 
-#: activity.py:274
+#: activity.py:340
 msgid "Dismiss"
 msgstr "Rechasá"
 
-#: activity.py:278
+#: activity.py:344
 msgid "Details"
 msgstr "Detayenan"
 
-#: activity.py:289
+#: activity.py:355
 msgid "<b>Missing tracks</b>"
 msgstr "<b>Kansionan ku falta</b>"
 
-#: activity.py:334
+#: activity.py:401
 msgid "Error"
 msgstr "Eror"
 
-#: activity.py:335
+#: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "No por toka e ¨%s¨ fail akí"
 
-#: controls.py:50
+#: controls.py:51
 msgid "Add track"
 msgstr "Añadí kansion"
 
-#: controls.py:56
+#: controls.py:57
 msgid "Remove track"
 msgstr "Kita kansion"
 
-#: controls.py:66
+#: controls.py:69
 msgid "Previous"
 msgstr "Anterior"
 
-#: controls.py:87
+#: controls.py:90
 msgid "Next"
 msgstr "Siguiente"
 
-#: playlist.py:66
+#: playlist.py:65
 msgid "No."
 msgstr "No."
 
-#: playlist.py:73
+#: playlist.py:72
 msgid "Track"
 msgstr "Kansion"
 
-#: playlist.py:214
+#: playlist.py:283
 msgid "Jukebox playlist"
 msgstr "Lista di kansion di jukebox"
 
-#: viewtoolbar.py:48
+#: viewtoolbar.py:46
 msgid "Show Playlist"
 msgstr "Mustra Lista di kansion"
 
-#: viewtoolbar.py:54
+#: viewtoolbar.py:52
 msgid "Fullscreen"
 msgstr "Pantaya kompleto"
 
