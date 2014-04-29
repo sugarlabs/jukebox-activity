@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2013-02-10 22:07+0200\n"
+"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"PO-Revision-Date: 2013-12-22 22:55+0200\n"
 "Last-Translator: whe <heppew@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nl\n"
@@ -48,73 +48,81 @@ msgstr ""
 msgid "Jukebox Activity"
 msgstr "Jukebox activiteit"
 
-#: activity.py:143
+#: activity.py:129
+msgid "Move up"
+msgstr "Beweeg omhoog"
+
+#: activity.py:134
+msgid "Move down"
+msgstr "Beweeg omlaag"
+
+#: activity.py:182
 msgid "No media"
 msgstr "Geen media"
 
-#: activity.py:143
+#: activity.py:182
 msgid "Choose media files"
 msgstr "Kies mediabestanden"
 
-#: activity.py:271
+#: activity.py:337
 #, python-format
 msgid "%s tracks not found."
 msgstr "%s sporen niet gevonden."
 
-#: activity.py:274
+#: activity.py:340
 msgid "Dismiss"
 msgstr "Vertrek"
 
-#: activity.py:278
+#: activity.py:344
 msgid "Details"
 msgstr "Details"
 
-#: activity.py:289
+#: activity.py:355
 msgid "<b>Missing tracks</b>"
 msgstr "<b>Missende sporen</b>"
 
-#: activity.py:334
+#: activity.py:401
 msgid "Error"
 msgstr "Fout"
 
-#: activity.py:335
+#: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "Dit \"%s\" bestand kan niet afgespeeld worden"
 
-#: controls.py:50
+#: controls.py:51
 msgid "Add track"
 msgstr "Voeg spoor toe"
 
-#: controls.py:56
+#: controls.py:57
 msgid "Remove track"
 msgstr "Verwijder spoor"
 
-#: controls.py:66
+#: controls.py:69
 msgid "Previous"
 msgstr "Vorig"
 
-#: controls.py:87
+#: controls.py:90
 msgid "Next"
 msgstr "Volgend"
 
-#: playlist.py:66
+#: playlist.py:65
 msgid "No."
 msgstr "Nee."
 
-#: playlist.py:73
+#: playlist.py:72
 msgid "Track"
 msgstr "Spoor"
 
-#: playlist.py:214
+#: playlist.py:283
 msgid "Jukebox playlist"
 msgstr "Jukebox afspeellijst"
 
-#: viewtoolbar.py:48
+#: viewtoolbar.py:46
 msgid "Show Playlist"
 msgstr "Toon afspeellijst"
 
-#: viewtoolbar.py:54
+#: viewtoolbar.py:52
 msgid "Fullscreen"
 msgstr "Schermvullend"
 
