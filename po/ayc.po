@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2013-05-22 00:11+0200\n"
+"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"PO-Revision-Date: 2014-02-16 02:05+0200\n"
 "Last-Translator: EdgarQuispeChambi <quispedgar@yahoo.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ayc\n"
@@ -38,76 +38,84 @@ msgstr ""
 msgid "Jukebox Activity"
 msgstr "Warurt'anaka qhantayaña wakichäwi"
 
-#: activity.py:143
+#: activity.py:129
+msgid "Move up"
+msgstr "Alayaru apsuña"
+
+#: activity.py:134
+msgid "Move down"
+msgstr "Aynacharu apaqaña"
+
+#: activity.py:182
 msgid "No media"
 msgstr "Lurañanakaxa janiwa utjiti"
 
-#: activity.py:143
+#: activity.py:182
 msgid "Choose media files"
 msgstr "Lurañanaka imatanaka jajllma"
 
-#: activity.py:271
+#: activity.py:337
 #, python-format
 msgid "%s tracks not found."
 msgstr "%s warurt'irinaka thaki janiwa katuyasiti."
 
-#: activity.py:274
+#: activity.py:340
 msgid "Dismiss"
 msgstr "Apanukuña"
 
-#: activity.py:278
+#: activity.py:344
 msgid "Details"
 msgstr "Utjirinaka"
 
-#: activity.py:289
+#: activity.py:355
 msgid "<b>Missing tracks</b>"
 msgstr "<b>Chhaqata thakinaka</b>"
 
-#: activity.py:334
+#: activity.py:401
 msgid "Error"
 msgstr "Pantjata"
 
-#: activity.py:335
+#: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "Aka \"%s\" imataxa janiwa qhantaña muniti"
 
-#: controls.py:50
+#: controls.py:51
 msgid "Add track"
 msgstr "Warurt'ayañataki wakichma"
 
-#: controls.py:56
+#: controls.py:57
 msgid "Remove track"
 msgstr "Warurt'añataki wakichata apaqma"
 
 #  "Anterior"
-#: controls.py:66
+#: controls.py:69
 msgid "Previous"
 msgstr "Nayrchapi"
 
 #  "Siguiente"
-#: controls.py:87
+#: controls.py:90
 msgid "Next"
 msgstr "Qhipankiri"
 
-#: playlist.py:66
+#: playlist.py:65
 msgid "No."
 msgstr "N.° jakhu chimpu"
 
-#: playlist.py:73
+#: playlist.py:72
 msgid "Track"
 msgstr "Thaki"
 
-#: playlist.py:214
+#: playlist.py:283
 msgid "Jukebox playlist"
 msgstr "Jukebox warurt'anaka qhantayaña wakichaña"
 
-#: viewtoolbar.py:48
+#: viewtoolbar.py:46
 msgid "Show Playlist"
 msgstr "Warurt'anaka qhantayaña wakichata"
 
 #  "Pantalla completa"
-#: viewtoolbar.py:54
+#: viewtoolbar.py:52
 msgid "Fullscreen"
 msgstr "Maypacha uñtañataki"
 
