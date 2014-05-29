@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2013-02-01 11:31+0200\n"
+"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"PO-Revision-Date: 2013-12-02 18:14+0200\n"
 "Last-Translator: lite <litekok@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -41,73 +41,81 @@ msgstr "成为一个DJ或VJ。播放您喜爱的视频和歌曲。与朋友们�
 msgid "Jukebox Activity"
 msgstr "点唱机活动"
 
-#: activity.py:143
+#: activity.py:129
+msgid "Move up"
+msgstr "上移"
+
+#: activity.py:134
+msgid "Move down"
+msgstr "下移"
+
+#: activity.py:182
 msgid "No media"
 msgstr "没有媒体"
 
-#: activity.py:143
+#: activity.py:182
 msgid "Choose media files"
 msgstr "选择媒体文件"
 
-#: activity.py:271
+#: activity.py:337
 #, python-format
 msgid "%s tracks not found."
 msgstr "没有被发现音轨 %s 。"
 
-#: activity.py:274
+#: activity.py:340
 msgid "Dismiss"
 msgstr "解除"
 
-#: activity.py:278
+#: activity.py:344
 msgid "Details"
 msgstr "详细信息"
 
-#: activity.py:289
+#: activity.py:355
 msgid "<b>Missing tracks</b>"
 msgstr "<b>丢失的音轨</b>"
 
-#: activity.py:334
+#: activity.py:401
 msgid "Error"
 msgstr "错误"
 
-#: activity.py:335
+#: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "无法播放 \"%s\" 文件"
 
-#: controls.py:50
+#: controls.py:51
 msgid "Add track"
 msgstr "添加曲目"
 
-#: controls.py:56
+#: controls.py:57
 msgid "Remove track"
 msgstr "移除曲目"
 
-#: controls.py:66
+#: controls.py:69
 msgid "Previous"
 msgstr "上一个"
 
-#: controls.py:87
+#: controls.py:90
 msgid "Next"
 msgstr "下一个"
 
-#: playlist.py:66
+#: playlist.py:65
 msgid "No."
 msgstr "否"
 
-#: playlist.py:73
+#: playlist.py:72
 msgid "Track"
 msgstr "音轨"
 
-#: playlist.py:214
+#: playlist.py:283
 msgid "Jukebox playlist"
 msgstr "点唱机播放列表"
 
-#: viewtoolbar.py:48
+#: viewtoolbar.py:46
 msgid "Show Playlist"
 msgstr "显示播放列表"
 
-#: viewtoolbar.py:54
+#: viewtoolbar.py:52
 msgid "Fullscreen"
 msgstr "全屏显示"
 
