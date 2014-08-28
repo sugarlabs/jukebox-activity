@@ -267,8 +267,6 @@ class JukeboxActivity(activity.Activity):
         else:
             self.play_toggled()
             self.player.stop()
-            self._switch_canvas(show_video=False)
-            self.player.set_uri(None)
             self.check_if_next_prev()
 
     def play(self, media_index):
