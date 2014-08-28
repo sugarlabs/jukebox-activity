@@ -31,6 +31,7 @@ from sugar.activity import activity
 from sugar.graphics.objectchooser import ObjectChooser
 from sugar import mime
 from sugar.datastore import datastore
+from sugar.graphics.alert import ErrorAlert
 
 OLD_TOOLBAR = False
 try:
@@ -279,14 +280,23 @@ class JukeboxActivity(activity.Activity):
         self.player.connect("tag", self._player_new_tag_cb)
         self.player.connect("stream-info", self._player_stream_info_cb)
         url = self.playlist[self.currentplaying]['url']
+        error = None
         if url.startswith('journal://'):
-            jobject = datastore.get(url[len("journal://"):])
-            url = 'file://' + jobject.file_path
-        self.player.set_uri(url)
+            try:
+                jobject = datastore.get(url[len("journal://"):])
+                url = 'file://' + jobject.file_path
+            except:
+                path = url[len("journal://"):]
+                error = _('The file %s was not found') % path
+
+        if error is None:
+            self.player.set_uri(url)
+        else:
+            self.control.set_disabled()
+            self._show_error_alert(_('Error'), error)
 
         self.play_toggled()
 
-        self.check_if_next_prev()
         self.playlist_widget.set_cursor(self.currentplaying)
 
     def _player_eos_cb(self, widget):
@@ -296,10 +306,18 @@ class JukeboxActivity(activity.Activity):
         self.player.stop()
         self.player.set_uri(None)
         self.control.set_disabled()
-        self.bin.remove(self.videowidget)
-        text = gtk.Label("Error: %s - %s" % (message, detail))
-        text.show_all()
-        self.bin.add(text)
+        self._show_error_alert("Error: %s - %s" % (message, detail))
+
+    def _show_error_alert(self, title, text=None):
+        alert = ErrorAlert()
+        alert.props.title = title
+        alert.props.msg = text
+        self.add_alert(alert)
+        alert.connect('response', self._alert_cancel_cb)
+        alert.show()
+
+    def _alert_cancel_cb(self, alert, response_id):
+        self.remove_alert(alert)
 
     def _player_new_tag_cb(self, widget, tag, value):
         if not tag in [gst.TAG_TITLE, gst.TAG_ARTIST, gst.TAG_ALBUM]:
@@ -483,6 +501,7 @@ class JukeboxActivity(activity.Activity):
                 self.playlist.append({'url': uri, 'title': title})
         if uri.endswith(title) or title is None or title == '' or \
                 object_id is not None:
+            error = False
             logging.error('Try get a better title reading tags')
             # TODO: unify this code....
             url = self.playlist[len(self.playlist) - 1]['url']
@@ -490,10 +509,14 @@ class JukeboxActivity(activity.Activity):
                 url = url[len("journal://"):]
                 url = 'file://' + url
             elif url.startswith('journal://'):
-                jobject = datastore.get(url[len("journal://"):])
-                url = 'file://' + jobject.file_path
+                try:
+                    jobject = datastore.get(url[len("journal://"):])
+                    url = 'file://' + jobject.file_path
+                except:
+                    error = True
                 # jobject.destroy() ??
-            self.tag_reader.set_file(url, len(self.playlist) - 1)
+            if not error:
+                self.tag_reader.set_file(url, len(self.playlist) - 1)
 
         if not self.player:
             # lazy init the player so that videowidget is realized
