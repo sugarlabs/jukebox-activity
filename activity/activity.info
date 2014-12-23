@@ -8,3 +8,4 @@ show_launcher = yes
 activity_version = 32
 mime_types = video/x-theora;audio/x-vorbis;audio/x-flac;audio/x-speex;application/x-ogm-video;application/x-ogm-audio;video/x-mng;audio/x-aiff;audio/x-wav;audio/x-m4a;video/mpeg4;video/mpeg-stream;video/mpeg;application/ogg;video/mpegts;video/mpeg2;video/mpeg1;audio/mpeg;audio/x-ac3;video/x-cdxa;audio/x-au;audio/mpegurl;audio/x-mpegurl;audio/x-vorbis+ogg;audio/x-scpls;audio/ogg;video/ogg;audio/x-flac+ogg;audio/x-speex+ogg;video/x-theora+ogg;video/x-ogm+ogg;video/x-flv;video/mp4;video/x-matroska;video/x-msvideo;video/quicktime, video/x-quicktime, image/mov, audio/aiff, audio/x-midi, video/avi
 summary = Be a DJ, be a VJ. Play your favorite videos and songs. Share with your friends the songs you love, watch movies and educational videos together, and much more!
+repository = git@github.com:godiard/jukebox-activity.git
