@@ -15,19 +15,20 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2009-08-24 11:35-0400\n"
-"Last-Translator: Camille Robert <camille.robert@gmail.com>\n"
+"PO-Revision-Date: 2015-09-11 20:59+0000\n"
+"Last-Translator: Robert <rbuj@fedoraproject.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 1.2.1\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1442005187.000000\n"
 
 #. TRANS: "name" option from activity.info file
 msgid "Jukebox"
-msgstr "Tocadiscs"
+msgstr "Màquina tocadiscs"
 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
@@ -36,76 +37,80 @@ msgid ""
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 msgstr ""
+"Sigueu un discjòquei o un videojòquei. Reproduïu els vostres vídeos "
+"preferits i les vostres cançons preferides. Compartiu amb els vostres amics "
+"les cançons que més us agraden, veieu junts pel·lícules i vídeos educatius, "
+"i molt més!"
 
 #: activity.py:71
 msgid "Jukebox Activity"
-msgstr "Activitat tocadiscs"
+msgstr "Activitat Màquina tocadiscs"
 
 #: activity.py:143
 msgid "No media"
-msgstr ""
+msgstr "Sense mitjans"
 
 #: activity.py:143
 msgid "Choose media files"
-msgstr ""
+msgstr "Tria els fitxers de mitjans"
 
 #: activity.py:271
 #, python-format
 msgid "%s tracks not found."
-msgstr ""
+msgstr "%s pistes no trobades."
 
 #: activity.py:274
 msgid "Dismiss"
-msgstr ""
+msgstr "Ignora"
 
 #: activity.py:278
 msgid "Details"
-msgstr ""
+msgstr "Detalls"
 
 #: activity.py:289
 msgid "<b>Missing tracks</b>"
-msgstr ""
+msgstr "<b>Les pistes que falten</b>"
 
 #: activity.py:334
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
-msgstr ""
+msgstr "El fitxer \"%s\" no pot reproduir-se"
 
 #: controls.py:50
 msgid "Add track"
-msgstr ""
+msgstr "Afegeix una pista"
 
 #: controls.py:56
 msgid "Remove track"
-msgstr ""
+msgstr "Suprimeix una pista"
 
 #: controls.py:66
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 #: controls.py:87
 msgid "Next"
-msgstr ""
+msgstr "Següent"
 
 #: playlist.py:66
 msgid "No."
-msgstr ""
+msgstr "No."
 
 #: playlist.py:73
 msgid "Track"
-msgstr ""
+msgstr "Pista"
 
 #: playlist.py:214
 msgid "Jukebox playlist"
-msgstr ""
+msgstr "Llista de reproducció de la màquina tocadiscs"
 
 #: viewtoolbar.py:48
 msgid "Show Playlist"
-msgstr ""
+msgstr "Mostra la llista de reproducció"
 
 #: viewtoolbar.py:54
 msgid "Fullscreen"
