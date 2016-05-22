@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"POT-Creation-Date: 2013-01-30 00:33-0500\n"
 "PO-Revision-Date: 2012-07-29 21:47+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,81 +41,73 @@ msgstr ""
 msgid "Jukebox Activity"
 msgstr ""
 
-#: activity.py:129
-msgid "Move up"
-msgstr ""
-
-#: activity.py:134
-msgid "Move down"
-msgstr ""
-
-#: activity.py:182
+#: activity.py:143
 msgid "No media"
 msgstr ""
 
-#: activity.py:182
+#: activity.py:143
 msgid "Choose media files"
 msgstr ""
 
-#: activity.py:337
+#: activity.py:271
 #, python-format
 msgid "%s tracks not found."
 msgstr ""
 
-#: activity.py:340
+#: activity.py:274
 msgid "Dismiss"
 msgstr ""
 
-#: activity.py:344
+#: activity.py:278
 msgid "Details"
 msgstr ""
 
-#: activity.py:355
+#: activity.py:289
 msgid "<b>Missing tracks</b>"
 msgstr ""
 
-#: activity.py:401
+#: activity.py:334
 msgid "Error"
 msgstr ""
 
-#: activity.py:402
+#: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr ""
 
-#: controls.py:51
+#: controls.py:50
 msgid "Add track"
 msgstr ""
 
-#: controls.py:57
+#: controls.py:56
 msgid "Remove track"
 msgstr ""
 
-#: controls.py:69
+#: controls.py:66
 msgid "Previous"
 msgstr "Vorige"
 
-#: controls.py:90
+#: controls.py:87
 msgid "Next"
 msgstr "Volgende"
 
-#: playlist.py:65
+#: playlist.py:66
 msgid "No."
 msgstr ""
 
-#: playlist.py:72
+#: playlist.py:73
 msgid "Track"
 msgstr ""
 
-#: playlist.py:283
+#: playlist.py:214
 msgid "Jukebox playlist"
 msgstr ""
 
-#: viewtoolbar.py:46
+#: viewtoolbar.py:48
 msgid "Show Playlist"
 msgstr ""
 
-#: viewtoolbar.py:52
+#: viewtoolbar.py:54
 msgid "Fullscreen"
 msgstr "Volskerm"
 
