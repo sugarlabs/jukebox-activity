@@ -10,24 +10,25 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2016-09-24 09:20+0000\n"
+"Last-Translator: Samson <samsongoddy@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: yo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.1.1rc4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1474708803.000000\n"
 
 #. TRANS: "name" option from activity.info file
 msgid "Jukebox"
-msgstr ""
+msgstr "Orin oṣere ọkunrin"
 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
@@ -36,77 +37,80 @@ msgid ""
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 msgstr ""
+"Wa ni a DJ, jẹ a VJ. Mu ayanfẹ rẹ awọn fidio ati awọn orin. o ti le pin pẹlu "
+"ọrẹ rẹ awọn orin o ni ife, aago sinima ati eko awọn fidio jọ, ki o si Elo "
+"siwaju sii!"
 
 #: activity.py:71
 msgid "Jukebox Activity"
-msgstr ""
+msgstr "Orin oṣere ọkunrin aṣayan iṣẹ"
 
 #: activity.py:143
 msgid "No media"
-msgstr ""
+msgstr "Ko si awọn oun igberohinjade"
 
 #: activity.py:143
 msgid "Choose media files"
-msgstr ""
+msgstr "Yan awọn faili awọn oun igberohinjade"
 
 #: activity.py:271
 #, python-format
 msgid "%s tracks not found."
-msgstr ""
+msgstr "%s orin ko ba ri."
 
 #: activity.py:274
 msgid "Dismiss"
-msgstr ""
+msgstr "Yọ"
 
 #: activity.py:278
 msgid "Details"
-msgstr ""
+msgstr "Awọn alaye"
 
 #: activity.py:289
 msgid "<b>Missing tracks</b>"
-msgstr ""
+msgstr "<b>Sonu orin</b>"
 
 #: activity.py:334
 msgid "Error"
-msgstr ""
+msgstr "Aṣiṣe"
 
 #: activity.py:335
 #, python-format
 msgid "This \"%s\" file can't be played"
-msgstr ""
+msgstr "Yi \" %s \" faili ko le wa ni dun"
 
 #: controls.py:50
 msgid "Add track"
-msgstr ""
+msgstr "Fi orin"
 
 #: controls.py:56
 msgid "Remove track"
-msgstr ""
+msgstr "Yọ orin"
 
 #: controls.py:66
 msgid "Previous"
-msgstr ""
+msgstr "Ti tẹlẹ"
 
 #: controls.py:87
 msgid "Next"
-msgstr ""
+msgstr "Itele"
 
 #: playlist.py:66
 msgid "No."
-msgstr ""
+msgstr "Ko si."
 
 #: playlist.py:73
 msgid "Track"
-msgstr ""
+msgstr "Oju-ipa"
 
 #: playlist.py:214
 msgid "Jukebox playlist"
-msgstr ""
+msgstr "Orin oṣere ọkunrin akojọ orin"
 
 #: viewtoolbar.py:48
 msgid "Show Playlist"
-msgstr ""
+msgstr "fihan akojọ orin"
 
 #: viewtoolbar.py:54
 msgid "Fullscreen"
-msgstr ""
+msgstr "Gbogbo sikirini"
