@@ -48,7 +48,7 @@ from gi.repository import Gio
 
 from viewtoolbar import ViewToolbar
 from controls import Controls
-from player import GstPlayer
+from gstplayer import GstPlayer
 
 from playlist import PlayList
 
