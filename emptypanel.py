@@ -41,6 +41,5 @@ def show(activity, icon_name, message, btn_label, btn_callback):
 
     empty_widgets.add(vbox)
     empty_widgets.show_all()
-    logging.error('Showing empty Panel')
     activity.view_area.append_page(empty_widgets, None)
     activity.view_area.set_current_page(2)

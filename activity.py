@@ -21,8 +21,19 @@
 
 import sys
 import logging
-import emptypanel
 from gettext import gettext as _
+
+import gi
+gi.require_version('Gdk', '3.0')
+gi.require_version('Gtk', '3.0')
+gi.require_version('Gst', '1.0')
+gi.require_version('SugarExt', '1.0')
+gi.require_version('GstVideo', '1.0')
+
+from gi.repository import GObject
+from gi.repository import Gdk
+from gi.repository import Gtk
+from gi.repository import Gio
 
 from sugar3.activity import activity
 from sugar3 import mime
@@ -37,20 +48,13 @@ from sugar3.graphics.alert import Alert
 from sugar3.graphics.icon import Icon
 from sugar3.graphics.toolbutton import ToolButton
 
-import gi
-gi.require_version('Gtk', '3.0')
-gi.require_version('Gst', '1.0')
-
-from gi.repository import GObject
-from gi.repository import Gdk
-from gi.repository import Gtk
-from gi.repository import Gio
-
 from viewtoolbar import ViewToolbar
 from controls import Controls
 from gstplayer import GstPlayer
 
 from playlist import PlayList
+
+import emptypanel
 
 PLAYLIST_WIDTH_PROP = 1.0 / 3
 
@@ -71,10 +75,10 @@ class JukeboxActivity(activity.Activity):
         self.set_title(_('Jukebox Activity'))
         self.max_participants = 1
 
-        self._toolbar_box = ToolbarBox()
+        toolbar_box = ToolbarBox()
         activity_button = ActivityToolbarButton(self)
         activity_toolbar = activity_button.page
-        self._toolbar_box.toolbar.insert(activity_button, 0)
+        toolbar_box.toolbar.insert(activity_button, 0)
         self.title_entry = activity_toolbar.title
 
         self._view_toolbar = ViewToolbar()
@@ -86,7 +90,7 @@ class JukeboxActivity(activity.Activity):
             page=self._view_toolbar,
             icon_name='toolbar-view')
         self._view_toolbar.show()
-        self._toolbar_box.toolbar.insert(view_toolbar_button, -1)
+        toolbar_box.toolbar.insert(view_toolbar_button, -1)
         view_toolbar_button.show()
 
         self._control_toolbar = Gtk.Toolbar()
@@ -94,11 +98,11 @@ class JukeboxActivity(activity.Activity):
             page=self._control_toolbar,
             icon_name='media-playback-start')
         self._control_toolbar.show()
-        self._toolbar_box.toolbar.insert(self._control_toolbar_button, -1)
+        toolbar_box.toolbar.insert(self._control_toolbar_button, -1)
         self._control_toolbar_button.hide()
 
-        self.set_toolbar_box(self._toolbar_box)
-        self._toolbar_box.show_all()
+        self.set_toolbar_box(toolbar_box)
+        toolbar_box.show_all()
 
         self.connect('key_press_event', self.__key_press_event_cb)
         self.connect('playlist-finished', self.__playlist_finished_cb)
@@ -145,17 +149,17 @@ class JukeboxActivity(activity.Activity):
         self.player.connect('error', self.__player_error_cb)
         self.player.connect('play', self.__player_play_cb)
 
-        self.control = Controls(self, self._toolbar_box.toolbar,
+        self.control = Controls(self, toolbar_box.toolbar,
                                 self._control_toolbar)
 
         self._separator = Gtk.SeparatorToolItem()
         self._separator.props.draw = False
         self._separator.set_expand(True)
         self._separator.show()
-        self._toolbar_box.toolbar.insert(self._separator, -1)
+        toolbar_box.toolbar.insert(self._separator, -1)
 
         self._stop = StopButton(self)
-        self._toolbar_box.toolbar.insert(self._stop, -1)
+        toolbar_box.toolbar.insert(self._stop, -1)
 
         self._empty_widget = Gtk.Label(label="")
         self._empty_widget.show()
@@ -193,18 +197,19 @@ class JukeboxActivity(activity.Activity):
         self.playlist_widget.move_down()
 
     def _configure_cb(self, event=None):
-        self._toolbar_box.toolbar.remove(self._stop)
-        self._toolbar_box.toolbar.remove(self._separator)
+        toolbar = self.get_toolbar_box().toolbar
+        toolbar.remove(self._stop)
+        toolbar.remove(self._separator)
         if Gdk.Screen.width() < Gdk.Screen.height():
             self._control_toolbar_button.show()
             self._control_toolbar_button.set_expanded(True)
             self.control.update_layout(landscape=False)
-            self._toolbar_box.toolbar.insert(self._separator, -1)
+            toolbar.insert(self._separator, -1)
         else:
             self._control_toolbar_button.set_expanded(False)
             self._control_toolbar_button.hide()
             self.control.update_layout(landscape=True)
-        self._toolbar_box.toolbar.insert(self._stop, -1)
+        toolbar.insert(self._stop, -1)
 
     def __notify_active_cb(self, widget, event):
         """Sugar notify us that the activity is becoming active or inactive.
