@@ -2,126 +2,114 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2011-04-13 02:29+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
+"PO-Revision-Date: 2017-04-19 20:05+0000\n"
+"Last-Translator: dbekele <almazsolutions@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: am\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1492632307.000000\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Jukebox"
-msgstr ""
+msgstr "ሙዚቃ ማጫወቻ ሳጥን"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 msgstr ""
+"ዲጄ ሁን፣ ቪጄ ሁን፡፡ የምትወዳቸውን ሙዚቃዎች ወይንም ቪዲዮች አጫውት፡፡ የምትወዳቸውን ሙዚቃዎች ከጓደኞችህ ጋር ሆነህ "
+"አዳምጥ፣ ሙቪ፣ ትምህርት ነክ የሆኑ ቪዲዎችና ሌሎችንም አብረህ ተሳተፍ፡፡"
+
+#: playlist.py:65
+msgid "No."
+msgstr "አይሆንም::"
+
+#: playlist.py:72
+msgid "Track"
+msgstr "በአንድ ቦታ ከተቀዱ ሙዚቃዎች/ዘፈኖች አንዱ"
+
+#: playlist.py:283
+msgid "Jukebox playlist"
+msgstr "የሙዚቃ ማጫወቻ መዝገብ/ዝርዝር"
 
 #: activity.py:71
 msgid "Jukebox Activity"
-msgstr ""
+msgstr "በሙዚቃ ማጫወቻ የሆኑ ድርጊቶች"
 
-#: activity.py:143
+#: activity.py:129
+msgid "Move up"
+msgstr "ወደላይ ውጣ"
+
+#: activity.py:134
+msgid "Move down"
+msgstr "ወደታች ውረድ"
+
+#: activity.py:182
 msgid "No media"
-msgstr ""
+msgstr "የሚጫወት ቅጂ የለም"
 
-#: activity.py:143
+#: activity.py:182
 msgid "Choose media files"
-msgstr ""
+msgstr "ቴፕ/ትራክ/ፋይል ምረጥ"
 
-#: activity.py:271
+# The correct punctuation when a sentence in Amharic ends is "::".  The check appears to find it an error.
+#: activity.py:337
 #, python-format
 msgid "%s tracks not found."
-msgstr ""
+msgstr "%s የሚጫወት ቅጂ አልተገኘም፡፡"
 
-#: activity.py:274
+#: activity.py:340
 msgid "Dismiss"
-msgstr ""
+msgstr "ጨርስ/አሰናብት"
 
-#: activity.py:278
+#: activity.py:344
 msgid "Details"
-msgstr ""
+msgstr "ዝርዝሮች"
 
-#: activity.py:289
+#: activity.py:355
 msgid "<b>Missing tracks</b>"
-msgstr ""
+msgstr "<b>በቦታው የሌሉ/ያልተገኙ ቅጂዎች</b>"
 
-#: activity.py:334
+#: activity.py:401
 msgid "Error"
-msgstr ""
+msgstr "ስህተት"
 
-#: activity.py:335
+#: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
-msgstr ""
+msgstr "ይህን \"%s\" ፋይል ማጫወት አይቻልም"
 
-#: controls.py:50
-msgid "Add track"
-msgstr ""
-
-#: controls.py:56
-msgid "Remove track"
-msgstr ""
-
-#: controls.py:66
-msgid "Previous"
-msgstr ""
-
-#: controls.py:87
-msgid "Next"
-msgstr ""
-
-#: playlist.py:66
-msgid "No."
-msgstr ""
-
-#: playlist.py:73
-msgid "Track"
-msgstr ""
-
-#: playlist.py:214
-msgid "Jukebox playlist"
-msgstr ""
-
-#: viewtoolbar.py:48
+#: viewtoolbar.py:46
 msgid "Show Playlist"
-msgstr ""
+msgstr "ማጫወት የሚቻሉትን ዝርዝር አሳይ"
 
-#: viewtoolbar.py:54
+#: viewtoolbar.py:52
 msgid "Fullscreen"
 msgstr "ሙሉ እስክሪን"
 
-#~ msgid "Play"
-#~ msgstr "አጫዉት"
+#: controls.py:51
+msgid "Add track"
+msgstr "የሚደመጥ ቅጂ ጨምር"
+
+#: controls.py:57
+msgid "Remove track"
+msgstr "ቅጂውን አስወግድ/አውጣ"
+
+#: controls.py:69
+msgid "Previous"
+msgstr "የበፊቱ"
+
+#: controls.py:90
+msgid "Next"
+msgstr "የሚቀጥለው"

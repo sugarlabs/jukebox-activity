@@ -2,129 +2,114 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 00:33-0500\n"
-"PO-Revision-Date: 2012-09-08 10:26+0200\n"
-"Last-Translator: Yannis <kiolalis@gmail.com>\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
+"PO-Revision-Date: 2017-05-21 05:52+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.5\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1495345961.000000\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Jukebox"
 msgstr "Jukebox"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 msgstr ""
+"Γίνε DJ, είναι ένα VJ. Παίξτε τα αγαπημένα σας βίντεο και τραγούδια. "
+"Μοιραστείτε με τους φίλους σας τα τραγούδια που αγαπάτε, να παρακολουθήσετε "
+"ταινίες και εκπαιδευτικά βίντεο μαζί, και πολλά άλλα!"
+
+#: playlist.py:65
+msgid "No."
+msgstr "Όχι."
+
+#: playlist.py:72
+msgid "Track"
+msgstr "Πίστα"
+
+#: playlist.py:283
+msgid "Jukebox playlist"
+msgstr "Λίστα αναπαραγωγής του Jukebox"
 
 #: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Δραστηριότητα Jukebox"
 
-#: activity.py:143
+#: activity.py:129
+msgid "Move up"
+msgstr "Μετακίνηση προς τα επάνω"
+
+#: activity.py:134
+msgid "Move down"
+msgstr "Μετακινηθείτε προς τα κάτω"
+
+#: activity.py:182
 msgid "No media"
-msgstr ""
+msgstr "Δεν μέσων"
 
-#: activity.py:143
+#: activity.py:182
 msgid "Choose media files"
-msgstr ""
+msgstr "Επιλέξτε τα αρχεία πολυμέσων"
 
-#: activity.py:271
+#: activity.py:337
 #, python-format
 msgid "%s tracks not found."
-msgstr ""
+msgstr "%s κομμάτια δεν βρέθηκε."
 
-#: activity.py:274
+#: activity.py:340
 msgid "Dismiss"
-msgstr ""
+msgstr "Απολύω"
 
-#: activity.py:278
+#: activity.py:344
 msgid "Details"
-msgstr ""
+msgstr "Λεπτομέριες"
 
-#: activity.py:289
+#: activity.py:355
 msgid "<b>Missing tracks</b>"
-msgstr ""
+msgstr "<b>Λείπουν κομμάτια</b>"
 
-#: activity.py:334
+#: activity.py:401
 msgid "Error"
-msgstr ""
+msgstr "Λάθος"
 
-#: activity.py:335
+#: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
-msgstr ""
+msgstr "Αυτό το «%s» το αρχείο δεν μπορεί να αναπαραχθεί"
 
-#: controls.py:50
-msgid "Add track"
-msgstr "Προσθήκη κομματιού"
-
-#: controls.py:56
-msgid "Remove track"
-msgstr "Αφαίρεση κομματιού"
-
-#: controls.py:66
-msgid "Previous"
-msgstr "Προηγούμενο"
-
-#: controls.py:87
-msgid "Next"
-msgstr "Επόμενο"
-
-#: playlist.py:66
-msgid "No."
-msgstr "Όχι"
-
-#: playlist.py:73
-msgid "Track"
-msgstr ""
-
-#: playlist.py:214
-msgid "Jukebox playlist"
-msgstr "Λίστα αναπαραγωγής του Jukebox"
-
-#: viewtoolbar.py:48
+#: viewtoolbar.py:46
 msgid "Show Playlist"
 msgstr "Εμφάνιση λίστας αναπαραγωγής"
 
-#: viewtoolbar.py:54
+#: viewtoolbar.py:52
 msgid "Fullscreen"
 msgstr "Πλήρης οθόνη"
 
-#~ msgid "Play List"
-#~ msgstr "Λίστα αναπαραγωγής"
+#: controls.py:51
+msgid "Add track"
+msgstr "Προσθήκη κομματιού"
 
-#~ msgid "Play"
-#~ msgstr "Αναπαραγωγή"
+#: controls.py:57
+msgid "Remove track"
+msgstr "Αφαίρεση κομματιού"
 
-#~ msgid "View"
-#~ msgstr "Προβολή"
+#: controls.py:69
+msgid "Previous"
+msgstr "Προηγούμενο"
 
-#~ msgid "Choose document"
-#~ msgstr "Επιλογή εγγράφου"
-
-#~ msgid "Fit to window"
-#~ msgstr "Ταίριασμα στο παράθυρο"
-
-#~ msgid "Original size"
-#~ msgstr "Αρχικό μέγεθος"
+#: controls.py:90
+msgid "Next"
+msgstr "Επόμενο"

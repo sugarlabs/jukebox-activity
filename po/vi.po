@@ -2,19 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 00:33-0500\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2011-12-02 05:21+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,103 +17,95 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Jukebox"
 msgstr "Máy hát tự động"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 msgstr ""
 
+#: playlist.py:65
+msgid "No."
+msgstr ""
+
+#: playlist.py:72
+msgid "Track"
+msgstr ""
+
+#: playlist.py:283
+msgid "Jukebox playlist"
+msgstr ""
+
 #: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Hoạt động máy hát tự động"
 
-#: activity.py:143
+#: activity.py:129
+msgid "Move up"
+msgstr ""
+
+#: activity.py:134
+msgid "Move down"
+msgstr ""
+
+#: activity.py:182
 msgid "No media"
 msgstr ""
 
-#: activity.py:143
+#: activity.py:182
 msgid "Choose media files"
 msgstr ""
 
-#: activity.py:271
+#: activity.py:337
 #, python-format
 msgid "%s tracks not found."
 msgstr ""
 
-#: activity.py:274
+#: activity.py:340
 msgid "Dismiss"
 msgstr ""
 
-#: activity.py:278
+#: activity.py:344
 msgid "Details"
 msgstr ""
 
-#: activity.py:289
+#: activity.py:355
 msgid "<b>Missing tracks</b>"
 msgstr ""
 
-#: activity.py:334
+#: activity.py:401
 msgid "Error"
 msgstr ""
 
-#: activity.py:335
+#: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr ""
 
-#: controls.py:50
-msgid "Add track"
-msgstr ""
-
-#: controls.py:56
-msgid "Remove track"
-msgstr ""
-
-#: controls.py:66
-msgid "Previous"
-msgstr "Lùi"
-
-#: controls.py:87
-msgid "Next"
-msgstr "Tiếp"
-
-#: playlist.py:66
-msgid "No."
-msgstr ""
-
-#: playlist.py:73
-msgid "Track"
-msgstr ""
-
-#: playlist.py:214
-msgid "Jukebox playlist"
-msgstr ""
-
-#: viewtoolbar.py:48
+#: viewtoolbar.py:46
 msgid "Show Playlist"
 msgstr ""
 
-#: viewtoolbar.py:54
+#: viewtoolbar.py:52
 msgid "Fullscreen"
 msgstr "Toàn màn hình"
 
-#~ msgid "Play"
-#~ msgstr "Phát"
+#: controls.py:51
+msgid "Add track"
+msgstr ""
 
-#~ msgid "View"
-#~ msgstr "Xem"
+#: controls.py:57
+msgid "Remove track"
+msgstr ""
 
-#~ msgid "Choose document"
-#~ msgstr "Chọn tài liệu"
+#: controls.py:69
+msgid "Previous"
+msgstr "Lùi"
 
-#~ msgid "Fit to window"
-#~ msgstr "Vừa khít cửa sổ"
-
-#~ msgid "Original size"
-#~ msgstr "Kích cỡ gốc"
+#: controls.py:90
+msgid "Next"
+msgstr "Tiếp"

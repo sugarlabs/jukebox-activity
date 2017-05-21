@@ -1,19 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
 # MARISELLE <maber56>, 2013.
 # User <juneleonora@yahoo.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2014-03-27 23:12+0200\n"
 "Last-Translator: June <juneleonora@yahoo.com>\n"
 "Language-Team: JuneLeonora\n"
@@ -24,12 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Jukebox"
 msgstr "Jukebox"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
 "friends the songs you love, watch movies and educational videos together, "
@@ -38,6 +31,18 @@ msgstr ""
 "Ta un Dj, ta un VJ. Proyektá i toka bo vidio i kansionnan faborito. Kompartí "
 "ku bo amigunan e kansionnan ku bo gusta, mira pelíkula y vidio edukashonal "
 "juntu, i hopi mas!"
+
+#: playlist.py:65
+msgid "No."
+msgstr "No."
+
+#: playlist.py:72
+msgid "Track"
+msgstr "Kansion"
+
+#: playlist.py:283
+msgid "Jukebox playlist"
+msgstr "Lista di kansion di jukebox"
 
 #: activity.py:71
 msgid "Jukebox Activity"
@@ -85,6 +90,14 @@ msgstr "Eror"
 msgid "This \"%s\" file can't be played"
 msgstr "No por toka e ¨%s¨ fail akí"
 
+#: viewtoolbar.py:46
+msgid "Show Playlist"
+msgstr "Mustra Lista di kansion"
+
+#: viewtoolbar.py:52
+msgid "Fullscreen"
+msgstr "Pantaya kompleto"
+
 #: controls.py:51
 msgid "Add track"
 msgstr "Añadí kansion"
@@ -100,29 +113,3 @@ msgstr "Anterior"
 #: controls.py:90
 msgid "Next"
 msgstr "Siguiente"
-
-#: playlist.py:65
-msgid "No."
-msgstr "No."
-
-#: playlist.py:72
-msgid "Track"
-msgstr "Kansion"
-
-#: playlist.py:283
-msgid "Jukebox playlist"
-msgstr "Lista di kansion di jukebox"
-
-#: viewtoolbar.py:46
-msgid "Show Playlist"
-msgstr "Mustra Lista di kansion"
-
-#: viewtoolbar.py:52
-msgid "Fullscreen"
-msgstr "Pantaya kompleto"
-
-#~ msgid "Play"
-#~ msgstr "Toka"
-
-#~ msgid "Choose document"
-#~ msgstr "Skohe dukumento"

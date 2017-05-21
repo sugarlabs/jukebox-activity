@@ -2,19 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-30 00:33-0500\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2016-09-24 09:20+0000\n"
 "Last-Translator: Samson <samsongoddy@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,12 +18,11 @@ msgstr ""
 "X-Generator: Pootle 2.5.1.1\n"
 "X-POOTLE-MTIME: 1474708803.000000\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Jukebox"
 msgstr "Orin oṣere ọkunrin"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
 "friends the songs you love, watch movies and educational videos together, "
@@ -41,76 +32,84 @@ msgstr ""
 "ọrẹ rẹ awọn orin o ni ife, aago sinima ati eko awọn fidio jọ, ki o si Elo "
 "siwaju sii!"
 
+#: playlist.py:65
+msgid "No."
+msgstr "Ko si."
+
+#: playlist.py:72
+msgid "Track"
+msgstr "Oju-ipa"
+
+#: playlist.py:283
+msgid "Jukebox playlist"
+msgstr "Orin oṣere ọkunrin akojọ orin"
+
 #: activity.py:71
 msgid "Jukebox Activity"
 msgstr "Orin oṣere ọkunrin aṣayan iṣẹ"
 
-#: activity.py:143
+#: activity.py:129
+msgid "Move up"
+msgstr ""
+
+#: activity.py:134
+msgid "Move down"
+msgstr ""
+
+#: activity.py:182
 msgid "No media"
 msgstr "Ko si awọn oun igberohinjade"
 
-#: activity.py:143
+#: activity.py:182
 msgid "Choose media files"
 msgstr "Yan awọn faili awọn oun igberohinjade"
 
-#: activity.py:271
+#: activity.py:337
 #, python-format
 msgid "%s tracks not found."
 msgstr "%s orin ko ba ri."
 
-#: activity.py:274
+#: activity.py:340
 msgid "Dismiss"
 msgstr "Yọ"
 
-#: activity.py:278
+#: activity.py:344
 msgid "Details"
 msgstr "Awọn alaye"
 
-#: activity.py:289
+#: activity.py:355
 msgid "<b>Missing tracks</b>"
 msgstr "<b>Sonu orin</b>"
 
-#: activity.py:334
+#: activity.py:401
 msgid "Error"
 msgstr "Aṣiṣe"
 
-#: activity.py:335
+#: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
 msgstr "Yi \" %s \" faili ko le wa ni dun"
 
-#: controls.py:50
-msgid "Add track"
-msgstr "Fi orin"
-
-#: controls.py:56
-msgid "Remove track"
-msgstr "Yọ orin"
-
-#: controls.py:66
-msgid "Previous"
-msgstr "Ti tẹlẹ"
-
-#: controls.py:87
-msgid "Next"
-msgstr "Itele"
-
-#: playlist.py:66
-msgid "No."
-msgstr "Ko si."
-
-#: playlist.py:73
-msgid "Track"
-msgstr "Oju-ipa"
-
-#: playlist.py:214
-msgid "Jukebox playlist"
-msgstr "Orin oṣere ọkunrin akojọ orin"
-
-#: viewtoolbar.py:48
+#: viewtoolbar.py:46
 msgid "Show Playlist"
 msgstr "fihan akojọ orin"
 
-#: viewtoolbar.py:54
+#: viewtoolbar.py:52
 msgid "Fullscreen"
 msgstr "Gbogbo sikirini"
+
+#: controls.py:51
+msgid "Add track"
+msgstr "Fi orin"
+
+#: controls.py:57
+msgid "Remove track"
+msgstr "Yọ orin"
+
+#: controls.py:69
+msgid "Previous"
+msgstr "Ti tẹlẹ"
+
+#: controls.py:90
+msgid "Next"
+msgstr "Itele"
