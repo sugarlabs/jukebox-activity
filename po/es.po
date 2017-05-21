@@ -2,31 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2013-12-03 03:09+0200\n"
 "Last-Translator: AlanJAS <alanjas@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,12 +17,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Jukebox"
 msgstr "Máquina de discos"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
 "friends the songs you love, watch movies and educational videos together, "
@@ -51,6 +30,19 @@ msgstr ""
 "Se un DJ, se un VJ. Reproduce tus videos y canciones favoritas. Comparte con "
 "tus amigos las canciones que amas, mira películas y videos educacionales "
 "juntos, y mucho mas."
+
+# abreviación de número?
+#: playlist.py:65
+msgid "No."
+msgstr "Nº."
+
+#: playlist.py:72
+msgid "Track"
+msgstr "Pista"
+
+#: playlist.py:283
+msgid "Jukebox playlist"
+msgstr "Lista de reproducción de Jukebox"
 
 #: activity.py:71
 msgid "Jukebox Activity"
@@ -98,6 +90,14 @@ msgstr "Error"
 msgid "This \"%s\" file can't be played"
 msgstr "Este \"%s\" archivo no puede reproducirse"
 
+#: viewtoolbar.py:46
+msgid "Show Playlist"
+msgstr "Mostrar Lista de Reproducción"
+
+#: viewtoolbar.py:52
+msgid "Fullscreen"
+msgstr "Pantalla completa"
+
 #: controls.py:51
 msgid "Add track"
 msgstr "Agregar pista"
@@ -113,49 +113,3 @@ msgstr "Anterior"
 #: controls.py:90
 msgid "Next"
 msgstr "Siguiente"
-
-# abreviación de número?
-#: playlist.py:65
-msgid "No."
-msgstr "Nº."
-
-#: playlist.py:72
-msgid "Track"
-msgstr "Pista"
-
-#: playlist.py:283
-msgid "Jukebox playlist"
-msgstr "Lista de reproducción de Jukebox"
-
-#: viewtoolbar.py:46
-msgid "Show Playlist"
-msgstr "Mostrar Lista de Reproducción"
-
-#: viewtoolbar.py:52
-msgid "Fullscreen"
-msgstr "Pantalla completa"
-
-#, python-format
-#~ msgid "The file %s was not found"
-#~ msgstr "El archivo %s no fue encontrado"
-
-#~ msgid "Play List"
-#~ msgstr "Lista de reproducción"
-
-#~ msgid "Play"
-#~ msgstr "Reproducir"
-
-#~ msgid "View"
-#~ msgstr "Ver"
-
-#~ msgid "Choose document"
-#~ msgstr "Elegir documento"
-
-#~ msgid "Remove selected track from the playlist"
-#~ msgstr "Eliminar la pista seleccionada de la lista de reproducción"
-
-#~ msgid "Fit to window"
-#~ msgstr "Concordar con ventana"
-
-#~ msgid "Original size"
-#~ msgstr "Tamaño original"

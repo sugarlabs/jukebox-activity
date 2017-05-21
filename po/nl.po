@@ -2,23 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2013-12-22 22:55+0200\n"
 "Last-Translator: whe <heppew@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,12 +17,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Jukebox"
 msgstr "Jukebox"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
 "friends the songs you love, watch movies and educational videos together, "
@@ -43,6 +30,18 @@ msgstr ""
 "Wees een DJ, wees een VJ. Speel je favoriete videos en liedjes. Deel de "
 "liedjes waar je van houdt met je vrienden, bekijk films en leerzame videos "
 "samen, en veel meer!"
+
+#: playlist.py:65
+msgid "No."
+msgstr "Nee."
+
+#: playlist.py:72
+msgid "Track"
+msgstr "Spoor"
+
+#: playlist.py:283
+msgid "Jukebox playlist"
+msgstr "Jukebox afspeellijst"
 
 #: activity.py:71
 msgid "Jukebox Activity"
@@ -90,6 +89,14 @@ msgstr "Fout"
 msgid "This \"%s\" file can't be played"
 msgstr "Dit \"%s\" bestand kan niet afgespeeld worden"
 
+#: viewtoolbar.py:46
+msgid "Show Playlist"
+msgstr "Toon afspeellijst"
+
+#: viewtoolbar.py:52
+msgid "Fullscreen"
+msgstr "Schermvullend"
+
 #: controls.py:51
 msgid "Add track"
 msgstr "Voeg spoor toe"
@@ -105,45 +112,3 @@ msgstr "Vorig"
 #: controls.py:90
 msgid "Next"
 msgstr "Volgend"
-
-#: playlist.py:65
-msgid "No."
-msgstr "Nee."
-
-#: playlist.py:72
-msgid "Track"
-msgstr "Spoor"
-
-#: playlist.py:283
-msgid "Jukebox playlist"
-msgstr "Jukebox afspeellijst"
-
-#: viewtoolbar.py:46
-msgid "Show Playlist"
-msgstr "Toon afspeellijst"
-
-#: viewtoolbar.py:52
-msgid "Fullscreen"
-msgstr "Schermvullend"
-
-#, python-format
-#~ msgid "The file %s was not found"
-#~ msgstr "Het bestand %s is niet gevonden"
-
-#~ msgid "Play List"
-#~ msgstr "Afspeellijst"
-
-#~ msgid "Play"
-#~ msgstr "Afspelen"
-
-#~ msgid "View"
-#~ msgstr "Bekijk"
-
-#~ msgid "Choose document"
-#~ msgstr "Document kiezen"
-
-#~ msgid "Fit to window"
-#~ msgstr "Passend in venster"
-
-#~ msgid "Original size"
-#~ msgstr "Originele grootte"

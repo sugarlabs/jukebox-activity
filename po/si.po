@@ -2,19 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2012-02-03 09:41+0200\n"
 "Last-Translator: Danishka Navin <danishka@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,16 +17,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Jukebox"
 msgstr "සංගීතය ශ්‍රවණ පෙට්ටිය"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
+msgstr ""
+
+#: playlist.py:65
+msgid "No."
+msgstr ""
+
+#: playlist.py:72
+msgid "Track"
+msgstr ""
+
+#: playlist.py:283
+msgid "Jukebox playlist"
 msgstr ""
 
 #: activity.py:71
@@ -83,6 +86,14 @@ msgstr ""
 msgid "This \"%s\" file can't be played"
 msgstr ""
 
+#: viewtoolbar.py:46
+msgid "Show Playlist"
+msgstr "වාදන ලැයිස්තුව පෙන්වන්න"
+
+#: viewtoolbar.py:52
+msgid "Fullscreen"
+msgstr "මුළු තිරයම"
+
 #: controls.py:51
 msgid "Add track"
 msgstr ""
@@ -98,38 +109,3 @@ msgstr "පෙර"
 #: controls.py:90
 msgid "Next"
 msgstr "ඊළඟ"
-
-#: playlist.py:65
-msgid "No."
-msgstr ""
-
-#: playlist.py:72
-msgid "Track"
-msgstr ""
-
-#: playlist.py:283
-msgid "Jukebox playlist"
-msgstr ""
-
-#: viewtoolbar.py:46
-msgid "Show Playlist"
-msgstr "වාදන ලැයිස්තුව පෙන්වන්න"
-
-#: viewtoolbar.py:52
-msgid "Fullscreen"
-msgstr "මුළු තිරයම"
-
-#~ msgid "Play"
-#~ msgstr "වාදනය"
-
-#~ msgid "View"
-#~ msgstr "දර්ශනය කරන්න"
-
-#~ msgid "Choose document"
-#~ msgstr "ලේඛනය තෝරන්න"
-
-#~ msgid "Fit to window"
-#~ msgstr "කවුළුවට ගැළපෙන"
-
-#~ msgid "Original size"
-#~ msgstr "මුල් ප්‍රමාණය"

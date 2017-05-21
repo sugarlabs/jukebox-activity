@@ -2,19 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2013-11-29 07:47+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,12 +17,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Jukebox"
 msgstr "Jukebox"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
 "friends the songs you love, watch movies and educational videos together, "
@@ -39,6 +30,18 @@ msgstr ""
 "Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
+
+#: playlist.py:65
+msgid "No."
+msgstr "No."
+
+#: playlist.py:72
+msgid "Track"
+msgstr "Track"
+
+#: playlist.py:283
+msgid "Jukebox playlist"
+msgstr "Jukebox playlist"
 
 #: activity.py:71
 msgid "Jukebox Activity"
@@ -86,6 +89,14 @@ msgstr "Error"
 msgid "This \"%s\" file can't be played"
 msgstr "This \"%s\" file can't be played"
 
+#: viewtoolbar.py:46
+msgid "Show Playlist"
+msgstr "Show Playlist"
+
+#: viewtoolbar.py:52
+msgid "Fullscreen"
+msgstr "Fullscreen"
+
 #: controls.py:51
 msgid "Add track"
 msgstr "Add track"
@@ -101,48 +112,3 @@ msgstr "Previous"
 #: controls.py:90
 msgid "Next"
 msgstr "Next"
-
-#: playlist.py:65
-msgid "No."
-msgstr "No."
-
-#: playlist.py:72
-msgid "Track"
-msgstr "Track"
-
-#: playlist.py:283
-msgid "Jukebox playlist"
-msgstr "Jukebox playlist"
-
-#: viewtoolbar.py:46
-msgid "Show Playlist"
-msgstr "Show Playlist"
-
-#: viewtoolbar.py:52
-msgid "Fullscreen"
-msgstr "Fullscreen"
-
-#, python-format
-#~ msgid "The file %s was not found"
-#~ msgstr "The file %s was not found"
-
-#~ msgid "Play List"
-#~ msgstr "Play List"
-
-#~ msgid "Play"
-#~ msgstr "Play"
-
-#~ msgid "View"
-#~ msgstr "View"
-
-#~ msgid "Choose document"
-#~ msgstr "Choose document"
-
-#~ msgid "Remove selected track from the playlist"
-#~ msgstr "Remove selected track from the playlist"
-
-#~ msgid "Fit to window"
-#~ msgstr "Fit to window"
-
-#~ msgid "Original size"
-#~ msgstr "Original size"

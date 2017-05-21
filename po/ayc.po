@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2014-02-16 02:05+0200\n"
 "Last-Translator: EdgarQuispeChambi <quispedgar@yahoo.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,11 @@ msgstr ""
 "X-Generator: Pootle 2.0.5\n"
 
 #  "Máquina de discos"
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Jukebox"
 msgstr "Warurt'anaka qhantayiri"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
 "friends the songs you love, watch movies and educational videos together, "
@@ -32,6 +31,18 @@ msgstr ""
 "DJ ukasma, VJ ukasma. Wali munata uñjäwinaka ukata warurt'anaka qhantayma. "
 "Masinakamampi wali munata warurt'anakama ist'apxma, yatiqañani uñjañanaka "
 "wakichata uñjapxma, ukata walja yaqhanakampi."
+
+#: playlist.py:65
+msgid "No."
+msgstr "N.° jakhu chimpu"
+
+#: playlist.py:72
+msgid "Track"
+msgstr "Thaki"
+
+#: playlist.py:283
+msgid "Jukebox playlist"
+msgstr "Jukebox warurt'anaka qhantayaña wakichaña"
 
 #  "Actividad máquina de discos"
 #: activity.py:71
@@ -80,6 +91,15 @@ msgstr "Pantjata"
 msgid "This \"%s\" file can't be played"
 msgstr "Aka \"%s\" imataxa janiwa qhantaña muniti"
 
+#: viewtoolbar.py:46
+msgid "Show Playlist"
+msgstr "Warurt'anaka qhantayaña wakichata"
+
+#  "Pantalla completa"
+#: viewtoolbar.py:52
+msgid "Fullscreen"
+msgstr "Maypacha uñtañataki"
+
 #: controls.py:51
 msgid "Add track"
 msgstr "Warurt'ayañataki wakichma"
@@ -97,47 +117,3 @@ msgstr "Nayrchapi"
 #: controls.py:90
 msgid "Next"
 msgstr "Qhipankiri"
-
-#: playlist.py:65
-msgid "No."
-msgstr "N.° jakhu chimpu"
-
-#: playlist.py:72
-msgid "Track"
-msgstr "Thaki"
-
-#: playlist.py:283
-msgid "Jukebox playlist"
-msgstr "Jukebox warurt'anaka qhantayaña wakichaña"
-
-#: viewtoolbar.py:46
-msgid "Show Playlist"
-msgstr "Warurt'anaka qhantayaña wakichata"
-
-#  "Pantalla completa"
-#: viewtoolbar.py:52
-msgid "Fullscreen"
-msgstr "Maypacha uñtañataki"
-
-#~ msgid "Play List"
-#~ msgstr "Warurt'anaka qhantayaña wakichata"
-
-#  "Reproducir"
-#~ msgid "Play"
-#~ msgstr "Qhantayaña"
-
-#  "Ver"
-#~ msgid "View"
-#~ msgstr "Unjaña"
-
-#  "Elegir documento"
-#~ msgid "Choose document"
-#~ msgstr "Wakichata ajlliña"
-
-#  "Concordar con ventana"
-#~ msgid "Fit to window"
-#~ msgstr "Wakichata wakichaña"
-
-#  "Tamaño original"
-#~ msgid "Original size"
-#~ msgstr "Tunuchani"

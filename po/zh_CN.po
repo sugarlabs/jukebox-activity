@@ -2,19 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-27 00:31-0500\n"
+"POT-Creation-Date: 2017-03-24 17:39+1100\n"
 "PO-Revision-Date: 2013-12-02 18:14+0200\n"
 "Last-Translator: lite <litekok@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,17 +17,28 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: "name" option from activity.info file
+#: activity/activity.info:2
 msgid "Jukebox"
 msgstr "点唱机"
 
-#. TRANS: "summary" option from activity.info file
-#. TRANS: "description" option from activity.info file
+#: activity/activity.info:3
 msgid ""
 "Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
 "friends the songs you love, watch movies and educational videos together, "
 "and much more!"
 msgstr "成为一个DJ或VJ。播放您喜爱的视频和歌曲。与朋友们分享喜爱的歌曲，一起看电影和教育视频，还有更多！"
+
+#: playlist.py:65
+msgid "No."
+msgstr "否"
+
+#: playlist.py:72
+msgid "Track"
+msgstr "音轨"
+
+#: playlist.py:283
+msgid "Jukebox playlist"
+msgstr "点唱机播放列表"
 
 #: activity.py:71
 msgid "Jukebox Activity"
@@ -83,6 +86,14 @@ msgstr "错误"
 msgid "This \"%s\" file can't be played"
 msgstr "无法播放 \"%s\" 文件"
 
+#: viewtoolbar.py:46
+msgid "Show Playlist"
+msgstr "显示播放列表"
+
+#: viewtoolbar.py:52
+msgid "Fullscreen"
+msgstr "全屏显示"
+
 #: controls.py:51
 msgid "Add track"
 msgstr "添加曲目"
@@ -98,48 +109,3 @@ msgstr "上一个"
 #: controls.py:90
 msgid "Next"
 msgstr "下一个"
-
-#: playlist.py:65
-msgid "No."
-msgstr "否"
-
-#: playlist.py:72
-msgid "Track"
-msgstr "音轨"
-
-#: playlist.py:283
-msgid "Jukebox playlist"
-msgstr "点唱机播放列表"
-
-#: viewtoolbar.py:46
-msgid "Show Playlist"
-msgstr "显示播放列表"
-
-#: viewtoolbar.py:52
-msgid "Fullscreen"
-msgstr "全屏显示"
-
-#, python-format
-#~ msgid "The file %s was not found"
-#~ msgstr "没有发现文件 %s "
-
-#~ msgid "Play List"
-#~ msgstr "播放列表"
-
-#~ msgid "Play"
-#~ msgstr "播放"
-
-#~ msgid "View"
-#~ msgstr "查看"
-
-#~ msgid "Choose document"
-#~ msgstr "选择文档"
-
-#~ msgid "Remove selected track from the playlist"
-#~ msgstr "从播放列表中移除选中的音轨"
-
-#~ msgid "Fit to window"
-#~ msgstr "适合窗口大小"
-
-#~ msgid "Original size"
-#~ msgstr "原始大小"
