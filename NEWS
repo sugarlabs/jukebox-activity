@@ -1,4 +1,16 @@
+33
+
+* New translations (Chris Leonard et al),
+* Fix URL of source repository (Gonzalo Odiard, James Cameron),
+* Add reordering of playlist #4484 (Sai Vineet),
+* Source formatting (Gonzalo Odiard, James Cameron),
+* Remove several warnings from logs (James Cameron),
+* Use new toolbar box in toolkit (James Cameron),
+* Add missing copyright to playlist.py (James Cameron),
+* Remove deprecated MANIFEST (James Cameron),
+
 11
+
 * Now one can add more songs to the playlist
 * New translations added
 
