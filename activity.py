@@ -50,7 +50,7 @@ from sugar3.graphics.toolbutton import ToolButton
 
 from viewtoolbar import ViewToolbar
 from controls import Controls
-from gstplayer import GstPlayer
+from player import GstPlayer
 
 from playlist import PlayList
 
