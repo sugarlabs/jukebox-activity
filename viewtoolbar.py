@@ -32,7 +32,7 @@ class ViewToolbar(Gtk.Toolbar):
     __gsignals__ = {
         'go-fullscreen': (GObject.SignalFlags.RUN_FIRST,
                           None,
-                         ([])),
+                          ([])),
         'toggle-playlist': (GObject.SignalFlags.RUN_FIRST,
                             None,
                             ([]))

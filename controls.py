@@ -147,7 +147,7 @@ class Controls(GObject.GObject):
                         self.button, self.next_button,
                         self._current_time, self.scale_item,
                         self._total_time]:
-            if not control in toolbar:
+            if control not in toolbar:
                 toolbar.insert(control, -1)
                 control.show()
 

@@ -487,8 +487,6 @@ if __name__ == '__main__':
     window = Gtk.Window()
     view = VideoWidget()
 
-    #player.connect("eos", self._player_eos_cb)
-    #player.connect("error", self._player_error_cb)
     view.show()
     window.add(view)
 
