@@ -57,7 +57,7 @@ class PlayList(Gtk.ScrolledWindow):
         self.selection = self.listview.get_selection()
         self.selection.set_mode(Gtk.SelectionMode.SINGLE)
 
-        renderer_icon = CellRendererIcon(self.listview)
+        renderer_icon = CellRendererIcon()
         renderer_icon.props.icon_name = 'emblem-notification'
         renderer_icon.props.width = 20
         renderer_icon.props.height = 20
