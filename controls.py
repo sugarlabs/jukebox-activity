@@ -67,6 +67,7 @@ class Controls(GObject.GObject):
 
         self.prev_button = ToolButton('player_rew')
         self.prev_button.set_tooltip(_('Previous'))
+        self.prev_button.props.accelerator = 'Up'
         self.prev_button.show()
         self.prev_button.connect('clicked', self.__prev_button_clicked_cb)
         self.toolbar.insert(self.prev_button, -1)
@@ -78,8 +79,10 @@ class Controls(GObject.GObject):
                                                    Gtk.IconSize.BUTTON)
         self.play_image.show()
 
-        self.button = Gtk.ToolButton()
+        self.button = ToolButton('media-playback-start')
+        self.button.set_tooltip(_('Play or Pause'))
         self.button.set_icon_widget(self.play_image)
+        self.button.props.accelerator = 'space'
         self.button.set_property('can-default', True)
         self.button.show()
         self.button.connect('clicked', self._button_clicked_cb)
@@ -88,6 +91,7 @@ class Controls(GObject.GObject):
 
         self.next_button = ToolButton('player_fwd')
         self.next_button.set_tooltip(_('Next'))
+        self.next_button.props.accelerator = 'Down'
         self.next_button.show()
         self.next_button.connect('clicked', self.__next_button_clicked_cb)
         self.toolbar.insert(self.next_button, -1)

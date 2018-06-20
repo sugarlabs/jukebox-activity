@@ -79,9 +79,9 @@ class JukeboxActivity(activity.Activity):
         self.max_participants = 1
 
         toolbar_box = ToolbarBox()
-        activity_button = ActivityToolbarButton(self)
-        activity_toolbar = activity_button.page
-        toolbar_box.toolbar.insert(activity_button, 0)
+        self._activity_toolbar_button = ActivityToolbarButton(self)
+        activity_toolbar = self._activity_toolbar_button.page
+        toolbar_box.toolbar.insert(self._activity_toolbar_button, 0)
         self.title_entry = activity_toolbar.title
 
         self._view_toolbar = ViewToolbar()
@@ -256,14 +256,61 @@ class JukeboxActivity(activity.Activity):
         self._video_canvas.queue_draw()
 
     def __key_press_event_cb(self, widget, event):
-        keyname = Gdk.keyval_name(event.keyval)
-        logging.info("Keyname Press: %s, time: %s", keyname, event.time)
+        key = event.keyval
+        ctrl = event.state & Gdk.ModifierType.CONTROL_MASK
+
+        # while activity toolbar is visible, only escape key is taken
+        if self._activity_toolbar_button.is_expanded():
+            if key == Gdk.KEY_Escape:
+                self._activity_toolbar_button.set_expanded(False)
+                return True
+
+            return False
+
+        # while title is focused, no shortcuts
         if self.title_entry.has_focus():
             return False
 
-        if keyname == "space":
-            self.control._button_clicked_cb(None)
+        # Shortcut - Space does play or pause
+        if key == Gdk.KEY_space:
+            self.control.button.emit('clicked')
             return True
+
+        # Shortcut - Up does previous playlist item
+        if key == Gdk.KEY_Up:
+            self.control.prev_button.emit('clicked')
+            return True
+
+        # Shortcut - Down does next playlist item
+        if key == Gdk.KEY_Down:
+            self.control.next_button.emit('clicked')
+            return True
+
+        # Shortcut - Escape does unfullscreen, then playlist hide
+        if key == Gdk.KEY_Escape:
+            if self.is_fullscreen():
+                # sugar3.graphics.Window.__key_press_cb will handle it
+                return False
+
+            if self._view_toolbar._show_playlist.props.active:
+                self._view_toolbar._show_playlist.props.active = False
+                return True
+
+        # Shortcut - ctrl-f does fullscreen toggle
+        # (fullscreen enable is handled by ToolButton accelerator)
+        if ctrl and key == Gdk.KEY_f:
+            if self.is_fullscreen():
+                self.unfullscreen()
+                return True
+
+        # Shortcut - ctrl-l does playlist toggle
+        # (ToggleToolButton accelerator ineffective when ViewToolbar hidden)
+        if ctrl and key == Gdk.KEY_l:
+            togglebutton = self._view_toolbar._show_playlist
+            togglebutton.props.active = not togglebutton.props.active
+            return True
+
+        return False
 
     def __playlist_finished_cb(self, widget):
         self._switch_canvas(show_video=False)

@@ -44,13 +44,15 @@ class ViewToolbar(Gtk.Toolbar):
 
         self._show_playlist = ToggleToolButton('view-list')
         self._show_playlist.set_active(True)  # due to Activity.show_all()
-        self._show_playlist.set_tooltip(_('Show Playlist'))
+        self._show_playlist.set_tooltip(_('Playlist'))
+        self._show_playlist.set_accelerator('<ctrl>l')
         self._show_playlist.connect('toggled', self._playlist_toggled_cb)
         self.insert(self._show_playlist, -1)
         self._show_playlist.show()
 
         self._fullscreen = ToolButton('view-fullscreen')
         self._fullscreen.set_tooltip(_('Fullscreen'))
+        self._fullscreen.set_accelerator('<ctrl>f')
         self._fullscreen.connect('clicked', self._fullscreen_cb)
         self.insert(self._fullscreen, -1)
         self._fullscreen.show()
