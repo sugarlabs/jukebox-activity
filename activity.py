@@ -73,6 +73,7 @@ class JukeboxActivity(activity.Activity):
 
         self._alert = None
         self._playlist_jobject = None
+        self._on_unfullscreen_show_playlist = False
 
         self.set_title(_('Jukebox Activity'))
         self.max_participants = 1
@@ -169,8 +170,9 @@ class JukeboxActivity(activity.Activity):
         self.set_canvas(self._video_canvas)
         self._init_view_area()
         self.show_all()
-        # need hide the playlist by default
-        self._playlist_box.hide()
+
+        if len(self.playlist_widget) < 2:
+            self._view_toolbar._show_playlist.props.active = False
 
         self._configure_cb()
 
@@ -265,7 +267,7 @@ class JukeboxActivity(activity.Activity):
 
     def __playlist_finished_cb(self, widget):
         self._switch_canvas(show_video=False)
-        self._view_toolbar._show_playlist.set_active(True)
+        self._view_toolbar._show_playlist.props.active = True
         self.unfullscreen()
 
         # Select the first stream to be played when Play button will
@@ -418,11 +420,10 @@ class JukeboxActivity(activity.Activity):
 
     def read_file(self, file_path):
         """Load a file from the datastore on activity start."""
-        logging.debug('JukeBoxAtivity.read_file: %s', file_path)
+        logging.debug('JukeboxActivity.read_file: %s', file_path)
 
         title = self.metadata['title']
         self.playlist_widget.load_file(file_path, title)
-        self._view_toolbar._show_playlist.set_active(True)
 
     def write_file(self, file_path):
 
@@ -461,11 +462,19 @@ class JukeboxActivity(activity.Activity):
             write_playlist_to_file(self._playlist_jobject.file_path)
             datastore.write(self._playlist_jobject)
 
+    def unfullscreen(self):
+        activity.Activity.unfullscreen(self)
+        if self._on_unfullscreen_show_playlist:
+            self._view_toolbar._show_playlist.props.active = True
+
     def __go_fullscreen_cb(self, toolbar):
+        if self._view_toolbar._show_playlist.props.active:
+            self._view_toolbar._show_playlist.props.active = False
+            self._on_unfullscreen_show_playlist = True
         self.fullscreen()
 
     def __toggle_playlist_cb(self, toolbar):
-        if self._view_toolbar._show_playlist.get_active():
+        if self._view_toolbar._show_playlist.props.active:
             self._playlist_box.show_all()
         else:
             self._playlist_box.hide()

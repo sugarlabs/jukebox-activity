@@ -25,10 +25,10 @@ import tempfile
 from gettext import gettext as _
 
 from gi.repository import GObject
+from gi.repository import Gio
 from gi.repository import Gtk
 from gi.repository import Pango
 
-from sugar3 import mime
 from sugar3.datastore import datastore
 from sugar3.activity import activity
 from sugar3.graphics.icon import CellRendererIcon
@@ -87,6 +87,9 @@ class PlayList(Gtk.ScrolledWindow):
         self.listview.connect('cursor-changed', self.__on_cursor_changed)
 
         self.add(self.listview)
+
+    def __len__(self):
+        return len(self._items)
 
     def move_up(self):
         selected_iter = self.selection.get_selected()[1]
@@ -224,14 +227,23 @@ class PlayList(Gtk.ScrolledWindow):
             logging.debug('Loading a %s', type(jobject))
             file_path = mime_path = jobject
 
-        mimetype = mime.get_for_file('file://' + mime_path)
-        logging.info('read_file mime %s', mimetype)
-        if mimetype == 'audio/x-mpegurl':
-            # is a M3U playlist:
-            self._load_m3u_playlist(file_path)
+        info = Gio.File.new_for_path(mime_path).query_info(
+            Gio.FILE_ATTRIBUTE_STANDARD_SIZE + ',' +
+            Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE, 0, None)
+        size = info.get_size()
+        mime = info.get_content_type()
+
+        if size != 0:
+            logging.debug('read_file mime %s', mime)
+            if mime == 'audio/x-mpegurl':
+                # is a M3U playlist:
+                self._load_m3u_playlist(file_path)
+            else:
+                # is not a M3U playlist
+                self._load_stream(file_path, title)
         else:
-            # is not a M3U playlist
-            self._load_stream(file_path, title)
+            logging.debug('read_file is empty')
+            self._load_m3u_playlist(file_path)
 
         missing_tracks = self._get_missing_tracks()
         if len(missing_tracks) > 0:
