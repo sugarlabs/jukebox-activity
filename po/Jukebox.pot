@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-31 13:00+1000\n"
+"POT-Creation-Date: 2018-06-20 14:42+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,16 +28,50 @@ msgid ""
 "and much more!"
 msgstr ""
 
-#: playlist.py:71
-msgid "No."
+#: activity.py:78
+msgid "Jukebox Activity"
 msgstr ""
 
-#: playlist.py:78
-msgid "Track"
+#: activity.py:136
+msgid "Move up"
 msgstr ""
 
-#: playlist.py:289
-msgid "Jukebox playlist"
+#: activity.py:141
+msgid "Move down"
+msgstr ""
+
+#: activity.py:190
+msgid "No media"
+msgstr ""
+
+#: activity.py:190
+msgid "Choose media files"
+msgstr ""
+
+#: activity.py:346
+#, python-format
+msgid "%s tracks not found."
+msgstr ""
+
+#: activity.py:349
+msgid "Dismiss"
+msgstr ""
+
+#: activity.py:353
+msgid "Details"
+msgstr ""
+
+#: activity.py:364
+msgid "<b>Missing tracks</b>"
+msgstr ""
+
+#: activity.py:410
+msgid "Error"
+msgstr ""
+
+#: activity.py:411
+#, python-format
+msgid "This \"%s\" file can't be played"
 msgstr ""
 
 #: controls.py:51
@@ -56,56 +90,22 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: viewtoolbar.py:46
+#: playlist.py:71
+msgid "No."
+msgstr ""
+
+#: playlist.py:78
+msgid "Track"
+msgstr ""
+
+#: playlist.py:301
+msgid "Jukebox playlist"
+msgstr ""
+
+#: viewtoolbar.py:47
 msgid "Show Playlist"
 msgstr ""
 
-#: viewtoolbar.py:52
+#: viewtoolbar.py:54
 msgid "Fullscreen"
-msgstr ""
-
-#: activity.py:75
-msgid "Jukebox Activity"
-msgstr ""
-
-#: activity.py:133
-msgid "Move up"
-msgstr ""
-
-#: activity.py:138
-msgid "Move down"
-msgstr ""
-
-#: activity.py:186
-msgid "No media"
-msgstr ""
-
-#: activity.py:186
-msgid "Choose media files"
-msgstr ""
-
-#: activity.py:342
-#, python-format
-msgid "%s tracks not found."
-msgstr ""
-
-#: activity.py:345
-msgid "Dismiss"
-msgstr ""
-
-#: activity.py:349
-msgid "Details"
-msgstr ""
-
-#: activity.py:360
-msgid "<b>Missing tracks</b>"
-msgstr ""
-
-#: activity.py:406
-msgid "Error"
-msgstr ""
-
-#: activity.py:407
-#, python-format
-msgid "This \"%s\" file can't be played"
 msgstr ""
