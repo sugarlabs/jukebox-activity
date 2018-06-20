@@ -7,15 +7,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2013-10-30 03:44+0200\n"
-"Last-Translator: Alex <tarrask@tarrask.com>\n"
+"PO-Revision-Date: 2017-06-14 20:15+0000\n"
+"Last-Translator: Mariana <dias.inkscape@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Pootle 2.0.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1497471316.000000\n"
 
 #: activity/activity.info:2
 msgid "Jukebox"
@@ -47,13 +48,16 @@ msgstr "Lista de faixas da Jukebox"
 msgid "Jukebox Activity"
 msgstr "Atividade da Jukebox"
 
+# Unsure about the context: Can be both move up as for advance in your career for example, in which case it should be translate as "Avançar", or to go back to the beginning of the page which is translated as "Voltar ao topo".
 #: activity.py:129
+#, fuzzy
 msgid "Move up"
-msgstr ""
+msgstr "Mover para cima"
 
+# It can mean a decrease in price for example in this case "Diminuir", or a movement per say "Mover para baixo"
 #: activity.py:134
 msgid "Move down"
-msgstr ""
+msgstr "Mover para baixo"
 
 #: activity.py:182
 msgid "No media"

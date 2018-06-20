@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2017-05-21 06:11+0000\n"
+"PO-Revision-Date: 2017-12-03 05:29+0000\n"
 "Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sd\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1495347118.000000\n"
+"X-POOTLE-MTIME: 1512278975.000000\n"
 
 #: activity/activity.info:2
 msgid "Jukebox"
@@ -41,11 +41,11 @@ msgstr "ڪچي"
 
 #: playlist.py:283
 msgid "Jukebox playlist"
-msgstr "Jukebox playlist"
+msgstr ""
 
 #: activity.py:71
 msgid "Jukebox Activity"
-msgstr "Jukebox Activity"
+msgstr ""
 
 #: activity.py:129
 msgid "Move up"
