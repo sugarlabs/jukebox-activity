@@ -48,8 +48,8 @@ class PlayList(Gtk.ScrolledWindow):
         self._current_playing = 0
         self._items = []
 
-        GObject.GObject.__init__(self, hadjustment=None,
-                                 vadjustment=None)
+        Gtk.ScrolledWindow.__init__(self, hadjustment=None,
+                                    vadjustment=None)
         self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         self.listview = Gtk.TreeView()
         self.treemodel = Gtk.ListStore(int, object, bool)

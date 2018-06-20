@@ -474,7 +474,7 @@ class JukeboxActivity(activity.Activity):
 
 class VideoWidget(Gtk.DrawingArea):
     def __init__(self):
-        GObject.GObject.__init__(self)
+        Gtk.DrawingArea.__init__(self)
         self.set_events(Gdk.EventMask.POINTER_MOTION_MASK |
                         Gdk.EventMask.POINTER_MOTION_HINT_MASK |
                         Gdk.EventMask.EXPOSURE_MASK |

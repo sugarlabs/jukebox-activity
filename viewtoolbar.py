@@ -40,7 +40,7 @@ class ViewToolbar(Gtk.Toolbar):
     }
 
     def __init__(self):
-        GObject.GObject.__init__(self)
+        Gtk.Toolbar.__init__(self)
 
         self._show_playlist = ToggleToolButton('view-list')
         self._show_playlist.set_active(False)
