@@ -1,0 +1,10 @@
+[flake8]
+
+# E402 module level import not at top of file
+# gi.require_version() is required before later imports
+
+# F401 imported but unused
+# imports have a side-effect without being used
+# GstVideo and GdkX11 are needed by GStreamer for prepare-window-handler
+
+ignore = E402,F401
