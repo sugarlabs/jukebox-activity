@@ -24,11 +24,6 @@ from gi.repository import GObject
 # respectively:
 from gi.repository import GdkX11, GstVideo
 
-# Avoid "Fatal Python error: GC object already tracked"
-# http://stackoverflow.com/questions/7496629/
-#                                    gstreamer-appsrc-causes-random-crashes
-# GObject.threads_init()
-
 # Initialize GStreamer
 Gst.init(None)
 
