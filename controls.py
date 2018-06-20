@@ -1,3 +1,5 @@
+# Copyright (C) 2013 Manuel Kaufmann <humitos@gmail.com>
+#
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
@@ -12,8 +14,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
-
-# Copyright (C) 2013 Manuel Kaufmann <humitos@gmail.com>
 
 import logging
 

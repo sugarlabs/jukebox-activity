@@ -1,3 +1,10 @@
+# Activity that plays media.
+#
+# Copyright (C) 2007 Andy Wingo <wingo@pobox.com>
+# Copyright (C) 2007 Red Hat, Inc.
+# Copyright (C) 2008-2010 Kushal Das <kushal@fedoraproject.org>
+# Copyright (C) 2013 Manuel Kaufmann <humitos@gmail.com>
+#
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
 # License as published by the Free Software Foundation; either
@@ -13,11 +20,6 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 # USA
 
-# Activity that plays media.
-# Copyright (C) 2007 Andy Wingo <wingo@pobox.com>
-# Copyright (C) 2007 Red Hat, Inc.
-# Copyright (C) 2008-2010 Kushal Das <kushal@fedoraproject.org>
-# Copyright (C) 2013 Manuel Kaufmann <humitos@gmail.com>
 
 import sys
 import logging
