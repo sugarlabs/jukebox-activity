@@ -226,8 +226,12 @@ class Controls(GObject.GObject):
             self.prev_button.set_sensitive(False)
             self.button.set_sensitive(False)
             self.next_button.set_sensitive(False)
+            self.hscale.set_sensitive(False)
+            self.activity._view_toolbar._fullscreen.set_sensitive(False)
         else:
             self.button.set_sensitive(True)
+            self.hscale.set_sensitive(True)
+            self.activity._view_toolbar._fullscreen.set_sensitive(True)
 
             if current_playing == 0:
                 self.prev_button.set_sensitive(False)
