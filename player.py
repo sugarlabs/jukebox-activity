@@ -57,6 +57,8 @@ class GstPlayer(GObject.GObject):
 
         # Create GStreamer elements
         self.player = Gst.ElementFactory.make('playbin', None)
+        # FIXME: visualisation is in separate window
+        #self.player.props.flags |= 8
         self.pipeline.add(self.player)
 
     def init_view_area(self, videowidget):
