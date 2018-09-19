@@ -1,5 +1,5 @@
- * Drag and drop media objects from Frame
- * Playlist making and editing support
- * Screenshot support
- * journal support
- * Collaboration support
+* Visualisations, currently opens a new window that will need to be captured and reparented.
+
+* Drag and drop media objects from Frame
+
+* Collaboration, playlist and items, on buddy join, send add-item for each item, add-item for each use of + by anyone, erase-item for each use of - by anyone, no file transfer until an item is played, then check if present already, allow playback during transfer, save in journal.
