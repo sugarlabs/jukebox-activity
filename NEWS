@@ -1,3 +1,24 @@
+34
+
+* Hide playlist on fullscreen (James Cameron),
+* Add shortcuts, ctrl+l for playlist toggle, ctrl+f for fullscreen
+  toggle, space for play or pause, up and down arrows for previous and
+  next playlist item, escape to contract toolbar button, fullscreen
+  off, or playlist off (James Cameron),
+* Disable controls without media (Rahul Bothra),
+
+* New translations (Berend, Božidar Putanec, Mariana, Besnik Bleta,
+  Paulo Francisco),
+* Fix translation warnings on fr.po (James Cameron),
+* Update POT file (James Cameron),
+
+* Remove deprecated treeview parameter in CellRendererIcon (Rahul Bothra),
+* Move copyrights, change metadata and add COPYING.LGPLv2.1 (James Cameron),
+* Fix class initialisation (James Cameron),
+* Update metadata (Vipul Gupta),
+* Update TODO and try visualisations (James Cameron),
+* Add README (Rudra Sadhu),
+
 33
 
 * New translations (Chris Leonard et al),
