@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-24 17:39+1100\n"
-"PO-Revision-Date: 2017-06-14 20:15+0000\n"
-"Last-Translator: Mariana <dias.inkscape@gmail.com>\n"
+"PO-Revision-Date: 2018-08-15 20:09+0000\n"
+"Last-Translator: Paulo Francisco <slomp@ufrgs.br>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1497471316.000000\n"
+"X-POOTLE-MTIME: 1534363752.000000\n"
 
 #: activity/activity.info:2
 msgid "Jukebox"
@@ -34,7 +34,7 @@ msgstr ""
 
 #: playlist.py:65
 msgid "No."
-msgstr "N."
+msgstr "Nº."
 
 #: playlist.py:72
 msgid "Track"
@@ -42,7 +42,7 @@ msgstr "Faixa"
 
 #: playlist.py:283
 msgid "Jukebox playlist"
-msgstr "Lista de faixas da Jukebox"
+msgstr "Lista de reprodução da Jukebox"
 
 #: activity.py:71
 msgid "Jukebox Activity"
@@ -50,7 +50,6 @@ msgstr "Atividade da Jukebox"
 
 # Unsure about the context: Can be both move up as for advance in your career for example, in which case it should be translate as "Avançar", or to go back to the beginning of the page which is translated as "Voltar ao topo".
 #: activity.py:129
-#, fuzzy
 msgid "Move up"
 msgstr "Mover para cima"
 
@@ -74,7 +73,7 @@ msgstr "%s música não encontrada."
 
 #: activity.py:340
 msgid "Dismiss"
-msgstr "Cancelar"
+msgstr "Descartar"
 
 #: activity.py:344
 msgid "Details"
@@ -82,7 +81,7 @@ msgstr "Detalhes"
 
 #: activity.py:355
 msgid "<b>Missing tracks</b>"
-msgstr "<b>Faixas não encontradas</b>"
+msgstr "<b>Faixas perdidas</b>"
 
 #: activity.py:401
 msgid "Error"
@@ -91,15 +90,15 @@ msgstr "Erro"
 #: activity.py:402
 #, python-format
 msgid "This \"%s\" file can't be played"
-msgstr "Não se pode tocar o arquivo \"%s\""
+msgstr "Não é possível reproduzir o arquivo \"%s\""
 
 #: viewtoolbar.py:46
 msgid "Show Playlist"
-msgstr "Mostrar lista de faixas"
+msgstr "Mostrar lista de reprodução"
 
 #: viewtoolbar.py:52
 msgid "Fullscreen"
-msgstr "Tela Cheia"
+msgstr "Tela cheia"
 
 #: controls.py:51
 msgid "Add track"
