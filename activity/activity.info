@@ -1,7 +1,7 @@
 [Activity]
 name = Jukebox
 bundle_id = org.laptop.sugar.Jukebox
-license = GPLv2+;LGPLv2.1+;LGPLv2+
+license = GPLv2+;LGPLv2+
 icon = activity-jukebox
 exec = sugar-activity activity.JukeboxActivity
 activity_version = 34
