@@ -314,7 +314,7 @@ class Controls(GObject.GObject):
     def _reseek(self):
         self._scale_reseek_timeout_id = -1
         location = int(self.activity.control.hscale.get_value() *
-                        self.p_duration / 100)  # in ns
+                       self.p_duration / 100)  # in ns
         self.activity.player.seek(location)
         # Allow for a preroll
         self.activity.player.get_state(timeout=50 * Gst.MSECOND)  # 50 ms
