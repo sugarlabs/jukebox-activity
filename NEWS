@@ -1,3 +1,11 @@
+35
+
+* Fix license metadata (James Cameron),
+* Add screenshots (Aryan Sharma),
+* Port to Python 3 (Rahul Bothra),
+* flake8 fixes (Aniket Mathur),
+* Remove empty locale files (James Cameron),
+
 34
 
 * Hide playlist on fullscreen (James Cameron),
