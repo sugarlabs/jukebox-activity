@@ -436,7 +436,7 @@ class JukeboxActivity(activity.Activity):
             if self.player.playing_video():
                 self._switch_canvas(True)
             else:
-                self._switch_canvas(False)
+                self._switch_canvas(True)
             return False
 
         # HACK: we need a timeout here because gstreamer returns
