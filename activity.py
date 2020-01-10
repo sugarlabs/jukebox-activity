@@ -429,19 +429,7 @@ class JukeboxActivity(activity.Activity):
         self.remove_alert(alert)
 
     def __player_play_cb(self, widget):
-        # Do not show the visualization widget if we are playing just
-        # an audio stream
-
-        def callback():
-            if self.player.playing_video():
-                self._switch_canvas(True)
-            else:
-                self._switch_canvas(False)
-            return False
-
-        # HACK: we need a timeout here because gstreamer returns
-        # n-video = 0 if we call it immediately
-        GObject.timeout_add(1000, callback)
+        self._switch_canvas(True)
 
     def __player_error_cb(self, widget, message, detail):
         self.player.stop()
