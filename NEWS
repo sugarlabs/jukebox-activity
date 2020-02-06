@@ -1,3 +1,11 @@
+34.1
+
+* Fix audio visualisation (Srevin Saju),
+* Fix license metadata (James Cameron),
+* Add screenshots (Aryan Sharma),
+* flake8 fixes (Aniket Mathur),
+* Remove empty locale files (James Cameron),
+
 34
 
 * Hide playlist on fullscreen (James Cameron),
