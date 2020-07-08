@@ -93,12 +93,19 @@ class PlayList(Gtk.ScrolledWindow):
 
     def move_up(self):
         selected_iter = self.selection.get_selected()[1]
-        position = self.treemodel.get_iter(
-            int(str(self.treemodel.get_path(selected_iter))) - 1)
+        if selected_iter is None:
+            return
+
+        position = self.treemodel.iter_previous(
+            self.treemodel.get_iter(self.treemodel.get_path(selected_iter)))
+        if position is None:
+            return
+
         self.treemodel.move_before(selected_iter, position)
         i = self._current_playing
         self._items[i - 1], self._items[i] = \
             self._items[i], self._items[i - 1]
+
         index = 0
         for tree_item, playlist_item in zip(self.treemodel, self._items):
             tree_item[0] = index
@@ -108,8 +115,14 @@ class PlayList(Gtk.ScrolledWindow):
 
     def move_down(self):
         selected_iter = self.selection.get_selected()[1]
-        position = self.treemodel.get_iter(
-            int(str(self.treemodel.get_path(selected_iter))) + 1)
+        if selected_iter is None:
+            return
+
+        position = self.treemodel.iter_next(
+            self.treemodel.get_iter(self.treemodel.get_path(selected_iter)))
+        if position is None:
+            return
+
         self.treemodel.move_after(selected_iter, position)
         i = self._current_playing
         self._items[i + 1], self._items[i] = \
