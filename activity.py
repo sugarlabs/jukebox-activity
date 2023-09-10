@@ -202,8 +202,10 @@ class JukeboxActivity(activity.Activity):
 
     def _configure_cb(self, event=None):
         toolbar = self.get_toolbar_box().toolbar
-        toolbar.remove(self._stop)
-        toolbar.remove(self._separator)
+        if self._stop.get_parent() == toolbar:
+            toolbar.remove(self._stop)
+        if self._separator.get_parent() == toolbar:
+            toolbar.remove(self._separator)
         if Gdk.Screen.width() < Gdk.Screen.height():
             self._control_toolbar_button.show()
             self._control_toolbar_button.set_expanded(True)
