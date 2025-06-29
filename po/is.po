@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-20 14:42+1000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: activity/activity.info:2
+msgid "Jukebox"
+msgstr ""
+
+#: activity/activity.info:3
+msgid ""
+"Be a DJ, be a VJ. Play your favorite videos and songs. Share with your "
+"friends the songs you love, watch movies and educational videos together, "
+"and much more!"
+msgstr ""
+
+#: activity.py:78
+msgid "Jukebox Activity"
+msgstr ""
+
+#: activity.py:136
+msgid "Move up"
+msgstr ""
+
+#: activity.py:141
+msgid "Move down"
+msgstr ""
+
+#: activity.py:190
+msgid "No media"
+msgstr ""
+
+#: activity.py:190
+msgid "Choose media files"
+msgstr ""
+
+#: activity.py:346
+#, python-format
+msgid "%s tracks not found."
+msgstr ""
+
+#: activity.py:349
+msgid "Dismiss"
+msgstr ""
+
+#: activity.py:353
+msgid "Details"
+msgstr ""
+
+#: activity.py:364
+msgid "<b>Missing tracks</b>"
+msgstr ""
+
+#: activity.py:410
+msgid "Error"
+msgstr ""
+
+#: activity.py:411
+#, python-format
+msgid "This \"%s\" file can't be played"
+msgstr ""
+
+#: controls.py:51
+msgid "Add track"
+msgstr ""
+
+#: controls.py:57
+msgid "Remove track"
+msgstr ""
+
+#: controls.py:69
+msgid "Previous"
+msgstr ""
+
+#: controls.py:90
+msgid "Next"
+msgstr ""
+
+#: playlist.py:71
+msgid "No."
+msgstr ""
+
+#: playlist.py:78
+msgid "Track"
+msgstr ""
+
+#: playlist.py:301
+msgid "Jukebox playlist"
+msgstr ""
+
+#: viewtoolbar.py:47
+msgid "Show Playlist"
+msgstr ""
+
+#: viewtoolbar.py:54
+msgid "Fullscreen"
+msgstr ""
