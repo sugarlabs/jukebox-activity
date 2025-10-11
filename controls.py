@@ -65,7 +65,7 @@ class Controls(GObject.GObject):
         self.toolbar.insert(self._spacer, -1)
         self._spacer.show()
 
-        self.prev_button = ToolButton('player_rew')
+        self.prev_button = ToolButton('media-seek-backward')
         self.prev_button.set_tooltip(_('Previous'))
         self.prev_button.props.accelerator = 'Up'
         self.prev_button.show()
@@ -89,7 +89,7 @@ class Controls(GObject.GObject):
 
         self.toolbar.insert(self.button, -1)
 
-        self.next_button = ToolButton('player_fwd')
+        self.next_button = ToolButton('media-seek-forward')
         self.next_button.set_tooltip(_('Next'))
         self.next_button.props.accelerator = 'Down'
         self.next_button.show()
