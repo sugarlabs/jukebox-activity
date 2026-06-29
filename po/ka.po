@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-20 14:42+1000\n"
-"PO-Revision-Date: 2026-04-01 08:11+0000\n"
+"PO-Revision-Date: 2026-06-29 12:11+0000\n"
 "Last-Translator: NF <rkavt@smartprojects.ge>\n"
 "Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
 "sugar-activities/jukebox/ka/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: activity/activity.info:2
 msgid "Jukebox"
-msgstr ""
+msgstr "Jukebox"
 
 #: activity/activity.info:3
 msgid ""
@@ -57,11 +57,11 @@ msgstr ""
 
 #: activity.py:349
 msgid "Dismiss"
-msgstr ""
+msgstr "მოცილება"
 
 #: activity.py:353
 msgid "Details"
-msgstr ""
+msgstr "დეტალები"
 
 #: activity.py:364
 msgid "<b>Missing tracks</b>"
@@ -94,11 +94,11 @@ msgstr "შემდეგი"
 
 #: playlist.py:71
 msgid "No."
-msgstr ""
+msgstr "არა."
 
 #: playlist.py:78
 msgid "Track"
-msgstr ""
+msgstr "ტრეკი"
 
 #: playlist.py:301
 msgid "Jukebox playlist"
