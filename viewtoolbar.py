@@ -23,11 +23,11 @@ from gettext import gettext as _
 from gi.repository import GObject
 from gi.repository import Gtk
 
-from sugar3.graphics.toolbutton import ToolButton
-from sugar3.graphics.toggletoolbutton import ToggleToolButton
+from sugar4.graphics.toolbutton import ToolButton
+from sugar4.graphics.toggletoolbutton import ToggleToolButton
 
 
-class ViewToolbar(Gtk.Toolbar):
+class ViewToolbar(Gtk.Box):
     __gtype_name__ = 'ViewToolbar'
 
     __gsignals__ = {
@@ -40,21 +40,21 @@ class ViewToolbar(Gtk.Toolbar):
     }
 
     def __init__(self):
-        Gtk.Toolbar.__init__(self)
+        Gtk.Box.__init__(self)
 
         self._show_playlist = ToggleToolButton('view-list')
-        self._show_playlist.set_active(True)  # due to Activity.show_all()
+        self._show_playlist.set_active(True)
         self._show_playlist.set_tooltip(_('Playlist'))
         self._show_playlist.set_accelerator('<ctrl>l')
         self._show_playlist.connect('toggled', self._playlist_toggled_cb)
-        self.insert(self._show_playlist, -1)
+        self.append(self._show_playlist)
         self._show_playlist.show()
 
         self._fullscreen = ToolButton('view-fullscreen')
         self._fullscreen.set_tooltip(_('Fullscreen'))
         self._fullscreen.set_accelerator('<ctrl>f')
         self._fullscreen.connect('clicked', self._fullscreen_cb)
-        self.insert(self._fullscreen, -1)
+        self.append(self._fullscreen)
         self._fullscreen.show()
 
     def _fullscreen_cb(self, button):

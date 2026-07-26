@@ -26,8 +26,8 @@ import logging
 from gettext import gettext as _
 
 import gi
-gi.require_version('Gdk', '3.0')
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gdk', '4.0')
+gi.require_version('Gtk', '4.0')
 gi.require_version('Gst', '1.0')
 gi.require_version('SugarExt', '1.0')
 gi.require_version('GstVideo', '1.0')
@@ -37,18 +37,18 @@ from gi.repository import Gdk
 from gi.repository import Gtk
 from gi.repository import Gio
 
-from sugar3.activity import activity
-from sugar3 import mime
-from sugar3.datastore import datastore
+from sugar4.activity import activity
+from sugar4 import mime
+from sugar4.datastore import datastore
 
-from sugar3.graphics.toolbarbox import ToolbarBox
-from sugar3.graphics.toolbarbox import ToolbarButton
-from sugar3.activity.widgets import StopButton
-from sugar3.activity.widgets import ActivityToolbarButton
-from sugar3.graphics.alert import ErrorAlert
-from sugar3.graphics.alert import Alert
-from sugar3.graphics.icon import Icon
-from sugar3.graphics.toolbutton import ToolButton
+from sugar4.graphics.toolbarbox import ToolbarBox
+from sugar4.graphics.toolbarbox import ToolbarButton
+from sugar4.activity.widgets import StopButton
+from sugar4.activity.widgets import ActivityToolbarButton
+from sugar4.graphics.alert import ErrorAlert
+from sugar4.graphics.alert import Alert
+from sugar4.graphics.icon import Icon
+from sugar4.graphics.toolbutton import ToolButton
 
 from viewtoolbar import ViewToolbar
 from controls import Controls
@@ -79,9 +79,10 @@ class JukeboxActivity(activity.Activity):
         self.max_participants = 1
 
         toolbar_box = ToolbarBox()
-        self._activity_toolbar_button = ActivityToolbarButton(self)
+        self._activity_toolbar_button = ActivityToolbarButton(
+            self, icon_name="activity-jukebox")
         activity_toolbar = self._activity_toolbar_button.page
-        toolbar_box.toolbar.insert(self._activity_toolbar_button, 0)
+        toolbar_box.toolbar.prepend(self._activity_toolbar_button)
         self.title_entry = activity_toolbar.title
 
         self._view_toolbar = ViewToolbar()
@@ -93,21 +94,21 @@ class JukeboxActivity(activity.Activity):
             page=self._view_toolbar,
             icon_name='toolbar-view')
         self._view_toolbar.show()
-        toolbar_box.toolbar.insert(view_toolbar_button, -1)
+        toolbar_box.toolbar.append(view_toolbar_button)
         view_toolbar_button.show()
 
-        self._control_toolbar = Gtk.Toolbar()
+        self._control_toolbar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         self._control_toolbar_button = ToolbarButton(
             page=self._control_toolbar,
             icon_name='media-playback-start')
-        self._control_toolbar.show()
-        toolbar_box.toolbar.insert(self._control_toolbar_button, -1)
-        self._control_toolbar_button.hide()
+        toolbar_box.toolbar.append(self._control_toolbar_button)
+        self._control_toolbar_button.set_visible(False)
 
         self.set_toolbar_box(toolbar_box)
-        toolbar_box.show_all()
 
-        self.connect('key_press_event', self.__key_press_event_cb)
+        key_controller = Gtk.EventControllerKey()
+        key_controller.connect('key-pressed', self.__key_pressed_cb)
+        self.add_controller(key_controller)
         self.connect('playlist-finished', self.__playlist_finished_cb)
 
         # We want to be notified when the activity gets the focus or
@@ -123,27 +124,30 @@ class JukeboxActivity(activity.Activity):
         self.playlist_widget.connect('play-index', self.__play_index_cb)
         self.playlist_widget.connect('missing-tracks',
                                      self.__missing_tracks_cb)
+        screen_w, screen_h = self._get_screen_size()
         self.playlist_widget.set_size_request(
-            Gdk.Screen.width() * PLAYLIST_WIDTH_PROP, 0)
+            int(screen_w * PLAYLIST_WIDTH_PROP), 0)
         self.playlist_widget.show()
 
-        self._playlist_box.pack_start(self.playlist_widget, expand=True,
-                                      fill=True, padding=0)
+        self.playlist_widget.set_vexpand(True)
+        self.playlist_widget.set_hexpand(True)
+        self._playlist_box.append(self.playlist_widget)
 
-        self._playlist_toolbar = Gtk.Toolbar()
+        self._playlist_toolbar = Gtk.Box(
+            orientation=Gtk.Orientation.HORIZONTAL)
 
         move_up = ToolButton("go-up")
         move_up.set_tooltip(_("Move up"))
         move_up.connect("clicked", self._move_up_cb)
-        self._playlist_toolbar.insert(move_up, 0)
+        self._playlist_toolbar.append(move_up)
 
         move_down = ToolButton("go-down")
         move_down.set_tooltip(_("Move down"))
         move_down.connect("clicked", self._move_down_cb)
-        self._playlist_toolbar.insert(move_down, 1)
+        self._playlist_toolbar.append(move_down)
 
-        self._playlist_box.pack_end(self._playlist_toolbar, False, False, 0)
-        self._video_canvas.pack_start(self._playlist_box, False, False, 0)
+        self._playlist_box.append(self._playlist_toolbar)
+        self._video_canvas.append(self._playlist_box)
 
         # Create the player just once
         logging.debug('Instantiating GstPlayer')
@@ -155,28 +159,22 @@ class JukeboxActivity(activity.Activity):
         self.control = Controls(self, toolbar_box.toolbar,
                                 self._control_toolbar)
 
-        self._separator = Gtk.SeparatorToolItem()
-        self._separator.props.draw = False
-        self._separator.set_expand(True)
-        self._separator.show()
-        toolbar_box.toolbar.insert(self._separator, -1)
+        self._separator = Gtk.Separator()
+        self._separator.set_hexpand(True)
+        toolbar_box.toolbar.append(self._separator)
 
         self._stop = StopButton(self)
-        toolbar_box.toolbar.insert(self._stop, -1)
+        toolbar_box.toolbar.append(self._stop)
 
         self._empty_widget = Gtk.Label(label="")
-        self._empty_widget.show()
-        self.videowidget = VideoWidget()
+        self.videowidget = self.player.get_video_widget()
         self.set_canvas(self._video_canvas)
         self._init_view_area()
-        self.show_all()
 
         if len(self.playlist_widget) < 2:
             self._view_toolbar._show_playlist.props.active = False
 
         self._configure_cb()
-
-        self.player.init_view_area(self.videowidget)
 
         self._volume_monitor = Gio.VolumeMonitor.get()
         self._volume_monitor.connect('mount-added', self.__mount_added_cb)
@@ -192,7 +190,12 @@ class JukeboxActivity(activity.Activity):
 
         self.control.check_if_next_prev()
 
-        Gdk.Screen.get_default().connect('size-changed', self._configure_cb)
+        display = Gdk.Display.get_default()
+        if display:
+            monitors = display.get_monitors()
+            if monitors and monitors.get_n_items() > 0:
+                monitor = monitors.get_item(0)
+                monitor.connect("notify::geometry", self._configure_cb)
 
     def _move_up_cb(self, button):
         self.playlist_widget.move_up()
@@ -200,22 +203,24 @@ class JukeboxActivity(activity.Activity):
     def _move_down_cb(self, button):
         self.playlist_widget.move_down()
 
-    def _configure_cb(self, event=None):
+    def _configure_cb(self, *args):
         toolbar = self.get_toolbar_box().toolbar
         if self._stop.get_parent() == toolbar:
             toolbar.remove(self._stop)
         if self._separator.get_parent() == toolbar:
             toolbar.remove(self._separator)
-        if Gdk.Screen.width() < Gdk.Screen.height():
+
+        screen_w, screen_h = self._get_screen_size()
+        if screen_w < screen_h:
             self._control_toolbar_button.show()
             self._control_toolbar_button.set_expanded(True)
             self.control.update_layout(landscape=False)
-            toolbar.insert(self._separator, -1)
+            toolbar.append(self._separator)
         else:
             self._control_toolbar_button.set_expanded(False)
             self._control_toolbar_button.hide()
             self.control.update_layout(landscape=True)
-        toolbar.insert(self._stop, -1)
+        toolbar.append(self._stop)
 
     def __notify_active_cb(self, widget, event):
         """Sugar notify us that the activity is becoming active or inactive.
@@ -241,8 +246,9 @@ class JukeboxActivity(activity.Activity):
         self.view_area.set_show_tabs(False)
         self.view_area.append_page(self._empty_widget, None)
         self.view_area.append_page(self.videowidget, None)
-        self._video_canvas.pack_end(self.view_area, expand=True,
-                                    fill=True, padding=0)
+        self.view_area.set_vexpand(True)
+        self.view_area.set_hexpand(True)
+        self._video_canvas.append(self.view_area)
 
     def _switch_canvas(self, show_video):
         """Show or hide the video visualization in the canvas.
@@ -257,13 +263,12 @@ class JukeboxActivity(activity.Activity):
             self.view_area.set_current_page(0)
         self._video_canvas.queue_draw()
 
-    def __key_press_event_cb(self, widget, event):
-        key = event.keyval
-        ctrl = event.state & Gdk.ModifierType.CONTROL_MASK
+    def __key_pressed_cb(self, controller, keyval, keycode, state):
+        ctrl = state & Gdk.ModifierType.CONTROL_MASK
 
         # while activity toolbar is visible, only escape key is taken
         if self._activity_toolbar_button.is_expanded():
-            if key == Gdk.KEY_Escape:
+            if keyval == Gdk.KEY_Escape:
                 self._activity_toolbar_button.set_expanded(False)
                 return True
 
@@ -274,24 +279,24 @@ class JukeboxActivity(activity.Activity):
             return False
 
         # Shortcut - Space does play or pause
-        if key == Gdk.KEY_space:
+        if keyval == Gdk.KEY_space:
             self.control.button.emit('clicked')
             return True
 
         # Shortcut - Up does previous playlist item
-        if key == Gdk.KEY_Up:
+        if keyval == Gdk.KEY_Up:
             self.control.prev_button.emit('clicked')
             return True
 
         # Shortcut - Down does next playlist item
-        if key == Gdk.KEY_Down:
+        if keyval == Gdk.KEY_Down:
             self.control.next_button.emit('clicked')
             return True
 
         # Shortcut - Escape does unfullscreen, then playlist hide
-        if key == Gdk.KEY_Escape:
+        if keyval == Gdk.KEY_Escape:
             if self.is_fullscreen():
-                # sugar3.graphics.Window.__key_press_cb will handle it
+                # sugar4.graphics.Window.__key_press_cb will handle it
                 return False
 
             if self._view_toolbar._show_playlist.props.active:
@@ -300,14 +305,14 @@ class JukeboxActivity(activity.Activity):
 
         # Shortcut - ctrl-f does fullscreen toggle
         # (fullscreen enable is handled by ToolButton accelerator)
-        if ctrl and key == Gdk.KEY_f:
+        if ctrl and keyval == Gdk.KEY_f:
             if self.is_fullscreen():
                 self.unfullscreen()
                 return True
 
         # Shortcut - ctrl-l does playlist toggle
         # (ToggleToolButton accelerator ineffective when ViewToolbar hidden)
-        if ctrl and key == Gdk.KEY_l:
+        if ctrl and keyval == Gdk.KEY_l:
             togglebutton = self._view_toolbar._show_playlist
             togglebutton.props.active = not togglebutton.props.active
             return True
@@ -396,11 +401,9 @@ class JukeboxActivity(activity.Activity):
         self._alert.props.title = title
         icon = Icon(icon_name='dialog-cancel')
         self._alert.add_button(Gtk.ResponseType.CANCEL, _('Dismiss'), icon)
-        icon.show()
 
         icon = Icon(icon_name='dialog-ok')
         self._alert.add_button(Gtk.ResponseType.APPLY, _('Details'), icon)
-        icon.show()
         self.add_alert(self._alert)
         self._alert.connect(
             'response', self.__missing_tracks_alert_response_cb, tracks)
@@ -411,15 +414,15 @@ class JukeboxActivity(activity.Activity):
             vbox.props.valign = Gtk.Align.CENTER
             label = Gtk.Label(label='')
             label.set_markup(_('<b>Missing tracks</b>'))
-            vbox.pack_start(label, False, False, 15)
+            label.set_margin_bottom(15)
+            vbox.append(label)
 
             for track in tracks:
                 label = Gtk.Label(label=track['path'])
-                vbox.add(label)
+                vbox.append(label)
 
             _missing_tracks = Gtk.ScrolledWindow()
-            _missing_tracks.add_with_viewport(vbox)
-            _missing_tracks.show_all()
+            _missing_tracks.set_child(vbox)
 
             self.view_area.append_page(_missing_tracks, None)
 
@@ -431,7 +434,18 @@ class JukeboxActivity(activity.Activity):
         self.remove_alert(alert)
 
     def __player_play_cb(self, widget):
-        self._switch_canvas(True)
+        # Delay the video detection check to give GStreamer time to
+        # parse stream metadata and discover video tracks
+        GObject.timeout_add(500, self.__check_video_stream)
+
+    def __check_video_stream(self):
+        if self.player.playing_video():
+            self._switch_canvas(True)
+        else:
+            # Audio-only: show the playlist instead of a blank video area
+            self._switch_canvas(False)
+            self._view_toolbar._show_playlist.props.active = True
+        return False
 
     def __player_error_cb(self, widget, message, detail):
         self.player.stop()
@@ -512,39 +526,17 @@ class JukeboxActivity(activity.Activity):
 
     def __toggle_playlist_cb(self, toolbar):
         if self._view_toolbar._show_playlist.props.active:
-            self._playlist_box.show_all()
+            self._playlist_box.show()
         else:
             self._playlist_box.hide()
         self._video_canvas.queue_draw()
 
-
-class VideoWidget(Gtk.DrawingArea):
-    def __init__(self):
-        Gtk.DrawingArea.__init__(self)
-        self.set_events(Gdk.EventMask.POINTER_MOTION_MASK |
-                        Gdk.EventMask.POINTER_MOTION_HINT_MASK |
-                        Gdk.EventMask.EXPOSURE_MASK |
-                        Gdk.EventMask.KEY_PRESS_MASK |
-                        Gdk.EventMask.KEY_RELEASE_MASK)
-
-        self.set_app_paintable(True)
-        self.set_double_buffered(False)
-
-
-if __name__ == '__main__':
-    window = Gtk.Window()
-    view = VideoWidget()
-
-    view.show()
-    window.add(view)
-
-    def map_cb(widget):
-        player = GstPlayer(view)
-        player.set_uri(sys.argv[1])
-        player.play()
-
-    window.connect('map', map_cb)
-    window.maximize()
-    window.show_all()
-    window.connect("destroy", Gtk.main_quit)
-    Gtk.main()
+    def _get_screen_size(self):
+        display = Gdk.Display.get_default()
+        if display:
+            monitors = display.get_monitors()
+            if monitors and monitors.get_n_items() > 0:
+                monitor = monitors.get_item(0)
+                geo = monitor.get_geometry()
+                return geo.width, geo.height
+        return 1200, 900

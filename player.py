@@ -19,10 +19,7 @@ import logging
 
 from gi.repository import Gst
 from gi.repository import GObject
-
-# Needed for window.get_xid(), xvimagesink.set_window_handle(),
-# respectively:
-from gi.repository import GdkX11, GstVideo
+from gi.repository import Gtk
 
 # Initialize GStreamer
 Gst.init(None)
@@ -51,20 +48,27 @@ class GstPlayer(GObject.GObject):
         self.bus.connect('message::eos', self.__on_eos_message)
         self.bus.connect('message::error', self.__on_error_message)
 
-        # This is needed to make the video output in our DrawingArea
-        self.bus.enable_sync_message_emission()
-        self.bus.connect('sync-message::element', self.__on_sync_message)
-
         # Create GStreamer elements
         self.player = Gst.ElementFactory.make('playbin', None)
-        # FIXME: visualisation is in separate window
-        self.player.props.flags |= 8
+
+        self.paintablesink = Gst.ElementFactory.make('gtk4paintablesink', None)
+        if self.paintablesink:
+            self.player.set_property('video-sink', self.paintablesink)
+        else:
+            logging.error(
+                "gtk4paintablesink not found, video may not render correctly "
+                "in GTK 4.")
         self.pipeline.add(self.player)
 
-    def init_view_area(self, videowidget):
-        videowidget.realize()
-        self.videowidget = videowidget
-        self.videowidget_xid = videowidget.get_window().get_xid()
+    def get_video_widget(self):
+        if self.paintablesink:
+            paintable = self.paintablesink.get_property('paintable')
+            picture = Gtk.Picture.new_for_paintable(paintable)
+            picture.set_hexpand(True)
+            picture.set_vexpand(True)
+            return picture
+        else:
+            return Gtk.Label(label="Video sink missing")
 
     def __on_error_message(self, bus, msg):
         self.stop()
@@ -77,10 +81,6 @@ class GstPlayer(GObject.GObject):
         logging.debug('SIGNAL: eos')
         self.playing = False
         self.emit('eos')
-
-    def __on_sync_message(self, bus, msg):
-        if msg.get_structure().get_name() == 'prepare-window-handle':
-            msg.src.set_window_handle(self.videowidget_xid)
 
     def set_uri(self, uri):
         self.pipeline.set_state(Gst.State.READY)

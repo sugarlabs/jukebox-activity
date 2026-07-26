@@ -29,9 +29,8 @@ from gi.repository import Gio
 from gi.repository import Gtk
 from gi.repository import Pango
 
-from sugar3.datastore import datastore
-from sugar3.activity import activity
-from sugar3.graphics.icon import CellRendererIcon
+from sugar4.datastore import datastore
+from sugar4.activity import activity
 
 
 COLUMNS_NAME = ('index', 'title', 'available')
@@ -45,11 +44,10 @@ class PlayList(Gtk.ScrolledWindow):
         'missing-tracks': (GObject.SignalFlags.RUN_FIRST, None, [object]), }
 
     def __init__(self):
-        self._current_playing = 0
+        self._current_playing = -1
         self._items = []
 
-        Gtk.ScrolledWindow.__init__(self, hadjustment=None,
-                                    vadjustment=None)
+        Gtk.ScrolledWindow.__init__(self)
         self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         self.listview = Gtk.TreeView()
         self.treemodel = Gtk.ListStore(int, object, bool)
@@ -57,11 +55,10 @@ class PlayList(Gtk.ScrolledWindow):
         self.selection = self.listview.get_selection()
         self.selection.set_mode(Gtk.SelectionMode.SINGLE)
 
-        renderer_icon = CellRendererIcon()
-        renderer_icon.props.icon_name = 'emblem-notification'
-        renderer_icon.props.width = 20
-        renderer_icon.props.height = 20
-        renderer_icon.props.size = 20
+        renderer_icon = Gtk.CellRendererPixbuf()
+        renderer_icon.set_property('icon-name', 'emblem-notification')
+        renderer_icon.set_property('width', 20)
+        renderer_icon.set_property('height', 20)
         treecol_icon = Gtk.TreeViewColumn()
         treecol_icon.pack_start(renderer_icon, False)
         treecol_icon.set_cell_data_func(renderer_icon, self._set_icon)
@@ -86,7 +83,7 @@ class PlayList(Gtk.ScrolledWindow):
         self.listview.connect('row-activated', self.__on_row_activated)
         self.listview.connect('cursor-changed', self.__on_cursor_changed)
 
-        self.add(self.listview)
+        self.set_child(self.listview)
 
     def __len__(self):
         return len(self._items)
@@ -138,8 +135,12 @@ class PlayList(Gtk.ScrolledWindow):
     def __on_cursor_changed(self, treeview):
         sel_model, sel_rows = self.listview.get_selection().get_selected_rows()
         for row in sel_rows:
-            index = sel_model.get_value(sel_model.get_iter(row), 0)
-            if index != self._current_playing:
+            iter_ = sel_model.get_iter(row)
+            if iter_ is None:
+                continue
+            index = sel_model.get_value(iter_, 0)
+            if index != self._current_playing and 0 <= index < len(
+                    self._items):
                 path = self._items[index]['path']
                 available = self._items[index]['available']
                 if available:
@@ -151,16 +152,18 @@ class PlayList(Gtk.ScrolledWindow):
 
         treeiter = model.get_iter(path)
         index = model.get_value(treeiter, COLUMNS['index'])
-        # TODO: put the path inside the ListStore
-        path = self._items[index]['path']
-        available = self._items[index]['available']
-        if available:
-            self.set_current_playing(index)
-            self.emit('play-index', index, path)
+        if 0 <= index < len(self._items):
+            # TODO: put the path inside the ListStore
+            item_path = self._items[index]['path']
+            available = self._items[index]['available']
+            if available:
+                self.set_current_playing(index)
+                self.emit('play-index', index, item_path)
 
     def set_current_playing(self, index):
         self._current_playing = index
-        self._set_cursor(index)
+        if 0 <= index < len(self._items):
+            self._set_cursor(index)
 
     def get_current_playing(self):
         return self._current_playing
@@ -188,16 +191,45 @@ class PlayList(Gtk.ScrolledWindow):
 
     def delete_selected_items(self):
         sel_model, sel_rows = self.listview.get_selection().get_selected_rows()
-        for row in sel_rows:
-            index = sel_model.get_value(sel_model.get_iter(row), 0)
-            self._items.pop(index)
-            self.treemodel.remove(self.treemodel.get_iter(row))
+        if not sel_rows:
+            return False
 
-        # uptade the order numbers in the playlist
+        # Unselect all to prevent cursor-changed from firing while we're in an
+        # inconsistent state
+        self.listview.get_selection().unselect_all()
+
+        deleted_playing = False
+
+        # Sort paths in reverse order so deleting doesn't shift the indices of
+        # remaining target rows
+        sel_rows.sort(key=lambda p: p.get_indices()[0], reverse=True)
+
+        for row in sel_rows:
+            iter_ = sel_model.get_iter(row)
+            if not iter_:
+                continue
+            index = sel_model.get_value(iter_, 0)
+
+            if index == self._current_playing:
+                deleted_playing = True
+            elif index < self._current_playing:
+                # If an earlier track is deleted, the playing track's index
+                # shifts down
+                self._current_playing -= 1
+
+            self._items.pop(index)
+            self.treemodel.remove(iter_)
+
+        # update the order numbers in the playlist
         index = 0
         for tree_item, playlist_item in zip(self.treemodel, self._items):
             tree_item[0] = index
             index = index + 1
+
+        if deleted_playing:
+            self._current_playing = -1
+
+        return deleted_playing
 
     def check_available_media(self, path):
         if self.is_from_journal(path):
@@ -240,9 +272,9 @@ class PlayList(Gtk.ScrolledWindow):
             logging.debug('Loading a %s', type(jobject))
             file_path = mime_path = jobject
 
-        info = Gio.File.new_for_path(mime_path).query_info(
-            Gio.FILE_ATTRIBUTE_STANDARD_SIZE + ',' +
-            Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE, 0, None)
+        attrs = (f"{Gio.FILE_ATTRIBUTE_STANDARD_SIZE},"
+                 f"{Gio.FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE}")
+        info = Gio.File.new_for_path(mime_path).query_info(attrs, 0, None)
         size = info.get_size()
         mime = info.get_content_type()
 
